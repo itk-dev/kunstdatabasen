@@ -139,22 +139,22 @@
         },
         {
             "name": "itk-dev/mock-up-bundle",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/itk-dev/mock-up-bundle.git",
-                "reference": "536576d499245a1bc9fc8d930be13706a4ad2f91"
+                "reference": "6d7d5748ba5350653a71c4c391b418da2d91d94e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/itk-dev/mock-up-bundle/zipball/536576d499245a1bc9fc8d930be13706a4ad2f91",
-                "reference": "536576d499245a1bc9fc8d930be13706a4ad2f91",
+                "url": "https://api.github.com/repos/itk-dev/mock-up-bundle/zipball/6d7d5748ba5350653a71c4c391b418da2d91d94e",
+                "reference": "6d7d5748ba5350653a71c4c391b418da2d91d94e",
                 "shasum": ""
             },
             "require": {
                 "symfony/finder": "^4.4 || ^5.0",
                 "symfony/framework-bundle": "^4.4 || ^5.0",
-                "symfony/http-foundation": "^4.4 || ^5.0",
+                "symfony/http-foundation": "^4.4 || ^5.0.7",
                 "symfony/twig-bundle": "^4.4 || ^5.0",
                 "twig/twig": "^3.0"
             },
@@ -168,24 +168,7 @@
                     "ItkDev\\MockUpBundle\\": "./"
                 }
             },
-            "scripts": {
-                "coding-standards-check/php-cs-fixer": [
-                    "php-cs-fixer --config=.php_cs.dist fix --dry-run"
-                ],
-                "coding-standards-check/twigcs": [
-                    "twigcs Resources/views"
-                ],
-                "coding-standards-check": [
-                    "@coding-standards-check/php-cs-fixer",
-                    "@coding-standards-check/twigcs"
-                ],
-                "coding-standards-apply/php-cs-fixer": [
-                    "php-cs-fixer --config=.php_cs.dist fix"
-                ],
-                "coding-standards-apply": [
-                    "@coding-standards-apply/php-cs-fixer"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -196,11 +179,7 @@
                 }
             ],
             "description": "A mock-up bundle for Symfony",
-            "support": {
-                "source": "https://github.com/itk-dev/mock-up-bundle/tree/master",
-                "issues": "https://github.com/itk-dev/mock-up-bundle/issues"
-            },
-            "time": "2020-04-29T10:20:27+00:00"
+            "time": "2020-04-30T08:11:55+00:00"
         },
         {
             "name": "psr/cache",
