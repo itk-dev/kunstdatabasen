@@ -1,9 +1,14 @@
+{% extends "base.html.twig" %}
+
 {% block title %}
-  {{ "Aarhus art database"|trans }}
+  {{ "Kunstdatabasen | Find værker"|trans }}
 {% endblock %}
 
 {% block body %}
-  <h1>{{ "Aarhus art database"|trans }}</h1>
+  {% include "mock-up/frontend/_header.html.twig" %}
+  {% include "mock-up/frontend/_filters.html.twig" %}
+  {% include "mock-up/frontend/_table.html.twig" %}
+  {% include "mock-up/frontend/_footer.html.twig" %}
 {% endblock %}
 
 {% block stylesheets %}
