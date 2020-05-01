@@ -1,5 +1,29 @@
 @import '../custom-variables';
 @import '../base';
 
-@import '~bootstrap/scss/custom-forms';
 @import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/custom-forms';
+@import '~bootstrap/scss/tables';
+@import '~bootstrap/scss/pagination';
+@import '~bootstrap/scss/transitions';
+
+button {
+  &[aria-expanded="false"] {
+    span.true {
+      display: none;
+    }
+    span:not(.true) {
+      display: inline;
+    }
+  }
+
+  &[aria-expanded="true"] {
+    span.true {
+      display: inline;
+    }
+    span:not(.true) {
+      display: none;
+    }
+  }
+}
