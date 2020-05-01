@@ -1,34 +1,41 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
     <div class="col">
-      <table class="table table-responsive">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Titel</th>
-            <th>Art.nr.</th>
-            <th>Kategori</th>
-            <th>Kunstner</th>
-            <th>Type</th>
-            <th>Dimensioner</th>
-            <th>Bygning</th>
-          </tr>
-          </thead>
-          <tbody>
-            {% for i in 0..10 %}
-              <tr>
-                <td>Rytmisk interferens</td>
-                <td>GA2028</td>
-                <td>Kunst</td>
-                <td>Jørgen Michael Andersen</td>
-                <td>Jørgen Michael Andersen</td>
-                <td>Maleri</td>
-                <td>175 x 175</td>
-                <td>Kalkværksvej 10</td>
-              </tr>
-            {% endfor %}
-          </tbody>
-      </table>
+      <div class="table-responsive">
+        <table class="table table-borderless">
+          <thead>
+            <tr class="text-muted small">
+              <th></th>
+              <th>Titel</th>
+              <th>Art.nr.</th>
+              <th>Kategori</th>
+              <th>Kunstner</th>
+              <th>Type</th>
+              <th>Dimensioner</th>
+              <th>Bygning</th>
+            </tr>
+            </thead>
+            <tbody>
+              {% for i in 0..10 %}
+                <tr>
+                  <td><img src="{{ asset('images/rytmisk-interferens.png') }}" alt="{{ "Aarhus Kommunes Byvåben"|trans }}" height="60"/></td>
+                  <td><strong>GA2028</strong></td>
+                  <td>Kunst</td>
+                  <td>Jørgen Michael Andersen</td>
+                  <td>Jørgen Michael Andersen</td>
+                  <td>Maleri</td>
+                  <td>175 x 175</td>
+                  <td>Kalkværksvej 10</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      {% include "mock-up/frontend/_pager.html.twig" %}
     </div>
   </div>
 </div>

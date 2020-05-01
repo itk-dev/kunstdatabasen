@@ -8,6 +8,7 @@
 @import '~bootstrap/scss/pagination';
 @import '~bootstrap/scss/transitions';
 
+// Toggle button texts with collapse
 button {
   &[aria-expanded="false"] {
     span.true {
@@ -24,6 +25,15 @@ button {
     }
     span:not(.true) {
       display: none;
+    }
+  }
+}
+
+.table {
+  // Style table header
+  thead {
+    th {
+      font-weight: normal;
     }
   }
 }
