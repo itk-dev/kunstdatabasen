@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col bg-light py-5">
-      <div class="row">
+      <div class="row collapse show" id="filters">
         <div class="col-md-4">
           <div class="form-group">
             <label for="filtersSoeg">{{ "Søg titel, art. nr. eller kunstner"|trans }}</label>
@@ -86,9 +86,10 @@
               </div>
             </div>
           </div>
-          <button class="btn mb-3 mb-md-0 btn-block" type="button" data-toggle="collapse" data-target="#filtersAdvanced" aria-expanded="false" aria-controls="contentId"><span>{{ "Vis avancerede filtre"|trans }}</span><span class="true">{{ "Skjul avancerede filtre"|trans }}</span></button>
+          <button class="btn mb-3 mb-md-0 btn-block" type="button" data-toggle="collapse" data-target="#filtersAdvanced" aria-expanded="false" aria-controls="contentId"><span>{{ "Vis avancerede muligheder"|trans }}</span><span class="true">{{ "Skjul avancerede muligheder"|trans }}</span></button>
         </div>
       </div>
+      <button class="btn btn-dark mt-3 btn-block d-md-none" type="button" data-toggle="collapse" data-target="#filters" aria-expanded="true" aria-controls="contentId"><span>{{ "Vis søgning"|trans }}</span><span class="true">{{ "Skjul søgning"|trans }}</span></button>
     </div>
   </div>
 </div>
