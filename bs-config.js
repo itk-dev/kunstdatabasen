@@ -23,7 +23,7 @@ module.exports = {
     notify: false,
     files: [
       'templates/**/*.twig',
-      'app/**/*.*'
+      'assets/**/*.*'
     ],
     proxy: 'kunstdatabasen.local.itkdev.dk'
 };
