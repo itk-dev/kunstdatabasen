@@ -1,4 +1,6 @@
 {
+    "name": "aakb/kunstdatabasen",
+    "description": "Archive of artworks",
     "type": "project",
     "license": "proprietary",
     "require": {
