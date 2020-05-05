@@ -1,0 +1,10 @@
+App\Entity\Artwork:
+    artwork_{1..10}:
+        name: <da_DK:name()>
+        artist: <da_DK:name()>
+        artSerial: <uuid()>
+        description: <text()>
+        purchasePrice: '<numberBetween(1000, 1000000)>'
+        productionYear: '<numberBetween(1600, 2020)>'
+        assessmentDate: '<date_create()>'
+        assessmentPrice: '<numberBetween(1000, 1000000)>'
