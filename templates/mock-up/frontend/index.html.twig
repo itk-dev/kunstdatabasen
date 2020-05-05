@@ -1,20 +1,96 @@
-{% extends "base.html.twig" %}
+{% set data = {
+  title: 'Mit fede link',
+  brand: 'Aarhus kommunes kunstdatabase',
+  artworks: {
+    artwork1: {
+      link: 'details',
+      img: 'images/rytmisk-interferens.png',
+      title: 'Rytmisk Interferens',
+      artNo: 'GA 2027',
+      category: 'Kunst',
+      artist: 'Jørgen Mikael Andersen',
+      type: 'Maleri',
+      dimensions: '175 x 175',
+      building: 'Kalkværksvej 10',
+      comment: 'Hører sammen med Ga 2027',
+      department: 'Center for Byens Anvendelse',
+      geo: '5,309',
+      price: '28000',
+      productionYear: '-',
+      estimatedValue: '28000',
+      estimatedValueDate: '01.01.2020',
+      custom1: 'Billedekunstudvalget',
+      custom2: '2010',
+      custom3: '',
+      custom4: 'Hos kunstneren'
+    },
+    artwork2: {
+      link: 'details',
+      img: 'images/rytmisk-interferens.png',
+      title: 'Rytmisk Interferens',
+      artNo: 'GA 2027',
+      category: 'Kunst',
+      artist: 'Jørgen Mikael Andersen',
+      type: 'Maleri',
+      dimensions: '175 x 175',
+      building: 'Kalkværksvej 10',
+      comment: 'Hører sammen med Ga 2027',
+      department: 'Center for Byens Anvendelse',
+      geo: '5,309',
+      price: '28000',
+      productionYear: '-',
+      estimatedValue: '28000',
+      estimatedValueDate: '01.01.2020',
+      custom1: 'Billedekunstudvalget',
+      custom2: '2010',
+      custom3: '',
+      custom4: 'Hos kunstneren'
+    },
+    artwork3: {
+      link: 'details',
+      img: 'images/rytmisk-interferens.png',
+      title: 'Rytmisk Interferens',
+      artNo: 'GA 2027',
+      category: 'Kunst',
+      artist: 'Jørgen Mikael Andersen',
+      type: 'Maleri',
+      dimensions: '175 x 175',
+      building: 'Kalkværksvej 10',
+      comment: 'Hører sammen med Ga 2027',
+      department: 'Center for Byens Anvendelse',
+      geo: '5,309',
+      price: '28000',
+      productionYear: '-',
+      estimatedValue: '28000',
+      estimatedValueDate: '01.01.2020',
+      custom1: 'Billedekunstudvalget',
+      custom2: '2010',
+      custom3: '',
+      custom4: 'Hos kunstneren'
+    },
+    artwork4: {
+      link: 'details',
+      img: 'images/rytmisk-interferens.png',
+      title: 'Rytmisk Interferens',
+      artNo: 'GA 2027',
+      category: 'Kunst',
+      artist: 'Jørgen Mikael Andersen',
+      type: 'Maleri',
+      dimensions: '175 x 175',
+      building: 'Kalkværksvej 10',
+      comment: 'Hører sammen med Ga 2027',
+      department: 'Center for Byens Anvendelse',
+      geo: '5,309',
+      price: '28000',
+      productionYear: '-',
+      estimatedValue: '28000',
+      estimatedValueDate: '01.01.2020',
+      custom1: 'Billedekunstudvalget',
+      custom2: '2010',
+      custom3: '',
+      custom4: 'Hos kunstneren'
+    }
+  }
+} %}
 
-{% block title %}
-  {{ "Kunstdatabasen | Find værker"|trans }}
-{% endblock %}
-
-{% block body %}
-  {% include "mock-up/frontend/_header.html.twig" %}
-  {% include "mock-up/frontend/_filters.html.twig" %}
-  {% include "mock-up/frontend/_table.html.twig" %}
-  {% include "mock-up/frontend/_footer.html.twig" %}
-{% endblock %}
-
-{% block stylesheets %}
-	{{ encore_entry_link_tags('app') }}
-{% endblock %}
-
-{% block javascripts %}
-	{{ encore_entry_script_tags('app') }}
-{% endblock %}
+{% include 'app/index.html.twig' with data %}
