@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Artwork{% endblock %}
+
+{% block body %}
+    <h1>Create new Artwork</h1>
+
+    {{ include('artwork/_form.html.twig') }}
+
+    <a href="{{ path('artwork_index') }}">back to list</a>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('imageUpload') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
