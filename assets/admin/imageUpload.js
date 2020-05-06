@@ -27,7 +27,7 @@ function addForm(collectionHolder, newLinkLi) {
 }
 
 function addDeleteLink(tagFormLi) {
-    let removeFormButton = $('<button type="button">Delete this tag</button>');
+    let removeFormButton = $('<button type="button">Remove image</button>');
     tagFormLi.append(removeFormButton);
 
     removeFormButton.on('click', function(e) {

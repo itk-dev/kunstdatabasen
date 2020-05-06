@@ -14,6 +14,7 @@ class ImageType extends AbstractType
     {
         $builder
             ->add('imageFile', VichImageType::class)
+            ->add('primaryImage')
         ;
     }
 

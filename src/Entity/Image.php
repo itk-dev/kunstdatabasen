@@ -56,9 +56,17 @@ class Image
      */
     private $updatedAt;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $primaryImage;
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return ''.$this->getId();
+        return $this->getImageName() ?? Image::class . ': ' . $this->getId();
     }
 
     /**
@@ -121,6 +129,18 @@ class Image
     public function setArtwork(?Artwork $artwork): self
     {
         $this->artwork = $artwork;
+
+        return $this;
+    }
+
+    public function getPrimaryImage(): ?bool
+    {
+        return $this->primaryImage;
+    }
+
+    public function setPrimaryImage(?bool $primaryImage): self
+    {
+        $this->primaryImage = $primaryImage;
 
         return $this;
     }
