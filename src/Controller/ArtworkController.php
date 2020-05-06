@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Artwork;
+use App\Entity\Image;
 use App\Form\ArtworkType;
 use App\Repository\ArtworkRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

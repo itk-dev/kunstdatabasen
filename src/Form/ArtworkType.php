@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Artwork;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ArtworkType extends AbstractType
 {
@@ -20,13 +22,28 @@ class ArtworkType extends AbstractType
             ->add('productionYear')
             ->add('assessmentDate')
             ->add('assessmentPrice')
-        ;
+            ->add(
+                'images',
+                CollectionType::class,
+                [
+                    'entry_type' => ImageType::class,
+                    'entry_options' => [
+                        'label' => false,
+                        'required' => false,
+                    ],
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                ]
+            );;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Artwork::class,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => Artwork::class,
+            ]
+        );
     }
 }

@@ -1,4 +1,20 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+
+    {{ form_widget(form.name) }}
+    {{ form_widget(form.description) }}
+    {{ form_widget(form.artist) }}
+    {{ form_widget(form.artSerial) }}
+    {{ form_widget(form.purchasePrice) }}
+    {{ form_widget(form.productionYear) }}
+    {{ form_widget(form.assessmentDate) }}
+    {{ form_widget(form.assessmentPrice) }}
+
+    <h3>Images</h3>
+    <ul class="images" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
+        {% for image in form.images %}
+            <li>{{ form_widget(image) }}</li>
+        {% endfor %}
+    </ul>
+
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
