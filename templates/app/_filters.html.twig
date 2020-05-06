@@ -1,0 +1,96 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col bg-light py-5">
+      <div class="row collapse show" id="filters">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="filtersSoeg">{{ "Søg titel, art. nr. eller kunstner"|trans }}</label>
+            <input type="text" name="" id="filtersSoeg" class="form-control" placeholder="Skriv søgeord">
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="filtersType">{{ "Type"|trans }}</label>
+            <select class="form-control" name="filtersType" id="filtersType">
+              <option>{{ "Alle typer"|trans }}</option>
+              <option>{{ "Type 1"|trans }}</option>
+              <option>{{ "Type 2"|trans }}</option>
+              <option>{{ "Type 3"|trans }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="filtersCategory">{{ "Kategori"|trans }}</label>
+            <select class="form-control" name="filtersCategory" id="filtersCategory">
+              <option>{{ "Alle kategorier"|trans }}</option>
+              <option>{{ "Kategori 1"|trans }}</option>
+              <option>{{ "Kategori 2"|trans }}</option>
+              <option>{{ "Kategori 3"|trans }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label for="filtersBuilding">{{ "Bygning"|trans }}</label>
+            <select class="form-control" name="filtersBuilding" id="filtersBuilding">
+              <option>{{ "Alle bygninger"|trans }}</option>
+              <option>{{ "Bygning 1"|trans }}</option>
+              <option>{{ "Bygning 2"|trans }}</option>
+              <option>{{ "Bygning 3"|trans }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-2 pt-md-2 order-last order-md-1">
+          <button type="submit" class="btn btn-primary btn-block mt-md-4">{{ "Søg"|trans }}</button>
+        </div>
+        <div class="col-12 order-md-2">
+          <div class="collapse" id="filtersAdvanced">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="filtersWidth">{{ "Bredde(cm)"|trans }}</label>
+                  <select class="form-control" name="filtersWidth" id="filtersWidth">
+                    <option>{{ "Vælg bredde"|trans }}</option>
+                    <option>{{ "0 - 50"|trans }}</option>
+                    <option>{{ "50 - 100"|trans }}</option>
+                    <option>{{ "100 <"|trans }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="filtersHeight">{{ "Højde(cm)"|trans }}</label>
+                  <select class="form-control" name="filtersHeight" id="filtersHeight">
+                    <option>{{ "Vælg højde"|trans }}</option>
+                    <option>{{ "0 - 50"|trans }}</option>
+                    <option>{{ "50 - 100"|trans }}</option>
+                    <option>{{ "100 <"|trans }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="filtersYear">{{ "År"|trans }}</label>
+                  <div class="row">
+                    <div class="col">
+                      <input type="text"
+                        class="form-control" name="filtersYear" id="filtersYear" placeholder="{{ "Fra år"|trans }}">
+                    </div>
+                    <div class="col">
+                      <label for="filtersYearTo" class="sr-only">{{ "År"|trans }}</label>
+                      <input type="text"
+                      class="form-control" name="filtersYearTo" id="filtersYearTo" placeholder="{{ "Til år"|trans }}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="btn mb-3 mb-md-0 btn-block" type="button" data-toggle="collapse" data-target="#filtersAdvanced" aria-expanded="false" aria-controls="contentId"><span>{{ "Vis avancerede muligheder"|trans }}</span><span class="true">{{ "Skjul avancerede muligheder"|trans }}</span></button>
+        </div>
+      </div>
+      <button class="btn btn-dark mt-3 btn-block d-md-none" type="button" data-toggle="collapse" data-target="#filters" aria-expanded="true" aria-controls="contentId"><span>{{ "Vis søgning"|trans }}</span><span class="true">{{ "Skjul søgning"|trans }}</span></button>
+    </div>
+  </div>
+</div>

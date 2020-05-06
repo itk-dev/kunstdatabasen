@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="table-responsive">
+        <table class="table table-borderless">
+          <thead>
+            <tr class="text-muted small">
+              <th></th>
+              <th>{{ "Titel"|trans }}</th>
+              <th>{{ "Art.nr."|trans }}</th>
+              <th>{{ "Kategori"|trans }}</th>
+              <th>{{ "Kunstner"|trans }}</th>
+              <th>{{ "Type"|trans }}</th>
+              <th>{{ "Dimensioner"|trans }}</th>
+              <th>{{ "Bygning"|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+              {% for art in data.artworks %}
+                <tr>
+                  <td><a href="{{ art.link }}"><img src="{{ asset(art.img) }}" alt="" height="60"/></a></td>
+                  <td><a href="{{ art.link }}"><strong>{{ art.title }}</strong></a></td>
+                  <td>{{ art.artNo }}</td>
+                  <td>{{ art.category }}</td>
+                  <td>{{ art.artist }}</td>
+                  <td>{{ art.type }}</td>
+                  <td>{{ art.dimensions }}</td>
+                  <td>{{ art.building }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      {% include "app/_pager.html.twig" %}
+    </div>
+  </div>
+</div>
