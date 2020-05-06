@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Entity;
 
 use App\Repository\ImageRepository;
@@ -7,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
-
 /**
  * @ORM\Entity(repositoryClass=ImageRepository::class)
+ *
  * @Vich\Uploadable
  */
 class Image
@@ -66,7 +72,7 @@ class Image
      */
     public function __toString()
     {
-        return $this->getImageName() ?? Image::class . ': ' . $this->getId();
+        return $this->getImageName() ?? self::class.': '.$this->getId();
     }
 
     /**
@@ -91,41 +97,67 @@ class Image
         }
     }
 
+    /**
+     * @return \Symfony\Component\HttpFoundation\File\File|null
+     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
+    /**
+     * @param string|null $imageName
+     */
     public function setImageName(?string $imageName): void
     {
         $this->imageName = $imageName;
     }
 
+    /**
+     * @return string|null
+     */
     public function getImageName(): ?string
     {
         return $this->imageName;
     }
 
+    /**
+     * @param int|null $imageSize
+     */
     public function setImageSize(?int $imageSize): void
     {
         $this->imageSize = $imageSize;
     }
 
+    /**
+     * @return int|null
+     */
     public function getImageSize(): ?int
     {
         return $this->imageSize;
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return \App\Entity\Artwork|null
+     */
     public function getArtwork(): ?Artwork
     {
         return $this->artwork;
     }
 
+    /**
+     * @param \App\Entity\Artwork|null $artwork
+     *
+     * @return $this
+     */
     public function setArtwork(?Artwork $artwork): self
     {
         $this->artwork = $artwork;
@@ -133,11 +165,19 @@ class Image
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getPrimaryImage(): ?bool
     {
         return $this->primaryImage;
     }
 
+    /**
+     * @param bool|null $primaryImage
+     *
+     * @return $this
+     */
     public function setPrimaryImage(?bool $primaryImage): self
     {
         $this->primaryImage = $primaryImage;

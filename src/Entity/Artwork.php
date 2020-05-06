@@ -69,6 +69,9 @@ class Artwork
      */
     private $images;
 
+    /**
+     * Artwork constructor.
+     */
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -250,6 +253,11 @@ class Artwork
         return $this->images;
     }
 
+    /**
+     * @param \App\Entity\Image $image
+     *
+     * @return $this
+     */
     public function addImage(Image $image): self
     {
         if (!$this->images->contains($image)) {
@@ -260,6 +268,11 @@ class Artwork
         return $this;
     }
 
+    /**
+     * @param \App\Entity\Image $image
+     *
+     * @return $this
+     */
     public function removeImage(Image $image): self
     {
         if ($this->images->contains($image)) {
@@ -273,8 +286,11 @@ class Artwork
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return "".$this->getId();
+        return ''.$this->getId();
     }
 }
