@@ -1,12 +1,20 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="da">
     <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <!-- Required meta tags -->
+		    <meta charset="utf-8">
+		    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>
+          {% block title %}
+            {% if data.artworks.artwok1.title %}{{ data.artworks.artwok1.title }} |{% endif %}{{ title }}
+          {% endblock %}
+        </title>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+      {% block body %}
+        {% block content %}{% endblock %}
+      {% endblock %}
+      {% block javascripts %}{% endblock %}
     </body>
 </html>
