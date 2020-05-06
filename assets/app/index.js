@@ -1,8 +1,6 @@
 import './app.scss';
 import './app.scss';
 
-// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-// import $ from 'jquery';
+// Need jQuery? Install it with "yarn add jquery", then add the line `import $ from 'jquery';` to this file.
 
-// require('jquery')
 import 'bootstrap/js/dist/collapse'
