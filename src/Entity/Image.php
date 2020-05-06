@@ -28,9 +28,9 @@ class Image
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Artwork::class, inversedBy="images")
+     * @ORM\ManyToOne(targetEntity=Item::class, inversedBy="images")
      */
-    private $artwork;
+    private $item;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -72,7 +72,7 @@ class Image
      */
     public function __toString()
     {
-        return $this->getImageName() ?? self::class.': '.$this->getId();
+        return $this->getImageName();
     }
 
     /**
@@ -146,21 +146,21 @@ class Image
     }
 
     /**
-     * @return \App\Entity\Artwork|null
+     * @return \App\Entity\Item|null
      */
-    public function getArtwork(): ?Artwork
+    public function getItem(): ?Item
     {
-        return $this->artwork;
+        return $this->item;
     }
 
     /**
-     * @param \App\Entity\Artwork|null $artwork
+     * @param \App\Entity\Item|null $item
      *
      * @return $this
      */
-    public function setArtwork(?Artwork $artwork): self
+    public function setItem(?Item $item): self
     {
-        $this->artwork = $artwork;
+        $this->item = $item;
 
         return $this;
     }

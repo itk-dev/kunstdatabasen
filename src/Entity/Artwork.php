@@ -15,25 +15,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArtworkRepository")
  */
-class Artwork
+class Artwork extends Item
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $description;
-
     /**
      * @ORM\Column(type="string", length=255)
      */
@@ -63,67 +46,6 @@ class Artwork
      * @ORM\Column(type="float", nullable=true)
      */
     private $assessmentPrice;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Image::class, mappedBy="artwork", cascade={"persist"})
-     */
-    private $images;
-
-    /**
-     * Artwork constructor.
-     */
-    public function __construct()
-    {
-        $this->images = new ArrayCollection();
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return $this
-     */
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    /**
-     * @param string|null $description
-     *
-     * @return $this
-     */
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 
     /**
      * @return string|null
@@ -246,51 +168,10 @@ class Artwork
     }
 
     /**
-     * @return Collection|Image[]
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    /**
-     * @param \App\Entity\Image $image
-     *
-     * @return $this
-     */
-    public function addImage(Image $image): self
-    {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setArtwork($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @param \App\Entity\Image $image
-     *
-     * @return $this
-     */
-    public function removeImage(Image $image): self
-    {
-        if ($this->images->contains($image)) {
-            $this->images->removeElement($image);
-            // set the owning side to null (unless already changed)
-            if ($image->getArtwork() === $this) {
-                $image->setArtwork(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return string
      */
     public function __toString()
     {
-        return ''.$this->getId();
+        return $this->getName();
     }
 }
