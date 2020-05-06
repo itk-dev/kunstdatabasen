@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artwork index{% endblock %}
+
+{% block body %}
+    <h1>Artwork index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Artist</th>
+                <th>ArtSerial</th>
+                <th>PurchasePrice</th>
+                <th>ProductionYear</th>
+                <th>AssessmentDate</th>
+                <th>AssessmentPrice</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for artwork in artworks %}
+            <tr>
+                <td>{{ artwork.id }}</td>
+                <td>{{ artwork.name }}</td>
+                <td>{{ artwork.description }}</td>
+                <td>{{ artwork.artist }}</td>
+                <td>{{ artwork.artSerial }}</td>
+                <td>{{ artwork.purchasePrice }}</td>
+                <td>{{ artwork.productionYear }}</td>
+                <td>{{ artwork.assessmentDate ? artwork.assessmentDate|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ artwork.assessmentPrice }}</td>
+                <td>
+                    <a href="{{ path('artwork_show', {'id': artwork.id}) }}">show</a>
+                    <a href="{{ path('artwork_edit', {'id': artwork.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('artwork_new') }}">Create new</a>
+{% endblock %}
