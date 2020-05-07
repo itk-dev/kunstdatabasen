@@ -85,13 +85,13 @@ class FrontendController extends AbstractController
             'geo' => '@TODO',
             'comment' => '@TODO',
             'department' => '@TODO',
-            'price' => '@TODO',
-            'productionYear' => '@TODO',
+            'price' => $artwork->getPurchasePrice(),
+            'productionYear' => $artwork->getProductionYear(),
             'custom1' => '@TODO',
             'custom2' => '@TODO',
             'custom4' => '@TODO',
-            'estimatedValue' => '@TODO',
-            'estimatedValueDate' => '@TODO',
+            'estimatedValue' => $artwork->getAssessmentPrice(),
+            'estimatedValueDate' => $artwork->getAssessmentDate()->format('d/m Y'),
         ];
 
         return $this->render('app/details.html.twig', [
