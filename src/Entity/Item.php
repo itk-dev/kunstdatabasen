@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Entity;
 
 use App\Repository\ItemRepository;
@@ -8,7 +14,6 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
-
 
 /**
  * @ORM\Entity(repositoryClass=ItemRepository::class)

@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Repository;
 
 use App\Entity\Item;

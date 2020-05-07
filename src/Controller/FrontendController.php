@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Artwork;
@@ -14,7 +20,7 @@ class FrontendController extends AbstractController
     /**
      * @Route("/", name="frontend_index")
      *
-     * @param \App\Repository\ArtworkRepository $artworkRepository
+     * @param \App\Repository\ArtworkRepository                     $artworkRepository
      * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -28,11 +34,11 @@ class FrontendController extends AbstractController
         /* @var Artwork $artworkEntity */
         foreach ($artworkEntities as $artworkEntity) {
             $path = '';
-            if (count($artworkEntity->getImages()) > 0) {
+            if (\count($artworkEntity->getImages()) > 0) {
                 $path = $uploaderHelper->asset($artworkEntity->getImages()[0], 'imageFile');
             }
 
-            $artworks[] = (object)[
+            $artworks[] = (object) [
                 'link' => $this->generateUrl('frontend_artwork_show', [
                     'id' => $artworkEntity->getId(),
                 ]),
@@ -58,7 +64,7 @@ class FrontendController extends AbstractController
     /**
      * @Route("/artwork/{id}", name="frontend_artwork_show", methods={"GET"})
      *
-     * @param \App\Entity\Artwork $artwork
+     * @param \App\Entity\Artwork                                   $artwork
      * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -66,11 +72,11 @@ class FrontendController extends AbstractController
     public function show(Artwork $artwork, UploaderHelper $uploaderHelper): Response
     {
         $path = '';
-        if (count($artwork->getImages()) > 0) {
+        if (\count($artwork->getImages()) > 0) {
             $path = $uploaderHelper->asset($artwork->getImages()[0], 'imageFile');
         }
 
-        $artworkRender = (object)[
+        $artworkRender = (object) [
             'link' => $this->generateUrl('frontend_artwork_show', [
                 'id' => $artwork->getId(),
             ]),
