@@ -107,7 +107,7 @@ class Item
     {
         if (!$this->images->contains($image)) {
             $this->images[] = $image;
-            $image->setArtwork($this);
+            $image->setItem($this);
         }
 
         return $this;
@@ -123,8 +123,8 @@ class Item
         if ($this->images->contains($image)) {
             $this->images->removeElement($image);
             // set the owning side to null (unless already changed)
-            if ($image->getArtwork() === $this) {
-                $image->setArtwork(null);
+            if ($image->getItem() === $this) {
+                $image->setItem(null);
             }
         }
 

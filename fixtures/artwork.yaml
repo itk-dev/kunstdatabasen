@@ -1,6 +1,6 @@
 App\Entity\Artwork:
     artwork_{1..10}:
-        name: <da_DK:name()>
+        name: <da_DK:word()>
         artist: <da_DK:name()>
         artSerial: <uuid()>
         description: <text()>
@@ -9,5 +9,4 @@ App\Entity\Artwork:
         assessmentDate: '<date_create()>'
         assessmentPrice: '<numberBetween(1000, 1000000)>'
         images:
-            - '@image_1'
-            - '@image_2'
+            - '@image_<current()>'
