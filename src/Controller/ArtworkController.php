@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/artwork")
+ * @Route("/admin/artwork")
  */
 class ArtworkController extends AbstractController
 {
