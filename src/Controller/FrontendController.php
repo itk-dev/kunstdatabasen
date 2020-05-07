@@ -15,6 +15,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
+/**
+ * Class FrontendController.
+ */
 class FrontendController extends AbstractController
 {
     /**
