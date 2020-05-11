@@ -1,0 +1,6 @@
+App\Entity\Image:
+    image_{1..10}:
+        image_name: '../fixtures/image<current()>.jpg'
+        image_size: 1234
+        updatedAt: '<date_create()>'
+        primaryImage: true

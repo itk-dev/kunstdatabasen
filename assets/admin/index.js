@@ -13,3 +13,6 @@ library.add(
   faMountain
 )
 dom.watch()
+
+const $ = require('jquery');
+global.$ = global.jQuery = $;

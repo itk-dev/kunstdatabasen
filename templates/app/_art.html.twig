@@ -1,34 +1,34 @@
 <div class="container">
   <div class="row my-3">
     <div class="col">
-      <a href="index"><span class="text-secondary" aria-hidden="true">&laquo;</span> tilbage til listen</a>
+      <a href="{{ indexLink ?: '' }}"><span class="text-secondary" aria-hidden="true">&laquo;</span> tilbage til listen</a>
     </div>
   </div>
   <div class="row art-details">
     <div class="col-md-12 mb-3">
       <label for="detailsTitle">{{ "Titel"|trans }}</label>
-      <h1 id="detailsTitle">{{ data.artworks.artwork1.title }}</h1>
+      <h1 id="detailsTitle">{{ data.artwork.title }}</h1>
     </div>
     <div class="col-md-3">
-      <img src="{{ asset(data.artworks.artwork1.img) }}" alt="" class="img-fluid"/>
+      <img src="{{ asset(data.artwork.img) }}" alt="" class="img-fluid"/>
     </div>
     <div class="col-md-9">
       <div class="row">
         <div class="col-md-4">
           <label for="detailsArtist">{{ "Kunstner"|trans }}</label>
-          <p>{{ data.artworks.artwork1.artist }}</p>
+          <p>{{ data.artwork.artist }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsType">{{ "Type"|trans }}</label>
-          <p>{{ data.artworks.artwork1.type }}</p>
+          <p>{{ data.artwork.type }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsDimensions">{{ "Dimensioner"|trans }}</label>
-          <p>{{ data.artworks.artwork1.dimensions }}</p>
+          <p>{{ data.artwork.dimensions }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsComment">{{ "Bemærkning"|trans }}</label>
-          <p>{{ data.artworks.artwork1.comment }}</p>
+          <p>{{ data.artwork.comment }}</p>
         </div>
       </div>
       <div class="row mt-3">
@@ -37,15 +37,15 @@
         </div>
         <div class="col-md-4">
           <label for="detailsDepartment">{{ "Afdeling"|trans }}</label>
-          <p>{{ data.artworks.artwork1.department }}</p>
+          <p>{{ data.artwork.department }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsBuilding">{{ "Bygning"|trans }}</label>
-          <p>{{ data.artworks.artwork1.building }}</p>
+          <p>{{ data.artwork.building }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsGeo">{{ "Afdeling"|trans }}</label>
-          <p>{{ data.artworks.artwork1.geo }}</p>
+          <p>{{ data.artwork.geo }}</p>
         </div>
       </div>
       <div class="row mt-3">
@@ -54,39 +54,39 @@
         </div>
         <div class="col-md-4">
           <label for="detailsArtNo">{{ "Art.nr."|trans }}</label>
-          <p>{{ data.artworks.artwork1.artNo }}</p>
+          <p>{{ data.artwork.artNo }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsCategory">{{ "Kategori"|trans }}</label>
-          <p>{{ data.artworks.artwork1.category }}</p>
+          <p>{{ data.artwork.category }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsPrice">{{ "Indkøbspris"|trans }}</label>
-          <p>{{ data.artworks.artwork1.price }}</p>
+          <p>{{ data.artwork.price }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsProductionYear">{{ "Produktionsår"|trans }}</label>
-          <p>{{ data.artworks.artwork1.productionYear }}</p>
+          <p>{{ data.artwork.productionYear }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsCustom1">{{ "Custom 1"|trans }}</label>
-          <p>{{ data.artworks.artwork1.custom1 }}</p>
+          <p>{{ data.artwork.custom1 }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsCustom2">{{ "Custom 1"|trans }}</label>
-          <p>{{ data.artworks.artwork1.custom2 }}</p>
+          <p>{{ data.artwork.custom2 }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsCustom4">{{ "Custom 4"|trans }}</label>
-          <p>{{ data.artworks.artwork1.custom4 }}</p>
+          <p>{{ data.artwork.custom4 }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsEstimatedValue">{{ "Vurderingspris"|trans }}</label>
-          <p>{{ data.artworks.artwork1.estimatedValue }}</p>
+          <p>{{ data.artwork.estimatedValue }}</p>
         </div>
         <div class="col-md-4">
           <label for="detailsEstimatedValue">{{ "Vurderingsdato"|trans }}</label>
-          <p>{{ data.artworks.artwork1.estimatedValueDate }}</p>
+          <p>{{ data.artwork.estimatedValueDate }}</p>
         </div>
       </div>
     </div>

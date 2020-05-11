@@ -6,7 +6,7 @@
 
 {% block body %}
 	{% include "app/_header.html.twig" %}
-	{% include "app/_art.html.twig" %}
+	{% include "app/_art.html.twig" with {artwork: data.artwork} %}
 	{% include "app/_footer.html.twig" %}
 {% endblock %}
 

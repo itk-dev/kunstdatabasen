@@ -1,8 +1,8 @@
 {% set data = {
   title: 'Kunstdatabasen',
   brand: 'Aarhus kommunes kunstdatabase',
-  artworks: {
-    artwork1: {
+  artworks: [
+    {
       link: 'details',
       img: 'images/rytmisk-interferens.png',
       title: 'Rytmisk Interferens',
@@ -24,7 +24,7 @@
       custom3: '',
       custom4: 'Hos kunstneren'
     },
-    artwork2: {
+    {
       link: 'details',
       img: 'images/rytmisk-interferens.png',
       title: 'Rytmisk Interferens',
@@ -46,7 +46,7 @@
       custom3: '',
       custom4: 'Hos kunstneren'
     },
-    artwork3: {
+    {
       link: 'details',
       img: 'images/rytmisk-interferens.png',
       title: 'Rytmisk Interferens',
@@ -68,7 +68,7 @@
       custom3: '',
       custom4: 'Hos kunstneren'
     },
-    artwork4: {
+    {
       link: 'details',
       img: 'images/rytmisk-interferens.png',
       title: 'Rytmisk Interferens',
@@ -90,7 +90,8 @@
       custom3: '',
       custom4: 'Hos kunstneren'
     }
-  }
+  ]
 } %}
+{# twigcs use-var data #}
 
 {% include 'app/index.html.twig' with data %}
