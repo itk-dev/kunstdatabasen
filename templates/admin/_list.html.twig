@@ -1,4 +1,42 @@
 <div class="col bg-light border-left px-md-5">
-	<h1 class="h4 mt-3 mb-4">{{ data.welcome }}</h1>
-	{% include "admin/_table.html.twig" with { header: false } %}
+    <div class="row mt-3 mb-4">
+        <div class="col">
+	        <h1 class="h4">{{ data.welcome }}</h1>
+        </div>
+        <div class="col-auto">
+            <div class="btn-group shadow-sm rounded" role="group" aria-label="tableFilters">
+                <button class="btn btn-sm btn-light dropdown-toggle bg-white px-md-3" type="button" id="triggerBuildings" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                        {{ 'Bygninger'|trans }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="triggerBuildings">
+                    {% for item in buildings %}
+                        <button class="dropdown-item" href="#">{{ item.name }}</button>
+                    {% endfor %}
+                </div>
+
+                <button class="btn btn-sm btn-light dropdown-toggle bg-white px-md-3" type="button" id="triggerBuildings" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                        {{ 'Bygninger'|trans }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="triggerBuildings">
+                    {% for item in buildings %}
+                        <button class="dropdown-item" href="#">{{ item.name }}</button>
+                    {% endfor %}
+                </div>
+
+                <button class="btn btn-sm btn-light dropdown-toggle bg-white px-md-3" type="button" id="triggerBuildings" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                        {{ 'Bygninger'|trans }}
+                </button>
+                <div class="dropdown-menu" aria-labelledby="triggerBuildings">
+                    {% for item in buildings %}
+                        <button class="dropdown-item" href="#">{{ item.name }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            <a name="" id="" class="btn btn-sm btn-primary ml-3" href="#" role="button">{{ 'Opret ny'|trans }}</a>
+        </div>
+    </div>
+	{% include "admin/_table.html.twig" with { header: true } %}
 </div>
