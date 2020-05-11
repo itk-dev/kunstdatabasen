@@ -46,6 +46,31 @@ class Artwork extends Item
     private $assessmentPrice;
 
     /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $width;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $height;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $depth;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $diameter;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $weight;
+
+    /**
      * @return string|null
      */
     public function getArtist(): ?string
@@ -171,5 +196,65 @@ class Artwork extends Item
     public function __toString()
     {
         return $this->getName();
+    }
+
+    public function getWidth(): ?float
+    {
+        return $this->width;
+    }
+
+    public function setWidth(?float $width): self
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    public function getHeight(): ?float
+    {
+        return $this->height;
+    }
+
+    public function setHeight(?float $height): self
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    public function getDepth(): ?float
+    {
+        return $this->depth;
+    }
+
+    public function setDepth(?float $depth): self
+    {
+        $this->depth = $depth;
+
+        return $this;
+    }
+
+    public function getDiameter(): ?float
+    {
+        return $this->diameter;
+    }
+
+    public function setDiameter(?float $diameter): self
+    {
+        $this->diameter = $diameter;
+
+        return $this;
+    }
+
+    public function getWeight(): ?float
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(?float $weight): self
+    {
+        $this->weight = $weight;
+
+        return $this;
     }
 }
