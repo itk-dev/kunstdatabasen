@@ -142,19 +142,27 @@ class FrontendController extends AbstractController
             'img' => $path,
             'title' => $artwork->getName(),
             'artNo' => $artwork->getArtSerial(),
-            'category' => '@TODO',
             'artist' => $artwork->getArtist(),
-            'type' => '@TODO',
-            'dimensions' => '@TODO',
-            'building' => '@TODO',
+            'type' => $artwork->getType(),
+            'dimensions' => $this->getDimensions($artwork),
+            'category' => '@TODO',
+            'building' => $artwork->getBuilding(),
             'geo' => '@TODO',
             'comment' => '@TODO',
-            'department' => '@TODO',
+            'department' => $artwork->getOrganization(),
             'price' => $artwork->getPurchasePrice(),
             'productionYear' => $artwork->getProductionYear(),
             'estimatedValue' => $artwork->getAssessmentPrice(),
             'estimatedValueDate' => $artwork->getAssessmentDate()->format('d/m Y'),
         ];
+    }
+
+    private function getDimensions(Artwork $artwork)
+    {
+        $width = $artwork->getWidth();
+        $height = $artwork->getHeight();
+
+        return sprintf('%d X %d', $width, $height);
     }
 
     /**

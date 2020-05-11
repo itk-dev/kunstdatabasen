@@ -10,6 +10,21 @@ App\Entity\Artwork:
         assessmentPrice: '<numberBetween(1000, 1000000)>'
         images:
             - '@image_<current()>'
+        location: <text(15)>
+        building: <text(25)>
+        room: 'M-<numberBetween(1, 10)>'
+        address: <text(30)>
+        postal_code: '<numberBetween(1000, 9999)>'
+        city: <text(15)>
+        width: '<numberBetween(1.0, 100.0)>'
+        height: '<numberBetween(1.0, 100.0)>'
+        depth: '<numberBetween(1.0, 100.0)>'
+        diameter: '<numberBetween(1.0, 200.0)>'
+        weight: '<numberBetween(0.1, 100.0)>'
+        publicly_accessible: '<boolean()>'
+        status: <randomElement(["På lager","Udlånt"])>
+        type: <randomElement(["Maleri","Skulptur"])>
+        organization: <text(5)>
     artwork_{11..200}:
         name: <da_DK:word()>
         artist: <da_DK:name()>
@@ -20,3 +35,18 @@ App\Entity\Artwork:
         assessmentDate: '<date_create()>'
         assessmentPrice: '<numberBetween(1000, 1000000)>'
         images: []
+        location: <text(15)>
+        building: <text(25)>
+        room: 'M-<numberBetween(1, 10)>'
+        address: <text(30)>
+        postal_code: '<numberBetween(1000, 9999)>'
+        city: <text(15)>
+        width: '<numberBetween(1.0, 100.0)>'
+        height: '<numberBetween(1.0, 100.0)>'
+        depth: '<numberBetween(1.0, 100.0)>'
+        diameter: '<numberBetween(1.0, 200.0)>'
+        weight: '<numberBetween(0.1, 100.0)>'
+        publicly_accessible: '<boolean()>'
+        status: <randomElement(["På lager","Udlånt"])>
+        type: <randomElement(["Maleri","Skulptur"])>
+        organization: <text(5)>
