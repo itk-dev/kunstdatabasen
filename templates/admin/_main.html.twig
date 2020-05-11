@@ -1,21 +1,30 @@
 <div class="col bg-light border-left px-md-5">
-  <h1 class="h4 mt-3 mb-4">{{ data.welcome }}</h1>
-  <p class="text-muted">{{ "Senest sete værker"|trans }}</p>
-  {% include "admin/_table.html.twig" with { header: false } %}
-  <p class="text-muted">{{ "Senest tilføjede værker"|trans }}</p>
-  {% include "admin/_table.html.twig" with { header: false } %}
-  <div class="row mt-5">
-    <div class="col">
-      <a name="" id="" class="btn btn-primary mr-3" href="#" role="button">{{ "Opret ny"|trans }}</a>
-      <a name="" id="" class="btn btn-outline-dark" href="#" role="button">{{ "Vis alle"|trans }}</a>
-    </div>
-  </div>
-  <div class="row my-5">
-    <div class="col">
-      <p class="text-muted">Hjælp og vejledning</p>
-      <a href="#">Hvad er nyt</a>
-      <a href="#">Support</a>
-      <a href="#">Github kildekode</a>
-    </div>
-  </div>
+	<h1 class="h4 mt-3 mb-4">{{ data.welcome }}</h1>
+	<p class="text-muted">{{ "Senest sete værker"|trans }}</p>
+	{% include "admin/_table.html.twig" with { header: false } %}
+	<p class="text-muted">{{ "Senest tilføjede værker"|trans }}</p>
+	{% include "admin/_table.html.twig" with { header: false } %}
+	<div class="row mt-5">
+		<div class="col">
+			<a name="" id="" class="btn btn-primary mr-3" href="#" role="button">{{ "Opret ny"|trans }}</a>
+			<a name="" id="" class="btn btn-outline-dark" href="#" role="button">{{ "Vis alle"|trans }}</a>
+		</div>
+	</div>
+	<div class="row my-5">
+		<div class="col">
+			<p class="text-muted">Hjælp og vejledning</p>
+
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Hvad er nyt</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Support</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Github kildekode</a>
+                </li>
+            </ul>
+		</div>
+	</div>
 </div>
