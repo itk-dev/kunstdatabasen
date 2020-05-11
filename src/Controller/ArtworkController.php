@@ -30,9 +30,20 @@ class ArtworkController extends AbstractController
      */
     public function index(ArtworkRepository $artworkRepository): Response
     {
-        return $this->render('artwork/index.html.twig', [
-            'artworks' => $artworkRepository->findAll(),
-        ]);
+        return $this->render(
+            'admin/list.html.twig',
+            [
+                'artworks' => $artworkRepository->findAll(),
+                'title' => 'Kunstdatabasen',
+                'brand' => 'Aarhus kommunes kunstdatabase',
+                'brandShort' => 'Kunstdatabasen',
+                'welcome' => 'Velkommen til Aarhus Kommunes kunstdatabase',
+                'user' => [
+                    'username' => 'Admin user',
+                    'email' => 'admin@email.com',
+                ],
+            ]
+        );
     }
 
     /**
@@ -56,10 +67,13 @@ class ArtworkController extends AbstractController
             return $this->redirectToRoute('artwork_index');
         }
 
-        return $this->render('artwork/new.html.twig', [
-            'artwork' => $artwork,
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'admin/artwork/new.html.twig',
+            [
+                'artwork' => $artwork,
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
@@ -71,16 +85,19 @@ class ArtworkController extends AbstractController
      */
     public function show(Artwork $artwork): Response
     {
-        return $this->render('artwork/show.html.twig', [
-            'artwork' => $artwork,
-        ]);
+        return $this->render(
+            'admin/artwork/show.html.twig',
+            [
+                'artwork' => $artwork,
+            ]
+        );
     }
 
     /**
      * @Route("/{id}/edit", name="artwork_edit", methods={"GET","POST"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Entity\Artwork                       $artwork
+     * @param \App\Entity\Artwork $artwork
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -95,17 +112,20 @@ class ArtworkController extends AbstractController
             return $this->redirectToRoute('artwork_index');
         }
 
-        return $this->render('artwork/edit.html.twig', [
-            'artwork' => $artwork,
-            'form' => $form->createView(),
-        ]);
+        return $this->render(
+            'admin/artwork/edit.html.twig',
+            [
+                'artwork' => $artwork,
+                'form' => $form->createView(),
+            ]
+        );
     }
 
     /**
      * @Route("/{id}", name="artwork_delete", methods={"DELETE"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Entity\Artwork                       $artwork
+     * @param \App\Entity\Artwork $artwork
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

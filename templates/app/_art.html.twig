@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row my-3">
     <div class="col">
-      <a href="{{ indexLink ?: '' }}"><span class="text-secondary" aria-hidden="true">&laquo;</span> tilbage til listen</a>
+      <a href="{{ indexLink ?: '' }}"><span class="text-secondary" aria-hidden="true">&laquo;</span> {{ 'frontend.back_to_list'|trans }}</a>
     </div>
   </div>
   <div class="row art-details">
     <div class="col-md-12 mb-3">
-      <label for="detailsTitle">{{ "Titel"|trans }}</label>
+      <label for="detailsTitle">{{ 'frontend.artwork.title'|trans }}</label>
       <h1 id="detailsTitle">{{ data.artwork.title }}</h1>
     </div>
     <div class="col-md-3">
@@ -15,77 +15,65 @@
     <div class="col-md-9">
       <div class="row">
         <div class="col-md-4">
-          <label for="detailsArtist">{{ "Kunstner"|trans }}</label>
+          <label for="detailsArtist">{{ 'frontend.artwork.artist'|trans }}</label>
           <p>{{ data.artwork.artist }}</p>
         </div>
         <div class="col-md-4">
-          <label for="detailsType">{{ "Type"|trans }}</label>
+          <label for="detailsType">{{ 'frontend.artwork.type'|trans }}</label>
           <p>{{ data.artwork.type }}</p>
         </div>
         <div class="col-md-4">
-          <label for="detailsDimensions">{{ "Dimensioner"|trans }}</label>
+          <label for="detailsDimensions">{{ 'frontend.artwork.dimensions'|trans }}</label>
           <p>{{ data.artwork.dimensions }}</p>
         </div>
         <div class="col-md-4">
-          <label for="detailsComment">{{ "Bemærkning"|trans }}</label>
+          <label for="detailsComment">{{ 'frontend.artwork.comment'|trans }}</label>
           <p>{{ data.artwork.comment }}</p>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-12">
-          <h2 class="h4 border-bottom pb-2">{{ "Lokation"|trans }}</h2>
+          <h2 class="h4 border-bottom pb-2">{{ 'frontend.artwork.location'|trans }}</h2>
         </div>
         <div class="col-md-4">
-          <label for="detailsDepartment">{{ "Afdeling"|trans }}</label>
+          <label for="detailsDepartment">{{ 'frontend.artwork.department'|trans }}</label>
           <p>{{ data.artwork.department }}</p>
         </div>
         <div class="col-md-4">
-          <label for="detailsBuilding">{{ "Bygning"|trans }}</label>
+          <label for="detailsBuilding">{{ 'frontend.artwork.building'|trans }}</label>
           <p>{{ data.artwork.building }}</p>
         </div>
         <div class="col-md-4">
-          <label for="detailsGeo">{{ "Afdeling"|trans }}</label>
+          <label for="detailsGeo">{{ 'frontend.artwork.geo'|trans }}</label>
           <p>{{ data.artwork.geo }}</p>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-12">
-          <h2 class="h4 border-bottom pb-2">{{ "Yderligere information"|trans }}</h2>
+          <h2 class="h4 border-bottom pb-2">{{ 'frontend.artwork.further_information'|trans }}</h2>
         </div>
         <div class="col-md-4">
-          <label for="detailsArtNo">{{ "Art.nr."|trans }}</label>
+          <label for="detailsArtNo">{{ 'frontend.artwork.art_serial'|trans }}</label>
           <p>{{ data.artwork.artNo }}</p>
         </div>
         <div class="col-md-4">
-          <label for="detailsCategory">{{ "Kategori"|trans }}</label>
+          <label for="detailsCategory">{{ 'frontend.artwork.category'|trans }}</label>
           <p>{{ data.artwork.category }}</p>
         </div>
         <div class="col-md-4">
-          <label for="detailsPrice">{{ "Indkøbspris"|trans }}</label>
+          <label for="detailsPrice">{{ 'frontend.artwork.purchase_price'|trans }}</label>
           <p>{{ data.artwork.price }}</p>
         </div>
         <div class="col-md-4">
-          <label for="detailsProductionYear">{{ "Produktionsår"|trans }}</label>
+          <label for="detailsProductionYear">{{ 'frontend.artwork.production_year'|trans }}</label>
           <p>{{ data.artwork.productionYear }}</p>
         </div>
         <div class="col-md-4">
-          <label for="detailsCustom1">{{ "Custom 1"|trans }}</label>
-          <p>{{ data.artwork.custom1 }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsCustom2">{{ "Custom 1"|trans }}</label>
-          <p>{{ data.artwork.custom2 }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsCustom4">{{ "Custom 4"|trans }}</label>
-          <p>{{ data.artwork.custom4 }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsEstimatedValue">{{ "Vurderingspris"|trans }}</label>
+          <label for="detailsEstimatedValue">{{ 'frontend.artwork.assessment_price'|trans }}</label>
           <p>{{ data.artwork.estimatedValue }}</p>
         </div>
         <div class="col-md-4">
-          <label for="detailsEstimatedValue">{{ "Vurderingsdato"|trans }}</label>
+          <label for="detailsEstimatedValue">{{ 'frontend.artwork.assessment_date'|trans }}</label>
           <p>{{ data.artwork.estimatedValueDate }}</p>
         </div>
       </div>

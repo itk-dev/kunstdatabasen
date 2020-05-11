@@ -11,8 +11,8 @@ library.add(
   faPalette,
   faSearch,
   faMountain
-)
-dom.watch()
+);
+dom.watch();
 
 const $ = require('jquery');
 global.$ = global.jQuery = $;
