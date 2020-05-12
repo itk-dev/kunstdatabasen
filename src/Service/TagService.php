@@ -43,7 +43,7 @@ class TagService
 
         /* @var Tag $tag */
         foreach ($tags as $tag) {
-            $choices[$tag->getValue()] = $tag->getId();
+            $choices[$tag->getValue()] = $tag->getValue();
         }
 
         return $choices;

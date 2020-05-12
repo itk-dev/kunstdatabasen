@@ -28,15 +28,15 @@ class TaggingSubscriber implements EventSubscriber
     public function getSubscribedEvents()
     {
         return [
-            Events::postPersist,
-            Events::postUpdate,
+            Events::prePersist,
+            Events::preUpdate,
         ];
     }
 
     /**
      * {@inheritdoc}
      */
-    public function postPersist(LifecycleEventArgs $args)
+    public function prePersist(LifecycleEventArgs $args)
     {
         $this->changeTags('persist', $args);
     }
@@ -44,7 +44,7 @@ class TaggingSubscriber implements EventSubscriber
     /**
      * {@inheritdoc}
      */
-    public function postUpdate(LifecycleEventArgs $args)
+    public function preUpdate(LifecycleEventArgs $args)
     {
         $this->changeTags('update', $args);
     }

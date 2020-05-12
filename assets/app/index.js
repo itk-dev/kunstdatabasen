@@ -21,7 +21,9 @@ $(function () {
     $(document).ready(function () {
         $('.tag-select-edit').select2({
             tags: true,
-            language: 'da_DK'
+            allowClear: true,
+            placeholder: "Skriv",
+            language: 'da_DK',
         });
 
         $('.tag-select').select2({

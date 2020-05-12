@@ -39,9 +39,10 @@ class ArtworkType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $entity = $options['data'];
+        /* @var Artwork $artwork */
+        $artwork = $options['data'];
 
-        $classname = get_class($entity);
+        $classname = get_class($artwork);
 
         $builder
             ->add('name')
@@ -56,43 +57,50 @@ class ArtworkType extends AbstractType
                 'attr' => [
                     'class' => 'tag-select-edit',
                 ],
-                'choices' => $this->tagService->getChoices(get_class($entity), 'building'),
+                'choices' => $this->tagService->getChoices($classname, 'building'),
+                'required' => false,
             ])
             ->add('organization', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
                 ],
-                'choices' => $this->tagService->getChoices(get_class($entity), 'organization'),
+                'choices' => $this->tagService->getChoices($classname, 'organization'),
+                'required' => false,
             ])
             ->add('type', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
                 ],
-                'choices' => $this->tagService->getChoices(get_class($entity), 'type'),
+                'choices' => $this->tagService->getChoices($classname, 'type'),
+                'required' => false,
             ])
             ->add('address', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
                 ],
-                'choices' => $this->tagService->getChoices(get_class($entity), 'address'),
+                'choices' => $this->tagService->getChoices($classname, 'address'),
+                'required' => false,
             ])
             ->add('location', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
                 ],
-                'choices' => $this->tagService->getChoices(get_class($entity), 'location'),
+                'choices' => $this->tagService->getChoices($classname, 'location'),
+                'required' => false,
             ])
             ->add('room', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
                 ],
-                'choices' => $this->tagService->getChoices(get_class($entity), 'room'),
+                'choices' => $this->tagService->getChoices($classname, 'room'),
+                'required' => false,
             ])
             ->add('city', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
                 ],
-                'choices' => $this->tagService->getChoices(get_class($entity), 'city'),
+                'choices' => $this->tagService->getChoices($classname, 'city'),
+                'required' => false,
             ])
             ->add('postalCode')
             ->add('width')
@@ -115,6 +123,8 @@ class ArtworkType extends AbstractType
                     'by_reference' => false,
                 ]
             );
+
+        // Allow for new options from the user.
         $builder->get('building')->resetViewTransformers();
         $builder->get('organization')->resetViewTransformers();
         $builder->get('type')->resetViewTransformers();
