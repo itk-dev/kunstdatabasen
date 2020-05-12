@@ -1,10 +1,10 @@
 let collectionHolder;
-let addButton = $('<button type="button" class="add_link">Add image</button>');
-let addNewLink = $('<li></li>').append(addButton);
+const addButton = $('<button type="button" class="add_link">Add image</button>');
+const addNewLink = $('<li></li>').append(addButton);
 
 jQuery(document).ready(function () {
     collectionHolder = $('ul.images');
-    collectionHolder.find('li').each(function() {
+    collectionHolder.find('li').each(function () {
         addDeleteLink($(this));
     });
     collectionHolder.append(addNewLink);
@@ -15,22 +15,22 @@ jQuery(document).ready(function () {
     });
 });
 
-function addForm(collectionHolder, newLinkLi) {
-    let prototype = collectionHolder.data('prototype');
-    let index = collectionHolder.data('index');
+function addForm (collectionHolder, newLinkLi) {
+    const prototype = collectionHolder.data('prototype');
+    const index = collectionHolder.data('index');
     let newForm = prototype;
     newForm = newForm.replace(/__name__/g, index);
     collectionHolder.data('index', index + 1);
-    let newFormLi = $('<li></li>').append(newForm);
+    const newFormLi = $('<li></li>').append(newForm);
     newLinkLi.before(newFormLi);
     addDeleteLink(newFormLi);
 }
 
-function addDeleteLink(tagFormLi) {
-    let removeFormButton = $('<button type="button">Remove image</button>');
+function addDeleteLink (tagFormLi) {
+    const removeFormButton = $('<button type="button">Remove image</button>');
     tagFormLi.append(removeFormButton);
 
-    removeFormButton.on('click', function(e) {
+    removeFormButton.on('click', function (e) {
         tagFormLi.remove();
     });
 }

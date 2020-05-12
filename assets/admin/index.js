@@ -1,17 +1,17 @@
-const $ = require('jquery');
-global.$ = global.jQuery = $;
-
 import './admin.scss';
 
 // Add font awesome icons
-import { library, dom } from '@fortawesome/fontawesome-svg-core'
-import { faEdit, faPalette, faSearch, faMountain } from '@fortawesome/free-solid-svg-icons'
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import { faEdit, faPalette, faSearch, faMountain } from '@fortawesome/free-solid-svg-icons';
+
+const $ = require('jquery');
+global.$ = global.jQuery = $;
 
 library.add(
-  faEdit,
-  faPalette,
-  faSearch,
-  faMountain
+    faEdit,
+    faPalette,
+    faSearch,
+    faMountain
 );
 dom.watch();
 
@@ -23,8 +23,8 @@ $(function () {
         $('.tag-select-edit').select2({
             tags: true,
             allowClear: true,
-            placeholder: "Skriv",
-            language: 'da_DK',
+            placeholder: 'Skriv',
+            language: 'da_DK'
         });
 
         $('.tag-select').select2({
