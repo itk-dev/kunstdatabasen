@@ -9,7 +9,6 @@
 namespace App\Controller;
 
 use App\Entity\Artwork;
-use App\Entity\Item;
 use App\Repository\ArtworkRepository;
 use App\Service\TagService;
 use Knp\Component\Pager\PaginatorInterface;
@@ -34,7 +33,7 @@ class FrontendController extends AbstractController
      * FrontendController constructor.
      *
      * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
-     * @param \App\Service\TagService $tagService
+     * @param \App\Service\TagService                               $tagService
      */
     public function __construct(UploaderHelper $uploaderHelper, TagService $tagService)
     {
@@ -46,9 +45,8 @@ class FrontendController extends AbstractController
      * @Route("/", name="frontend_index")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ArtworkRepository $artworkRepository
-     *
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator
+     * @param \App\Repository\ArtworkRepository         $artworkRepository
+     * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -61,8 +59,8 @@ class FrontendController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $width = $data['width'] !== null ? json_decode($data['width']) : null;
-            $height = $data['height'] !== null ? json_decode($data['height']) : null;
+            $width = null !== $data['width'] ? json_decode($data['width']) : null;
+            $height = null !== $data['height'] ? json_decode($data['height']) : null;
 
             $query = $artworkRepository->getQuery(
                 $data['search'],
@@ -137,7 +135,7 @@ class FrontendController extends AbstractController
             $path = $this->uploaderHelper->asset($artwork->getImages()[0], 'imageFile');
         }
 
-        return (object)[
+        return (object) [
             'link' => $this->generateUrl(
                 'frontend_artwork_show',
                 [
@@ -199,7 +197,7 @@ class FrontendController extends AbstractController
                     'attr' => [
                         'placeholder' => 'frontend.filter.search_placeholder',
                     ],
-                    'required' => false
+                    'required' => false,
                 ]
             )
             ->add(
@@ -211,7 +209,7 @@ class FrontendController extends AbstractController
                     'required' => false,
                     'choices' => $typeChoices,
                     'attr' => [
-                        'class' => 'tag-select'
+                        'class' => 'tag-select',
                     ],
                 ]
             )
@@ -224,7 +222,7 @@ class FrontendController extends AbstractController
                     'required' => false,
                     'choices' => $buildingChoices,
                     'attr' => [
-                        'class' => 'tag-select'
+                        'class' => 'tag-select',
                     ],
                 ]
             )
@@ -236,9 +234,9 @@ class FrontendController extends AbstractController
                     'required' => false,
                     'placeholder' => 'frontend.filter.width_placeholder',
                     'choices' => [
-                        "0 - 50" => json_encode(['min' => 0, 'max' => 50]),
-                        "50 - 100" => json_encode(['min' => 50, 'max' => 100]),
-                        "100 <" => json_encode(['min' => 100]),
+                        '0 - 50' => json_encode(['min' => 0, 'max' => 50]),
+                        '50 - 100' => json_encode(['min' => 50, 'max' => 100]),
+                        '100 <' => json_encode(['min' => 100]),
                     ],
                 ]
             )
@@ -250,9 +248,9 @@ class FrontendController extends AbstractController
                     'required' => false,
                     'placeholder' => 'frontend.filter.height_placeholder',
                     'choices' => [
-                        "0 - 50" => json_encode(['min' => 0, 'max' => 50]),
-                        "50 - 100" => json_encode(['min' => 50, 'max' => 100]),
-                        "100 <" => json_encode(['min' => 100]),
+                        '0 - 50' => json_encode(['min' => 0, 'max' => 50]),
+                        '50 - 100' => json_encode(['min' => 50, 'max' => 100]),
+                        '100 <' => json_encode(['min' => 100]),
                     ],
                 ]
             )

@@ -198,11 +198,19 @@ class Artwork extends Item
         return $this->getName();
     }
 
+    /**
+     * @return float|null
+     */
     public function getWidth(): ?float
     {
         return $this->width;
     }
 
+    /**
+     * @param float|null $width
+     *
+     * @return $this
+     */
     public function setWidth(?float $width): self
     {
         $this->width = $width;
@@ -210,11 +218,19 @@ class Artwork extends Item
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getHeight(): ?float
     {
         return $this->height;
     }
 
+    /**
+     * @param float|null $height
+     *
+     * @return $this
+     */
     public function setHeight(?float $height): self
     {
         $this->height = $height;
@@ -222,11 +238,19 @@ class Artwork extends Item
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getDepth(): ?float
     {
         return $this->depth;
     }
 
+    /**
+     * @param float|null $depth
+     *
+     * @return $this
+     */
     public function setDepth(?float $depth): self
     {
         $this->depth = $depth;
@@ -234,11 +258,19 @@ class Artwork extends Item
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getDiameter(): ?float
     {
         return $this->diameter;
     }
 
+    /**
+     * @param float|null $diameter
+     *
+     * @return $this
+     */
     public function setDiameter(?float $diameter): self
     {
         $this->diameter = $diameter;
@@ -246,11 +278,19 @@ class Artwork extends Item
         return $this;
     }
 
+    /**
+     * @return float|null
+     */
     public function getWeight(): ?float
     {
         return $this->weight;
     }
 
+    /**
+     * @param float|null $weight
+     *
+     * @return $this
+     */
     public function setWeight(?float $weight): self
     {
         $this->weight = $weight;

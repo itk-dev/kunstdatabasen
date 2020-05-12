@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Repository;
 
 use App\Entity\Tag;
@@ -14,12 +20,26 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TagRepository extends ServiceEntityRepository
 {
+    /**
+     * TagRepository constructor.
+     *
+     * @param \Doctrine\Persistence\ManagerRegistry $registry
+     */
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Tag::class);
     }
 
-    public function getByClassname(string $classname, string $field) {
+    /**
+     * Get tags by classname and field.
+     *
+     * @param string $classname
+     * @param string $field
+     *
+     * @return \App\Entity\Tag[]
+     */
+    public function getByClassname(string $classname, string $field)
+    {
         return $this->findBy([
             'class' => $classname,
             'field' => $field,

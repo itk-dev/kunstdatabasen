@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Service;
 
 use App\Entity\Item;
@@ -18,7 +24,7 @@ class TagService
     /**
      * TagService constructor.
      *
-     * @param \App\Repository\TagRepository $tagRepository
+     * @param \App\Repository\TagRepository        $tagRepository
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
      */
     public function __construct(TagRepository $tagRepository, EntityManagerInterface $entityManager)
@@ -56,15 +62,16 @@ class TagService
      * @param $field
      * @param $value
      */
-    public function addTag(Item $item, $field, $value) {
-        $classname = get_class($item);
+    public function addTag(Item $item, $field, $value)
+    {
+        $classname = \get_class($item);
         $tags = $this->tagRepository->findBy([
             'class' => $classname,
             'field' => $field,
             'value' => $value,
         ]);
 
-        if (count($tags) === 0) {
+        if (0 === \count($tags)) {
             $tag = new Tag();
             $tag->setClass($classname);
             $tag->setField($field);
@@ -83,7 +90,8 @@ class TagService
      * @param string $classname
      * @param string $field
      */
-    private function cleanupTags(string $classname, string $field) {
+    private function cleanupTags(string $classname, string $field)
+    {
         // @TODO: Implement this!
     }
 }

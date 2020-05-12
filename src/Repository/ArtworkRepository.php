@@ -38,24 +38,24 @@ class ArtworkRepository extends ServiceEntityRepository
      * @param string|null $type
      * @param string|null $category
      * @param string|null $building
-     * @param int|null $yearFrom
-     * @param int|null $yearTo
-     * @param int|null $minWidth
-     * @param int|null $maxWidth
-     * @param int|null $minHeight
-     * @param int|null $maxHeight
+     * @param int|null    $yearFrom
+     * @param int|null    $yearTo
+     * @param int|null    $minWidth
+     * @param int|null    $maxWidth
+     * @param int|null    $minHeight
+     * @param int|null    $maxHeight
      *
      * @return \Doctrine\ORM\Query
      */
-    public function getQuery(string $search = NULL, string $type = NULL, string $category = NULL, string $building = NULL, int $yearFrom = NULL, int $yearTo = NULL, int $minWidth = NULL, int $maxWidth = NULL, int $minHeight = NULL, int $maxHeight = NULL): Query
+    public function getQuery(string $search = null, string $type = null, string $category = null, string $building = null, int $yearFrom = null, int $yearTo = null, int $minWidth = null, int $maxWidth = null, int $minHeight = null, int $maxHeight = null): Query
     {
         $qb = $this->createQueryBuilder('e');
-        $search !== null && $qb->andWhere('e.name LIKE :search')->setParameter('search', '%'.$search.'%');
-//        $type !== null && $qb->andWhere('e.type = :type')->setParameter('type', $type);
-//        $category !== null && $qb->andWhere('e.category = :category')->setParameter('category', $category);
-//        $building !== null && $qb->andWhere('e.building = :building')->setParameter('building', $building);
-        $yearFrom !== null && $qb->andWhere('e.productionYear >= :yearFrom')->setParameter('yearFrom', $yearFrom);
-        $yearTo !== null && $qb->andWhere('e.productionYear <= :yearTo')->setParameter('yearTo', $yearTo);
+        null !== $search && $qb->andWhere('e.name LIKE :search')->setParameter('search', '%'.$search.'%');
+        null !== $type && $qb->andWhere('e.type = :type')->setParameter('type', $type);
+        null !== $category && $qb->andWhere('e.category = :category')->setParameter('category', $category);
+        null !== $building && $qb->andWhere('e.building = :building')->setParameter('building', $building);
+        null !== $yearFrom && $qb->andWhere('e.productionYear >= :yearFrom')->setParameter('yearFrom', $yearFrom);
+        null !== $yearTo && $qb->andWhere('e.productionYear <= :yearTo')->setParameter('yearTo', $yearTo);
 
         return $qb->getQuery();
     }

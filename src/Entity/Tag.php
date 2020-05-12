@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Entity;
 
 use App\Repository\TagRepository;
@@ -32,16 +38,27 @@ class Tag
      */
     private $field;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getClass(): ?string
     {
         return $this->class;
     }
 
+    /**
+     * @param string $class
+     *
+     * @return $this
+     */
     public function setClass(string $class): self
     {
         $this->class = $class;
@@ -49,11 +66,19 @@ class Tag
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getValue(): ?string
     {
         return $this->value;
     }
 
+    /**
+     * @param string $value
+     *
+     * @return $this
+     */
     public function setValue(string $value): self
     {
         $this->value = $value;
@@ -61,11 +86,19 @@ class Tag
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getField(): ?string
     {
         return $this->field;
     }
 
+    /**
+     * @param string $field
+     *
+     * @return $this
+     */
     public function setField(string $field): self
     {
         $this->field = $field;

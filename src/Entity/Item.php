@@ -20,7 +20,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  */
-abstract class Item
+class Item
 {
     use BlameableEntity;
     use TimestampableEntity;
@@ -186,11 +186,19 @@ abstract class Item
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getStatus(): ?string
     {
         return $this->status;
     }
 
+    /**
+     * @param string|null $status
+     *
+     * @return $this
+     */
     public function setStatus(?string $status): self
     {
         $this->status = $status;
@@ -198,11 +206,19 @@ abstract class Item
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
+    /**
+     * @param string|null $type
+     *
+     * @return $this
+     */
     public function setType(?string $type): self
     {
         $this->type = $type;
@@ -210,11 +226,19 @@ abstract class Item
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getOrganization(): ?string
     {
         return $this->organization;
     }
 
+    /**
+     * @param string|null $organization
+     *
+     * @return $this
+     */
     public function setOrganization(?string $organization): self
     {
         $this->organization = $organization;
@@ -222,11 +246,19 @@ abstract class Item
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLocation(): ?string
     {
         return $this->location;
     }
 
+    /**
+     * @param string|null $location
+     *
+     * @return $this
+     */
     public function setLocation(?string $location): self
     {
         $this->location = $location;
@@ -234,11 +266,19 @@ abstract class Item
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getBuilding(): ?string
     {
         return $this->building;
     }
 
+    /**
+     * @param string|null $building
+     *
+     * @return $this
+     */
     public function setBuilding(?string $building): self
     {
         $this->building = $building;
@@ -246,11 +286,19 @@ abstract class Item
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getRoom(): ?string
     {
         return $this->room;
     }
 
+    /**
+     * @param string|null $room
+     *
+     * @return $this
+     */
     public function setRoom(?string $room): self
     {
         $this->room = $room;
@@ -258,11 +306,19 @@ abstract class Item
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getAddress(): ?string
     {
         return $this->address;
     }
 
+    /**
+     * @param string|null $address
+     *
+     * @return $this
+     */
     public function setAddress(?string $address): self
     {
         $this->address = $address;
@@ -270,11 +326,19 @@ abstract class Item
         return $this;
     }
 
+    /**
+     * @return int|null
+     */
     public function getPostalCode(): ?int
     {
         return $this->postalCode;
     }
 
+    /**
+     * @param int|null $postalCode
+     *
+     * @return $this
+     */
     public function setPostalCode(?int $postalCode): self
     {
         $this->postalCode = $postalCode;
@@ -282,11 +346,19 @@ abstract class Item
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCity(): ?string
     {
         return $this->city;
     }
 
+    /**
+     * @param string|null $city
+     *
+     * @return $this
+     */
     public function setCity(?string $city): self
     {
         $this->city = $city;
@@ -294,11 +366,19 @@ abstract class Item
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getPubliclyAccessible(): ?bool
     {
         return $this->publiclyAccessible;
     }
 
+    /**
+     * @param bool|null $publiclyAccessible
+     *
+     * @return $this
+     */
     public function setPubliclyAccessible(?bool $publiclyAccessible): self
     {
         $this->publiclyAccessible = $publiclyAccessible;

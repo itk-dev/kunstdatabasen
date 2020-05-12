@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\EventSubscriber;
 
 use App\Entity\Item;
@@ -8,6 +14,9 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 
+/**
+ * Class TaggingSubscriber.
+ */
 class TaggingSubscriber implements EventSubscriber
 {
     private $tagService;
@@ -52,7 +61,7 @@ class TaggingSubscriber implements EventSubscriber
     /**
      * Save the new tag.
      *
-     * @param string $action
+     * @param string                                         $action
      * @param \Doctrine\Persistence\Event\LifecycleEventArgs $args
      */
     private function changeTags(string $action, LifecycleEventArgs $args)
@@ -68,13 +77,13 @@ class TaggingSubscriber implements EventSubscriber
             $room = $entity->getRoom();
             $location = $entity->getLocation();
 
-            $type !== null && $this->tagService->addTag($entity, 'type', $type);
-            $organization !== null && $this->tagService->addTag($entity, 'organization', $organization);
-            $building !== null && $this->tagService->addTag($entity, 'building', $building);
-            $address !== null && $this->tagService->addTag($entity, 'address', $address);
-            $city !== null && $this->tagService->addTag($entity, 'city', $city);
-            $room !== null && $this->tagService->addTag($entity, 'room', $room);
-            $location !== null && $this->tagService->addTag($entity, 'location', $location);
+            null !== $type && $this->tagService->addTag($entity, 'type', $type);
+            null !== $organization && $this->tagService->addTag($entity, 'organization', $organization);
+            null !== $building && $this->tagService->addTag($entity, 'building', $building);
+            null !== $address && $this->tagService->addTag($entity, 'address', $address);
+            null !== $city && $this->tagService->addTag($entity, 'city', $city);
+            null !== $room && $this->tagService->addTag($entity, 'room', $room);
+            null !== $location && $this->tagService->addTag($entity, 'location', $location);
         }
     }
 }

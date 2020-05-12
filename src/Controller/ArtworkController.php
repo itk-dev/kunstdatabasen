@@ -97,7 +97,7 @@ class ArtworkController extends AbstractController
      * @Route("/{id}/edit", name="artwork_edit", methods={"GET","POST"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Entity\Artwork $artwork
+     * @param \App\Entity\Artwork                       $artwork
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -125,7 +125,7 @@ class ArtworkController extends AbstractController
      * @Route("/{id}", name="artwork_delete", methods={"DELETE"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Entity\Artwork $artwork
+     * @param \App\Entity\Artwork                       $artwork
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
