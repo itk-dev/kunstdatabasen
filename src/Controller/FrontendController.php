@@ -9,7 +9,9 @@
 namespace App\Controller;
 
 use App\Entity\Artwork;
+use App\Entity\Item;
 use App\Repository\ArtworkRepository;
+use App\Service\TagService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -26,15 +28,18 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 class FrontendController extends AbstractController
 {
     private $uploaderHelper;
+    private $tagService;
 
     /**
      * FrontendController constructor.
      *
      * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
+     * @param \App\Service\TagService $tagService
      */
-    public function __construct(UploaderHelper $uploaderHelper)
+    public function __construct(UploaderHelper $uploaderHelper, TagService $tagService)
     {
         $this->uploaderHelper = $uploaderHelper;
+        $this->tagService = $tagService;
     }
 
     /**
@@ -62,7 +67,7 @@ class FrontendController extends AbstractController
             $query = $artworkRepository->getQuery(
                 $data['search'],
                 $data['type'],
-                $data['category'],
+                null,
                 $data['building'],
                 $data['yearFrom'],
                 $data['yearTo'],
@@ -156,10 +161,19 @@ class FrontendController extends AbstractController
         ];
     }
 
+    /**
+     * Get dimensions.
+     *
+     * @param \App\Entity\Artwork $artwork
+     *
+     * @return string
+     */
     private function getDimensions(Artwork $artwork)
     {
         $width = $artwork->getWidth();
         $height = $artwork->getHeight();
+
+        // @TODO: Include depth, diameter and weight in string.
 
         return sprintf('%d X %d', $width, $height);
     }
@@ -171,6 +185,8 @@ class FrontendController extends AbstractController
      */
     private function getSearchForm()
     {
+        $typeChoices = $this->tagService->getChoices(Artwork::class, 'type');
+        $buildingChoices = $this->tagService->getChoices(Artwork::class, 'building');
 
         $formBuilder = $this->createFormBuilder();
         $formBuilder
@@ -183,7 +199,7 @@ class FrontendController extends AbstractController
                     'attr' => [
                         'placeholder' => 'frontend.filter.search_placeholder',
                     ],
-                    'required' => false,
+                    'required' => false
                 ]
             )
             ->add(
@@ -193,22 +209,9 @@ class FrontendController extends AbstractController
                     'label' => 'frontend.filter.type',
                     'placeholder' => 'frontend.filter.type_placeholder',
                     'required' => false,
-                    'choices' => [
-                        '1' => '1',
-                        '2' => '2',
-                    ],
-                ]
-            )
-            ->add(
-                'category',
-                ChoiceType::class,
-                [
-                    'label' => 'frontend.filter.category',
-                    'placeholder' => 'frontend.filter.category_placeholder',
-                    'required' => false,
-                    'choices' => [
-                        '1' => '1',
-                        '2' => '2',
+                    'choices' => $typeChoices,
+                    'attr' => [
+                        'class' => 'tag-select'
                     ],
                 ]
             )
@@ -219,9 +222,9 @@ class FrontendController extends AbstractController
                     'label' => 'frontend.filter.building',
                     'placeholder' => 'frontend.filter.building_placeholder',
                     'required' => false,
-                    'choices' => [
-                        'building 1' => 1,
-                        'building 2' => 2,
+                    'choices' => $buildingChoices,
+                    'attr' => [
+                        'class' => 'tag-select'
                     ],
                 ]
             )

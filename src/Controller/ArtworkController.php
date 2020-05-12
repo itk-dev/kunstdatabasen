@@ -31,7 +31,7 @@ class ArtworkController extends AbstractController
     public function index(ArtworkRepository $artworkRepository): Response
     {
         return $this->render(
-            'admin/list.html.twig',
+            'admin/artwork/index.html.twig',
             [
                 'artworks' => $artworkRepository->findAll(),
                 'title' => 'Kunstdatabasen',

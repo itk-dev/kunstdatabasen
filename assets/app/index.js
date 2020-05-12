@@ -1,11 +1,11 @@
-import './app.scss';
+const $ = require('jquery');
+global.$ = global.jQuery = $;
 
-// Need jQuery? Install it with "yarn add jquery", then add the line `import $ from 'jquery';` to this file.
+import './app.scss';
 
 // Add font awesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
 library.add(
     faArrowLeft,
     faArrowRight
@@ -13,3 +13,15 @@ library.add(
 dom.watch();
 
 import 'bootstrap/js/dist/collapse';
+
+require('select2');
+
+$(function () {
+    $(document).ready(function () {
+        $('.tag-select-edit').select2({
+            tags: true
+        });
+
+        $('.tag-select').select2();
+    });
+});

@@ -1,6 +1,7 @@
-import './admin.scss';
+const $ = require('jquery');
+global.$ = global.jQuery = $;
 
-// Need jQuery? Install it with "yarn add jquery", then add the line `import $ from 'jquery';` to this file.
+import './admin.scss';
 
 // Add font awesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
@@ -14,5 +15,14 @@ library.add(
 );
 dom.watch();
 
-const $ = require('jquery');
-global.$ = global.jQuery = $;
+require('select2');
+
+$(function () {
+    $(document).ready(function () {
+        $('.tag-select-edit').select2({
+            tags: true
+        });
+
+        $('.tag-select').select2();
+    });
+});
