@@ -20,7 +20,7 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  */
-class Item
+abstract class Item
 {
     use BlameableEntity;
     use TimestampableEntity;

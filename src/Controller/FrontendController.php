@@ -145,7 +145,6 @@ class FrontendController extends AbstractController
             'artist' => $artwork->getArtist(),
             'type' => $artwork->getType(),
             'dimensions' => $this->getDimensions($artwork),
-            'category' => '@TODO',
             'building' => $artwork->getBuilding(),
             'geo' => '@TODO',
             'comment' => '@TODO',
