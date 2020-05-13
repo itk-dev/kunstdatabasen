@@ -14,12 +14,13 @@ use App\Repository\ArtworkRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin/artwork")
  */
-class ArtworkController extends AbstractController
+class ArtworkController extends BaseController
 {
     /**
      * @Route("/", name="artwork_index", methods={"GET"})
@@ -31,7 +32,7 @@ class ArtworkController extends AbstractController
     public function index(ArtworkRepository $artworkRepository): Response
     {
         return $this->render(
-            'admin/artwork/index.html.twig',
+            'admin2/artwork/index.html.twig',
             [
                 'artworks' => $artworkRepository->findAll(),
                 'title' => 'Kunstdatabasen',
@@ -68,7 +69,7 @@ class ArtworkController extends AbstractController
         }
 
         return $this->render(
-            'admin/artwork/new.html.twig',
+            'admin2/artwork/new.html.twig',
             [
                 'artwork' => $artwork,
                 'form' => $form->createView(),
@@ -86,7 +87,7 @@ class ArtworkController extends AbstractController
     public function show(Artwork $artwork): Response
     {
         return $this->render(
-            'admin/artwork/show.html.twig',
+            'admin2/artwork/show.html.twig',
             [
                 'artwork' => $artwork,
             ]
@@ -113,7 +114,7 @@ class ArtworkController extends AbstractController
         }
 
         return $this->render(
-            'admin/artwork/edit.html.twig',
+            'admin2/artwork/edit.html.twig',
             [
                 'artwork' => $artwork,
                 'form' => $form->createView(),
