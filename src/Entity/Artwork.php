@@ -46,6 +46,31 @@ class Artwork extends Item
     private $assessmentPrice;
 
     /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $width;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $height;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $depth;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $diameter;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $weight;
+
+    /**
      * @return string|null
      */
     public function getArtist(): ?string
@@ -171,5 +196,105 @@ class Artwork extends Item
     public function __toString()
     {
         return $this->getName();
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getWidth(): ?float
+    {
+        return $this->width;
+    }
+
+    /**
+     * @param float|null $width
+     *
+     * @return $this
+     */
+    public function setWidth(?float $width): self
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getHeight(): ?float
+    {
+        return $this->height;
+    }
+
+    /**
+     * @param float|null $height
+     *
+     * @return $this
+     */
+    public function setHeight(?float $height): self
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getDepth(): ?float
+    {
+        return $this->depth;
+    }
+
+    /**
+     * @param float|null $depth
+     *
+     * @return $this
+     */
+    public function setDepth(?float $depth): self
+    {
+        $this->depth = $depth;
+
+        return $this;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getDiameter(): ?float
+    {
+        return $this->diameter;
+    }
+
+    /**
+     * @param float|null $diameter
+     *
+     * @return $this
+     */
+    public function setDiameter(?float $diameter): self
+    {
+        $this->diameter = $diameter;
+
+        return $this;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getWeight(): ?float
+    {
+        return $this->weight;
+    }
+
+    /**
+     * @param float|null $weight
+     *
+     * @return $this
+     */
+    public function setWeight(?float $weight): self
+    {
+        $this->weight = $weight;
+
+        return $this;
     }
 }

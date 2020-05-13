@@ -6,22 +6,20 @@
                     <thead>
                     <tr class="text-muted small">
                         <th></th>
-                        <th>{{ "Titel"|trans }}</th>
-                        <th>{{ "Art.nr."|trans }}</th>
-                        <th>{{ "Kategori"|trans }}</th>
-                        <th>{{ "Kunstner"|trans }}</th>
-                        <th>{{ "Type"|trans }}</th>
-                        <th>{{ "Dimensioner"|trans }}</th>
-                        <th>{{ "Bygning"|trans }}</th>
+                        <th>{{ 'frontend.artwork.title'|trans }}</th>
+                        <th>{{ 'frontend.artwork.art_serial'|trans }}</th>
+                        <th>{{ 'frontend.artwork.artist'|trans }}</th>
+                        <th>{{ 'frontend.artwork.type'|trans }}</th>
+                        <th>{{ 'frontend.artwork.dimensions'|trans }}</th>
+                        <th>{{ 'frontend.artwork.building'|trans }}</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {% for art in data.artworks %}
+                    {% for art in artworks %}
                         <tr>
                             <td><a href="{{ art.link }}"><img src="{{ asset(art.img) }}" alt="" height="60"/></a></td>
                             <td><a href="{{ art.link }}"><strong>{{ art.title }}</strong></a></td>
                             <td>{{ art.artNo }}</td>
-                            <td>{{ art.category }}</td>
                             <td>{{ art.artist }}</td>
                             <td>{{ art.type }}</td>
                             <td>{{ art.dimensions }}</td>
@@ -35,7 +33,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-auto">
-            {% include "app/_pager.html.twig" %}
+            {{ knp_pagination_render(pagination) }}
         </div>
     </div>
 </div>

@@ -10,7 +10,13 @@ namespace App\Controller;
 
 use App\Entity\Artwork;
 use App\Repository\ArtworkRepository;
+use App\Service\TagService;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
@@ -20,94 +26,257 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
  */
 class FrontendController extends AbstractController
 {
+    private $uploaderHelper;
+    private $tagService;
+
+    /**
+     * FrontendController constructor.
+     *
+     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
+     * @param \App\Service\TagService                               $tagService
+     */
+    public function __construct(UploaderHelper $uploaderHelper, TagService $tagService)
+    {
+        $this->uploaderHelper = $uploaderHelper;
+        $this->tagService = $tagService;
+    }
+
     /**
      * @Route("/", name="frontend_index")
      *
-     * @param \App\Repository\ArtworkRepository                     $artworkRepository
-     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \App\Repository\ArtworkRepository         $artworkRepository
+     * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(ArtworkRepository $artworkRepository, UploaderHelper $uploaderHelper)
+    public function index(Request $request, ArtworkRepository $artworkRepository, PaginatorInterface $paginator)
     {
-        $artworks = [];
+        $form = $this->getSearchForm();
 
-        $artworkEntities = $artworkRepository->findAll();
+        $form->handleRequest($request);
 
-        /* @var Artwork $artworkEntity */
-        foreach ($artworkEntities as $artworkEntity) {
-            $path = '';
-            if (\count($artworkEntity->getImages()) > 0) {
-                $path = $uploaderHelper->asset($artworkEntity->getImages()[0], 'imageFile');
-            }
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
 
-            $artworks[] = (object) [
-                'link' => $this->generateUrl('frontend_artwork_show', [
-                    'id' => $artworkEntity->getId(),
-                ]),
-                'img' => $path,
-                'title' => $artworkEntity->getName(),
-                'artNo' => $artworkEntity->getArtSerial(),
-                'category' => '@TODO',
-                'artist' => $artworkEntity->getArtist(),
-                'type' => '@TODO',
-                'dimensions' => '@TODO',
-                'building' => '@TODO',
-            ];
+            $width = null !== $data['width'] ? json_decode($data['width']) : null;
+            $height = null !== $data['height'] ? json_decode($data['height']) : null;
+
+            $query = $artworkRepository->getQuery(
+                $data['search'],
+                $data['type'],
+                null,
+                $data['building'],
+                $data['yearFrom'],
+                $data['yearTo'],
+                $width->min ?? null,
+                $width->max ?? null,
+                $height->min ?? null,
+                $height->max ?? null
+            );
+        } else {
+            $query = $artworkRepository->getQuery();
         }
 
-        return $this->render('app/index.html.twig', [
-            'title' => 'Kunstdatabasen',
-            'data' => [
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        $artworks = [];
+        /* @var Artwork $artworkEntity */
+        foreach ($pagination->getItems() as $artworkEntity) {
+            $artworks[] = $this->artworkToRenderArray($artworkEntity);
+        }
+
+        return $this->render(
+            'app/index.html.twig',
+            [
+                'title' => 'Kunstdatabasen',
                 'artworks' => $artworks,
-            ],
-        ]);
+                'pagination' => $pagination,
+                'searchForm' => $form->createView(),
+            ]
+        );
     }
 
     /**
      * @Route("/artwork/{id}", name="frontend_artwork_show", methods={"GET"})
      *
-     * @param \App\Entity\Artwork                                   $artwork
-     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
+     * @param \App\Entity\Artwork $artwork
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function show(Artwork $artwork, UploaderHelper $uploaderHelper): Response
+    public function show(Artwork $artwork): Response
+    {
+        return $this->render(
+            'app/details.html.twig',
+            [
+                'indexLink' => $this->generateUrl('frontend_index'),
+                'data' => [
+                    'artwork' => $this->artworkToRenderArray($artwork),
+                ],
+            ]
+        );
+    }
+
+    /**
+     * Create render array for artwork.
+     *
+     * @param \App\Entity\Artwork $artwork
+     *
+     * @return object
+     */
+    private function artworkToRenderArray(Artwork $artwork)
     {
         $path = '';
         if (\count($artwork->getImages()) > 0) {
-            $path = $uploaderHelper->asset($artwork->getImages()[0], 'imageFile');
+            $path = $this->uploaderHelper->asset($artwork->getImages()[0], 'imageFile');
         }
 
-        $artworkRender = (object) [
-            'link' => $this->generateUrl('frontend_artwork_show', [
-                'id' => $artwork->getId(),
-            ]),
+        return (object) [
+            'link' => $this->generateUrl(
+                'frontend_artwork_show',
+                [
+                    'id' => $artwork->getId(),
+                ]
+            ),
             'img' => $path,
             'title' => $artwork->getName(),
             'artNo' => $artwork->getArtSerial(),
-            'category' => '@TODO',
             'artist' => $artwork->getArtist(),
-            'type' => '@TODO',
-            'dimensions' => '@TODO',
-            'building' => '@TODO',
+            'type' => $artwork->getType(),
+            'dimensions' => $this->getDimensions($artwork),
+            'building' => $artwork->getBuilding(),
             'geo' => '@TODO',
             'comment' => '@TODO',
-            'department' => '@TODO',
+            'department' => $artwork->getOrganization(),
             'price' => $artwork->getPurchasePrice(),
             'productionYear' => $artwork->getProductionYear(),
-            'custom1' => '@TODO',
-            'custom2' => '@TODO',
-            'custom4' => '@TODO',
             'estimatedValue' => $artwork->getAssessmentPrice(),
             'estimatedValueDate' => $artwork->getAssessmentDate()->format('d/m Y'),
         ];
+    }
 
-        return $this->render('app/details.html.twig', [
-            'indexLink' => $this->generateUrl('frontend_index'),
-            'data' => [
-                'artwork' => $artworkRender,
-            ],
-        ]);
+    /**
+     * Get dimensions.
+     *
+     * @param \App\Entity\Artwork $artwork
+     *
+     * @return string
+     */
+    private function getDimensions(Artwork $artwork)
+    {
+        $width = $artwork->getWidth();
+        $height = $artwork->getHeight();
+
+        // @TODO: Include depth, diameter and weight in string.
+
+        return sprintf('%d X %d', $width, $height);
+    }
+
+    /**
+     * Create search form.
+     *
+     * @return \Symfony\Component\Form\FormInterface
+     */
+    private function getSearchForm()
+    {
+        $typeChoices = $this->tagService->getChoices(Artwork::class, 'type');
+        $buildingChoices = $this->tagService->getChoices(Artwork::class, 'building');
+
+        $formBuilder = $this->createFormBuilder();
+        $formBuilder
+            ->setMethod('GET')
+            ->add(
+                'search',
+                SearchType::class,
+                [
+                    'label' => 'frontend.filter.search',
+                    'attr' => [
+                        'placeholder' => 'frontend.filter.search_placeholder',
+                    ],
+                    'required' => false,
+                ]
+            )
+            ->add(
+                'type',
+                ChoiceType::class,
+                [
+                    'label' => 'frontend.filter.type',
+                    'placeholder' => 'frontend.filter.type_placeholder',
+                    'required' => false,
+                    'choices' => $typeChoices,
+                    'attr' => [
+                        'class' => 'tag-select',
+                    ],
+                ]
+            )
+            ->add(
+                'building',
+                ChoiceType::class,
+                [
+                    'label' => 'frontend.filter.building',
+                    'placeholder' => 'frontend.filter.building_placeholder',
+                    'required' => false,
+                    'choices' => $buildingChoices,
+                    'attr' => [
+                        'class' => 'tag-select',
+                    ],
+                ]
+            )
+            ->add(
+                'width',
+                ChoiceType::class,
+                [
+                    'label' => 'frontend.filter.width',
+                    'required' => false,
+                    'placeholder' => 'frontend.filter.width_placeholder',
+                    'choices' => [
+                        '0 - 50' => json_encode(['min' => 0, 'max' => 50]),
+                        '50 - 100' => json_encode(['min' => 50, 'max' => 100]),
+                        '100 <' => json_encode(['min' => 100]),
+                    ],
+                ]
+            )
+            ->add(
+                'height',
+                ChoiceType::class,
+                [
+                    'label' => 'frontend.filter.height',
+                    'required' => false,
+                    'placeholder' => 'frontend.filter.height_placeholder',
+                    'choices' => [
+                        '0 - 50' => json_encode(['min' => 0, 'max' => 50]),
+                        '50 - 100' => json_encode(['min' => 50, 'max' => 100]),
+                        '100 <' => json_encode(['min' => 100]),
+                    ],
+                ]
+            )
+            ->add(
+                'yearFrom',
+                NumberType::class,
+                [
+                    'label' => false,
+                    'attr' => [
+                        'placeholder' => 'frontend.filter.year_from_placeholder',
+                    ],
+                    'required' => false,
+                ]
+            )
+            ->add(
+                'yearTo',
+                NumberType::class,
+                [
+                    'label' => false,
+                    'attr' => [
+                        'placeholder' => 'frontend.filter.year_to_placeholder',
+                    ],
+                    'required' => false,
+                ]
+            );
+
+        return $formBuilder->getForm();
     }
 }

@@ -1,0 +1,23 @@
+{# See: vendor/knplabs/knp-paginator-bundle/templates/Pagination/sliding.html.twig #}
+
+<nav aria-label="{{ 'pager.navigation'|trans }}">
+    <ul class="pagination">
+        {% if previous is defined %}
+            <li class="page-item">
+                <a href="{{ path(route, query|merge({(pageParameterName): previous})) }}" class="page-link" aria-label="Previous">
+                    <i class="fas fa-arrow-left" aria-hidden="true"></i>
+                    <span>{{ 'pager.previous'|trans }}</span>
+                </a>
+            </li>
+        {% endif %}
+        <li class="page-item disabled"><a class="page-link" href="#">{{ current }}</a></li>
+        {% if next is defined %}
+            <li class="page-item">
+                <a href="{{ path(route, query|merge({(pageParameterName): next})) }}" class="page-link" aria-label="Next">
+                    <span>{{ 'pager.next'|trans }}</span>
+                    <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+</nav>

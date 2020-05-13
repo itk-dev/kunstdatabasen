@@ -1,0 +1,39 @@
+footer.text: Aarhus kommunes kunstdatabase
+frontend.search.submit: Søg
+frontend.filters.year: År
+frontend.filters.show_advanced: Vis avancerede søgemuligheder
+frontend.filters.hide_advanced: Skjul avancerede søgemuligheder
+frontend.filter.search: Søg titel, art. nr. eller kunstner
+frontend.filter.search_placeholder: Skriv søgeord
+frontend.filter.type: Type
+frontend.filter.type_placeholder: Alle typer
+frontend.filter.category: Kategori
+frontend.filter.category_placeholder: Alle kategorier
+frontend.filter.building: Bygning
+frontend.filter.building_placeholder: Alle bygninger
+frontend.filter.width: Bredde (cm)
+frontend.filter.width_placeholder: Alle bredder
+frontend.filter.height: Højde (cm)
+frontend.filter.height_placeholder: Alle højder
+frontend.filter.year_from_placeholder: Fra år
+frontend.filter.year_to_placeholder: Til år
+frontend.back_to_list: Tilbage til liste
+frontend.artwork.title: Titel
+frontend.artwork.artist: Kunstner
+frontend.artwork.type: Type
+frontend.artwork.dimensions: Dimensioner
+frontend.artwork.comment: Kommentarer
+frontend.artwork.location: Placering
+frontend.artwork.department: Afdeling
+frontend.artwork.building: Bygning
+frontend.artwork.geo: Geo
+frontend.artwork.further_information: Yderligere informationer
+frontend.artwork.art_serial: Art.No.
+frontend.artwork.category: Kategori
+frontend.artwork.purchase_price: Indkøbspris
+frontend.artwork.production_year: Produktionsår
+frontend.artwork.assessment_price: Vurderingspris
+frontend.artwork.assessment_date: Vurderingsdato
+pager.navigation: Paginering
+pager.previous: Forrige
+pager.next: Næste
