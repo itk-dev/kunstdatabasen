@@ -1,34 +1,32 @@
-<div class="col bg-light border-left px-md-5">
-	<h1 class="h4 mt-3 mb-4">{{ welcome }}</h1>
-	<p class="text-muted">{{ 'admin.dashboard.latest_viewed'|trans }}</p>
+<h1 class="h4 mt-3 mb-4">{{ welcome }}</h1>
+<p class="text-muted">{{ 'admin.dashboard.latest_viewed'|trans }}</p>
 
-    {% include "admin/_table.html.twig" with { header: false, artworks: latestVisited } %}
+{% include "admin/_table.html.twig" with { header: false, artworks: latestVisited } %}
 
-    <p class="text-muted">{{ 'admin.dashboard.latest_added'|trans }}</p>
+<p class="text-muted">{{ 'admin.dashboard.latest_added'|trans }}</p>
 
-    {% include "admin/_table.html.twig" with { header: false, artworks: [] } %}
+{% include "admin/_table.html.twig" with { header: false, artworks: latestAdded } %}
 
-    <div class="row mt-5">
-		<div class="col">
-			<a name="" id="" class="btn btn-primary mr-3" href="#" role="button">{{ 'admin.dashboard.new'|trans }}</a>
-			<a name="" id="" class="btn btn-outline-dark" href="#" role="button">{{ 'admin.dashboard.show_all'|trans }}</a>
-		</div>
-	</div>
-	<div class="row my-5">
-		<div class="col">
-			<p class="text-muted">Hjælp og vejledning</p>
+<div class="row mt-5">
+    <div class="col">
+        <a class="btn btn-primary mr-3" href="@TODO" role="button">{{ 'admin.dashboard.new'|trans }}</a>
+        <a class="btn btn-outline-dark" href="@TODO" role="button">{{ 'admin.dashboard.show_all'|trans }}</a>
+    </div>
+</div>
+<div class="row my-5">
+    <div class="col">
+        <p class="text-muted">Hjælp og vejledning</p>
 
-            <ul class="nav">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Hvad er nyt</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Support</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Github kildekode</a>
-                </li>
-            </ul>
-		</div>
-	</div>
+        <ul class="nav">
+            <li class="nav-item">
+                <a href="#" class="nav-link">Hvad er nyt</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Support</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">Github kildekode</a>
+            </li>
+        </ul>
+    </div>
 </div>

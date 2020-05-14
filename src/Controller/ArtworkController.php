@@ -32,7 +32,7 @@ class ArtworkController extends BaseController
     public function index(ArtworkRepository $artworkRepository): Response
     {
         return $this->render(
-            'admin2/artwork/index.html.twig',
+            'admin/artwork/index.html.twig',
             [
                 'artworks' => $artworkRepository->findAll(),
                 'title' => 'Kunstdatabasen',
@@ -69,7 +69,7 @@ class ArtworkController extends BaseController
         }
 
         return $this->render(
-            'admin2/artwork/new.html.twig',
+            'admin/artwork/new.html.twig',
             [
                 'artwork' => $artwork,
                 'form' => $form->createView(),
@@ -87,7 +87,7 @@ class ArtworkController extends BaseController
     public function show(Artwork $artwork): Response
     {
         return $this->render(
-            'admin2/artwork/show.html.twig',
+            'admin/artwork/show.html.twig',
             [
                 'artwork' => $artwork,
             ]
@@ -114,7 +114,7 @@ class ArtworkController extends BaseController
         }
 
         return $this->render(
-            'admin2/artwork/edit.html.twig',
+            'admin/artwork/edit.html.twig',
             [
                 'artwork' => $artwork,
                 'form' => $form->createView(),

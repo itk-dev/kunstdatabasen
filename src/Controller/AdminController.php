@@ -39,21 +39,29 @@ class AdminController extends BaseController
         $session->start();
         $visitedSession = $session->get('latestVisitedItems');
 
-        $visitedItems = [];
+        $latestVisitedRender = [];
 
         if ($visitedSession !== null) {
             /* @var \stdClass $sessionItem */
             foreach ($visitedSession as $sessionItem) {
                 /* @var Item $item */
                 $item = $this->getDoctrine()->getRepository($sessionItem['type'])->find($sessionItem['id']);
-                $visitedItems[] = $this->itemToRender($item);
+                $latestVisitedRender[] = $this->itemToRender($item);
             }
+        }
+
+        $latestAdded = $this->getDoctrine()->getRepository(Item::class)->findBy([], ['createdAt' => 'desc'], 5);
+
+        $latestAddedRender = [];
+        foreach ($latestAdded as $item) {
+            $latestAddedRender[] = $this->itemToRender($item);
         }
 
         return $this->render('admin/index.html.twig', [
             'title' => 'admin.dashboard',
             'welcome' => 'Velkommen til Aarhus Kommunes kunstdatabase',
-            'latestVisited' => $visitedItems,
+            'latestVisited' => $latestVisitedRender,
+            'latestAdded' => $latestAddedRender,
         ]);
     }
 
