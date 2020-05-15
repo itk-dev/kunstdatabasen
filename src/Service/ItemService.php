@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Service;
 
 use App\Entity\Artwork;
@@ -18,7 +24,7 @@ class ItemService
     /**
      * ItemService constructor.
      *
-     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
+     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper      $uploaderHelper
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $router
      */
     public function __construct(UploaderHelper $uploaderHelper, UrlGeneratorInterface $router)

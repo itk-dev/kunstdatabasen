@@ -12,14 +12,12 @@ use App\Entity\Artwork;
 use App\Form\ArtworkType;
 use App\Repository\ArtworkRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -30,7 +28,9 @@ class ArtworkController extends BaseController
     /**
      * @Route("/", name="artwork_index", methods={"GET"})
      *
-     * @param \App\Repository\ArtworkRepository $artworkRepository
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \App\Repository\ArtworkRepository         $artworkRepository
+     * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -188,6 +188,25 @@ class ArtworkController extends BaseController
     }
 
     /**
+     * @Route("/{id}/modal", name="artwork_modal", methods={"GET"})
+     *
+     * @param \App\Entity\Artwork $artwork
+     *
+     * @return \Symfony\Component\HttpFoundation\JsonResponse
+     */
+    public function getModal(Artwork $artwork)
+    {
+        $itemObject = $this->itemService->itemToRenderObject($artwork);
+
+        return new JsonResponse([
+            'id' => $artwork->getId(),
+            'title' => $artwork->getName(),
+            'editLink' => $this->generateUrl('artwork_edit', ['id' => $artwork->getId()]),
+            'modalBody' => $this->renderView('admin/artwork/details.html.twig', ['artwork' => $itemObject]),
+        ]);
+    }
+
+    /**
      * Create search form.
      *
      * @return \Symfony\Component\Form\FormInterface
@@ -289,24 +308,5 @@ class ArtworkController extends BaseController
             );
 
         return $formBuilder->getForm();
-    }
-
-
-    /**
-     * @Route("/{id}/modal", name="artwork_modal", methods={"GET"})
-     *
-     * @param \App\Entity\Artwork $artwork
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
-    public function getModal(Artwork $artwork) {
-        $itemObject = $this->itemService->itemToRenderObject($artwork);
-
-        return new JsonResponse([
-            'id' => $artwork->getId(),
-            'title' => $artwork->getName(),
-            'editLink' => $this->generateUrl('artwork_edit', ['id' => $artwork->getId()]),
-            'modalBody' => $this->renderView('admin/artwork/details.html.twig', ['artwork' => $itemObject]),
-        ]);
     }
 }

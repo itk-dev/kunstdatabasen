@@ -4,6 +4,9 @@ import './admin.scss';
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faEdit, faPalette, faSearch, faMountain } from '@fortawesome/free-solid-svg-icons';
 
+import 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/collapse';
+
 const $ = require('jquery');
 global.$ = global.jQuery = $;
 
@@ -17,9 +20,6 @@ dom.watch();
 
 require('select2');
 require('select2/dist/js/i18n/da');
-
-import 'bootstrap/js/dist/modal';
-import 'bootstrap/js/dist/collapse';
 
 $(function () {
     $(document).ready(function () {

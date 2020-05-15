@@ -1,15 +1,25 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Item;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class AdminController.
+ */
 class AdminController extends BaseController
 {
     /**
      * @Route("/admin", name="admin")
+     *
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -21,13 +31,13 @@ class AdminController extends BaseController
 
         $latestVisitedRender = [];
 
-        if ($visitedSession !== null) {
+        if (null !== $visitedSession) {
             /* @var \stdClass $sessionItem */
             foreach ($visitedSession as $sessionItem) {
                 /* @var Item $item */
                 $item = $this->getDoctrine()->getRepository($sessionItem['type'])->find($sessionItem['id']);
 
-                if ($item !== null) {
+                if (null !== $item) {
                     $latestVisitedRender[] = $this->itemService->itemToRenderObject($item);
                 }
             }
@@ -46,5 +56,4 @@ class AdminController extends BaseController
             'latestAdded' => $latestAddedRender,
         ]);
     }
-
 }

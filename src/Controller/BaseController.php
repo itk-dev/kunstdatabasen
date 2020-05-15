@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Controller;
 
 use App\Entity\Artwork;
@@ -26,11 +32,11 @@ class BaseController extends AbstractController
     /**
      * BaseController constructor.
      *
-     * @param RequestStack $requestStack
+     * @param RequestStack                                               $requestStack
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param \App\Service\ItemService $itemService
-     * @param \App\Service\TagService $tagService
-     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
+     * @param \App\Service\ItemService                                   $itemService
+     * @param \App\Service\TagService                                    $tagService
+     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper      $uploaderHelper
      */
     public function __construct(RequestStack $requestStack, SessionInterface $session, ItemService $itemService, TagService $tagService, UploaderHelper $uploaderHelper)
     {
@@ -44,8 +50,8 @@ class BaseController extends AbstractController
     /**
      * Render view.
      *
-     * @param string $view
-     * @param array $parameters
+     * @param string        $view
+     * @param array         $parameters
      * @param Response|null $response
      *
      * @return Response
@@ -68,7 +74,7 @@ class BaseController extends AbstractController
                 'icon' => 'fa-mountain',
                 'active' => true,
                 'link' => '/admin/artwork',
-            ]
+            ],
         ];
 
         // Save latest visited items,artworks.
@@ -76,7 +82,7 @@ class BaseController extends AbstractController
         $match = preg_match('/\/admin\/(item|artwork)\/(\d+)/', $basePath, $matches);
         if ($match) {
             $type = strtolower($matches[1]);
-            switch($type) {
+            switch ($type) {
                 case 'artwork':
                     $type = Artwork::class;
                     break;
@@ -101,12 +107,13 @@ class BaseController extends AbstractController
                 'id' => $id,
             ];
 
-            if (count($visited) > 5) {
+            if (\count($visited) > 5) {
                 array_shift($visited);
             }
 
             $this->session->set('latestVisitedItems', $visited);
         }
+
         return parent::render($view, $parameters, $response);
     }
 }
