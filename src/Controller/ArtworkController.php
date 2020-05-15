@@ -204,9 +204,9 @@ class ArtworkController extends BaseController
                 'search',
                 SearchType::class,
                 [
-                    'label' => 'frontend.filter.search',
+                    'label' => 'filter.search',
                     'attr' => [
-                        'placeholder' => 'frontend.filter.search_placeholder',
+                        'placeholder' => 'filter.search_placeholder',
                     ],
                     'required' => false,
                 ]
@@ -215,8 +215,8 @@ class ArtworkController extends BaseController
                 'type',
                 ChoiceType::class,
                 [
-                    'label' => 'frontend.filter.type',
-                    'placeholder' => 'frontend.filter.type_placeholder',
+                    'label' => 'filter.type',
+                    'placeholder' => 'filter.type_placeholder',
                     'required' => false,
                     'choices' => $typeChoices,
                     'attr' => [
@@ -228,8 +228,8 @@ class ArtworkController extends BaseController
                 'building',
                 ChoiceType::class,
                 [
-                    'label' => 'frontend.filter.building',
-                    'placeholder' => 'frontend.filter.building_placeholder',
+                    'label' => 'filter.building',
+                    'placeholder' => 'filter.building_placeholder',
                     'required' => false,
                     'choices' => $buildingChoices,
                     'attr' => [
@@ -241,9 +241,9 @@ class ArtworkController extends BaseController
                 'width',
                 ChoiceType::class,
                 [
-                    'label' => 'frontend.filter.width',
+                    'label' => 'filter.width',
                     'required' => false,
-                    'placeholder' => 'frontend.filter.width_placeholder',
+                    'placeholder' => 'filter.width_placeholder',
                     'choices' => [
                         '0 - 50' => json_encode(['min' => 0, 'max' => 50]),
                         '50 - 100' => json_encode(['min' => 50, 'max' => 100]),
@@ -255,9 +255,9 @@ class ArtworkController extends BaseController
                 'height',
                 ChoiceType::class,
                 [
-                    'label' => 'frontend.filter.height',
+                    'label' => 'filter.height',
                     'required' => false,
-                    'placeholder' => 'frontend.filter.height_placeholder',
+                    'placeholder' => 'filter.height_placeholder',
                     'choices' => [
                         '0 - 50' => json_encode(['min' => 0, 'max' => 50]),
                         '50 - 100' => json_encode(['min' => 50, 'max' => 100]),
@@ -271,7 +271,7 @@ class ArtworkController extends BaseController
                 [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => 'frontend.filter.year_from_placeholder',
+                        'placeholder' => 'filter.year_from_placeholder',
                     ],
                     'required' => false,
                 ]
@@ -282,7 +282,7 @@ class ArtworkController extends BaseController
                 [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => 'frontend.filter.year_to_placeholder',
+                        'placeholder' => 'filter.year_to_placeholder',
                     ],
                     'required' => false,
                 ]
