@@ -1,39 +1,40 @@
 <div class="bg-white shadow rounded mb-5">
-  <div class="table-responsive">
-    <table class="table table-borderless">
-      {% if header %}
-        <thead class="bg-light">
-          <tr class="text-muted small">
-            <th>{{ "Thumbnail"|trans }}</th>
-            <th>{{ "Titel"|trans }}</th>
-            <th>{{ "Art.nr."|trans }}</th>
-            <th>{{ "Bygning"|trans }}</th>
-            <th>{{ "Kunstner"|trans }}</th>
-            <th>{{ "Type"|trans }}</th>
-            <th>{{ "Status"|trans }}</th>
-            <th>{{ "Funktion"|trans }}</th>
-          </tr>
-        </thead>
-      {% endif %}
-      <tbody>
-        {% for art in data.artworks %}
-          <tr>
-            <td><a href="{{ art.link }}"><img src="{{ asset(art.img) }}" alt="" height="30"/></a></td>
-            <td><a href="{{ art.link }}"><strong>{{ art.title }}</strong></a></td>
-            <td>{{ art.artNo }}</td>
-            <td>{{ art.building }}</td>
-            <td>{{ art.artist }}</td>
-            <td>{{ art.type }}</td>
-            <td>
-              {% if art.status == "Udlånt" %}
-                <span class="badge badge-pill badge-dark">{{ art.status }}</span></td>
-              {% else %}
-                <span class="badge badge-pill badge-success">{{ art.status }}</span></td>
-              {% endif %}
-            <td><a href="{{ art.linkEdit }}"><i class="fas fa-edit"></i></a></td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+    <div class="table-responsive">
+        <table class="table table-borderless">
+            {% if header %}
+                <thead class="bg-light">
+                <tr class="text-muted small">
+                    <th>{{ 'admin.table.thumpnail'|trans }}</th>
+                    <th>{{ 'admin.table.title'|trans }}</th>
+                    <th>{{ 'admin.table.art_serial'|trans }}</th>
+                    <th>{{ 'admin.table.building'|trans }}</th>
+                    <th>{{ 'admin.table.artist'|trans }}</th>
+                    <th>{{ 'admin.table.type'|trans }}</th>
+                    <th>{{ 'admin.table.status'|trans }}</th>
+                    <th>{{ 'admin.table.function'|trans }}</th>
+                </tr>
+                </thead>
+            {% endif %}
+            <tbody>
+            {% for art in artworks %}
+                <tr>
+                    <td><a class="artwork-details-link" data-id="{{ art.id }}"><img src="{{ asset(art.img) }}" alt="" height="30"/></a></td>
+                    <td><a class="artwork-details-link" data-id="{{ art.id }}"><strong>{{ art.title }}</strong></a></td>
+                    <td>{{ art.artNo }}</td>
+                    <td>{{ art.building }}</td>
+                    <td>{{ art.artist }}</td>
+                    <td>{{ art.type }}</td>
+                    <td>
+                        {% if art.status == "Udlånt" %}
+                            <span class="badge badge-pill badge-dark">{{ art.status }}</span>
+                        {% else %}
+                            <span class="badge badge-pill badge-success">{{ art.status }}</span>
+                        {% endif %}
+                    </td>
+                    <td><a href="{{ art.linkEdit }}"><i class="fas fa-edit"></i></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>

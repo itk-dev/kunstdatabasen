@@ -1,0 +1,72 @@
+{# @TODO: Styling #}
+<div class="container">
+    <div class="row art-details">
+        <div class="col-md-3">
+            <img src="{{ asset(artwork.img) }}" alt="" class="img-fluid"/>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="detailsArtist">{{ 'frontend.artwork.artist'|trans }}</label>
+                    <p>{{ artwork.artist }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsType">{{ 'frontend.artwork.type'|trans }}</label>
+                    <p>{{ artwork.type }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsDimensions">{{ 'frontend.artwork.dimensions'|trans }}</label>
+                    <p>{{ artwork.dimensions }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="detailsComment">{{ 'frontend.artwork.comment'|trans }}</label>
+                    <p>{{ artwork.comment }}</p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h2 class="h4 border-bottom pb-2">{{ 'frontend.artwork.location'|trans }}</h2>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsDepartment">{{ 'frontend.artwork.department'|trans }}</label>
+                    <p>{{ artwork.department }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsBuilding">{{ 'frontend.artwork.building'|trans }}</label>
+                    <p>{{ artwork.building }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsGeo">{{ 'frontend.artwork.geo'|trans }}</label>
+                    <p>{{ artwork.geo }}</p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h2 class="h4 border-bottom pb-2">{{ 'frontend.artwork.further_information'|trans }}</h2>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsArtNo">{{ 'frontend.artwork.art_serial'|trans }}</label>
+                    <p>{{ artwork.artNo }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsPrice">{{ 'frontend.artwork.purchase_price'|trans }}</label>
+                    <p>{{ artwork.price }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsProductionYear">{{ 'frontend.artwork.production_year'|trans }}</label>
+                    <p>{{ artwork.productionYear }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsEstimatedValue">{{ 'frontend.artwork.assessment_price'|trans }}</label>
+                    <p>{{ artwork.estimatedValue }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsEstimatedValue">{{ 'frontend.artwork.assessment_date'|trans }}</label>
+                    <p>{{ artwork.estimatedValueDate }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

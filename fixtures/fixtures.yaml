@@ -8,6 +8,8 @@ App\Entity\Artwork:
         productionYear: '<numberBetween(1600, 2020)>'
         assessmentDate: '<date_create()>'
         assessmentPrice: '<numberBetween(1000, 1000000)>'
+        geo: '<randomFloat()>, <randomFloat()>'
+        comment: '<text()>'
         location: '<text(15)>'
         building: '<text(20)>'
         room: 'M-<numberBetween(1, 10)>'
@@ -31,3 +33,9 @@ App\Entity\Image:
         updatedAt: '<date_create()>'
         primaryImage: true
         item: '@artwork_<current()>'
+
+App\Entity\User:
+    user_1:
+        email: 'admin@example.com'
+        roles: ['ROLE_ADMIN']
+        password: '\$argon2id\$v=19\$m=65536,t=4,p=1\$Y++5vhJTHBCHYlHrIJW5jA\$3adhhHTDBJOkyEW4AxDdT5vJYYkYy5a42cKzYi/eqy4'
