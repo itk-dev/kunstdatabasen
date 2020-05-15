@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Artwork;
 use App\Entity\Item;
+use App\Service\ItemService;
+use App\Service\TagService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
 /**
  * Class BaseController.
@@ -16,17 +19,26 @@ class BaseController extends AbstractController
 {
     protected $requestStack;
     protected $session;
+    protected $itemService;
+    protected $tagService;
+    protected $uploaderHelper;
 
     /**
      * BaseController constructor.
      *
      * @param RequestStack $requestStack
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
+     * @param \App\Service\ItemService $itemService
+     * @param \App\Service\TagService $tagService
+     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
      */
-    public function __construct(RequestStack $requestStack, SessionInterface $session)
+    public function __construct(RequestStack $requestStack, SessionInterface $session, ItemService $itemService, TagService $tagService, UploaderHelper $uploaderHelper)
     {
         $this->requestStack = $requestStack;
         $this->session = $session;
+        $this->itemService = $itemService;
+        $this->tagService = $tagService;
+        $this->uploaderHelper = $uploaderHelper;
     }
 
     /**
@@ -59,10 +71,9 @@ class BaseController extends AbstractController
             ]
         ];
 
+        // Save latest visited items,artworks.
         $basePath = $this->requestStack->getCurrentRequest()->getPathInfo();
-
         $match = preg_match('/\/admin\/(item|artwork)\/(\d+)/', $basePath, $matches);
-
         if ($match) {
             $type = strtolower($matches[1]);
             switch($type) {

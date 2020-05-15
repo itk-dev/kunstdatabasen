@@ -98,6 +98,16 @@ class Item
     private $publiclyAccessible;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $geo;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $comment;
+
+    /**
      * Artwork constructor.
      */
     public function __construct()
@@ -382,6 +392,46 @@ class Item
     public function setPubliclyAccessible(?bool $publiclyAccessible): self
     {
         $this->publiclyAccessible = $publiclyAccessible;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGeo(): ?string
+    {
+        return $this->geo;
+    }
+
+    /**
+     * @param string|null $geo
+     *
+     * @return $this
+     */
+    public function setGeo(?string $geo): self
+    {
+        $this->geo = $geo;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getComment(): ?string
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string|null $comment
+     *
+     * @return $this
+     */
+    public function setComment(?string $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }

@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    {{ form_start(form) }}
+
+    <div class="row">
+        <div class="col bg-light py-5">
+            <div class="row collapse show" id="filters">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        {{ form_row(form.search) }}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {{ form_row(form.type) }}
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        {{ form_row(form.building) }}
+                    </div>
+                </div>
+                <div class="col-md-2 pt-md-2 order-last order-md-1">
+                    <button type="submit" class="btn btn-primary btn-block mt-md-4">{{ 'frontend.search.submit'|trans }}</button>
+                </div>
+                <div class="col-12 order-md-2">
+                    <div class="collapse" id="filtersAdvanced">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {{ form_row(form.width) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {{ form_row(form.height) }}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="filtersYear">{{ 'frontend.filters.year'|trans }}</label>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{ form_row(form.yearFrom) }}
+                                        </div>
+                                        <div class="col">
+                                            {{ form_row(form.yearTo) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn mb-3 mb-md-0 btn-block" type="button" data-toggle="collapse" data-target="#filtersAdvanced" aria-expanded="false" aria-controls="contentId">
+                        <span>{{ 'frontend.filters.show_advanced'|trans }}</span>
+                        <span class="true">{{ 'frontend.filters.hide_advanced'|trans }}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ form_rest(form) }}
+
+    {{ form_end(form) }}
+</div>

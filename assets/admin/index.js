@@ -18,6 +18,9 @@ dom.watch();
 require('select2');
 require('select2/dist/js/i18n/da');
 
+import 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/collapse';
+
 $(function () {
     $(document).ready(function () {
         $('.tag-select-edit').select2({

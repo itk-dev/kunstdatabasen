@@ -109,6 +109,8 @@ class ArtworkType extends AbstractType
             ->add('diameter')
             ->add('weight')
             ->add('publiclyAccessible')
+            ->add('geo')
+            ->add('comment')
             ->add(
                 'images',
                 CollectionType::class,
