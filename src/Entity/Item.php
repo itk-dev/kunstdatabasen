@@ -33,7 +33,7 @@ class Item
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
@@ -108,6 +108,11 @@ class Item
     private $comment;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $department;
+
+    /**
      * Artwork constructor.
      */
     public function __construct()
@@ -124,17 +129,17 @@ class Item
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param mixed $name
+     * @param string|null $name
      */
-    public function setName($name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -432,6 +437,18 @@ class Item
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getDepartment(): ?string
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(?string $department): self
+    {
+        $this->department = $department;
 
         return $this;
     }

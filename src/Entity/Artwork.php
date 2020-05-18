@@ -16,12 +16,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Artwork extends Item
 {
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $artist;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $artSerial;
 
@@ -79,11 +79,11 @@ class Artwork extends Item
     }
 
     /**
-     * @param string $artist
+     * @param string|null $artist
      *
      * @return $this
      */
-    public function setArtist(string $artist): self
+    public function setArtist(?string $artist): self
     {
         $this->artist = $artist;
 
@@ -99,11 +99,11 @@ class Artwork extends Item
     }
 
     /**
-     * @param string $artSerial
+     * @param string|null $artSerial
      *
      * @return $this
      */
-    public function setArtSerial(string $artSerial): self
+    public function setArtSerial(?string $artSerial): self
     {
         $this->artSerial = $artSerial;
 

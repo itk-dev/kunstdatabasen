@@ -149,13 +149,15 @@ class FrontendController extends AbstractController
             'type' => $artwork->getType(),
             'dimensions' => $this->getDimensions($artwork),
             'building' => $artwork->getBuilding(),
-            'geo' => '@TODO',
-            'comment' => '@TODO',
-            'department' => $artwork->getOrganization(),
+            'geo' => $artwork->getGeo(),
+            'comment' => $artwork->getComment(),
+            'description' => $artwork->getDescription(),
+            'organization' => $artwork->getOrganization(),
+            'department' => $artwork->getDepartment(),
             'price' => $artwork->getPurchasePrice(),
             'productionYear' => $artwork->getProductionYear(),
             'estimatedValue' => $artwork->getAssessmentPrice(),
-            'estimatedValueDate' => $artwork->getAssessmentDate()->format('d/m Y'),
+            'estimatedValueDate' => $artwork->getAssessmentDate() ? $artwork->getAssessmentDate()->format('d/m Y') : null,
         ];
     }
 
@@ -172,8 +174,11 @@ class FrontendController extends AbstractController
         $height = $artwork->getHeight();
 
         // @TODO: Include depth, diameter and weight in string.
+        if ($width === null || $height === null) {
+            return null;
+        }
 
-        return sprintf('%d X %d', $width, $height);
+        return sprintf('%d x %d', $width, $height);
     }
 
     /**
