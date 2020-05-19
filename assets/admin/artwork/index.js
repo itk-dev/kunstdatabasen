@@ -1,10 +1,10 @@
 // Add admin styles
-import './admin.scss';
-import './_artworkDetails.js';
+import '../admin.scss';
+import '../_artworkDetails.js';
 
 // Add font awesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faPalette, faSearch, faMountain, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPalette, faSearch, faMountain, faBars, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
     faEdit,
@@ -12,7 +12,7 @@ library.add(
     faSearch,
     faMountain,
     faBars,
-    faTimes
+    faPlusCircle
 );
 dom.watch();
 
@@ -20,8 +20,3 @@ dom.watch();
 import 'bootstrap/js/dist/modal';
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/dropdown';
-
-
-// Add jQuery
-const $ = require('jquery');
-global.$ = global.jQuery = $;

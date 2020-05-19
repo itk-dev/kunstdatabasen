@@ -3,15 +3,25 @@
 {% block title %}Artwork index{% endblock %}
 
 {% block content %}
-    <h1>Artwork index</h1>
-
-    {% include "admin/artwork/_filters.html.twig" %}
+    <div class="row mt-3">
+        <div class="col">
+            <h1 class="h4">{{ 'admin.artwork.index'|trans }}</h1>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-sm btn-outline-primary float-right" href="{{ path('artwork_new') }}" role="button"><i class="fas fa-plus-circle mr-1"></i>{{ 'admin.index.new'|trans }}</a>
+        </div>
+        <div class="col-12">
+            {% include "admin/artwork/_filters.html.twig" %}
+        </div>
+    </div>
     {% include "admin/_table.html.twig" with { header: true, artworks: artworks } %}
     {% include "admin/artwork/_modal.html.twig" %}
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('admin/show') }}
+{% endblock %}
 
-    {{ encore_entry_script_tags('artworkDetails') }}
+{% block javascripts %}
+    {{ encore_entry_script_tags('admin/show') }}
 {% endblock %}

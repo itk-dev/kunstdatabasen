@@ -2,18 +2,29 @@
 
 {% block title %}Edit Artwork{% endblock %}
 
-{% block content %}
-    <h1>Edit Artwork</h1>
+{% block body %}
+    <div class="container-fluid bg-light">
+        <div class="row">
+            <div class="col">
+                {% block content %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <h1 class="h4">Edit Artwork</h1>
+                                {{ include('admin/artwork/_form.html.twig', {'button_label': 'Update'}) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
 
-    {{ include('admin/artwork/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('artwork_index') }}">back to list</a>
-
-    {{ include('admin/artwork/_delete_form.html.twig') }}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('admin/edit') }}
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-
-    {{ encore_entry_script_tags('imageUpload') }}
+    {{ encore_entry_script_tags('admin/edit') }}
 {% endblock %}

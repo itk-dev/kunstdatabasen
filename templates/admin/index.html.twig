@@ -2,18 +2,18 @@
 
 {% block content %}
     <h1 class="h4 mt-3 mb-4">{{ 'admin.welcome'|trans }}</h1>
-    <p class="text-muted">{{ 'admin.dashboard.latest_viewed'|trans }}</p>
+    <p class="text-muted">{{ 'admin.index.latest_viewed'|trans }}</p>
 
     {% include "admin/_table.html.twig" with { header: false, artworks: latestVisited } %}
 
-    <p class="text-muted">{{ 'admin.dashboard.latest_added'|trans }}</p>
+    <p class="text-muted">{{ 'admin.index.latest_added'|trans }}</p>
 
     {% include "admin/_table.html.twig" with { header: false, artworks: latestAdded } %}
 
     <div class="row mt-5">
         <div class="col">
-            <a class="btn btn-primary mr-3" href="{{ path('artwork_new') }}" role="button">{{ 'admin.dashboard.new'|trans }}</a>
-            <a class="btn btn-outline-dark" href="{{ path('artwork_index') }}" role="button">{{ 'admin.dashboard.show_all'|trans }}</a>
+            <a class="btn btn-primary mr-3" href="{{ path('artwork_new') }}" role="button">{{ 'admin.index.new'|trans }}</a>
+            <a class="btn btn-outline-dark" href="{{ path('artwork_index') }}" role="button">{{ 'admin.index.show_all'|trans }}</a>
         </div>
     </div>
     <div class="row my-5">
@@ -37,8 +37,10 @@
     {% include 'admin/artwork/_modal.html.twig' %}
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
+{% block stylesheets %}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
 
-    {{ encore_entry_script_tags('artworkDetails') }}
+{% block javascripts %}
+    {{ encore_entry_script_tags('admin') }}
 {% endblock %}

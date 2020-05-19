@@ -1,5 +1,5 @@
 let collectionHolder;
-const addButton = $('<button type="button" class="add_link">Add image</button>');
+const addButton = $('<button type="button" class="btn btn-primary btn-sm add_link">Add image</button>');
 const addNewLink = $('<li></li>').append(addButton);
 
 jQuery(document).ready(function () {
@@ -27,7 +27,7 @@ function addForm (collectionHolder, newLinkLi) {
 }
 
 function addDeleteLink (tagFormLi) {
-    const removeFormButton = $('<button type="button">Remove image</button>');
+    const removeFormButton = $('<button type="button" class="btn btn-danger btn-sm">Remove image</button>');
     tagFormLi.append(removeFormButton);
 
     removeFormButton.on('click', function (e) {

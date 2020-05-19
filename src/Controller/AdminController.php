@@ -50,8 +50,8 @@ class AdminController extends BaseController
             $latestAddedRender[] = $this->itemService->itemToRenderObject($item);
         }
 
-        return $this->render('admin/dashboard.html.twig', [
-            'title' => 'admin.dashboard',
+        return $this->render('admin/index.html.twig', [
+            'title' => 'admin.index',
             'latestVisited' => $latestVisitedRender,
             'latestAdded' => $latestAddedRender,
         ]);

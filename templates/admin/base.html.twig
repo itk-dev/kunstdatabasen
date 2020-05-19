@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container-fluid h-100">
+    <div class="container-fluid">
         <div class="row">
             {% include "admin/_sidebar.html.twig" %}
-            <div class="col bg-light border-left px-md-5">
+            <div class="col bg-light border-left px-md-5" style="min-height: 100vh;">
                 {% block content %}
                 {% endblock %}
             </div>

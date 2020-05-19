@@ -1,24 +1,19 @@
-@import '../custom-variables';
-@import '../base';
+@import '../../custom-variables';
+@import '../../base';
 
 @import '~bootstrap/scss/buttons';
 @import '~bootstrap/scss/forms';
 @import '~bootstrap/scss/custom-forms';
-@import '~bootstrap/scss/tables';
-@import '~bootstrap/scss/pagination';
 @import '~bootstrap/scss/transitions';
-@import '~bootstrap/scss/badge';
-@import '~bootstrap/scss/dropdown';
-@import '~bootstrap/scss/button-group';
-@import '~bootstrap/scss/images';
-@import '~bootstrap/scss/modal';
 @import '~bootstrap/scss/nav';
 @import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/images';
+@import '~bootstrap/scss/print';
+
 
 @import '~select2/src/scss/core';
 
 // Toggle button texts with collapse
-
 [aria-expanded='false'] {
   .true {
     display: none;
@@ -39,9 +34,8 @@
   }
 }
 
-.modal-body {
-  label {
-    color: $gray-700;
-    font-size: $sizer * 0.75;
-  }
+// Accomondate space for fixed nav
+body {
+  padding-top: $spacer * 5;
+  background-color: $gray-100;
 }
