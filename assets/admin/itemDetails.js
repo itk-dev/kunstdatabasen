@@ -1,11 +1,11 @@
 $(function () {
     $(document).ready(function () {
-        const modalTitle = $('#artwork-details-modal-title');
-        const modalBody = $('#artwork-details-modal-body');
-        const modalEditLink = $('#artwork-details-modal-edit-link');
-        const modal = $('#artwork-details-modal');
+        const modalTitle = $('#item-details-modal-title');
+        const modalBody = $('#item-details-modal-body');
+        const modalEditLink = $('#item-details-modal-edit-link');
+        const modal = $('#item-details-modal');
 
-        $('.artwork-details-link').on('click', function (event) {
+        $('.item-details-link').on('click', function (event) {
             event.preventDefault();
 
             const id = $(this).data('id');
@@ -17,7 +17,7 @@ $(function () {
             modal.modal('show');
 
             $.ajax({
-                url: '/admin/artwork/' + id + '/modal',
+                url: '/admin/item/' + id + '/modal',
                 type: 'GET',
                 data: {
                     id: id

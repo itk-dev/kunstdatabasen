@@ -9,8 +9,12 @@
 namespace App\Controller;
 
 use App\Entity\Artwork;
-use App\Form\ArtworkType;
+use App\Entity\Furniture;
+use App\Entity\Item;
+use App\Form\ArkworkType;
+use App\Form\FurnitureType;
 use App\Repository\ArtworkRepository;
+use App\Repository\ItemRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -21,20 +25,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/artwork")
+ * @Route("/admin/item")
  */
-class ArtworkController extends BaseController
+class ItemController extends BaseController
 {
     /**
-     * @Route("/", name="artwork_index", methods={"GET"})
+     * @Route("/", name="item_index", methods={"GET"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ArtworkRepository         $artworkRepository
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator
+     * @param \App\Repository\ItemRepository $itemRepository
+     * @param \Knp\Component\Pager\PaginatorInterface $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request, ArtworkRepository $artworkRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request, ItemRepository $itemRepository, PaginatorInterface $paginator): Response
     {
         $form = $this->getSearchForm();
 
@@ -46,7 +50,8 @@ class ArtworkController extends BaseController
             $width = null !== $data['width'] ? json_decode($data['width']) : null;
             $height = null !== $data['height'] ? json_decode($data['height']) : null;
 
-            $query = $artworkRepository->getQuery(
+            $query = $itemRepository->getQuery(
+                $data['itemType'],
                 $data['search'],
                 $data['type'],
                 null,
@@ -59,7 +64,7 @@ class ArtworkController extends BaseController
                 $height->max ?? null
             );
         } else {
-            $query = $artworkRepository->getQuery();
+            $query = $itemRepository->getQuery();
         }
 
         $pagination = $paginator->paginate(
@@ -68,16 +73,16 @@ class ArtworkController extends BaseController
             10
         );
 
-        $artworks = [];
-        /* @var Artwork $artworkEntity */
-        foreach ($pagination->getItems() as $artworkEntity) {
-            $artworks[] = $this->itemService->itemToRenderObject($artworkEntity);
+        $items = [];
+        /* @var Item $item */
+        foreach ($pagination->getItems() as $item) {
+            $items[] = $this->itemService->itemToRenderObject($item);
         }
 
         return $this->render(
-            'admin/artwork/index.html.twig',
+            'admin/item/index.html.twig',
             [
-                'artworks' => $artworks,
+                'items' => $items,
                 'title' => 'Kunstdatabasen',
                 'brand' => 'Aarhus kommunes kunstdatabase',
                 'brandShort' => 'Kunstdatabasen',
@@ -92,103 +97,189 @@ class ArtworkController extends BaseController
     }
 
     /**
-     * @Route("/new", name="artwork_new", methods={"GET","POST"})
+     * @Route("/list/{itemType}", name="item_list", methods={"GET"})
      *
+     * @param string $itemType
      * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param \App\Repository\ItemRepository $itemRepository
+     * @param \Knp\Component\Pager\PaginatorInterface $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function new(Request $request): Response
+    public function list(string $itemType, Request $request, ItemRepository $itemRepository, PaginatorInterface $paginator): Response
     {
-        $artwork = new Artwork();
-        $form = $this->createForm(ArtworkType::class, $artwork);
+        $form = $this->getSearchForm();
+
+        switch ($itemType) {
+            case 'artwork':
+                $itemTypeClass = Artwork::class;
+                break;
+            case 'furniture':
+                $itemTypeClass = Furniture::class;
+                break;
+            default:
+                $itemTypeClass = Item::class;
+                break;
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($artwork);
-            $entityManager->flush();
+            $data = $form->getData();
 
-            return $this->redirectToRoute('artwork_index');
+            $width = null !== $data['width'] ? json_decode($data['width']) : null;
+            $height = null !== $data['height'] ? json_decode($data['height']) : null;
+
+            $query = $itemRepository->getQuery(
+                $itemTypeClass,
+                $data['search'],
+                $data['type'],
+                null,
+                $data['building'],
+                $data['yearFrom'],
+                $data['yearTo'],
+                $width->min ?? null,
+                $width->max ?? null,
+                $height->min ?? null,
+                $height->max ?? null
+            );
+        } else {
+            $query = $itemRepository->getQuery($itemTypeClass);
+        }
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1),
+            10
+        );
+
+        $items = [];
+        /* @var Item $item */
+        foreach ($pagination->getItems() as $item) {
+            $items[] = $this->itemService->itemToRenderObject($item);
         }
 
         return $this->render(
-            'admin/artwork/new.html.twig',
+            'admin/item/index.html.twig',
             [
-                'artwork' => $artwork,
+                'items' => $items,
+                'title' => 'Kunstdatabasen',
+                'brand' => 'Aarhus kommunes kunstdatabase',
+                'brandShort' => 'Kunstdatabasen',
+                'welcome' => 'Velkommen til Aarhus Kommunes kunstdatabase',
+                'headline' => 'item.list.'.$itemType,
+                'user' => [
+                    'username' => 'Admin user',
+                    'email' => 'admin@email.com',
+                ],
                 'form' => $form->createView(),
             ]
         );
     }
 
     /**
-     * @Route("/{id}", name="artwork_show", methods={"GET"})
+     * @Route("/{type}/new", name="item_new", methods={"GET","POST"})
      *
-     * @param \App\Entity\Artwork $artwork
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     *
+     * @param string $type
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    public function show(Artwork $artwork): Response
+    public function new(Request $request, string $type): Response
     {
-        $artwork = $this->itemService->itemToRenderObject($artwork);
+        switch ($type) {
+            case 'artwork':
+                $item = new Artwork();
+                $form = $this->createForm(ArkworkType::class, $item);
+                break;
+            case 'furniture':
+                $item = new Furniture();
+                $form = $this->createForm(FurnitureType::class, $item);
+                break;
+            default:
+                throw new \Exception('Type is not valid.');
+        }
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($item);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('item_index');
+        }
 
         return $this->render(
-            'admin/artwork/show.html.twig',
+            'admin/item/new.html.twig',
             [
-                'artwork' => $artwork,
+                'artwork' => $item,
+                'form' => $form->createView(),
             ]
         );
     }
 
     /**
-     * @Route("/{id}/edit", name="artwork_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="item_edit", methods={"GET","POST"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Entity\Artwork                       $artwork
+     * @param \App\Entity\Artwork $artwork
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    public function edit(Request $request, Artwork $artwork): Response
+    public function edit(Request $request, Item $item): Response
     {
-        $form = $this->createForm(ArtworkType::class, $artwork);
+        if ($item instanceof Artwork) {
+            $form = $this->createForm(ArkworkType::class, $item);
+        }
+        else if ($item instanceof Furniture) {
+            $form = $this->createForm(FurnitureType::class, $item);
+        }
+        else {
+            throw new \Exception('Type is not valid.');
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('artwork_index');
+            return $this->redirectToRoute('item_index');
         }
 
         return $this->render(
-            'admin/artwork/edit.html.twig',
+            'admin/item/edit.html.twig',
             [
-                'artwork' => $artwork,
+                'item' => $item,
                 'form' => $form->createView(),
             ]
         );
     }
 
     /**
-     * @Route("/{id}", name="artwork_delete", methods={"DELETE"})
+     * @Route("/{id}", name="item_delete", methods={"DELETE"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Entity\Artwork                       $artwork
+     * @param \App\Entity\Item $item
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function delete(Request $request, Artwork $artwork): Response
+    public function delete(Request $request, Item $item): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$artwork->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$item->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($artwork);
+            $entityManager->remove($item);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('artwork_index');
+        return $this->redirectToRoute('item_index');
     }
 
     /**
-     * @Route("/{id}/modal", name="artwork_modal", methods={"GET"})
+     * @Route("/{id}/modal", name="item_modal", methods={"GET"})
      *
      * @param \App\Entity\Artwork $artwork
      *
@@ -198,12 +289,14 @@ class ArtworkController extends BaseController
     {
         $itemObject = $this->itemService->itemToRenderObject($artwork);
 
-        return new JsonResponse([
-            'id' => $artwork->getId(),
-            'title' => $artwork->getName(),
-            'editLink' => $this->generateUrl('artwork_edit', ['id' => $artwork->getId()]),
-            'modalBody' => $this->renderView('admin/artwork/details.html.twig', ['artwork' => $itemObject]),
-        ]);
+        return new JsonResponse(
+            [
+                'id' => $artwork->getId(),
+                'title' => $artwork->getName(),
+                'editLink' => $this->generateUrl('item_edit', ['id' => $artwork->getId()]),
+                'modalBody' => $this->renderView('admin/item/details.html.twig', ['item' => $itemObject]),
+            ]
+        );
     }
 
     /**
@@ -219,6 +312,19 @@ class ArtworkController extends BaseController
         $formBuilder = $this->createFormBuilder();
         $formBuilder
             ->setMethod('GET')
+            ->add(
+                'type',
+                ChoiceType::class,
+                [
+                    'label' => 'filter.item_type',
+                    'placeholder' => 'filter.item_type_placeholder',
+                    'required' => false,
+                    'choices' => [
+                        'artwork' => 'item.artwork',
+                        'furniture' => 'item.furniture',
+                    ],
+                ]
+            )
             ->add(
                 'search',
                 SearchType::class,

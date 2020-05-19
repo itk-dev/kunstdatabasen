@@ -16,22 +16,22 @@
                 </thead>
             {% endif %}
             <tbody>
-            {% for art in artworks %}
+            {% for item in items %}
                 <tr>
-                    <td><a class="artwork-details-link" data-id="{{ art.id }}"><img src="{{ asset(art.img) }}" alt="" height="30"/></a></td>
-                    <td><a class="artwork-details-link" data-id="{{ art.id }}"><strong>{{ art.title }}</strong></a></td>
-                    <td>{{ art.artNo }}</td>
-                    <td>{{ art.building }}</td>
-                    <td>{{ art.artist }}</td>
-                    <td>{{ art.type }}</td>
+                    <td><a class="item-details-link" data-id="{{ item.id }}"><img src="{{ asset(item.img) }}" alt="" height="30"/></a></td>
+                    <td><a class="item-details-link" data-id="{{ item.id }}"><strong>{{ item.title ?: 'item.no_title'|trans }}</strong></a></td>
+                    <td>{{ item.artNo }}</td>
+                    <td>{{ item.building }}</td>
+                    <td>{{ item.artist }}</td>
+                    <td>{{ item.type }}</td>
                     <td>
-                        {% if art.status == "Udlånt" %}
-                            <span class="badge badge-pill badge-dark">{{ art.status }}</span>
+                        {% if item.status == "Udlånt" %}
+                            <span class="badge badge-pill badge-dark">{{ item.status }}</span>
                         {% else %}
-                            <span class="badge badge-pill badge-success">{{ art.status }}</span>
+                            <span class="badge badge-pill badge-success">{{ item.status }}</span>
                         {% endif %}
                     </td>
-                    <td><a href="{{ art.linkEdit }}"><i class="fas fa-edit"></i></a></td>
+                    <td><a href="{{ item.linkEdit }}"><i class="fas fa-edit"></i></a></td>
                 </tr>
             {% endfor %}
             </tbody>

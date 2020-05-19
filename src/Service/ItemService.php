@@ -9,6 +9,7 @@
 namespace App\Service;
 
 use App\Entity\Artwork;
+use App\Entity\Furniture;
 use App\Entity\Item;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -54,21 +55,16 @@ class ItemService
 
         $renderObject = (object) [
             'id' => $item->getId(),
-            'link' => $this->router->generate(
-                'artwork_show',
-                [
-                    'id' => $item->getId(),
-                ]
-            ),
             'img' => $path,
             'title' => $item->getName(),
             'type' => $item->getType(),
             'building' => $item->getBuilding(),
             'geo' => $item->getGeo(),
+            'description' => $item->getDescription(),
             'comment' => $item->getComment(),
             'department' => $item->getOrganization(),
             'status' => $item->getStatus(),
-            'linkEdit' => $this->router->generate('artwork_edit', ['id' => $item->getId()]),
+            'linkEdit' => $this->router->generate('item_edit', ['id' => $item->getId()]),
         ];
 
         if ($item instanceof Artwork) {
@@ -78,7 +74,7 @@ class ItemService
             $renderObject->price = $item->getPurchasePrice();
             $renderObject->productionYear = $item->getProductionYear();
             $renderObject->estimatedValue = $item->getAssessmentPrice();
-            $renderObject->estimatedValueDate = $item->getAssessmentDate()->format('d/m Y');
+            $renderObject->estimatedValueDate = $item->getAssessmentDate() ? $item->getAssessmentDate()->format('d/m Y') : null;
         }
 
         return $renderObject;
@@ -130,14 +126,11 @@ class ItemService
 
             if ($entry[0] === 'Kunst') {
                 $item = new Artwork();
-                $item->setName($entry[3]);
                 $item->setArtist($entry[4]);
                 $item->setProductionYear($entry[5]);
-                $item->setType($entry[7]);
                 $item->setAssessmentPrice($entry[8]);
+                $item->setType($entry[7]);
                 $item->setArtSerial($entry[9]);
-                $item->setDepartment($entry[13]);
-                $item->setBuilding($entry[15]);
 
                 // InventoryID: 1
                 // AcquisitionYear: 11
@@ -153,11 +146,23 @@ class ItemService
                 else if ($entry[6] !== '') {
                     $unMappable[] = sprintf('ART_DIMENSION: %s', $entryDimensions);
                 }
+            }
+            else if ($entry[0] === 'Inventar') {
+                $item = new Furniture();
+                $item->setType($entry[19]);
 
-                $item->setComment($entry[16] . (count($unMappable) > 0 ? "\n\nImport errors:\n" . implode("\n - ", $unMappable) : ''));
+                $unMappable[] = sprintf('BARCODE: %s', $entry[20]);
+                $unMappable[] = sprintf('INV_USER: %s', $entry[21]);
             }
 
             if ($item !== null) {
+                $item->setName($entry[19]);
+                $item->setPurchasePrice($entry[21]);
+                $item->setDepartment($entry[13]);
+                $item->setBuilding($entry[15]);
+
+                $item->setComment($entry[16] . (count($unMappable) > 0 ? "\n\nImport errors:\n" . implode("\n - ", $unMappable) : ''));
+
                 $this->entityManager->persist($item);
             }
         }

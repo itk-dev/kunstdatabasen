@@ -22,6 +22,8 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  */
 class Item
 {
+    public $itemType = 'item';
+
     use BlameableEntity;
     use TimestampableEntity;
 
@@ -111,6 +113,11 @@ class Item
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $department;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $purchasePrice;
 
     /**
      * Artwork constructor.
@@ -449,6 +456,31 @@ class Item
     public function setDepartment(?string $department): self
     {
         $this->department = $department;
+
+        return $this;
+    }
+
+    public function getItemType(): string
+    {
+        return $this->itemType;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getPurchasePrice(): ?float
+    {
+        return $this->purchasePrice;
+    }
+
+    /**
+     * @param float|null $purchasePrice
+     *
+     * @return $this
+     */
+    public function setPurchasePrice(?float $purchasePrice): self
+    {
+        $this->purchasePrice = $purchasePrice;
 
         return $this;
     }

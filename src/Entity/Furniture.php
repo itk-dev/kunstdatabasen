@@ -15,5 +15,5 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Furniture extends Item
 {
-
+    public $itemType = 'furniture';
 }

@@ -1,13 +1,13 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}New Artwork{% endblock %}
+{% block title %}New item{% endblock %}
 
 {% block content %}
-    <h1>Create new Artwork</h1>
+    <h1>Create new item</h1>
 
-    {{ include('admin/artwork/_form.html.twig') }}
+    {{ include('admin/item/_form.html.twig') }}
 
-    <a href="{{ path('artwork_index') }}">back to list</a>
+    <a href="{{ path('item_index') }}">back to list</a>
 {% endblock %}
 
 {% block javascripts %}
