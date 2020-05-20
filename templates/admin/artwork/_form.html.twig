@@ -1,6 +1,6 @@
 {{ form_start(form) }}
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row mt-5">
+        <div class="col-md-12 mb-3">
             <h2 class="h5">{{ 'Common'|trans }}</h2>
         </div>
         <div class="col-md-4">
@@ -10,7 +10,9 @@
             {{ form_row(form.organization) }}
         </div>
         <div class="col-md-4">
+            {# TODO: Add status eg. avalibility #}
             Status
+            {# {{ form_row(form.status) }} #}
         </div>
         <div class="col-md-12">
             {{ form_row(form.name) }}
@@ -19,8 +21,8 @@
             {{ form_row(form.description) }}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row mt-5">
+        <div class="col-md-12 mb-3">
             <h2 class="h5">{{ 'Art'|trans }}</h2>
         </div>
         <div class="col-md-4">
@@ -29,48 +31,48 @@
         <div class="col-md-4">
             {{ form_row(form.artSerial) }}
         </div>
-        <div class="col-md-4">
+        <div class="col-6 col-md-4">
             {{ form_row(form.purchasePrice) }}
         </div>
-        <div class="col-md-4">
+        <div class="col-6 col-md-4">
             {{ form_row(form.productionYear) }}
         </div>
-        <div class="col-md-4">
-            {# TODO: Change date format to single input with default browser picker. #}
+        <div class="col-8 col-md-4">
+            {# TODO: Change date format to single input with default popoverpicker(html5 default?). #}
             {{ form_row(form.assessmentDate) }}
         </div>
-        <div class="col-md-4">
+        <div class="col-4 col-md-4">
             {{ form_row(form.assessmentPrice) }}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row mt-5">
+        <div class="col-md-12 mb-3">
             <h2 class="h5">{{ 'Placement'|trans }}</h2>
         </div>
         <div class="col-md-4">
             {{ form_row(form.location) }}
         </div>
-        <div class="col-md-4">
+        <div class="col-8 col-md-4">
             {{ form_row(form.building) }}
         </div>
-        <div class="col-md-4">
+        <div class="col-4 col-md-4">
             {{ form_row(form.room) }}
         </div>
         <div class="col-md-6">
             {{ form_row(form.address) }}
         </div>
-        <div class="col-md-2">
+        <div class="col-4 col-md-2">
             {{ form_row(form.postalCode) }}
         </div>
-        <div class="col-md-4">
+        <div class="col-8 col-md-4">
             {{ form_row(form.city) }}
         </div>
         <div class="col-md-12">
             {{ form_row(form.publiclyAccessible) }}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row mt-5">
+        <div class="col-md-12 mb-3">
             <h2 class="h5">{{ 'Attributes'|trans }}</h2>
         </div>
         <div class="col-md-2">
@@ -89,8 +91,8 @@
             {{ form_row(form.weight) }}
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row mt-5">
+        <div class="col-md-12 mb-3">
             <h2 class="h5">{{ 'Images'|trans }}</h2>
         </div>
         <div class="col-md-12">
@@ -101,8 +103,8 @@
              </ul>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
+    <div class="row mt-5">
+        <div class="col-md-12 mb-3">
             <h2 class="h5">{{ 'Extra'|trans }}</h2>
         </div>
         <div class="col-md-12">
