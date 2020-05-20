@@ -18,22 +18,22 @@ filter.height_placeholder: 'Alle højder'
 filter.year_from_placeholder: 'Fra år'
 filter.year_to_placeholder: 'Til år'
 frontend.back_to_list: 'Tilbage til liste'
-frontend.artwork.title: Titel
-frontend.artwork.artist: Kunstner
-frontend.artwork.type: Type
-frontend.artwork.dimensions: Dimensioner
-frontend.artwork.comment: Kommentarer
-frontend.artwork.location: Placering
-frontend.artwork.department: Afdeling
-frontend.artwork.building: Bygning
-frontend.artwork.geo: Geo
-frontend.artwork.further_information: 'Yderligere informationer'
-frontend.artwork.art_serial: Art.No.
-frontend.artwork.category: Kategori
-frontend.artwork.purchase_price: Indkøbspris
-frontend.artwork.production_year: Produktionsår
-frontend.artwork.assessment_price: Vurderingspris
-frontend.artwork.assessment_date: Vurderingsdato
+frontend.item.title: Titel
+frontend.item.artist: Kunstner
+frontend.item.type: Type
+frontend.item.dimensions: Dimensioner
+frontend.item.comment: Kommentarer
+frontend.item.location: Placering
+frontend.item.department: Afdeling
+frontend.item.building: Bygning
+frontend.item.geo: Geo
+frontend.item.further_information: 'Yderligere informationer'
+frontend.item.art_serial: Art.No.
+frontend.item.category: Kategori
+frontend.item.purchase_price: Indkøbspris
+frontend.item.production_year: Produktionsår
+frontend.item.assessment_price: Vurderingspris
+frontend.item.assessment_date: Vurderingsdato
 pager.navigation: Paginering
 pager.previous: Forrige
 pager.next: Næste
@@ -49,5 +49,13 @@ admin.table.function: Funktion
 admin.dashboard.latest_viewed: Senest åbne
 admin.dashboard.latest_added: Senest tilføjede
 admin.dashboard.new: Opret nyt værk
-admin.dashboard.show_all: Vis alle værker
+admin.dashboard.show_all: Vis alle indgange
 search.submit: Søg
+item.no_title: Uden titel
+menu.artworks: Kunstværker
+menu.furniture: Inventar
+admin.dashboard.new_artwork: Nyt kunstværk
+admin.dashboard.new_furniture: Nyt inventar
+item.list.item: Alle indgange
+item.list.artwork: Alle kunstværker
+item.list.furniture: Alt inventar

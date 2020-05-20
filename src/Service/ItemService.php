@@ -9,7 +9,10 @@
 namespace App\Service;
 
 use App\Entity\Artwork;
+use App\Entity\Furniture;
 use App\Entity\Item;
+use Doctrine\ORM\EntityManagerInterface;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
@@ -20,17 +23,20 @@ class ItemService
 {
     protected $uploaderHelper;
     protected $router;
+    protected $entityManager;
 
     /**
      * ItemService constructor.
      *
      * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper      $uploaderHelper
      * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $router
+     * @param \Doctrine\ORM\EntityManagerInterface                       $entityManager
      */
-    public function __construct(UploaderHelper $uploaderHelper, UrlGeneratorInterface $router)
+    public function __construct(UploaderHelper $uploaderHelper, UrlGeneratorInterface $router, EntityManagerInterface $entityManager)
     {
         $this->uploaderHelper = $uploaderHelper;
         $this->router = $router;
+        $this->entityManager = $entityManager;
     }
 
     /**
@@ -49,21 +55,16 @@ class ItemService
 
         $renderObject = (object) [
             'id' => $item->getId(),
-            'link' => $this->router->generate(
-                'artwork_show',
-                [
-                    'id' => $item->getId(),
-                ]
-            ),
             'img' => $path,
             'title' => $item->getName(),
             'type' => $item->getType(),
             'building' => $item->getBuilding(),
             'geo' => $item->getGeo(),
+            'description' => $item->getDescription(),
             'comment' => $item->getComment(),
             'department' => $item->getOrganization(),
             'status' => $item->getStatus(),
-            'linkEdit' => $this->router->generate('artwork_edit', ['id' => $item->getId()]),
+            'linkEdit' => $this->router->generate('item_edit', ['id' => $item->getId()]),
         ];
 
         if ($item instanceof Artwork) {
@@ -73,10 +74,101 @@ class ItemService
             $renderObject->price = $item->getPurchasePrice();
             $renderObject->productionYear = $item->getProductionYear();
             $renderObject->estimatedValue = $item->getAssessmentPrice();
-            $renderObject->estimatedValueDate = $item->getAssessmentDate()->format('d/m Y');
+            $renderObject->estimatedValueDate = $item->getAssessmentDate() ? $item->getAssessmentDate()->format('d/m Y') : null;
         }
 
         return $renderObject;
+    }
+
+    /**
+     * @param $file
+     *
+     * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function importFromSpreadsheet($file)
+    {
+        $spreadsheet = IOFactory::load($file);
+
+        /* Expected columns in spreadsheet:
+            0 => 'CAT_NAME',
+            1 => 'INVENTORY_ID',
+            2 => 'BILLEDE',
+            3 => 'ART_TITLE',
+            4 => 'ARTIST',
+            5 => 'ART_YEAR',
+            6 => 'ART_DIMENSION',
+            7 => 'TYPE',
+            8 => 'ART_EST_VALUE',
+            9 => 'ART_SERIAL',
+            10 => 'CUSTOM_1',
+            11 => 'CUSTOM_2',
+            12 => 'CUSTOM_4',
+            13 => 'DEPARTMENT',
+            14 => 'GEO_ROOM',
+            15 => 'BUILDING',
+            16 => 'REMARKS',
+            17 => 'STAT_NAME',
+            18 => 'STATUS_DATE',
+            19 => 'INV_TYPE',
+            20 => 'BARCODE',
+            21 => 'PRICE',
+            22 => 'INV_USER',
+            23 => 'CREATION_DATE',
+            24 => 'MODIFICATION_DATE',
+            25 => 'SCAN_DATE',
+         */
+        $content = $spreadsheet->getActiveSheet()->toArray();
+
+        foreach ($content as $entry) {
+            $item = null;
+
+            $unMappable = [];
+
+            if ('Kunst' === $entry[0]) {
+                $item = new Artwork();
+                $item->setName($entry[3]);
+                $item->setArtist($entry[4]);
+                $item->setProductionYear($entry[5]);
+                $item->setAssessmentPrice($entry[8]);
+                $item->setType($entry[7]);
+                $item->setArtSerial($entry[9]);
+
+                // Parse ART_DIMENSION.
+                $entryDimensions = $entry[6];
+                $pattern = '/(\d*)x(\d*)$/';
+                $match = preg_match($pattern, $entryDimensions, $matches);
+                if ($match && 3 === \count($matches)) {
+                    $item->setWidth($matches[1]);
+                    $item->setHeight($matches[2]);
+                } elseif ('' !== $entry[6]) {
+                    $unMappable[] = sprintf('ART_DIMENSION: %s', $entryDimensions);
+                }
+
+                $unMappable['CUSTOM_1'] = $entry[10];
+                $unMappable['CUSTOM_2'] = $entry[11];
+                $unMappable['CUSTOM_4'] = $entry[12];
+            } elseif ('Inventar' === $entry[0]) {
+                $item = new Furniture();
+                $item->setName($entry[19]);
+
+                $unMappable[] = sprintf('BARCODE: %s', $entry[20]);
+                $unMappable[] = sprintf('INV_USER: %s', $entry[21]);
+            }
+
+            if (null !== $item) {
+                $item->setInventoryId($entry[1]);
+                $item->setPurchasePrice($entry[21]);
+                $item->setDepartment($entry[13]);
+                $item->setBuilding($entry[15]);
+
+                $item->setComment($entry[16].(\count($unMappable) > 0 ? "\n\nFrom import:\n".implode("\n - ", $unMappable) : ''));
+
+                $this->entityManager->persist($item);
+            }
+        }
+
+        $this->entityManager->flush();
     }
 
     /**
@@ -91,8 +183,11 @@ class ItemService
         $width = $artwork->getWidth();
         $height = $artwork->getHeight();
 
+        if (null === $width || null === $height) {
+            return null;
+        }
         // @TODO: Include depth, diameter and weight in string.
 
-        return sprintf('%d X %d', $width, $height);
+        return sprintf('%d x %d', $width, $height);
     }
 }

@@ -8,7 +8,7 @@
 
 namespace App\Form;
 
-use App\Entity\Artwork;
+use App\Entity\Furniture;
 use App\Service\TagService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -17,9 +17,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Class ArtworkType.
+ * Class FurnitureType.
  */
-class ArtworkType extends AbstractType
+class FurnitureType extends AbstractType
 {
     /* @var TagService $tagService */
     private $tagService;
@@ -39,20 +39,14 @@ class ArtworkType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        /* @var Artwork $artwork */
-        $artwork = $options['data'];
+        /* @var Furniture $furniture */
+        $furniture = $options['data'];
 
-        $classname = \get_class($artwork);
+        $classname = \get_class($furniture);
 
         $builder
             ->add('name')
             ->add('description')
-            ->add('artist')
-            ->add('artSerial')
-            ->add('purchasePrice')
-            ->add('productionYear')
-            ->add('assessmentDate')
-            ->add('assessmentPrice')
             ->add('building', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
@@ -103,12 +97,6 @@ class ArtworkType extends AbstractType
                 'required' => false,
             ])
             ->add('postalCode')
-            ->add('width')
-            ->add('height')
-            ->add('depth')
-            ->add('diameter')
-            ->add('weight')
-            ->add('publiclyAccessible')
             ->add('geo')
             ->add('comment')
             ->add(
@@ -143,7 +131,7 @@ class ArtworkType extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => Artwork::class,
+                'data_class' => Furniture::class,
             ]
         );
     }

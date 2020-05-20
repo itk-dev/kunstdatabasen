@@ -22,6 +22,8 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  */
 class Item
 {
+    public $itemType = 'item';
+
     use BlameableEntity;
     use TimestampableEntity;
 
@@ -33,7 +35,7 @@ class Item
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $name;
 
@@ -108,6 +110,21 @@ class Item
     private $comment;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $department;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $purchasePrice;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $inventoryId;
+
+    /**
      * Artwork constructor.
      */
     public function __construct()
@@ -124,17 +141,17 @@ class Item
     }
 
     /**
-     * @return mixed
+     * @return string|null
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
 
     /**
-     * @param mixed $name
+     * @param string|null $name
      */
-    public function setName($name): void
+    public function setName(?string $name): void
     {
         $this->name = $name;
     }
@@ -432,6 +449,74 @@ class Item
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDepartment(): ?string
+    {
+        return $this->department;
+    }
+
+    /**
+     * @param string|null $department
+     *
+     * @return $this
+     */
+    public function setDepartment(?string $department): self
+    {
+        $this->department = $department;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getItemType(): string
+    {
+        return $this->itemType;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getPurchasePrice(): ?float
+    {
+        return $this->purchasePrice;
+    }
+
+    /**
+     * @param float|null $purchasePrice
+     *
+     * @return $this
+     */
+    public function setPurchasePrice(?float $purchasePrice): self
+    {
+        $this->purchasePrice = $purchasePrice;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getInventoryId(): ?int
+    {
+        return $this->inventoryId;
+    }
+
+    /**
+     * @param int $inventoryId
+     *
+     * @return $this
+     */
+    public function setInventoryId(int $inventoryId): self
+    {
+        $this->inventoryId = $inventoryId;
 
         return $this;
     }

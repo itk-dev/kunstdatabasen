@@ -15,20 +15,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Artwork extends Item
 {
+    public $itemType = 'artwork';
+
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $artist;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $artSerial;
-
-    /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $purchasePrice;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -79,11 +76,11 @@ class Artwork extends Item
     }
 
     /**
-     * @param string $artist
+     * @param string|null $artist
      *
      * @return $this
      */
-    public function setArtist(string $artist): self
+    public function setArtist(?string $artist): self
     {
         $this->artist = $artist;
 
@@ -99,33 +96,13 @@ class Artwork extends Item
     }
 
     /**
-     * @param string $artSerial
+     * @param string|null $artSerial
      *
      * @return $this
      */
-    public function setArtSerial(string $artSerial): self
+    public function setArtSerial(?string $artSerial): self
     {
         $this->artSerial = $artSerial;
-
-        return $this;
-    }
-
-    /**
-     * @return float|null
-     */
-    public function getPurchasePrice(): ?float
-    {
-        return $this->purchasePrice;
-    }
-
-    /**
-     * @param float|null $purchasePrice
-     *
-     * @return $this
-     */
-    public function setPurchasePrice(?float $purchasePrice): self
-    {
-        $this->purchasePrice = $purchasePrice;
 
         return $this;
     }
