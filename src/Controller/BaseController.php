@@ -92,6 +92,9 @@ class BaseController extends AbstractController
         return parent::render($view, $parameters, $response);
     }
 
+    /**
+     * Save that the user visited the item to session.
+     */
     public function saveVisited()
     {
         // Save latest visited items,artworks.
