@@ -74,3 +74,6 @@ item.form.images: Billeder
 item.form.extra: Ekstra
 item.form.list: Liste
 title: Aarhus Kommunes kunstdatabase
+admin.index: Forside
+admin.item.edit: Redigér
+admin.item.new: Opret nyt
