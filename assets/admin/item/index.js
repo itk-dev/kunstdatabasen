@@ -1,10 +1,10 @@
 // Add admin styles
 import '../admin.scss';
-import '../_artworkDetails.js';
+import '../_itemDetails.js';
 
 // Add font awesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faPalette, faSearch, faMountain, faBars, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPalette, faSearch, faMountain, faBars, faPlusCircle, faChair } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
     faEdit,
@@ -12,7 +12,8 @@ library.add(
     faSearch,
     faMountain,
     faBars,
-    faPlusCircle
+    faPlusCircle,
+    faChair
 );
 dom.watch();
 

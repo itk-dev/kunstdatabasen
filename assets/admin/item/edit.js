@@ -1,4 +1,4 @@
-import './artwork.scss';
+import './item.scss';
 import '../_imageUpload.js';
 
 // Add font awesome icons
