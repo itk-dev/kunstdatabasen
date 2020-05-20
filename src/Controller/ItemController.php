@@ -163,6 +163,7 @@ class ItemController extends BaseController
             'admin/item/index.html.twig',
             [
                 'items' => $items,
+                'supportMail' => $this->supportMail,
                 'headline' => 'item.list.'.$itemType,
                 'itemType' => $itemType,
                 'form' => $form->createView(),
@@ -286,6 +287,8 @@ class ItemController extends BaseController
     public function getModal(Item $item)
     {
         $itemObject = $this->itemService->itemToRenderObject($item);
+
+        $this->saveVisited();
 
         return new JsonResponse(
             [

@@ -76,7 +76,9 @@ class FrontendController extends AbstractController
                 $height->max ?? null
             );
         } else {
-            $query = $itemRepository->getQuery();
+            $query = $itemRepository->getQuery(
+                Artwork::class
+            );
         }
 
         $pagination = $paginator->paginate(
@@ -94,7 +96,6 @@ class FrontendController extends AbstractController
         return $this->render(
             'app/index.html.twig',
             [
-                'title' => 'Kunstdatabasen',
                 'artworks' => $artworks,
                 'pagination' => $pagination,
                 'searchForm' => $form->createView(),
@@ -151,7 +152,6 @@ class FrontendController extends AbstractController
             'dimensions' => $this->getDimensions($artwork),
             'building' => $artwork->getBuilding(),
             'geo' => $artwork->getGeo(),
-            'comment' => $artwork->getComment(),
             'description' => $artwork->getDescription(),
             'organization' => $artwork->getOrganization(),
             'department' => $artwork->getDepartment(),

@@ -29,23 +29,26 @@ class BaseController extends AbstractController
     protected $itemService;
     protected $tagService;
     protected $uploaderHelper;
+    protected $supportMail;
 
     /**
      * BaseController constructor.
      *
-     * @param RequestStack                                               $requestStack
+     * @param string $bindSupportMail
+     * @param RequestStack $requestStack
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param \App\Service\ItemService                                   $itemService
-     * @param \App\Service\TagService                                    $tagService
-     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper      $uploaderHelper
+     * @param \App\Service\ItemService $itemService
+     * @param \App\Service\TagService $tagService
+     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
      */
-    public function __construct(RequestStack $requestStack, SessionInterface $session, ItemService $itemService, TagService $tagService, UploaderHelper $uploaderHelper)
+    public function __construct(string $bindSupportMail, RequestStack $requestStack, SessionInterface $session, ItemService $itemService, TagService $tagService, UploaderHelper $uploaderHelper)
     {
         $this->requestStack = $requestStack;
         $this->session = $session;
         $this->itemService = $itemService;
         $this->tagService = $tagService;
         $this->uploaderHelper = $uploaderHelper;
+        $this->supportMail = $bindSupportMail;
     }
 
     /**
@@ -84,9 +87,15 @@ class BaseController extends AbstractController
             ],
         ];
 
+        $this->saveVisited();
+
+        return parent::render($view, $parameters, $response);
+    }
+
+    public function saveVisited() {
         // Save latest visited items,artworks.
         $basePath = $this->requestStack->getCurrentRequest()->getPathInfo();
-        $match = preg_match('/\/admin\/(item|artwork|furniture)\/(\d+)/', $basePath, $matches);
+        $match = preg_match('/\/admin\/(item|artwork|furniture)\/(\d+).*/', $basePath, $matches);
         if ($match) {
             $type = strtolower($matches[1]);
             switch ($type) {
@@ -123,7 +132,5 @@ class BaseController extends AbstractController
 
             $this->session->set('latestVisitedItems', $visited);
         }
-
-        return parent::render($view, $parameters, $response);
     }
 }
