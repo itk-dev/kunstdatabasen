@@ -1,5 +1,11 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Command;
 
 use App\Service\ItemService;
@@ -9,6 +15,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Class ImportSpreadsheetCommand.
+ */
 class ImportSpreadsheetCommand extends Command
 {
     protected static $defaultName = 'app:import-spreadsheet';
@@ -26,7 +35,9 @@ class ImportSpreadsheetCommand extends Command
         parent::__construct();
     }
 
-
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -35,6 +46,9 @@ class ImportSpreadsheetCommand extends Command
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);

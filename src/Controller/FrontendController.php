@@ -9,7 +9,6 @@
 namespace App\Controller;
 
 use App\Entity\Artwork;
-use App\Repository\ArtworkRepository;
 use App\Repository\ItemRepository;
 use App\Service\TagService;
 use Knp\Component\Pager\PaginatorInterface;
@@ -46,7 +45,7 @@ class FrontendController extends AbstractController
      * @Route("/", name="frontend_index")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ItemRepository         $itemRepository
+     * @param \App\Repository\ItemRepository            $itemRepository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
@@ -176,7 +175,7 @@ class FrontendController extends AbstractController
         $height = $artwork->getHeight();
 
         // @TODO: Include depth, diameter and weight in string.
-        if ($width === null || $height === null) {
+        if (null === $width || null === $height) {
             return null;
         }
 

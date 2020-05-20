@@ -71,13 +71,13 @@ class BaseController extends AbstractController
 
         $parameters['menuItems'] = [
             [
-                'title' => 'Kunstværker',
+                'title' => 'menu.artworks',
                 'icon' => 'fa-mountain',
                 'active' => true,
                 'link' => $this->generateUrl('item_list', ['itemType' => 'artwork']),
             ],
             [
-                'title' => 'Inventar',
+                'title' => 'menu.furniture',
                 'icon' => 'fa-chair',
                 'active' => true,
                 'link' => $this->generateUrl('item_list', ['itemType' => 'furniture']),

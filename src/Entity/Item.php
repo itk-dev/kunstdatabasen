@@ -120,6 +120,11 @@ class Item
     private $purchasePrice;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $inventoryId;
+
+    /**
      * Artwork constructor.
      */
     public function __construct()
@@ -448,11 +453,19 @@ class Item
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDepartment(): ?string
     {
         return $this->department;
     }
 
+    /**
+     * @param string|null $department
+     *
+     * @return $this
+     */
     public function setDepartment(?string $department): self
     {
         $this->department = $department;
@@ -460,6 +473,9 @@ class Item
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getItemType(): string
     {
         return $this->itemType;
@@ -481,6 +497,26 @@ class Item
     public function setPurchasePrice(?float $purchasePrice): self
     {
         $this->purchasePrice = $purchasePrice;
+
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getInventoryId(): ?int
+    {
+        return $this->inventoryId;
+    }
+
+    /**
+     * @param int $inventoryId
+     *
+     * @return $this
+     */
+    public function setInventoryId(int $inventoryId): self
+    {
+        $this->inventoryId = $inventoryId;
 
         return $this;
     }

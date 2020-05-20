@@ -49,6 +49,13 @@ admin.table.function: Funktion
 admin.dashboard.latest_viewed: Senest åbne
 admin.dashboard.latest_added: Senest tilføjede
 admin.dashboard.new: Opret nyt værk
-admin.dashboard.show_all: Vis alle værker
+admin.dashboard.show_all: Vis alle indgange
 search.submit: Søg
 item.no_title: Uden titel
+menu.artworks: Kunstværker
+menu.furniture: Inventar
+admin.dashboard.new_artwork: Nyt kunstværk
+admin.dashboard.new_furniture: Nyt inventar
+item.list.item: Alle indgange
+item.list.artwork: Alle kunstværker
+item.list.furniture: Alt inventar

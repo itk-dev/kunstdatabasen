@@ -2,6 +2,12 @@
 
 declare(strict_types=1);
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace DoctrineMigrations;
 
 use Doctrine\DBAL\Schema\Schema;
@@ -12,23 +18,32 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20200518112507 extends AbstractMigration
 {
-    public function getDescription() : string
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription(): string
     {
         return '';
     }
 
-    public function up(Schema $schema) : void
+    /**
+     * {@inheritdoc}
+     */
+    public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE item ADD department VARCHAR(255) DEFAULT NULL');
     }
 
-    public function down(Schema $schema) : void
+    /**
+     * {@inheritdoc}
+     */
+    public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE item DROP department');
     }

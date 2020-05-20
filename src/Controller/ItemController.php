@@ -13,7 +13,6 @@ use App\Entity\Furniture;
 use App\Entity\Item;
 use App\Form\ArkworkType;
 use App\Form\FurnitureType;
-use App\Repository\ArtworkRepository;
 use App\Repository\ItemRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -33,8 +32,8 @@ class ItemController extends BaseController
      * @Route("/", name="item_index", methods={"GET"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ItemRepository $itemRepository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator
+     * @param \App\Repository\ItemRepository            $itemRepository
+     * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -84,6 +83,7 @@ class ItemController extends BaseController
             [
                 'items' => $items,
                 'title' => 'Kunstdatabasen',
+                'headline' => 'item.list.item',
                 'brand' => 'Aarhus kommunes kunstdatabase',
                 'brandShort' => 'Kunstdatabasen',
                 'welcome' => 'Velkommen til Aarhus Kommunes kunstdatabase',
@@ -99,10 +99,10 @@ class ItemController extends BaseController
     /**
      * @Route("/list/{itemType}", name="item_list", methods={"GET"})
      *
-     * @param string $itemType
+     * @param string                                    $itemType
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ItemRepository $itemRepository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator
+     * @param \App\Repository\ItemRepository            $itemRepository
+     * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -163,15 +163,7 @@ class ItemController extends BaseController
             'admin/item/index.html.twig',
             [
                 'items' => $items,
-                'title' => 'Kunstdatabasen',
-                'brand' => 'Aarhus kommunes kunstdatabase',
-                'brandShort' => 'Kunstdatabasen',
-                'welcome' => 'Velkommen til Aarhus Kommunes kunstdatabase',
                 'headline' => 'item.list.'.$itemType,
-                'user' => [
-                    'username' => 'Admin user',
-                    'email' => 'admin@email.com',
-                ],
                 'form' => $form->createView(),
             ]
         );
@@ -181,15 +173,15 @@ class ItemController extends BaseController
      * @Route("/{type}/new", name="item_new", methods={"GET","POST"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @param string $type
+     * @param string                                    $itemType
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Exception
      */
-    public function new(Request $request, string $type): Response
+    public function new(Request $request, string $itemType): Response
     {
-        switch ($type) {
+        switch ($itemType) {
             case 'artwork':
                 $item = new Artwork();
                 $form = $this->createForm(ArkworkType::class, $item);
@@ -209,7 +201,7 @@ class ItemController extends BaseController
             $entityManager->persist($item);
             $entityManager->flush();
 
-            return $this->redirectToRoute('item_index');
+            return $this->redirectToRoute('item_index', ['itemType' => $itemType]);
         }
 
         return $this->render(
@@ -225,20 +217,21 @@ class ItemController extends BaseController
      * @Route("/{id}/edit", name="item_edit", methods={"GET","POST"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Entity\Artwork $artwork
+     * @param \App\Entity\Item                          $item
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Exception
      */
     public function edit(Request $request, Item $item): Response
     {
         if ($item instanceof Artwork) {
+            $itemType = 'artwork';
             $form = $this->createForm(ArkworkType::class, $item);
-        }
-        else if ($item instanceof Furniture) {
+        } elseif ($item instanceof Furniture) {
+            $itemType = 'furniture';
             $form = $this->createForm(FurnitureType::class, $item);
-        }
-        else {
+        } else {
             throw new \Exception('Type is not valid.');
         }
 
@@ -247,7 +240,7 @@ class ItemController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('item_index');
+            return $this->redirectToRoute('item_index', ['itemType' => $itemType]);
         }
 
         return $this->render(
@@ -263,7 +256,7 @@ class ItemController extends BaseController
      * @Route("/{id}", name="item_delete", methods={"DELETE"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Entity\Item $item
+     * @param \App\Entity\Item                          $item
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -281,19 +274,19 @@ class ItemController extends BaseController
     /**
      * @Route("/{id}/modal", name="item_modal", methods={"GET"})
      *
-     * @param \App\Entity\Artwork $artwork
+     * @param \App\Entity\Item $item
      *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
-    public function getModal(Artwork $artwork)
+    public function getModal(Item $item)
     {
-        $itemObject = $this->itemService->itemToRenderObject($artwork);
+        $itemObject = $this->itemService->itemToRenderObject($item);
 
         return new JsonResponse(
             [
-                'id' => $artwork->getId(),
-                'title' => $artwork->getName(),
-                'editLink' => $this->generateUrl('item_edit', ['id' => $artwork->getId()]),
+                'id' => $item->getId(),
+                'title' => $item->getName(),
+                'editLink' => $this->generateUrl('item_edit', ['id' => $item->getId()]),
                 'modalBody' => $this->renderView('admin/item/details.html.twig', ['item' => $itemObject]),
             ]
         );

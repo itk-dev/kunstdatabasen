@@ -20,10 +20,10 @@
                 <tr>
                     <td><a class="item-details-link" data-id="{{ item.id }}"><img src="{{ asset(item.img) }}" alt="" height="30"/></a></td>
                     <td><a class="item-details-link" data-id="{{ item.id }}"><strong>{{ item.title ?: 'item.no_title'|trans }}</strong></a></td>
-                    <td>{{ item.artNo }}</td>
-                    <td>{{ item.building }}</td>
-                    <td>{{ item.artist }}</td>
-                    <td>{{ item.type }}</td>
+                    <td>{{ item.artNo ?? '' }}</td>
+                    <td>{{ item.building ?? '' }}</td>
+                    <td>{{ item.artist ?? '' }}</td>
+                    <td>{{ item.type ?? '' }}</td>
                     <td>
                         {% if item.status == "Udlånt" %}
                             <span class="badge badge-pill badge-dark">{{ item.status }}</span>

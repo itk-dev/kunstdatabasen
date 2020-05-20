@@ -16,7 +16,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200518113515 extends AbstractMigration
+final class Version20200520074022 extends AbstractMigration
 {
     /**
      * {@inheritdoc}
@@ -34,7 +34,7 @@ final class Version20200518113515 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE item CHANGE name name VARCHAR(255) DEFAULT NULL');
+        $this->addSql('ALTER TABLE item ADD inventory_id INT NOT NULL');
     }
 
     /**
@@ -45,6 +45,6 @@ final class Version20200518113515 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE item CHANGE name name VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
+        $this->addSql('ALTER TABLE item DROP inventory_id');
     }
 }
