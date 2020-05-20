@@ -47,6 +47,13 @@ class FurnitureType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
+            ->add('status', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'tag-select-edit',
+                ],
+                'choices' => $this->tagService->getChoices($classname, 'status'),
+                'required' => false,
+            ])
             ->add('building', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
@@ -99,6 +106,7 @@ class FurnitureType extends AbstractType
             ->add('postalCode')
             ->add('geo')
             ->add('comment')
+            ->add('publiclyAccessible')
             ->add(
                 'images',
                 CollectionType::class,
