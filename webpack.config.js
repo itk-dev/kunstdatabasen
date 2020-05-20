@@ -25,7 +25,7 @@ Encore
      */
     .addEntry('app', './assets/app/index.js')
     .addEntry('admin', './assets/admin/index.js')
-    .addEntry('admin/show', './assets/admin/item/index.js')
+    .addEntry('admin/index', './assets/admin/item/index.js')
     .addEntry('admin/new', './assets/admin/item/new.js')
     .addEntry('admin/edit', './assets/admin/item/edit.js')
     .addEntry('login', './assets/security/login.js')

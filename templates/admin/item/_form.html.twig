@@ -1,7 +1,7 @@
 {{ form_start(form) }}
     <div class="row mt-5">
         <div class="col-md-12 mb-3">
-            <h2 class="h5">{{ 'Common'|trans }}</h2>
+            <h2 class="h5">{{ 'item.form.common'|trans }}</h2>
         </div>
         <div class="col-md-4">
             {{ form_row(form.type) }}
@@ -22,7 +22,7 @@
     {% if itemType == 'artwork' %}
     <div class="row mt-5">
         <div class="col-md-12 mb-3">
-            <h2 class="h5">{{ 'Art'|trans }}</h2>
+            <h2 class="h5">{{ 'item.form.art'|trans }}</h2>
         </div>
         <div class="col-md-4">
             {{ form_row(form.artist) }}
@@ -37,7 +37,6 @@
             {{ form_row(form.productionYear) }}
         </div>
         <div class="col-8 col-md-4">
-            {# TODO: Change date format to single input with default popoverpicker(html5 default?). #}
             {{ form_row(form.assessmentDate) }}
         </div>
         <div class="col-4 col-md-4">
@@ -47,7 +46,7 @@
     {% endif %}
     <div class="row mt-5">
         <div class="col-md-12 mb-3">
-            <h2 class="h5">{{ 'Placement'|trans }}</h2>
+            <h2 class="h5">{{ 'item.form.placement'|trans }}</h2>
         </div>
         <div class="col-md-4">
             {{ form_row(form.location) }}
@@ -74,7 +73,7 @@
     {% if itemType == 'artwork' %}
     <div class="row mt-5">
         <div class="col-md-12 mb-3">
-            <h2 class="h5">{{ 'Attributes'|trans }}</h2>
+            <h2 class="h5">{{ 'item.form.attributes'|trans }}</h2>
         </div>
         <div class="col-md-2">
             {{ form_row(form.width) }}
@@ -95,7 +94,7 @@
     {% endif %}
     <div class="row mt-5">
         <div class="col-md-12 mb-3">
-            <h2 class="h5">{{ 'Images'|trans }}</h2>
+            <h2 class="h5">{{ 'item.form.images'|trans }}</h2>
         </div>
         <div class="col-md-12">
             <ul class="images list-unstyled" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
@@ -107,7 +106,7 @@
     </div>
     <div class="row mt-5">
         <div class="col-md-12 mb-3">
-            <h2 class="h5">{{ 'Extra'|trans }}</h2>
+            <h2 class="h5">{{ 'item.form.extra'|trans }}</h2>
         </div>
         <div class="col-md-12">
             {{ form_row(form.geo) }}
@@ -120,7 +119,7 @@
         </div>
     </div>
     <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-white">
-        <a class="text-small" href="{{ indexLink }}"><i class="fas fa-arrow-left mr-1"></i>{{ 'Værker'|trans }}</a>
+        <a class="text-small" href="{{ indexLink }}"><i class="fas fa-arrow-left mr-1"></i>{{ 'item.form.list'|trans }}</a>
         <div class="ml-auto">
             <button class="btn btn-primary px-5">{{ button_label|default('Save') }}</button>
         </div>

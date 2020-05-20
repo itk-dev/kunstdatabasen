@@ -141,19 +141,15 @@ class ItemService
                 if ($match && 3 === \count($matches)) {
                     $item->setWidth($matches[1]);
                     $item->setHeight($matches[2]);
-                } elseif ('' !== $entry[6]) {
-                    $unMappable[] = sprintf('ART_DIMENSION: %s', $entryDimensions);
+                } else {
+                    !empty($entryDimensions) && $unMappable[] = sprintf('ART_DIMENSION: %s', $entryDimensions);
                 }
-
-                $unMappable['CUSTOM_1'] = $entry[10];
-                $unMappable['CUSTOM_2'] = $entry[11];
-                $unMappable['CUSTOM_4'] = $entry[12];
             } elseif ('Inventar' === $entry[0]) {
                 $item = new Furniture();
                 $item->setName($entry[19]);
 
-                $unMappable[] = sprintf('BARCODE: %s', $entry[20]);
-                $unMappable[] = sprintf('INV_USER: %s', $entry[21]);
+                !empty($entry[20]) && $unMappable[] = sprintf('BARCODE: %s', $entry[20]);
+                !empty($entry[21]) && $unMappable[] = sprintf('INV_USER: %s', $entry[21]);
             }
 
             if (null !== $item) {
@@ -161,6 +157,11 @@ class ItemService
                 $item->setPurchasePrice($entry[21]);
                 $item->setDepartment($entry[13]);
                 $item->setBuilding($entry[15]);
+                $item->setRoom($entry[14]);
+
+                !empty($entry[10]) && $unMappable[] = sprintf('CUSTOM_1: %s', $entry[10]);
+                !empty($entry[11]) && $unMappable[] = sprintf('CUSTOM_2: %s', $entry[11]);
+                !empty($entry[12]) && $unMappable[] = sprintf('CUSTOM_4: %s', $entry[12]);
 
                 $item->setComment($entry[16].(\count($unMappable) > 0 ? "\n\nFrom import:\n".implode("\n - ", $unMappable) : ''));
 

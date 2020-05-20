@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-	{{ "Kunstdatabasen | Rytmisk interferens"|trans }}
+	{{ ('title'|trans) ~ ' | ' ~ data.artwork.title }}
 {% endblock %}
 
 {% block body %}

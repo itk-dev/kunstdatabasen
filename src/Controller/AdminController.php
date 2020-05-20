@@ -52,6 +52,7 @@ class AdminController extends BaseController
 
         return $this->render('admin/index.html.twig', [
             'title' => 'admin.index',
+            'supportMail' => $this->supportMail,
             'latestVisited' => $latestVisitedRender,
             'latestAdded' => $latestAddedRender,
         ]);
