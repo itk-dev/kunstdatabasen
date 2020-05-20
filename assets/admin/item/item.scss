@@ -10,7 +10,6 @@
 @import '~bootstrap/scss/images';
 @import '~bootstrap/scss/print';
 
-
 @import '~select2/src/scss/core';
 
 // Toggle button texts with collapse
@@ -36,6 +35,6 @@
 
 // Accomondate space for fixed nav
 body {
-  padding-top: $spacer * 5;
   background-color: $gray-100;
+  padding-top: $spacer * 5;
 }

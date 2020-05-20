@@ -6,8 +6,10 @@ import './_itemDetails.js';
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faEdit, faPalette, faSearch, faMountain, faBars, faTimes, faChair } from '@fortawesome/free-solid-svg-icons';
 
+// Add bootstrap components
 import 'bootstrap/js/dist/modal';
 import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/dropdown';
 
 // Add jQuery
 const $ = require('jquery');
@@ -23,11 +25,3 @@ library.add(
     faChair
 );
 dom.watch();
-
-// Add bootstrap components
-import 'bootstrap/js/dist/modal';
-import 'bootstrap/js/dist/collapse';
-import 'bootstrap/js/dist/dropdown';
-
-
-
