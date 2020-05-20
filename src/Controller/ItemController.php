@@ -164,13 +164,14 @@ class ItemController extends BaseController
             [
                 'items' => $items,
                 'headline' => 'item.list.'.$itemType,
+                'itemType' => $itemType,
                 'form' => $form->createView(),
             ]
         );
     }
 
     /**
-     * @Route("/{type}/new", name="item_new", methods={"GET","POST"})
+     * @Route("/{itemType}/new", name="item_new", methods={"GET","POST"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string                                    $itemType
@@ -207,7 +208,9 @@ class ItemController extends BaseController
         return $this->render(
             'admin/item/new.html.twig',
             [
-                'artwork' => $item,
+                'item' => $item,
+                'itemType' => $itemType,
+                'indexLink' => $this->generateUrl('item_list', ['itemType' => $itemType]),
                 'form' => $form->createView(),
             ]
         );
@@ -247,6 +250,8 @@ class ItemController extends BaseController
             'admin/item/edit.html.twig',
             [
                 'item' => $item,
+                'itemType' => $itemType,
+                'indexLink' => $this->generateUrl('item_list', ['itemType' => $itemType]),
                 'form' => $form->createView(),
             ]
         );
