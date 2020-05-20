@@ -8,6 +8,7 @@ import 'bootstrap/js/dist/collapse';
 
 const $ = require('jquery');
 global.$ = global.jQuery = $;
+
 library.add(
     faArrowLeft,
     faArrowRight

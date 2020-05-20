@@ -20,15 +20,15 @@
                 <tr>
                     <td><a class="item-details-link" data-id="{{ item.id }}"><img src="{{ asset(item.img) }}" alt="" height="30"/></a></td>
                     <td><a class="item-details-link" data-id="{{ item.id }}"><strong>{{ item.title ?: 'item.no_title'|trans }}</strong></a></td>
-                    <td class="d-none d-md-table-cell">{{ item.artNo }}</td>
-                    <td>{{ item.building }}</td>
-                    <td class="d-none d-md-table-cell">{{ item.artist }}</td>
-                    <td class="d-none d-md-table-cell">{{ item.type }}</td>
+                    <td class="d-none d-md-table-cell">{{ item.artNo ?? '' }}</td>
+                    <td>{{ item.building ?? '' }}</td>
+                    <td class="d-none d-md-table-cell">{{ item.artist ?? '' }}</td>
+                    <td class="d-none d-md-table-cell">{{ item.type ?? '' }}</td>
                     <td>
                         {% if item.status == "Udlånt" %}
-                            <span class="badge badge-pill badge-dark">{{ item.status }}</span>
+                            <span class="badge badge-pill badge-dark">{{ item.status ?? '' }}</span>
                         {% else %}
-                            <span class="badge badge-pill badge-success">{{ item.status }}</span>
+                            <span class="badge badge-pill badge-success">{{ item.status ?? '' }}</span>
                         {% endif %}
                     </td>
                     <td class="text-right"><a href="{{ item.linkEdit }}"><i class="fas fa-edit"></i></a></td>

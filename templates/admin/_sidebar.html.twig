@@ -20,32 +20,10 @@
                             {{ user.email }}
                         </button>
                 <div class="dropdown-menu" aria-labelledby="userMenu">
-                    {# TODO: functionality #}
-                    <button class="dropdown-item" href="#">Log ud</button>
-                    <button class="dropdown-item" href="#">Skift password</button>
+                    <button class="dropdown-item" href="{{ path('app_logout') }}">Log ud</button>
                 </div>
             </div>
 
         </div>
     </nav>
 </div>
-{# <div class="col-auto d-flex flex-column pt-3">
-    <nav class="navbar navbar-expand-md">
-        <a href="{{ path('admin') }}" class="navbar-brand"><i class="fas fa-palette mr-1"></i><span class="text-dark">{{ brandShort }}</span></a>
-
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                <li class="nav-item">
-                    {% for menuItem in menuItems %}
-                        <a class="nav-link{{ menuItem.active ? ' active' : '' }}" href="{{ menuItem.link }}">
-                            <i class="fas {{ menuItem.icon }} mr-1"></i>{{ menuItem.title|trans }}
-                        </a>
-                    {% endfor %}
-                </li>
-                <li class="nav-item">
-                    {{ user.email }}
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>#}

@@ -9,7 +9,7 @@ import 'bootstrap/js/dist/dropdown';
 
 // Add font awesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faPalette, faSearch, faMountain, faBars, faPlusCircle, faChair } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPalette, faSearch, faMountain, faBars, faPlusCircle, faChair, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
     faEdit,
@@ -18,6 +18,7 @@ library.add(
     faMountain,
     faBars,
     faPlusCircle,
-    faChair
+    faChair,
+    faTimes
 );
 dom.watch();
