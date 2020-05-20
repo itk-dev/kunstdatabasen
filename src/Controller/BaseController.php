@@ -34,12 +34,12 @@ class BaseController extends AbstractController
     /**
      * BaseController constructor.
      *
-     * @param string $bindSupportMail
-     * @param RequestStack $requestStack
+     * @param string                                                     $bindSupportMail
+     * @param RequestStack                                               $requestStack
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param \App\Service\ItemService $itemService
-     * @param \App\Service\TagService $tagService
-     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
+     * @param \App\Service\ItemService                                   $itemService
+     * @param \App\Service\TagService                                    $tagService
+     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper      $uploaderHelper
      */
     public function __construct(string $bindSupportMail, RequestStack $requestStack, SessionInterface $session, ItemService $itemService, TagService $tagService, UploaderHelper $uploaderHelper)
     {
@@ -92,7 +92,8 @@ class BaseController extends AbstractController
         return parent::render($view, $parameters, $response);
     }
 
-    public function saveVisited() {
+    public function saveVisited()
+    {
         // Save latest visited items,artworks.
         $basePath = $this->requestStack->getCurrentRequest()->getPathInfo();
         $match = preg_match('/\/admin\/(item|artwork|furniture)\/(\d+).*/', $basePath, $matches);
