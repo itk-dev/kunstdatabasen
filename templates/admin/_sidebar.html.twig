@@ -9,7 +9,7 @@
                 {% for menuItem in menuItems %}
                     <li class="nav-item {{ menuItem.active ? ' active' : '' }}">
                         <a class="nav-link" href="{{ menuItem.link }}">
-                            <i class="fas {{ menuItem.icon }} mr-1"></i>{{ menuItem.title }}
+                            <i class="fas {{ menuItem.icon }} fa-fw mr-1"></i>{{ menuItem.title|trans }}
                         </a>
                     </li>
                 {% endfor %}
