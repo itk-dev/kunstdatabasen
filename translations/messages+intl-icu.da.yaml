@@ -46,10 +46,11 @@ admin.table.artist: Kunstner
 admin.table.type: Type
 admin.table.status: Status
 admin.table.function: Funktion
-admin.dashboard.latest_viewed: Senest åbne
-admin.dashboard.latest_added: Senest tilføjede
-admin.dashboard.new: Opret nyt værk
-admin.dashboard.show_all: Vis alle indgange
+admin.index.latest_viewed: Senest åbne
+admin.index.latest_added: Senest tilføjede
+admin.index.new: Opret nyt værk
+admin.index.show_all: Vis alle værker
+admin.artwork.index: Værker
 search.submit: Søg
 item.no_title: Uden titel
 menu.artworks: Kunstværker

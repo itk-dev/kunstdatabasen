@@ -14,21 +14,21 @@
 // Toggle button texts with collapse
 
 [aria-expanded='false'] {
-  span.true {
+  .true {
     display: none;
   }
 
-  span:not(.true) {
+  :not(.true) {
     display: inline;
   }
 }
 
 [aria-expanded='true'] {
-  span.true {
+  .true {
     display: inline;
   }
 
-  span:not(.true) {
+  :not(.true) {
     display: none;
   }
 }

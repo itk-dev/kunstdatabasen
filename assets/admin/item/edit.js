@@ -1,20 +1,20 @@
-import './app.scss';
+import './item.scss';
+import '../_imageUpload.js';
 
 // Add font awesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
-import 'bootstrap/js/dist/collapse';
-
-const $ = require('jquery');
-global.$ = global.jQuery = $;
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
-    faArrowLeft,
-    faArrowRight
+    faArrowLeft
 );
 dom.watch();
 
+// Add jQuery
+const $ = require('jquery');
+global.$ = global.jQuery = $;
+
+// Add select 2
 require('select2');
 require('select2/dist/js/i18n/da');
 

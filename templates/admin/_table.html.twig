@@ -5,13 +5,13 @@
                 <thead class="bg-light">
                 <tr class="text-muted small">
                     <th>{{ 'admin.table.thumpnail'|trans }}</th>
-                    <th>{{ 'admin.table.title'|trans }}</th>
-                    <th>{{ 'admin.table.art_serial'|trans }}</th>
+                    <th class="pointer">{{ 'admin.table.title'|trans }}</th>
+                    <th class="d-none d-md-table-cell">{{ 'admin.table.art_serial'|trans }}</th>
                     <th>{{ 'admin.table.building'|trans }}</th>
-                    <th>{{ 'admin.table.artist'|trans }}</th>
-                    <th>{{ 'admin.table.type'|trans }}</th>
+                    <th class="d-none d-md-table-cell">{{ 'admin.table.artist'|trans }}</th>
+                    <th class="d-none d-md-table-cell">{{ 'admin.table.type'|trans }}</th>
                     <th>{{ 'admin.table.status'|trans }}</th>
-                    <th>{{ 'admin.table.function'|trans }}</th>
+                    <th class="text-right">{{ 'admin.table.function'|trans }}</th>
                 </tr>
                 </thead>
             {% endif %}
@@ -20,18 +20,18 @@
                 <tr>
                     <td><a class="item-details-link" data-id="{{ item.id }}"><img src="{{ asset(item.img) }}" alt="" height="30"/></a></td>
                     <td><a class="item-details-link" data-id="{{ item.id }}"><strong>{{ item.title ?: 'item.no_title'|trans }}</strong></a></td>
-                    <td>{{ item.artNo ?? '' }}</td>
+                    <td class="d-none d-md-table-cell">{{ item.artNo ?? '' }}</td>
                     <td>{{ item.building ?? '' }}</td>
-                    <td>{{ item.artist ?? '' }}</td>
-                    <td>{{ item.type ?? '' }}</td>
+                    <td class="d-none d-md-table-cell">{{ item.artist ?? '' }}</td>
+                    <td class="d-none d-md-table-cell">{{ item.type ?? '' }}</td>
                     <td>
                         {% if item.status == "Udlånt" %}
-                            <span class="badge badge-pill badge-dark">{{ item.status }}</span>
+                            <span class="badge badge-pill badge-dark">{{ item.status ?? '' }}</span>
                         {% else %}
-                            <span class="badge badge-pill badge-success">{{ item.status }}</span>
+                            <span class="badge badge-pill badge-success">{{ item.status ?? '' }}</span>
                         {% endif %}
                     </td>
-                    <td><a href="{{ item.linkEdit }}"><i class="fas fa-edit"></i></a></td>
+                    <td class="text-right"><a href="{{ item.linkEdit }}"><i class="fas fa-edit"></i></a></td>
                 </tr>
             {% endfor %}
             </tbody>
