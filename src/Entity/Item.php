@@ -120,7 +120,7 @@ class Item
     private $purchasePrice;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $inventoryId;
 
@@ -510,11 +510,11 @@ class Item
     }
 
     /**
-     * @param int $inventoryId
+     * @param int|null $inventoryId
      *
      * @return $this
      */
-    public function setInventoryId(int $inventoryId): self
+    public function setInventoryId(?int $inventoryId): self
     {
         $this->inventoryId = $inventoryId;
 
