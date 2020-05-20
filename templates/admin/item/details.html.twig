@@ -1,0 +1,72 @@
+{# @TODO: Styling #}
+<div class="container">
+    <div class="row art-details">
+        <div class="col-md-3">
+            <img src="{{ asset(item.img) }}" alt="" class="img-fluid"/>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="detailsArtist">{{ 'frontend.item.artist'|trans }}</label>
+                    <p>{{ item.artist ?? '' }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsType">{{ 'frontend.item.type'|trans }}</label>
+                    <p>{{ item.type ?? '' }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsDimensions">{{ 'frontend.item.dimensions'|trans }}</label>
+                    <p>{{ item.dimensions ?? '' }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="detailsComment">{{ 'frontend.item.comment'|trans }}</label>
+                    <p>{{ item.comment ? item.comment|nl2br : '' }}</p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h2 class="h4 border-bottom pb-2">{{ 'frontend.item.location'|trans }}</h2>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsDepartment">{{ 'frontend.item.department'|trans }}</label>
+                    <p>{{ item.department ?? '' }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsBuilding">{{ 'frontend.item.building'|trans }}</label>
+                    <p>{{ item.building ?? '' }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsGeo">{{ 'frontend.item.geo'|trans }}</label>
+                    <p>{{ item.geo ?? '' }}</p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h2 class="h4 border-bottom pb-2">{{ 'frontend.item.further_information'|trans }}</h2>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsArtNo">{{ 'frontend.item.art_serial'|trans }}</label>
+                    <p>{{ item.artNo ?? '' }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsPrice">{{ 'frontend.item.purchase_price'|trans }}</label>
+                    <p>{{ item.price ?? '' }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsProductionYear">{{ 'frontend.item.production_year'|trans }}</label>
+                    <p>{{ item.productionYear ?? '' }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsEstimatedValue">{{ 'frontend.item.assessment_price'|trans }}</label>
+                    <p>{{ item.estimatedValue ?? '' }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsEstimatedValue">{{ 'frontend.item.assessment_date'|trans }}</label>
+                    <p>{{ item.estimatedValueDate ?? '' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

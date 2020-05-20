@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Artwork;
+use App\Entity\Furniture;
 use App\Entity\Item;
 use App\Service\ItemService;
 use App\Service\TagService;
@@ -70,21 +71,30 @@ class BaseController extends AbstractController
 
         $parameters['menuItems'] = [
             [
-                'title' => 'Kunstværker',
+                'title' => 'menu.artworks',
                 'icon' => 'fa-mountain',
                 'active' => true,
-                'link' => '/admin/artwork',
+                'link' => $this->generateUrl('item_list', ['itemType' => 'artwork']),
+            ],
+            [
+                'title' => 'menu.furniture',
+                'icon' => 'fa-chair',
+                'active' => true,
+                'link' => $this->generateUrl('item_list', ['itemType' => 'furniture']),
             ],
         ];
 
         // Save latest visited items,artworks.
         $basePath = $this->requestStack->getCurrentRequest()->getPathInfo();
-        $match = preg_match('/\/admin\/(item|artwork)\/(\d+)/', $basePath, $matches);
+        $match = preg_match('/\/admin\/(item|artwork|furniture)\/(\d+)/', $basePath, $matches);
         if ($match) {
             $type = strtolower($matches[1]);
             switch ($type) {
                 case 'artwork':
                     $type = Artwork::class;
+                    break;
+                case 'furniture':
+                    $type = Furniture::class;
                     break;
                 case 'item':
                     $type = Item::class;

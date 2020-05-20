@@ -16,22 +16,22 @@
                 </thead>
             {% endif %}
             <tbody>
-            {% for art in artworks %}
+            {% for item in items %}
                 <tr>
-                    <td><a class="artwork-details-link" data-id="{{ art.id }}"><img src="{{ asset(art.img) }}" alt="" height="30"/></a></td>
-                    <td><a class="artwork-details-link" data-id="{{ art.id }}"><strong>{{ art.title }}</strong></a></td>
-                    <td class="d-none d-md-table-cell">{{ art.artNo }}</td>
-                    <td>{{ art.building }}</td>
-                    <td class="d-none d-md-table-cell">{{ art.artist }}</td>
-                    <td class="d-none d-md-table-cell">{{ art.type }}</td>
+                    <td><a class="item-details-link" data-id="{{ item.id }}"><img src="{{ asset(item.img) }}" alt="" height="30"/></a></td>
+                    <td><a class="item-details-link" data-id="{{ item.id }}"><strong>{{ item.title ?: 'item.no_title'|trans }}</strong></a></td>
+                    <td class="d-none d-md-table-cell">{{ item.artNo }}</td>
+                    <td>{{ item.building }}</td>
+                    <td class="d-none d-md-table-cell">{{ item.artist }}</td>
+                    <td class="d-none d-md-table-cell">{{ item.type }}</td>
                     <td>
-                        {% if art.status == "Udlånt" %}
-                            <span class="badge badge-pill badge-dark">{{ art.status }}</span>
+                        {% if item.status == "Udlånt" %}
+                            <span class="badge badge-pill badge-dark">{{ item.status }}</span>
                         {% else %}
-                            <span class="badge badge-pill badge-success">{{ art.status }}</span>
+                            <span class="badge badge-pill badge-success">{{ item.status }}</span>
                         {% endif %}
                     </td>
-                    <td class="text-right"><a href="{{ art.linkEdit }}"><i class="fas fa-edit"></i></a></td>
+                    <td class="text-right"><a href="{{ item.linkEdit }}"><i class="fas fa-edit"></i></a></td>
                 </tr>
             {% endfor %}
             </tbody>

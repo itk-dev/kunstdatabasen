@@ -4,7 +4,13 @@ import './_artworkDetails.js';
 
 // Add font awesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faPalette, faSearch, faMountain, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPalette, faSearch, faMountain, faBars, faTimes, faChair } from '@fortawesome/free-solid-svg-icons';
+
+import 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/collapse';
+
+const $ = require('jquery');
+global.$ = global.jQuery = $;
 
 library.add(
     faEdit,
@@ -12,7 +18,8 @@ library.add(
     faSearch,
     faMountain,
     faBars,
-    faTimes
+    faTimes,
+    faChair
 );
 dom.watch();
 

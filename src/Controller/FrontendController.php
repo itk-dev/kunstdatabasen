@@ -9,7 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Artwork;
-use App\Repository\ArtworkRepository;
+use App\Repository\ItemRepository;
 use App\Service\TagService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -45,12 +45,12 @@ class FrontendController extends AbstractController
      * @Route("/", name="frontend_index")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ArtworkRepository         $artworkRepository
+     * @param \App\Repository\ItemRepository            $itemRepository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request, ArtworkRepository $artworkRepository, PaginatorInterface $paginator)
+    public function index(Request $request, ItemRepository $itemRepository, PaginatorInterface $paginator)
     {
         $form = $this->getSearchForm();
 
@@ -62,7 +62,8 @@ class FrontendController extends AbstractController
             $width = null !== $data['width'] ? json_decode($data['width']) : null;
             $height = null !== $data['height'] ? json_decode($data['height']) : null;
 
-            $query = $artworkRepository->getQuery(
+            $query = $itemRepository->getQuery(
+                Artwork::class,
                 $data['search'],
                 $data['type'],
                 null,
@@ -75,7 +76,7 @@ class FrontendController extends AbstractController
                 $height->max ?? null
             );
         } else {
-            $query = $artworkRepository->getQuery();
+            $query = $itemRepository->getQuery();
         }
 
         $pagination = $paginator->paginate(
@@ -149,13 +150,15 @@ class FrontendController extends AbstractController
             'type' => $artwork->getType(),
             'dimensions' => $this->getDimensions($artwork),
             'building' => $artwork->getBuilding(),
-            'geo' => '@TODO',
-            'comment' => '@TODO',
-            'department' => $artwork->getOrganization(),
+            'geo' => $artwork->getGeo(),
+            'comment' => $artwork->getComment(),
+            'description' => $artwork->getDescription(),
+            'organization' => $artwork->getOrganization(),
+            'department' => $artwork->getDepartment(),
             'price' => $artwork->getPurchasePrice(),
             'productionYear' => $artwork->getProductionYear(),
             'estimatedValue' => $artwork->getAssessmentPrice(),
-            'estimatedValueDate' => $artwork->getAssessmentDate()->format('d/m Y'),
+            'estimatedValueDate' => $artwork->getAssessmentDate() ? $artwork->getAssessmentDate()->format('d/m Y') : null,
         ];
     }
 
@@ -172,8 +175,11 @@ class FrontendController extends AbstractController
         $height = $artwork->getHeight();
 
         // @TODO: Include depth, diameter and weight in string.
+        if (null === $width || null === $height) {
+            return null;
+        }
 
-        return sprintf('%d X %d', $width, $height);
+        return sprintf('%d x %d', $width, $height);
     }
 
     /**
