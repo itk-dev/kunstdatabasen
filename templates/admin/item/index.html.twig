@@ -8,7 +8,7 @@
             <h1 class="h4">{{ headline|trans }}</h1>
         </div>
         <div class="col-auto">
-            <a class="btn btn-sm btn-outline-primary float-right" href="{{ path('item_new', {type: 'artwork'}) }}" role="button"><i class="fas fa-plus-circle mr-1"></i>{{ 'admin.index.new'|trans }}</a>
+            <a class="btn btn-sm btn-outline-primary float-right" href="{{ path('item_new', {itemType: itemType}) }}" role="button"><i class="fas fa-plus-circle mr-1"></i>{{ 'admin.index.new'|trans }}</a>
         </div>
         <div class="col-12">
             {% include "admin/item/_filters.html.twig" %}

@@ -10,9 +10,7 @@
             {{ form_row(form.organization) }}
         </div>
         <div class="col-md-4">
-            {# TODO: Add status eg. avalibility #}
-            Status
-            {# {{ form_row(form.status) }} #}
+            {{ form_row(form.status) }}
         </div>
         <div class="col-md-12">
             {{ form_row(form.name) }}
@@ -21,6 +19,7 @@
             {{ form_row(form.description) }}
         </div>
     </div>
+    {% if itemType == 'artwork' %}
     <div class="row mt-5">
         <div class="col-md-12 mb-3">
             <h2 class="h5">{{ 'Art'|trans }}</h2>
@@ -45,6 +44,7 @@
             {{ form_row(form.assessmentPrice) }}
         </div>
     </div>
+    {% endif %}
     <div class="row mt-5">
         <div class="col-md-12 mb-3">
             <h2 class="h5">{{ 'Placement'|trans }}</h2>
@@ -71,6 +71,7 @@
             {{ form_row(form.publiclyAccessible) }}
         </div>
     </div>
+    {% if itemType == 'artwork' %}
     <div class="row mt-5">
         <div class="col-md-12 mb-3">
             <h2 class="h5">{{ 'Attributes'|trans }}</h2>
@@ -91,6 +92,7 @@
             {{ form_row(form.weight) }}
         </div>
     </div>
+    {% endif %}
     <div class="row mt-5">
         <div class="col-md-12 mb-3">
             <h2 class="h5">{{ 'Images'|trans }}</h2>
@@ -118,7 +120,7 @@
         </div>
     </div>
     <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-white">
-        <a class="text-small" href="{{ path('item_index') }}"><i class="fas fa-arrow-left mr-1"></i>{{ 'Værker'|trans }}</a>
+        <a class="text-small" href="{{ indexLink }}"><i class="fas fa-arrow-left mr-1"></i>{{ 'Værker'|trans }}</a>
         <div class="ml-auto">
             <button class="btn btn-primary px-5">{{ button_label|default('Save') }}</button>
         </div>

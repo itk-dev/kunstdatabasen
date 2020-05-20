@@ -13,6 +13,7 @@ use App\Service\TagService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -51,8 +52,18 @@ class ArkworkType extends AbstractType
             ->add('artSerial')
             ->add('purchasePrice')
             ->add('productionYear')
-            ->add('assessmentDate')
+            ->add('assessmentDate', DateTimeType::class, [
+                'html5' => true,
+                'widget' => 'single_text',
+            ])
             ->add('assessmentPrice')
+            ->add('status', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'tag-select-edit',
+                ],
+                'choices' => $this->tagService->getChoices($classname, 'status'),
+                'required' => false,
+            ])
             ->add('building', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
