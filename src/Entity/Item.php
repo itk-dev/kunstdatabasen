@@ -125,6 +125,26 @@ class Item
     private $inventoryId;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $purchasePlace;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $purchaseDate;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $purchasedBy;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $barcode;
+
+    /**
      * Artwork constructor.
      */
     public function __construct()
@@ -517,6 +537,86 @@ class Item
     public function setInventoryId(?int $inventoryId): self
     {
         $this->inventoryId = $inventoryId;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPurchasePlace(): ?string
+    {
+        return $this->purchasePlace;
+    }
+
+    /**
+     * @param string|null $purchasePlace
+     *
+     * @return $this
+     */
+    public function setPurchasePlace(?string $purchasePlace): self
+    {
+        $this->purchasePlace = $purchasePlace;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getPurchaseDate(): ?\DateTimeInterface
+    {
+        return $this->purchaseDate;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $purchaseDate
+     *
+     * @return $this
+     */
+    public function setPurchaseDate(?\DateTimeInterface $purchaseDate): self
+    {
+        $this->purchaseDate = $purchaseDate;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPurchasedBy(): ?string
+    {
+        return $this->purchasedBy;
+    }
+
+    /**
+     * @param string|null $purchasedBy
+     *
+     * @return $this
+     */
+    public function setPurchasedBy(?string $purchasedBy): self
+    {
+        $this->purchasedBy = $purchasedBy;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBarcode(): ?string
+    {
+        return $this->barcode;
+    }
+
+    /**
+     * @param string|null $barcode
+     *
+     * @return $this
+     */
+    public function setBarcode(?string $barcode): self
+    {
+        $this->barcode = $barcode;
 
         return $this;
     }
