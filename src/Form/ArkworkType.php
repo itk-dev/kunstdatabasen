@@ -55,6 +55,7 @@ class ArkworkType extends AbstractType
             ->add('assessmentDate', DateTimeType::class, [
                 'html5' => true,
                 'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('assessmentPrice')
             ->add('status', ChoiceType::class, [

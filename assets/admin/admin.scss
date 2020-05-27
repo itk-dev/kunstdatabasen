@@ -15,11 +15,9 @@
 @import '~bootstrap/scss/nav';
 @import '~bootstrap/scss/navbar';
 
-@import '~select2/src/scss/core';
-
 // Toggle button texts with collapse
 
-[aria-expanded='false'] {
+button[aria-expanded='false'] {
   .true {
     display: none;
   }
@@ -29,7 +27,7 @@
   }
 }
 
-[aria-expanded='true'] {
+button[aria-expanded='true'] {
   .true {
     display: inline;
   }

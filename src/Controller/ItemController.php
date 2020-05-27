@@ -203,7 +203,7 @@ class ItemController extends BaseController
             $entityManager->persist($item);
             $entityManager->flush();
 
-            return $this->redirectToRoute('item_index', ['itemType' => $itemType]);
+            return $this->redirectToRoute('item_list', ['itemType' => $itemType]);
         }
 
         return $this->render(
@@ -244,7 +244,7 @@ class ItemController extends BaseController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('item_index', ['itemType' => $itemType]);
+            return $this->redirectToRoute('item_list', ['itemType' => $itemType]);
         }
 
         return $this->render(

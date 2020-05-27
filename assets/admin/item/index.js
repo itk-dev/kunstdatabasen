@@ -22,3 +22,5 @@ library.add(
     faTimes
 );
 dom.watch();
+
+import '../../partials/initSelect2';

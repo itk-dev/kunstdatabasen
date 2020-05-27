@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Artwork;
+use App\Repository\ArtworkRepository;
 use App\Repository\ItemRepository;
 use App\Service\TagService;
 use Knp\Component\Pager\PaginatorInterface;
@@ -45,12 +46,12 @@ class FrontendController extends AbstractController
      * @Route("/", name="frontend_index")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ItemRepository            $itemRepository
+     * @param \App\Repository\ArtworkRepository         $artworkRepository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(Request $request, ItemRepository $itemRepository, PaginatorInterface $paginator)
+    public function index(Request $request, ArtworkRepository $artworkRepository, PaginatorInterface $paginator)
     {
         $form = $this->getSearchForm();
 
@@ -62,8 +63,7 @@ class FrontendController extends AbstractController
             $width = null !== $data['width'] ? json_decode($data['width']) : null;
             $height = null !== $data['height'] ? json_decode($data['height']) : null;
 
-            $query = $itemRepository->getQuery(
-                Artwork::class,
+            $query = $artworkRepository->getQuery(
                 $data['search'],
                 $data['type'],
                 null,
@@ -76,9 +76,7 @@ class FrontendController extends AbstractController
                 $height->max ?? null
             );
         } else {
-            $query = $itemRepository->getQuery(
-                Artwork::class
-            );
+            $query = $artworkRepository->getQuery();
         }
 
         $pagination = $paginator->paginate(
@@ -104,7 +102,7 @@ class FrontendController extends AbstractController
     }
 
     /**
-     * @Route("/artwork/{id}", name="frontend_artwork_show", methods={"GET"})
+     * @Route("/{id}", name="frontend_artwork_show", methods={"GET"})
      *
      * @param \App\Entity\Artwork $artwork
      *
