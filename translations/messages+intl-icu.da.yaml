@@ -62,6 +62,7 @@ item.list.artwork: 'Alle kunstværker'
 item.list.furniture: 'Alt inventar'
 admin.index.new_artwork: Tilføj kunstværk
 admin.index.new_furniture: Tilføj inventar
+admin.item.delete: Slet dette værk
 admin.item.delete_confirm: Er du sikker på at du vil slette dette?
 action.edit_item: Redigér
 action.close: Luk
@@ -72,7 +73,7 @@ item.form.placement: Placering
 item.form.attributes: Attributter
 item.form.images: Billeder
 item.form.extra: Ekstra
-item.form.list: Liste
+item.form.list: Tilbage til listen
 title: Aarhus Kommunes kunstdatabase
 admin.index: Forside
 admin.item.edit: Redigér
