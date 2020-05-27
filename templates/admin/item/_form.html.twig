@@ -97,6 +97,7 @@
             <h2 class="h5">{{ 'item.form.images'|trans }}</h2>
         </div>
         <div class="col-md-12">
+            {{ form_row(form.images) }}
             <ul class="images list-unstyled" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
                 {% for image in form.images %}
                     <li class="media">{{ form_row(image) }}</li>
