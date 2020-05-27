@@ -100,13 +100,14 @@ class ItemController extends BaseController
     /**
      * @Route("/list/{itemType}", name="item_list", methods={"GET"})
      *
-     * @param string $itemType
+     * @param string                                    $itemType
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ItemRepository $itemRepository
-     * @param \App\Repository\ArtworkRepository $artworkRepository
-     * @param \Knp\Component\Pager\PaginatorInterface $paginator
+     * @param \App\Repository\ItemRepository            $itemRepository
+     * @param \App\Repository\ArtworkRepository         $artworkRepository
+     * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      * @throws \Exception
      */
     public function list(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository, PaginatorInterface $paginator): Response

@@ -47,13 +47,13 @@ class ArkworkType extends AbstractType
 
         $builder
             ->add('name', null, [
-                'label' => 'item.name'
+                'label' => 'item.name',
             ])
             ->add('description', null, [
-                'label' => 'item.description'
+                'label' => 'item.description',
             ])
             ->add('purchasePrice', null, [
-                'label' => 'item.purchase_price'
+                'label' => 'item.purchase_price',
             ])
             ->add('status', ChoiceType::class, [
                 'attr' => [
@@ -120,16 +120,16 @@ class ArkworkType extends AbstractType
                 'label' => 'item.city',
             ])
             ->add('postalCode', null, [
-                'label' => 'item.postal_code'
+                'label' => 'item.postal_code',
             ])
             ->add('publiclyAccessible', null, [
-                'label' => 'item.publicly_accessible'
+                'label' => 'item.publicly_accessible',
             ])
             ->add('geo', null, [
-                'label' => 'item.geo'
+                'label' => 'item.geo',
             ])
             ->add('comment', null, [
-                'label' => 'item.comment'
+                'label' => 'item.comment',
             ])
             ->add(
                 'images',
@@ -143,17 +143,17 @@ class ArkworkType extends AbstractType
                     'allow_add' => true,
                     'allow_delete' => true,
                     'by_reference' => false,
-                    'label' => 'item.images'
+                    'label' => 'item.images',
                 ]
             )
             ->add('artist', null, [
-                'label' => 'item.artist'
+                'label' => 'item.artist',
             ])
             ->add('artSerial', null, [
-                'label' => 'item.art_serial'
+                'label' => 'item.art_serial',
             ])
             ->add('productionYear', null, [
-                'label' => 'item.production_year'
+                'label' => 'item.production_year',
             ])
             ->add('assessmentDate', DateTimeType::class, [
                 'html5' => true,
@@ -165,19 +165,19 @@ class ArkworkType extends AbstractType
                 'label' => 'item.assessment_price',
             ])
             ->add('width', null, [
-                'label' => 'item.width'
+                'label' => 'item.width',
             ])
             ->add('height', null, [
-                'label' => 'item.height'
+                'label' => 'item.height',
             ])
             ->add('depth', null, [
-                'label' => 'item.depth'
+                'label' => 'item.depth',
             ])
             ->add('diameter', null, [
-                'label' => 'item.diameter'
+                'label' => 'item.diameter',
             ])
             ->add('weight', null, [
-                'label' => 'item.weight'
+                'label' => 'item.weight',
             ]);
 
         // Allow for new options from the user.

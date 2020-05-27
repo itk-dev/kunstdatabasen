@@ -13,7 +13,6 @@ use App\Service\TagService;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -47,13 +46,13 @@ class FurnitureType extends AbstractType
 
         $builder
             ->add('name', null, [
-                'label' => 'item.name'
+                'label' => 'item.name',
             ])
             ->add('description', null, [
-                'label' => 'item.description'
+                'label' => 'item.description',
             ])
             ->add('purchasePrice', null, [
-                'label' => 'item.purchase_price'
+                'label' => 'item.purchase_price',
             ])
             ->add('status', ChoiceType::class, [
                 'attr' => [
@@ -120,16 +119,16 @@ class FurnitureType extends AbstractType
                 'label' => 'item.city',
             ])
             ->add('postalCode', null, [
-                'label' => 'item.postal_code'
+                'label' => 'item.postal_code',
             ])
             ->add('publiclyAccessible', null, [
-                'label' => 'item.publicly_accessible'
+                'label' => 'item.publicly_accessible',
             ])
             ->add('geo', null, [
-                'label' => 'item.geo'
+                'label' => 'item.geo',
             ])
             ->add('comment', null, [
-                'label' => 'item.comment'
+                'label' => 'item.comment',
             ])
             ->add(
                 'images',
@@ -143,7 +142,7 @@ class FurnitureType extends AbstractType
                     'allow_add' => true,
                     'allow_delete' => true,
                     'by_reference' => false,
-                    'label' => false
+                    'label' => false,
                 ]
             )
             ->add('barcode', null, [
