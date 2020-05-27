@@ -77,3 +77,5 @@ title: Aarhus Kommunes kunstdatabase
 admin.index: Forside
 admin.item.edit: Redigér
 admin.item.new: Opret nyt
+admin.index.help: Hjælp og vejledning
+admin.index.help.github: Github kildekode
