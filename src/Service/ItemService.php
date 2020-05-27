@@ -125,46 +125,71 @@ class ItemService
 
             $unMappable = [];
 
+            $barcode = !empty($entry[20]) ? str_pad($entry[20], 5, '0', STR_PAD_LEFT) : null;
+
             if ('Kunst' === $entry[0]) {
                 $item = new Artwork();
                 $item->setName($entry[3]);
+                $item->setType($entry[7]);
+
                 $item->setArtist($entry[4]);
                 $item->setProductionYear($entry[5]);
                 $item->setAssessmentPrice($entry[8]);
-                $item->setType($entry[7]);
                 $item->setArtSerial($entry[9]);
 
                 // Parse ART_DIMENSION.
-                $entryDimensions = $entry[6];
-                $pattern = '/(\d*)x(\d*)$/';
-                $match = preg_match($pattern, $entryDimensions, $matches);
-                if ($match && 3 === \count($matches)) {
-                    $item->setWidth($matches[1]);
-                    $item->setHeight($matches[2]);
-                } elseif ('' !== $entry[6]) {
-                    $unMappable[] = sprintf('ART_DIMENSION: %s', $entryDimensions);
-                }
+                $entryDimensions = strtolower($entry[6]);
+                $split = explode('x', $entryDimensions);
 
-                $unMappable['CUSTOM_1'] = $entry[10];
-                $unMappable['CUSTOM_2'] = $entry[11];
-                $unMappable['CUSTOM_4'] = $entry[12];
+                if (\count($split) > 1) {
+                    $width = trim($split[0]);
+
+                    if (is_numeric($width)) {
+                        $item->setWidth($width);
+                    }
+
+                    $height = trim($split[1]);
+
+                    if (is_numeric($height)) {
+                        $item->setHeight($height);
+                    }
+
+                    if (3 === \count($split)) {
+                        $depth = trim($split[2]);
+
+                        if (is_numeric($depth)) {
+                            $item->setDepth($depth);
+                        }
+                    }
+                } else {
+                    !empty($entryDimensions) && $unMappable[] = sprintf('ART_DIMENSION: %s', $entryDimensions);
+                }
             } elseif ('Inventar' === $entry[0]) {
                 $item = new Furniture();
-                $item->setName($entry[19]);
+                $item->setType($entry[19]);
 
-                $unMappable[] = sprintf('BARCODE: %s', $entry[20]);
-                $unMappable[] = sprintf('INV_USER: %s', $entry[21]);
+                // Set name to barcode.
+                $item->setName($barcode);
+
+                !empty($entry[21]) && $unMappable[] = sprintf('INV_USER: %s', $entry[21]);
             }
 
             if (null !== $item) {
+                $item->setBarcode($barcode);
                 $item->setInventoryId($entry[1]);
                 $item->setPurchasePrice($entry[21]);
+                $item->setPurchasePlace($entry[12]);
+                !empty($entry[11]) && $item->setPurchaseDate(\DateTime::createFromFormat('Y', $entry[11]));
+                $item->setPurchasedBy($entry[10]);
                 $item->setDepartment($entry[13]);
                 $item->setBuilding($entry[15]);
+                $item->setRoom($entry[14]);
 
                 $item->setComment($entry[16].(\count($unMappable) > 0 ? "\n\nFrom import:\n".implode("\n - ", $unMappable) : ''));
 
                 $this->entityManager->persist($item);
+                $this->entityManager->flush();
+                $this->entityManager->clear();
             }
         }
 
