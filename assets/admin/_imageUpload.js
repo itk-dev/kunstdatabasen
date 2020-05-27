@@ -1,5 +1,5 @@
 let collectionHolder;
-const addButton = $('<button type="button" class="btn btn-primary btn-sm add_link">Add image</button>');
+const addButton = $('<button type="button" class="btn btn-success add_link px-5">Add image</button>');
 const addNewLink = $('<li></li>').append(addButton);
 
 jQuery(document).ready(function () {

@@ -26,22 +26,29 @@
 {%- endblock -%}
 
 {%- block vich_image_widget -%}
-    <div class="vich-image">
-        {{- form_widget(form.file) -}}
-        {%- if form.delete is defined -%}
-            {{- form_row(form.delete) -}}
-        {%- endif -%}
+    <div class="row vich-image">
+        <div class="col-4">
+            {%- if image_uri -%}
+                <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
+                    <img class="img-fluid" src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="" />
+                </a>
+            {%- endif -%}
+        </div>
+        <div class="col">
+            {{- form_widget(form.file) -}}
+            <p>TODO: Remove "form.label.delete" checkbox</p>
+            {%- if form.delete is defined -%}
+                {{- form_row(form.delete) -}}
 
-        {%- if image_uri -%}
-            <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" download>
-                <img src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="" />
-            </a>
-        {%- endif -%}
-        {%- if download_uri -%}
-            <a href="{{ asset_helper is same as(true) ? asset(download_uri) : download_uri }}" download>
-                {{ translation_domain is same as(false) ? download_label : download_label|trans({}, translation_domain) }}
-            </a>
-        {%- endif -%}
+            {%- endif -%}
+
+            {%- if download_uri -%}
+                <a href="{{ asset_helper is same as(true) ? asset(download_uri) : download_uri }}" download class="btn btn-dark btn-sm">
+                    {{ translation_domain is same as(false) ? download_label : download_label|trans({}, translation_domain) }}
+                </a>
+            {%- endif -%}
+            <p>TODO: move "Primary image" checkbox and "Remove image" button in here</p>
+        </div>
     </div>
 {%- endblock -%}
 
