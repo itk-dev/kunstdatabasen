@@ -13,6 +13,7 @@ use App\Entity\Furniture;
 use App\Entity\Item;
 use App\Form\ArkworkType;
 use App\Form\FurnitureType;
+use App\Repository\ArtworkRepository;
 use App\Repository\ItemRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -99,16 +100,19 @@ class ItemController extends BaseController
     /**
      * @Route("/list/{itemType}", name="item_list", methods={"GET"})
      *
-     * @param string                                    $itemType
+     * @param string $itemType
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ItemRepository            $itemRepository
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator
+     * @param \App\Repository\ItemRepository $itemRepository
+     * @param \App\Repository\ArtworkRepository $artworkRepository
+     * @param \Knp\Component\Pager\PaginatorInterface $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    public function list(string $itemType, Request $request, ItemRepository $itemRepository, PaginatorInterface $paginator): Response
+    public function list(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository, PaginatorInterface $paginator): Response
     {
-        $form = $this->getSearchForm();
+        $parameters = [];
+        $parameters['display_advanced_filters'] = false;
 
         switch ($itemType) {
             case 'artwork':
@@ -122,6 +126,8 @@ class ItemController extends BaseController
                 break;
         }
 
+        $form = $this->getSearchForm($itemTypeClass);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -130,21 +136,44 @@ class ItemController extends BaseController
             $width = null !== $data['width'] ? json_decode($data['width']) : null;
             $height = null !== $data['height'] ? json_decode($data['height']) : null;
 
-            $query = $itemRepository->getQuery(
-                $itemTypeClass,
-                $data['search'],
-                $data['type'],
-                null,
-                $data['building'],
-                $data['yearFrom'],
-                $data['yearTo'],
-                $width->min ?? null,
-                $width->max ?? null,
-                $height->min ?? null,
-                $height->max ?? null
-            );
+            switch ($itemType) {
+                case 'artwork':
+                    $query = $artworkRepository->getQuery(
+                        $data['search'],
+                        $data['type'],
+                        null,
+                        $data['building'],
+                        $data['yearFrom'],
+                        $data['yearTo'],
+                        $width->min ?? null,
+                        $width->max ?? null,
+                        $height->min ?? null,
+                        $height->max ?? null
+                    );
+                    break;
+                case 'furniture':
+                default:
+                    $query = $itemRepository->getQuery(
+                        $itemTypeClass,
+                        $data['search'],
+                        $data['type'],
+                        null,
+                        $data['building']
+                    );
+            }
+
+            if (null !== $data['width'] || null !== $data['height'] || null !== $data['yearFrom'] || null !== $data['yearTo']) {
+                $parameters['display_advanced_filters'] = true;
+            }
         } else {
-            $query = $itemRepository->getQuery($itemTypeClass);
+            switch ($itemType) {
+                case 'artwork':
+                    $query = $artworkRepository->getQuery();
+                    break;
+                case 'furniture':
+                default:
+                    $query = $itemRepository->getQuery($itemTypeClass);
+            }
         }
 
         $pagination = $paginator->paginate(
@@ -159,15 +188,15 @@ class ItemController extends BaseController
             $items[] = $this->itemService->itemToRenderObject($item);
         }
 
+        $parameters['items'] = $items;
+        $parameters['supportMail'] = $this->supportMail;
+        $parameters['headline'] = 'item.list.'.$itemType;
+        $parameters['itemType'] = $itemType;
+        $parameters['form'] = $form->createView();
+
         return $this->render(
             'admin/item/index.html.twig',
-            [
-                'items' => $items,
-                'supportMail' => $this->supportMail,
-                'headline' => 'item.list.'.$itemType,
-                'itemType' => $itemType,
-                'form' => $form->createView(),
-            ]
+            $parameters
         );
     }
 
@@ -303,12 +332,14 @@ class ItemController extends BaseController
     /**
      * Create search form.
      *
+     * @param string $classname
+     *
      * @return \Symfony\Component\Form\FormInterface
      */
-    private function getSearchForm()
+    private function getSearchForm($classname = Artwork::class)
     {
-        $typeChoices = $this->tagService->getChoices(Artwork::class, 'type');
-        $buildingChoices = $this->tagService->getChoices(Artwork::class, 'building');
+        $typeChoices = $this->tagService->getChoices($classname, 'type');
+        $buildingChoices = $this->tagService->getChoices($classname, 'building');
 
         $formBuilder = $this->createFormBuilder();
         $formBuilder
