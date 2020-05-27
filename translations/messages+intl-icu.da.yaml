@@ -111,3 +111,6 @@ item.postal_code: Postnummer
 item.city: By
 item.barcode: Stregkode
 admin.item.delete: Slet
+item.depth: Dybde
+item.diameter: Diameter
+item.weight: Vægt
