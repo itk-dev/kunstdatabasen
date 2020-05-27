@@ -62,21 +62,57 @@ item.list.artwork: 'Alle kunstværker'
 item.list.furniture: 'Alt inventar'
 admin.index.new_artwork: Tilføj kunstværk
 admin.index.new_furniture: Tilføj inventar
-admin.item.delete: Slet dette værk
 admin.item.delete_confirm: Er du sikker på at du vil slette dette?
 action.edit_item: Redigér
 action.close: Luk
-action.create_new_item: Opret nyt
+action.create_new_item: 'Opret nyt'
 item.form.common: Generelt
 item.form.art: Kunst
 item.form.placement: Placering
 item.form.attributes: Attributter
 item.form.images: Billeder
 item.form.extra: Ekstra
-item.form.list: Tilbage til listen
 title: Aarhus Kommunes kunstdatabase
 admin.index: Forside
 admin.item.edit: Redigér
 admin.item.new: Opret nyt
 admin.index.help: Hjælp og vejledning
 admin.index.help.github: Github kildekode
+item.form.list: Liste
+frontend.no_title: '-- Uden titel --'
+'Aarhus Kommunes kunstdatabase': '__Aarhus Kommunes kunstdatabase'
+'Aarhus Kommunes Byvåben': '__Aarhus Kommunes Byvåben'
+'Side navigation': '__Side navigation'
+Forrige: __Forrige
+Næste: __Næste
+Kunstdatabasen: __Kunstdatabasen
+'Sign in': '__Sign in'
+item.comment: Kommentarer
+item.name: Titel
+item.artist: Kunstner
+item.type: Type
+item.width: Bredde
+item.height: Højde
+item.description: Beskrivelse
+item.location: Placering
+item.department: Afdeling
+item.building: Bygning
+item.geo: Geo
+item.art_serial: Art.No.
+item.category: Kategori
+item.purchase_price: Indkøbspris
+item.production_year: Produktionsår
+item.assessment_price: Vurderingspris
+item.assessment_date: Vurderingsdato
+item.organization: Organisation
+item.status: Status
+item.room: Lokale
+item.address: Adresse
+item.publicly_accessible: Offentligt tilgængeligt
+item.postal_code: Postnummer
+item.city: By
+item.barcode: Stregkode
+admin.item.delete: Slet
+item.depth: Dybde
+item.diameter: Diameter
+item.weight: Vægt

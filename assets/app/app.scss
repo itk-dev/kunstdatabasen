@@ -10,29 +10,7 @@
 @import '~bootstrap/scss/images';
 @import '~bootstrap/scss/navbar';
 
-@import '~select2/src/scss/core';
-
-// Toggle button texts with collapse
-
-[aria-expanded='false'] {
-  .true {
-    display: none;
-  }
-
-  :not(.true) {
-    display: inline;
-  }
-}
-
-[aria-expanded='true'] {
-  .true {
-    display: inline;
-  }
-
-  :not(.true) {
-    display: none;
-  }
-}
+@import '../partials/toggle-button';
 
 // Table styling
 

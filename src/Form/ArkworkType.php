@@ -46,23 +46,22 @@ class ArkworkType extends AbstractType
         $classname = \get_class($artwork);
 
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('artist')
-            ->add('artSerial')
-            ->add('purchasePrice')
-            ->add('productionYear')
-            ->add('assessmentDate', DateTimeType::class, [
-                'html5' => true,
-                'widget' => 'single_text',
+            ->add('name', null, [
+                'label' => 'item.name',
             ])
-            ->add('assessmentPrice')
+            ->add('description', null, [
+                'label' => 'item.description',
+            ])
+            ->add('purchasePrice', null, [
+                'label' => 'item.purchase_price',
+            ])
             ->add('status', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
                 ],
                 'choices' => $this->tagService->getChoices($classname, 'status'),
                 'required' => false,
+                'label' => 'item.status',
             ])
             ->add('building', ChoiceType::class, [
                 'attr' => [
@@ -70,6 +69,7 @@ class ArkworkType extends AbstractType
                 ],
                 'choices' => $this->tagService->getChoices($classname, 'building'),
                 'required' => false,
+                'label' => 'item.building',
             ])
             ->add('organization', ChoiceType::class, [
                 'attr' => [
@@ -77,6 +77,7 @@ class ArkworkType extends AbstractType
                 ],
                 'choices' => $this->tagService->getChoices($classname, 'organization'),
                 'required' => false,
+                'label' => 'item.organization',
             ])
             ->add('type', ChoiceType::class, [
                 'attr' => [
@@ -84,6 +85,7 @@ class ArkworkType extends AbstractType
                 ],
                 'choices' => $this->tagService->getChoices($classname, 'type'),
                 'required' => false,
+                'label' => 'item.type',
             ])
             ->add('address', ChoiceType::class, [
                 'attr' => [
@@ -91,6 +93,7 @@ class ArkworkType extends AbstractType
                 ],
                 'choices' => $this->tagService->getChoices($classname, 'address'),
                 'required' => false,
+                'label' => 'item.address',
             ])
             ->add('location', ChoiceType::class, [
                 'attr' => [
@@ -98,6 +101,7 @@ class ArkworkType extends AbstractType
                 ],
                 'choices' => $this->tagService->getChoices($classname, 'location'),
                 'required' => false,
+                'label' => 'item.location',
             ])
             ->add('room', ChoiceType::class, [
                 'attr' => [
@@ -105,6 +109,7 @@ class ArkworkType extends AbstractType
                 ],
                 'choices' => $this->tagService->getChoices($classname, 'room'),
                 'required' => false,
+                'label' => 'item.room',
             ])
             ->add('city', ChoiceType::class, [
                 'attr' => [
@@ -112,16 +117,20 @@ class ArkworkType extends AbstractType
                 ],
                 'choices' => $this->tagService->getChoices($classname, 'city'),
                 'required' => false,
+                'label' => 'item.city',
             ])
-            ->add('postalCode')
-            ->add('width')
-            ->add('height')
-            ->add('depth')
-            ->add('diameter')
-            ->add('weight')
-            ->add('publiclyAccessible')
-            ->add('geo')
-            ->add('comment')
+            ->add('postalCode', null, [
+                'label' => 'item.postal_code',
+            ])
+            ->add('publiclyAccessible', null, [
+                'label' => 'item.publicly_accessible',
+            ])
+            ->add('geo', null, [
+                'label' => 'item.geo',
+            ])
+            ->add('comment', null, [
+                'label' => 'item.comment',
+            ])
             ->add(
                 'images',
                 CollectionType::class,
@@ -134,8 +143,42 @@ class ArkworkType extends AbstractType
                     'allow_add' => true,
                     'allow_delete' => true,
                     'by_reference' => false,
+                    'label' => 'item.images',
                 ]
-            );
+            )
+            ->add('artist', null, [
+                'label' => 'item.artist',
+            ])
+            ->add('artSerial', null, [
+                'label' => 'item.art_serial',
+            ])
+            ->add('productionYear', null, [
+                'label' => 'item.production_year',
+            ])
+            ->add('assessmentDate', DateTimeType::class, [
+                'html5' => true,
+                'widget' => 'single_text',
+                'required' => false,
+                'label' => 'item.assessment_date',
+            ])
+            ->add('assessmentPrice', null, [
+                'label' => 'item.assessment_price',
+            ])
+            ->add('width', null, [
+                'label' => 'item.width',
+            ])
+            ->add('height', null, [
+                'label' => 'item.height',
+            ])
+            ->add('depth', null, [
+                'label' => 'item.depth',
+            ])
+            ->add('diameter', null, [
+                'label' => 'item.diameter',
+            ])
+            ->add('weight', null, [
+                'label' => 'item.weight',
+            ]);
 
         // Allow for new options from the user.
         $builder->get('building')->resetViewTransformers();

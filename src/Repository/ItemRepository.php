@@ -39,16 +39,10 @@ class ItemRepository extends ServiceEntityRepository
      * @param string|null $type
      * @param string|null $category
      * @param string|null $building
-     * @param int|null    $yearFrom
-     * @param int|null    $yearTo
-     * @param int|null    $minWidth
-     * @param int|null    $maxWidth
-     * @param int|null    $minHeight
-     * @param int|null    $maxHeight
      *
      * @return \Doctrine\ORM\Query
      */
-    public function getQuery(string $itemType = null, string $search = null, string $type = null, string $category = null, string $building = null, int $yearFrom = null, int $yearTo = null, int $minWidth = null, int $maxWidth = null, int $minHeight = null, int $maxHeight = null): Query
+    public function getQuery(string $itemType = null, string $search = null, string $type = null, string $category = null, string $building = null): Query
     {
         $qb = $this->createQueryBuilder('e');
         null !== $itemType && $qb->andWhere('e INSTANCE OF :itemType')->setParameter('itemType', $this->getEntityManager()->getClassMetadata($itemType));
@@ -56,8 +50,6 @@ class ItemRepository extends ServiceEntityRepository
         null !== $type && $qb->andWhere('e.type = :type')->setParameter('type', $type);
         null !== $category && $qb->andWhere('e.category = :category')->setParameter('category', $category);
         null !== $building && $qb->andWhere('e.building = :building')->setParameter('building', $building);
-        null !== $yearFrom && $qb->andWhere('e.productionYear >= :yearFrom')->setParameter('yearFrom', $yearFrom);
-        null !== $yearTo && $qb->andWhere('e.productionYear <= :yearTo')->setParameter('yearTo', $yearTo);
 
         return $qb->getQuery();
     }
