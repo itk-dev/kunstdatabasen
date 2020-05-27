@@ -80,8 +80,8 @@ admin.index.help: Hjælp og vejledning
 admin.index.help.github: Github kildekode
 item.form.list: Liste
 frontend.no_title: '-- Uden titel --'
-'Aarhus Kommunes kunstdatabase': '__Aarhus Kommunes kunstdatabase'
-'Aarhus Kommunes Byvåben': '__Aarhus Kommunes Byvåben'
+'Aarhus Kommunes kunstdatabase': 'Aarhus Kommunes kunstdatabase'
+'Aarhus Kommunes Byvåben': 'Aarhus Kommunes Byvåben'
 'Side navigation': '__Side navigation'
 Forrige: __Forrige
 Næste: __Næste
