@@ -10,7 +10,6 @@ namespace App\Controller;
 
 use App\Entity\Artwork;
 use App\Repository\ArtworkRepository;
-use App\Repository\ItemRepository;
 use App\Service\TagService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,6 +52,9 @@ class FrontendController extends AbstractController
      */
     public function index(Request $request, ArtworkRepository $artworkRepository, PaginatorInterface $paginator)
     {
+        $parameters = [];
+        $parameters['display_advanced_filters'] = false;
+
         $form = $this->getSearchForm();
 
         $form->handleRequest($request);
@@ -75,6 +77,10 @@ class FrontendController extends AbstractController
                 $height->min ?? null,
                 $height->max ?? null
             );
+
+            if (null !== $data['width'] || null !== $data['height'] || null !== $data['yearFrom'] || null !== $data['yearTo']) {
+                $parameters['display_advanced_filters'] = true;
+            }
         } else {
             $query = $artworkRepository->getQuery();
         }
@@ -91,13 +97,13 @@ class FrontendController extends AbstractController
             $artworks[] = $this->artworkToRenderArray($artworkEntity);
         }
 
+        $parameters['artworks'] = $artworks;
+        $parameters['pagination'] = $pagination;
+        $parameters['searchForm'] = $form->createView();
+
         return $this->render(
             'app/index.html.twig',
-            [
-                'artworks' => $artworks,
-                'pagination' => $pagination,
-                'searchForm' => $form->createView(),
-            ]
+            $parameters,
         );
     }
 

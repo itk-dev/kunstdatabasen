@@ -23,7 +23,7 @@
                     <button type="submit" class="btn btn-primary btn-block mt-md-4">{{ 'frontend.search.submit'|trans }}</button>
                 </div>
                 <div class="col-12 order-md-2">
-                    <div class="collapse" id="filtersAdvanced">
+                    <div class="collapse{% if display_advanced_filters %} show{% endif %}" id="filtersAdvanced">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn mb-3 mb-md-0 btn-block expand-button" type="button" data-toggle="collapse" data-target="#filtersAdvanced" aria-expanded="false" aria-controls="contentId">
+                    <button class="btn mb-3 mb-md-0 btn-block expand-button" type="button" data-toggle="collapse" data-target="#filtersAdvanced" aria-expanded="{{ display_advanced_filters ? 'true' : 'false' }}" aria-controls="contentId">
                         <span>{{ 'filters.show_advanced'|trans }}</span>
                         <span class="true">{{ 'filters.hide_advanced'|trans }}</span>
                     </button>

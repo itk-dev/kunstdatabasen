@@ -15,27 +15,7 @@
 @import '~bootstrap/scss/nav';
 @import '~bootstrap/scss/navbar';
 
-// Toggle button texts with collapse
-
-button[aria-expanded='false'] {
-  .true {
-    display: none;
-  }
-
-  :not(.true) {
-    display: inline;
-  }
-}
-
-button[aria-expanded='true'] {
-  .true {
-    display: inline;
-  }
-
-  :not(.true) {
-    display: none;
-  }
-}
+@import '../partials/toggle-button';
 
 .modal-body {
   label {

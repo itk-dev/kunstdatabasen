@@ -8,7 +8,6 @@
 
 namespace App\Repository;
 
-use App\Entity\Artwork;
 use App\Entity\Item;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;

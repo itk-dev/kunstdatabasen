@@ -1,7 +1,7 @@
+import './initSelect2.scss';
+
 require('select2');
 require('select2/dist/js/i18n/da');
-
-import './initSelect2.scss';
 
 $(function () {
     $(document).ready(function () {
@@ -16,7 +16,7 @@ $(function () {
             $('.tag-select').select2({
                 language: 'da_DK',
                 allowClear: true,
-                placeholder: '',
+                placeholder: ''
             });
         });
     });
