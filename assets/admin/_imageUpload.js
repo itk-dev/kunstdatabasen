@@ -1,5 +1,5 @@
 let collectionHolder;
-const addButton = $('<button type="button" class="btn btn-success add_link px-5">Add image</button>');
+const addButton = $('<button type="button" class="btn btn-success add_link px-5">Tilføj billede</button>');
 const addNewLink = $('<li></li>').append(addButton);
 
 jQuery(document).ready(function () {
@@ -13,7 +13,29 @@ jQuery(document).ready(function () {
     addButton.on('click', function (e) {
         addForm(collectionHolder, addNewLink);
     });
+
+    const inputs = $('.custom-file-input');
+    inputs.on('change', (event) => {
+        inputOnChange(event.target);
+    });
+
+    let images = $('.custom-file-label').closest('.vich-image').find('img');
+    images.each((index, el) => {
+        let element = $(el);
+        let path = element.prop('src').split('/');
+
+        if (path.length > 0) {
+            let filename = path[path.length - 1];
+            element.closest('li.media').find('.custom-file-label').html(filename);
+        }
+    });
 });
+
+function inputOnChange(target) {
+    const element = $(target);
+    const filename = element.val().replace('C:\\fakepath\\', '').trim();
+    element.parent().find('.custom-file-label').html(filename);
+}
 
 function addForm (collectionHolder, newLinkLi) {
     const prototype = collectionHolder.data('prototype');
@@ -23,14 +45,40 @@ function addForm (collectionHolder, newLinkLi) {
     collectionHolder.data('index', index + 1);
     const newFormLi = $('<li></li>').append(newForm);
     newLinkLi.before(newFormLi);
+
+    const inputs = $(newFormLi).find('.custom-file-input');
+    inputs.on('change', (event) => {
+        inputOnChange(event.target);
+        filePreview(event.target);
+    });
+
     addDeleteLink(newFormLi);
 }
 
+function filePreview(input) {
+    let target = $(input);
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            target.closest('.vich-image').find('.js-image-preview').html('<img src="'+e.target.result+'" class="img-fluid"/>');
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 function addDeleteLink (tagFormLi) {
-    const removeFormButton = $('<button type="button" class="btn btn-danger btn-sm">Remove image</button>');
-    tagFormLi.append(removeFormButton);
+    movePrimaryImage(tagFormLi);
+
+    const removeFormButton = $('<button type="button" class="btn btn-danger btn-sm">Fjern billede</button>');
+    tagFormLi.find('.image-form-details').append(removeFormButton);
 
     removeFormButton.on('click', function (e) {
         tagFormLi.remove();
     });
+}
+
+function movePrimaryImage (newFormLi) {
+    let formGroup = newFormLi.find('.js-image-primary-image').closest('.form-group').detach();
+    formGroup.addClass('mt-2');
+    newFormLi.find('.image-form-details').append(formGroup);
 }

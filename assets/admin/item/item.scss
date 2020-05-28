@@ -16,3 +16,7 @@ body {
   background-color: $gray-100;
   padding-top: $spacer * 5;
 }
+
+.custom-file-label:after {
+  content: 'Vælg'
+}

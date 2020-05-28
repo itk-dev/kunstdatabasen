@@ -82,11 +82,11 @@ item.form.list: Liste
 frontend.no_title: '-- Uden titel --'
 'Aarhus Kommunes kunstdatabase': 'Aarhus Kommunes kunstdatabase'
 'Aarhus Kommunes Byvåben': 'Aarhus Kommunes Byvåben'
-'Side navigation': '__Side navigation'
-Forrige: __Forrige
-Næste: __Næste
-Kunstdatabasen: __Kunstdatabasen
-'Sign in': '__Sign in'
+'Side navigation': 'Side navigation'
+Forrige: Forrige
+Næste: Næste
+Kunstdatabasen: Kunstdatabasen
+'Sign in': Log ind
 item.comment: Kommentarer
 item.name: Titel
 item.artist: Kunstner
@@ -116,3 +116,7 @@ admin.item.delete: Slet
 item.depth: Dybde
 item.diameter: Diameter
 item.weight: Vægt
+image.file_placeholder: Vælg fil
+image.primary_image: Primært billede
+item.images: Billeder
+frontend.item.comment: Kommentarer
