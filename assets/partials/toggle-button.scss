@@ -1,21 +1,21 @@
 /* stylelint-disable */
 // Toggle button texts with collapse
 button[aria-expanded='false'] {
-  .true {
+  > .true {
     display: none;
   }
 
-  :not(.true) {
+  > :not(.true) {
     display: inline;
   }
 }
 
 button[aria-expanded='true'] {
-  .true {
+  > .true {
     display: inline;
   }
 
-  :not(.true) {
+  > :not(.true) {
     display: none;
   }
 }
