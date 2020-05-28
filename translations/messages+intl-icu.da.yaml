@@ -60,9 +60,9 @@ admin.dashboard.new_furniture: 'Nyt inventar'
 item.list.item: 'Alle indgange'
 item.list.artwork: 'Alle kunstværker'
 item.list.furniture: 'Alt inventar'
-admin.index.new_artwork: 'Tilføj kunstværk'
-admin.index.new_furniture: 'Tilføj inventar'
-admin.item.delete_confirm: 'Er du sikker på at du vil slette dette?'
+admin.index.new_artwork: Tilføj kunstværk
+admin.index.new_furniture: Tilføj inventar
+admin.item.delete_confirm: Er du sikker på at du vil slette dette?
 action.edit_item: Redigér
 action.close: Luk
 action.create_new_item: 'Opret nyt'
@@ -72,19 +72,21 @@ item.form.placement: Placering
 item.form.attributes: Attributter
 item.form.images: Billeder
 item.form.extra: Ekstra
-item.form.list: Liste
-title: 'Aarhus Kommunes kunstdatabase'
+title: Aarhus Kommunes kunstdatabase
 admin.index: Forside
 admin.item.edit: Redigér
-admin.item.new: 'Opret nyt'
+admin.item.new: Opret nyt
+admin.index.help: Hjælp og vejledning
+admin.index.help.github: Github kildekode
+item.form.list: Liste
 frontend.no_title: '-- Uden titel --'
-'Aarhus Kommunes kunstdatabase': '__Aarhus Kommunes kunstdatabase'
-'Aarhus Kommunes Byvåben': '__Aarhus Kommunes Byvåben'
-'Side navigation': '__Side navigation'
-Forrige: __Forrige
-Næste: __Næste
-Kunstdatabasen: __Kunstdatabasen
-'Sign in': '__Sign in'
+'Aarhus Kommunes kunstdatabase': 'Aarhus Kommunes kunstdatabase'
+'Aarhus Kommunes Byvåben': 'Aarhus Kommunes Byvåben'
+'Side navigation': 'Side navigation'
+Forrige: Forrige
+Næste: Næste
+Kunstdatabasen: Kunstdatabasen
+'Sign in': Log ind
 item.comment: Kommentarer
 item.name: Titel
 item.artist: Kunstner
@@ -114,3 +116,7 @@ admin.item.delete: Slet
 item.depth: Dybde
 item.diameter: Diameter
 item.weight: Vægt
+image.file_placeholder: Vælg fil
+image.primary_image: Primært billede
+item.images: Billeder
+frontend.item.comment: Kommentarer

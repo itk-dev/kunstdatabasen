@@ -5,10 +5,9 @@
 @import '~bootstrap/scss/forms';
 @import '~bootstrap/scss/custom-forms';
 @import '~bootstrap/scss/transitions';
-@import '~bootstrap/scss/nav';
-@import '~bootstrap/scss/navbar';
 @import '~bootstrap/scss/images';
-@import '~bootstrap/scss/print';
+//@import '~bootstrap/scss/nav';
+//@import '~bootstrap/scss/navbar';
 
 @import '../../partials/toggle-button';
 
@@ -16,4 +15,8 @@
 body {
   background-color: $gray-100;
   padding-top: $spacer * 5;
+}
+
+.custom-file-label::after {
+  content: 'Vælg';
 }

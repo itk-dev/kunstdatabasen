@@ -25,8 +25,18 @@ class ImageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('imageFile', VichImageType::class)
-            ->add('primaryImage')
+            ->add('imageFile', VichImageType::class, [
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Vælg billede',
+                ],
+            ])
+            ->add('primaryImage', null, [
+                'label' => 'image.primary_image',
+                'attr' => [
+                    'class' => 'js-image-primary-image',
+                ],
+            ])
         ;
     }
 
