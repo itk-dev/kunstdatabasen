@@ -94,7 +94,7 @@
     {% endif %}
     <div class="row mt-5">
         <div class="col-md-12 mb-3">
-            <h2 class="h5">{{ 'item.form.images'|trans }}</h2>
+            <h2 class="h5">{{ form_label(form.images) }}</h2>
         </div>
         <div class="col-md-12">
             <ul class="images list-unstyled" data-prototype="{{ form_widget(form.images.vars.prototype)|e('html_attr') }}">
@@ -118,7 +118,7 @@
             {{ form_rest(form) }}
         </div>
     </div>
-    <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-white">
+    <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-white shadow-sm">
         <a class="text-small" href="{{ indexLink }}"><i class="fas fa-arrow-left mr-1"></i>{{ 'item.form.list'|trans }}</a>
         <div class="ml-auto">
             <button class="btn btn-primary px-5">{{ button_label|default('Save') }}</button>

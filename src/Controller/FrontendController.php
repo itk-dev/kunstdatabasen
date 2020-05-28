@@ -108,7 +108,7 @@ class FrontendController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="frontend_artwork_show", methods={"GET"})
+     * @Route("/display/{id}", name="frontend_artwork_show", methods={"GET"})
      *
      * @param \App\Entity\Artwork $artwork
      *

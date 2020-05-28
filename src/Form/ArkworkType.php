@@ -188,6 +188,7 @@ class ArkworkType extends AbstractType
         $builder->get('location')->resetViewTransformers();
         $builder->get('room')->resetViewTransformers();
         $builder->get('city')->resetViewTransformers();
+        $builder->get('status')->resetViewTransformers();
     }
 
     /**

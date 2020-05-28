@@ -76,6 +76,7 @@ class TaggingSubscriber implements EventSubscriber
             $city = $entity->getCity();
             $room = $entity->getRoom();
             $location = $entity->getLocation();
+            $status = $entity->getStatus();
 
             null !== $type && $this->tagService->addTag($entity, 'type', $type);
             null !== $organization && $this->tagService->addTag($entity, 'organization', $organization);
@@ -83,6 +84,7 @@ class TaggingSubscriber implements EventSubscriber
             null !== $address && $this->tagService->addTag($entity, 'address', $address);
             null !== $city && $this->tagService->addTag($entity, 'city', $city);
             null !== $room && $this->tagService->addTag($entity, 'room', $room);
+            null !== $status && $this->tagService->addTag($entity, 'status', $status);
             null !== $location && $this->tagService->addTag($entity, 'location', $location);
         }
     }
