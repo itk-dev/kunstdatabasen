@@ -1,3 +1,5 @@
+/* global FileReader */
+
 let collectionHolder;
 const addButton = $('<button type="button" class="btn btn-success add_link px-5">Tilføj billede</button>');
 const addNewLink = $('<li></li>').append(addButton);
@@ -19,19 +21,19 @@ jQuery(document).ready(function () {
         inputOnChange(event.target);
     });
 
-    let images = $('.custom-file-label').closest('.vich-image').find('img');
+    const images = $('.custom-file-label').closest('.vich-image').find('img');
     images.each((index, el) => {
-        let element = $(el);
-        let path = element.prop('src').split('/');
+        const element = $(el);
+        const path = element.prop('src').split('/');
 
         if (path.length > 0) {
-            let filename = path[path.length - 1];
+            const filename = path[path.length - 1];
             element.closest('li.media').find('.custom-file-label').html(filename);
         }
     });
 });
 
-function inputOnChange(target) {
+function inputOnChange (target) {
     const element = $(target);
     const filename = element.val().replace('C:\\fakepath\\', '').trim();
     element.parent().find('.custom-file-label').html(filename);
@@ -55,12 +57,12 @@ function addForm (collectionHolder, newLinkLi) {
     addDeleteLink(newFormLi);
 }
 
-function filePreview(input) {
-    let target = $(input);
+function filePreview (input) {
+    const target = $(input);
     if (input.files && input.files[0]) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            target.closest('.vich-image').find('.js-image-preview').html('<img src="'+e.target.result+'" class="img-fluid"/>');
+            target.closest('.vich-image').find('.js-image-preview').html('<img src="' + e.target.result + '" class="img-fluid"/>');
         };
         reader.readAsDataURL(input.files[0]);
     }
@@ -78,7 +80,7 @@ function addDeleteLink (tagFormLi) {
 }
 
 function movePrimaryImage (newFormLi) {
-    let formGroup = newFormLi.find('.js-image-primary-image').closest('.form-group').detach();
+    const formGroup = newFormLi.find('.js-image-primary-image').closest('.form-group').detach();
     formGroup.addClass('mt-2');
     newFormLi.find('.image-form-details').append(formGroup);
 }

@@ -34,8 +34,8 @@ class ImageType extends AbstractType
             ->add('primaryImage', null, [
                 'label' => 'image.primary_image',
                 'attr' => [
-                    'class' => 'js-image-primary-image'
-                ]
+                    'class' => 'js-image-primary-image',
+                ],
             ])
         ;
     }

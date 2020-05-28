@@ -17,6 +17,6 @@ body {
   padding-top: $spacer * 5;
 }
 
-.custom-file-label:after {
-  content: 'Vælg'
+.custom-file-label::after {
+  content: 'Vælg';
 }
