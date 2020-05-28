@@ -3,6 +3,7 @@
         "@fortawesome/fontawesome-svg-core": "^1.2.28",
         "@fortawesome/free-solid-svg-icons": "^5.13.0",
         "@symfony/webpack-encore": "^0.29.0",
+        "@ttskch/select2-bootstrap4-theme": "^1.4.0",
         "acorn": "^7.2.0",
         "bootstrap": "^4.4.1",
         "core-js": "^3.0.0",
