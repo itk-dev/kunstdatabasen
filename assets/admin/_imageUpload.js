@@ -62,7 +62,7 @@ function filePreview (input) {
     if (input.files && input.files[0]) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            target.closest('.vich-image').find('.js-image-preview').html('<img src="' + e.target.result + '" class="img-fluid"/>');
+            target.closest('.vich-image').find('.js-image-preview').html('<img src="' + e.target.result + '" class="img-fluid" alt="preview image"/>');
         };
         reader.readAsDataURL(input.files[0]);
     }
