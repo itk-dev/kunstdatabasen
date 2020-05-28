@@ -6,6 +6,7 @@ require('select2/dist/js/i18n/da');
 $(function () {
     $(document).ready(function () {
         $('.tag-select-edit').select2({
+            theme: 'bootstrap4',
             tags: true,
             allowClear: true,
             placeholder: 'Skriv',
@@ -14,6 +15,7 @@ $(function () {
 
         $(document).ready(function () {
             $('.tag-select').select2({
+                theme: 'bootstrap4',
                 language: 'da_DK',
                 allowClear: true,
                 placeholder: ''
