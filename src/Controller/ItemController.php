@@ -194,6 +194,7 @@ class ItemController extends BaseController
         $parameters['headline'] = 'item.list.'.$itemType;
         $parameters['itemType'] = $itemType;
         $parameters['form'] = $form->createView();
+        $parameters['pagination'] = $pagination;
 
         return $this->render(
             'admin/item/index.html.twig',

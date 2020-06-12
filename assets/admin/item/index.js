@@ -11,7 +11,7 @@ import 'bootstrap/js/dist/carousel';
 
 // Add font awesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faPalette, faSearch, faMountain, faBars, faPlusCircle, faChair, faTimes, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPalette, faSearch, faMountain, faBars, faPlusCircle, faChair, faTimes, faTimesCircle, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import '../../partials/initSelect2';
 
@@ -24,6 +24,8 @@ library.add(
     faPlusCircle,
     faChair,
     faTimes,
-    faTimesCircle
+    faTimesCircle,
+    faArrowLeft,
+    faArrowRight
 );
 dom.watch();
