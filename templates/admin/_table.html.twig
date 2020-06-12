@@ -18,7 +18,7 @@
             <tbody>
             {% for item in items %}
                 <tr>
-                    <td><a class="item-details-link" data-id="{{ item.id }}"><img src="{{ asset(item.img) }}" alt="" height="30"/></a></td>
+                    <td>{% if item.images|length > 0 %}<a class="item-details-link" data-id="{{ item.id }}"><img src="{{ asset(item.images[0]) }}" alt="" height="30"/></a>{% endif %}</td>
                     <td><a class="item-details-link" data-id="{{ item.id }}"><strong>{{ item.title ?: 'item.no_title'|trans }}</strong></a></td>
                     <td class="d-none d-md-table-cell">{{ item.artNo ?? '' }}</td>
                     <td>{{ item.building ?? '' }}</td>

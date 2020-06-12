@@ -1,98 +1,98 @@
 <div class="container">
-  <div class="row my-3">
-    <div class="col">
-      <a href="{{ indexLink ?: '' }}"><span class="text-secondary" aria-hidden="true">&laquo;</span> {{ 'frontend.back_to_list'|trans }}</a>
+    <div class="row my-3">
+        <div class="col">
+            <a href="{{ indexLink ?: '' }}"><span class="text-secondary" aria-hidden="true">&laquo;</span> {{ 'frontend.back_to_list'|trans }}</a>
+        </div>
     </div>
-  </div>
-  <div class="row art-details">
-    <div class="col-md-12 mb-3">
-      <label for="detailsTitle">{{ 'frontend.item.title'|trans }}</label>
-      <h1 id="detailsTitle">{{ data.artwork.title }}</h1>
-    </div>
-    <div class="col-md-3">
-        <div id="carouselImageIndicators" class="carousel slide" data-interval="false">
-            <div class="carousel-inner">
-                {% for image in data.artwork.images %}
-                    <div class="carousel-item{% if loop.first %} active{% endif %}">
-                        <img class="d-block w-100" src="{{ asset(image) }}" alt="Billede">
-                        <span class="js-image-full" data-src="{{ image }}">
+    <div class="row art-details">
+        <div class="col-md-12 mb-3">
+            <label for="detailsTitle">{{ 'frontend.item.title'|trans }}</label>
+            <h1 id="detailsTitle">{{ data.artwork.title }}</h1>
+        </div>
+        <div class="col-md-3">
+            <div id="carouselImageIndicators" class="carousel slide" data-interval="false">
+                <div class="carousel-inner">
+                    {% for image in data.artwork.images %}
+                        <div class="carousel-item{% if loop.first %} active{% endif %}">
+                            <img class="d-block w-100" src="{{ asset(image) }}" alt="Billede">
+                            <span class="js-image-full" data-src="{{ image }}">
                             [@TODO: insert icon]
                         </span>
-                    </div>
-                {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <a href="#carouselImageIndicators" role="button" data-slide="prev" style="color: black">
+                Previous
+            </a>
+            <span><span id="carouselImageActiveIndex">1</span> / {{ data.artwork.images|length }}</span>
+            <a href="#carouselImageIndicators" role="button" data-slide="next" style="color: black">
+                Next
+            </a>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="detailsArtist">{{ 'frontend.item.artist'|trans }}</label>
+                    <p>{{ data.artwork.artist }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsType">{{ 'frontend.item.type'|trans }}</label>
+                    <p>{{ data.artwork.type }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsDimensions">{{ 'frontend.item.dimensions'|trans }}</label>
+                    <p>{{ data.artwork.dimensions }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsDescription">{{ 'frontend.item.description'|trans }}</label>
+                    <p>{{ data.artwork.description }}</p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h2 class="h4 border-bottom pb-2">{{ 'frontend.item.location'|trans }}</h2>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsDepartment">{{ 'frontend.item.department'|trans }}</label>
+                    <p>{{ data.artwork.department }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsBuilding">{{ 'frontend.item.building'|trans }}</label>
+                    <p>{{ data.artwork.building }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsGeo">{{ 'frontend.item.geo'|trans }}</label>
+                    <p>{{ data.artwork.geo }}</p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h2 class="h4 border-bottom pb-2">{{ 'frontend.item.further_information'|trans }}</h2>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsArtNo">{{ 'frontend.item.art_serial'|trans }}</label>
+                    <p>{{ data.artwork.artNo }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsPrice">{{ 'frontend.item.purchase_price'|trans }}</label>
+                    <p>{{ data.artwork.price }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsProductionYear">{{ 'frontend.item.production_year'|trans }}</label>
+                    <p>{{ data.artwork.productionYear }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsEstimatedValue">{{ 'frontend.item.assessment_price'|trans }}</label>
+                    <p>{{ data.artwork.estimatedValue }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsEstimatedValue">{{ 'frontend.item.assessment_date'|trans }}</label>
+                    <p>{{ data.artwork.estimatedValueDate }}</p>
+                </div>
             </div>
         </div>
-        <a href="#carouselImageIndicators" role="button" data-slide="prev" style="color: black">
-            Previous
-        </a>
-        <span><span id="carouselImageActiveIndex">1</span> / {{ data.artwork.images|length }}</span>
-        <a href="#carouselImageIndicators" role="button" data-slide="next" style="color: black">
-            Next
-        </a>
     </div>
-    <div class="col-md-9">
-      <div class="row">
-        <div class="col-md-4">
-          <label for="detailsArtist">{{ 'frontend.item.artist'|trans }}</label>
-          <p>{{ data.artwork.artist }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsType">{{ 'frontend.item.type'|trans }}</label>
-          <p>{{ data.artwork.type }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsDimensions">{{ 'frontend.item.dimensions'|trans }}</label>
-          <p>{{ data.artwork.dimensions }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsDescription">{{ 'frontend.item.description'|trans }}</label>
-          <p>{{ data.artwork.description }}</p>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-12">
-          <h2 class="h4 border-bottom pb-2">{{ 'frontend.item.location'|trans }}</h2>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsDepartment">{{ 'frontend.item.department'|trans }}</label>
-          <p>{{ data.artwork.department }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsBuilding">{{ 'frontend.item.building'|trans }}</label>
-          <p>{{ data.artwork.building }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsGeo">{{ 'frontend.item.geo'|trans }}</label>
-          <p>{{ data.artwork.geo }}</p>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-12">
-          <h2 class="h4 border-bottom pb-2">{{ 'frontend.item.further_information'|trans }}</h2>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsArtNo">{{ 'frontend.item.art_serial'|trans }}</label>
-          <p>{{ data.artwork.artNo }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsPrice">{{ 'frontend.item.purchase_price'|trans }}</label>
-          <p>{{ data.artwork.price }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsProductionYear">{{ 'frontend.item.production_year'|trans }}</label>
-          <p>{{ data.artwork.productionYear }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsEstimatedValue">{{ 'frontend.item.assessment_price'|trans }}</label>
-          <p>{{ data.artwork.estimatedValue }}</p>
-        </div>
-        <div class="col-md-4">
-          <label for="detailsEstimatedValue">{{ 'frontend.item.assessment_date'|trans }}</label>
-          <p>{{ data.artwork.estimatedValueDate }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
     <div class="modal" tabindex="-1" role="dialog" id="carouselImageModal">
         <div class="modal-dialog" role="document">

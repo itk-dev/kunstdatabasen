@@ -1,11 +1,13 @@
 // Add admin styles
 import '../admin.scss';
 import '../_itemDetails.js';
+import '../../partials/imageCarousel';
 
 // Add bootstrap components
 import 'bootstrap/js/dist/modal';
 import 'bootstrap/js/dist/collapse';
 import 'bootstrap/js/dist/dropdown';
+import 'bootstrap/js/dist/carousel';
 
 // Add font awesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core';

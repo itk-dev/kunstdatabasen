@@ -1,7 +1,25 @@
 <div class="container">
     <div class="row art-details">
         <div class="col-md-3">
-            <img src="{{ asset(item.img) }}" alt="" class="img-fluid"/>
+            <div id="carouselImageIndicators" class="carousel slide" data-interval="false">
+                <div class="carousel-inner">
+                    {% for image in item.images %}
+                        <div class="carousel-item{% if loop.first %} active{% endif %}">
+                            <img class="d-block w-100" src="{{ asset(image) }}" alt="Billede">
+                            <a href="{{ image }}" target="_blank">
+                              [@TODO: insert icon]
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <a href="#carouselImageIndicators" role="button" data-slide="prev" style="color: black">
+                Previous
+            </a>
+            <span><span id="carouselImageActiveIndex">1</span> / {{ item.images|length }}</span>
+            <a href="#carouselImageIndicators" role="button" data-slide="next" style="color: black">
+                Next
+            </a>
         </div>
         <div class="col-md-9">
             <div class="row">
@@ -64,6 +82,21 @@
                 <div class="col-md-4">
                     <label for="detailsEstimatedValue">{{ 'frontend.item.assessment_date'|trans }}</label>
                     <p>{{ item.estimatedValueDate ?? '' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="carouselImageModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="carouselImageFull" src="" alt="{{ 'frontend.image_large'|trans }}">
                 </div>
             </div>
         </div>

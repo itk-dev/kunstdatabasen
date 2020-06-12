@@ -48,14 +48,14 @@ class ItemService
      */
     public function itemToRenderObject(Item $item)
     {
-        $path = '';
-        if (\count($item->getImages()) > 0) {
-            $path = $this->uploaderHelper->asset($item->getImages()[0], 'imageFile');
+        $imagePaths = [];
+        foreach ($item->getImages() as $image) {
+            $imagePaths[] = $this->uploaderHelper->asset($image, 'imageFile');
         }
 
         $renderObject = (object) [
             'id' => $item->getId(),
-            'img' => $path,
+            'images' => $imagePaths,
             'title' => $item->getName(),
             'type' => $item->getType(),
             'building' => $item->getBuilding(),
