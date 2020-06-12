@@ -149,6 +149,14 @@ class ArkworkType extends AbstractType
             ->add('artist', null, [
                 'label' => 'item.artist',
             ])
+            ->add('artistGender', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'tag-select-edit',
+                ],
+                'choices' => $this->tagService->getChoices($classname, 'artistGender'),
+                'required' => false,
+                'label' => 'item.artist_gender',
+            ])
             ->add('artSerial', null, [
                 'label' => 'item.art_serial',
             ])
@@ -189,6 +197,7 @@ class ArkworkType extends AbstractType
         $builder->get('room')->resetViewTransformers();
         $builder->get('city')->resetViewTransformers();
         $builder->get('status')->resetViewTransformers();
+        $builder->get('artistGender')->resetViewTransformers();
     }
 
     /**

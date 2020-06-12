@@ -90,6 +90,7 @@ Kunstdatabasen: Kunstdatabasen
 item.comment: Kommentarer
 item.name: Titel
 item.artist: Kunstner
+item.artist_gender: Kunstners køn
 item.type: Type
 item.width: Bredde
 item.height: Højde
@@ -120,3 +121,4 @@ image.file_placeholder: Vælg fil
 image.primary_image: Primært billede
 item.images: Billeder
 frontend.item.comment: Kommentarer
+frontend.item.artist_gender: Kunstners køn
