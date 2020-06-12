@@ -10,7 +10,7 @@
       <h1 id="detailsTitle">{{ data.artwork.title }}</h1>
     </div>
     <div class="col-md-3">
-        <div id="carouselImageIndicators" class="carousel slide">
+        <div id="carouselImageIndicators" class="carousel slide" data-interval="false">
             <div class="carousel-inner">
                 {% for image in data.artwork.images %}
                     <div class="carousel-item{% if loop.first %} active{% endif %}">
