@@ -1,3 +1,5 @@
+/* global CustomEvent */
+
 $(function () {
     $(document).ready(function () {
         const modalTitle = $('#item-details-modal-title');

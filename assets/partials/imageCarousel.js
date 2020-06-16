@@ -1,7 +1,7 @@
 import 'bootstrap/js/dist/carousel';
 
 $(function () {
-    function register() {
+    function register () {
         $('#carouselImageIndicators').on('slide.bs.carousel', event => {
             const next = $(event.relatedTarget);
             const to = next.index();
