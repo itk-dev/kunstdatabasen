@@ -1,12 +1,22 @@
+import 'bootstrap/js/dist/carousel';
+
 $(function () {
-    $(document).ready(function () {
-        $('#carouselImageIndicators').on('slide.bs.carousel', function (e) {
-            $('#carouselImageActiveIndex').text(e.to + 1);
+    function register() {
+        $('#carouselImageIndicators').on('slide.bs.carousel', event => {
+            const next = $(event.relatedTarget);
+            const to = next.index();
+            $('#carouselImageActiveIndex').text(to + 1);
         });
 
-        $('.js-image-full').on('click', function () {
+        $('.js-image-full').on('click', () => {
             $('#carouselImageFull').attr('src', $(this).data('src'));
             $('#carouselImageModal').modal();
         });
-    });
+    }
+
+    $(document).ready(register);
+
+    window.addEventListener('registerImageCarousel', function (elem) {
+        register();
+    }, false);
 });
