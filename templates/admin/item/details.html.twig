@@ -1,27 +1,34 @@
 <div class="container">
     <div class="row art-details">
-        <div class="col-md-3">
+        <div class="col-md-4">
             <div id="carouselImageIndicators" class="carousel slide" data-interval="false">
                 <div class="carousel-inner">
                     {% for image in item.images %}
-                        <div class="carousel-item{% if loop.first %} active{% endif %}">
-                            <img class="d-block w-100" src="{{ asset(image) }}" alt="Billede">
+                        <div class="carousel-item{% if loop.first %} active{% endif %} position-relative">
                             <a href="{{ image }}" target="_blank">
-                              [@TODO: insert icon]
+                                <img class="d-block w-100" src="{{ asset(image) }}" alt="Billede">
+                                <span class="position-absolute bg-dark text-light rounded-circle py-1 px-2" style="right: 1em; bottom: 0.5em;" >
+                                    <span class="sr-only">
+                                        {{ 'image-carousel.expand'|trans }}
+                                    </span>
+                                    <i class="fas fa-expand"></i>
+                                </span>
                             </a>
                         </div>
                     {% endfor %}
                 </div>
             </div>
-            <a href="#carouselImageIndicators" role="button" data-slide="prev" style="color: black">
-                Previous
-            </a>
-            <span><span id="carouselImageActiveIndex">1</span> / {{ item.images|length }}</span>
-            <a href="#carouselImageIndicators" role="button" data-slide="next" style="color: black">
-                Next
-            </a>
+            <div class="d-flex justify-content-between mt-1">
+                <a href="#carouselImageIndicators" role="button" data-slide="prev" style="color: black">
+                    <span class="sr-only">{{ 'image-carousel.previous'|trans }}</span> <i class="fas fa-arrow-alt-circle-left" aria-hidden="true"></i>
+                </a>
+                <span><span id="carouselImageActiveIndex">1</span> / {{ item.images|length }}</span>
+                <a href="#carouselImageIndicators" role="button" data-slide="next" style="color: black">
+                    <span class="sr-only">{{ 'image-carousel.next'|trans }}</span> <i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i>
+                </a>
+            </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="row">
                 <div class="col-md-4">
                     <label for="detailsArtist">{{ 'frontend.item.artist'|trans }}</label>
@@ -91,12 +98,12 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                    <button type="button" class="btn" data-dismiss="modal" aria-label="{{ 'action.close'|trans }}">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <img id="carouselImageFull" src="" alt="{{ 'frontend.image_large'|trans }}">
+                    <img class="img-fluid" id="carouselImageFull" src="" alt="{{ 'frontend.image_large'|trans }}">
                 </div>
             </div>
         </div>

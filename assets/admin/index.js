@@ -4,7 +4,7 @@ import './_itemDetails.js';
 
 // Add font awesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faPalette, faSearch, faMountain, faBars, faTimes, faChair, faTimesCircle, faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPalette, faSearch, faMountain, faBars, faTimes, faChair, faTimesCircle, faArrowLeft, faArrowRight, faExpand, faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 
 // Add bootstrap components
 import 'bootstrap/js/dist/modal';
@@ -25,6 +25,9 @@ library.add(
     faChair,
     faTimesCircle,
     faArrowLeft,
-    faArrowRight
+    faArrowRight,
+    faExpand,
+    faArrowAltCircleLeft,
+    faArrowAltCircleRight
 );
 dom.watch();
