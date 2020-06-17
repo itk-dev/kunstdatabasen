@@ -76,10 +76,18 @@ class FrontendController extends AbstractController
                 $width->max ?? null,
                 $height->min ?? null,
                 $height->max ?? null,
-                $data['artistGender'] ?? null
+                $data['artistGender'] ?? null,
+                $data['priceFrom'] ?? null,
+                $data['priceTo'] ?? null
             );
 
-            if (null !== $data['width'] || null !== $data['height'] || null !== $data['yearFrom'] || null !== $data['yearTo'] || null !== $data['artistGender']) {
+            if (null !== $data['width'] ||
+                null !== $data['height'] ||
+                null !== $data['yearFrom'] ||
+                null !== $data['yearTo'] ||
+                null !== $data['artistGender'] ||
+                null !== $data['priceFrom'] ||
+                null !== $data['priceTo']) {
                 $parameters['display_advanced_filters'] = true;
             }
         } else {
@@ -297,6 +305,28 @@ class FrontendController extends AbstractController
                     'required' => false,
                     'placeholder' => 'filter.artist_gender_placeholder',
                     'choices' => $artistGenderChoices,
+                ]
+            )
+            ->add(
+                'priceFrom',
+                NumberType::class,
+                [
+                    'label' => false,
+                    'attr' => [
+                        'placeholder' => 'filter.price_from_placeholder',
+                    ],
+                    'required' => false,
+                ]
+            )
+            ->add(
+                'priceTo',
+                NumberType::class,
+                [
+                    'label' => false,
+                    'attr' => [
+                        'placeholder' => 'filter.price_to_placeholder',
+                    ],
+                    'required' => false,
                 ]
             );
 
