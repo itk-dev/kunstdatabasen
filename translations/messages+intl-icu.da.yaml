@@ -1,6 +1,7 @@
 footer.text: 'Aarhus kommunes kunstdatabase'
 frontend.search.submit: Søg
 filters.year: År
+filters.price: Vurderingspris
 filters.show_advanced: 'Vis avancerede søgemuligheder'
 filters.hide_advanced: 'Skjul avancerede søgemuligheder'
 filter.search: 'Søg titel, art. nr. eller kunstner'
@@ -17,6 +18,8 @@ filter.height: 'Højde (cm)'
 filter.height_placeholder: 'Alle højder'
 filter.year_from_placeholder: 'Fra år'
 filter.year_to_placeholder: 'Til år'
+filter.price_from_placeholder: 'Fra pris'
+filter.price_to_placeholder: 'Til pris'
 filter.artist_gender: 'Kunstnerens køn'
 filter.artist_gender_placeholder: 'Alle køn'
 frontend.back_to_list: 'Tilbage til liste'
