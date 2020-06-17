@@ -15,7 +15,7 @@
                     {% for image in data.artwork.images %}
                         <div class="carousel-item{% if loop.first %} active{% endif %}" class="position-relative">
                             <a href="#" class="js-image-full" data-src="{{ image }}">
-                                <img class="d-block w-100" src="{{ asset(image) }}" alt="Billede">
+                                <img class="d-block w-100" src="{{ asset(image)|imagine_filter('preview') }}" alt="Billede">
                                 <span class="position-absolute bg-dark text-light rounded-circle py-1 px-2" style="right: 1em; bottom: 0.5em;" >
                                     <span class="sr-only">
                                         {{ 'image-carousel.expand'|trans }}

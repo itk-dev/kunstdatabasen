@@ -11,6 +11,7 @@
         "doctrine/annotations": "^1.10",
         "itk-dev/mock-up-bundle": "^1.0",
         "knplabs/knp-paginator-bundle": "^5.2",
+        "liip/imagine-bundle": "^2.3",
         "phpoffice/phpspreadsheet": "^1.12",
         "sensio/framework-extra-bundle": "^5.5",
         "stof/doctrine-extensions-bundle": "^1.4",
