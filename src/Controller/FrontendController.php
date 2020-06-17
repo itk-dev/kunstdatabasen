@@ -137,9 +137,9 @@ class FrontendController extends AbstractController
      */
     private function artworkToRenderArray(Artwork $artwork)
     {
-        $path = '';
-        if (\count($artwork->getImages()) > 0) {
-            $path = $this->uploaderHelper->asset($artwork->getImages()[0], 'imageFile');
+        $imagePaths = [];
+        foreach ($artwork->getImages() as $image) {
+            $imagePaths[] = $this->uploaderHelper->asset($image, 'imageFile');
         }
 
         return (object) [
@@ -149,10 +149,11 @@ class FrontendController extends AbstractController
                     'id' => $artwork->getId(),
                 ]
             ),
-            'img' => $path,
+            'images' => $imagePaths,
             'title' => $artwork->getName(),
             'artNo' => $artwork->getArtSerial(),
             'artist' => $artwork->getArtist(),
+            'artistGender' => $artwork->getArtistGender(),
             'type' => $artwork->getType(),
             'dimensions' => $this->getDimensions($artwork),
             'building' => $artwork->getBuilding(),

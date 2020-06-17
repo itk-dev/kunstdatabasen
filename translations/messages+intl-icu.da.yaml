@@ -36,6 +36,9 @@ frontend.item.purchase_price: Indkøbspris
 frontend.item.production_year: Produktionsår
 frontend.item.assessment_price: Vurderingspris
 frontend.item.assessment_date: Vurderingsdato
+image-carousel.expand: Vis stort billede
+image-carousel.previous: Forrige
+image-carousel.next: Næste
 pager.navigation: Paginering
 pager.previous: Forrige
 pager.next: Næste
@@ -124,3 +127,4 @@ image.primary_image: Primært billede
 item.images: Billeder
 frontend.item.comment: Kommentarer
 frontend.item.artist_gender: Kunstners køn
+frontend.image_large: Stort billede

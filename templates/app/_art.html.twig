@@ -10,7 +10,34 @@
             <h1 id="detailsTitle">{{ data.artwork.title }}</h1>
         </div>
         <div class="col-md-3">
-            <img src="{{ asset(data.artwork.img) }}" alt="" class="img-fluid"/>
+            <div id="carouselImageIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner">
+                    {% for image in data.artwork.images %}
+                        <div class="carousel-item{% if loop.first %} active{% endif %}" class="position-relative">
+                            <a href="javascript:void()" class="js-image-full" data-src="{{ image }}">
+                                <img class="d-block w-100" src="{{ asset(image) }}" alt="Billede">
+                                <span class="position-absolute bg-dark text-light rounded-circle py-1 px-2" style="right: 1em; bottom: 0.5em;" >
+                                    <span class="sr-only">
+                                        {{ 'image-carousel.expand'|trans }}
+                                    </span>
+                                    <i class="fas fa-expand"></i>
+                                </span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if data.artwork.images|length > 1 %}
+            <div class="d-flex justify-content-between mt-1">
+                <a href="#carouselImageIndicators" role="button" data-slide="prev" class="text-dark ml-5">
+                    <span class="sr-only">{{ 'image-carousel.previous'|trans }}</span> <i class="fas fa-arrow-alt-circle-left" aria-hidden="true"></i>
+                </a>
+                <span><span id="carouselImageActiveIndex">1</span> / {{ data.artwork.images|length }}</span>
+                <a href="#carouselImageIndicators" role="button" data-slide="next" class="text-dark mr-5">
+                    <span class="sr-only">{{ 'image-carousel.next'|trans }}</span> <i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            {% endif %}
         </div>
         <div class="col-md-9">
             <div class="row">
@@ -26,7 +53,7 @@
                     <label for="detailsDimensions">{{ 'frontend.item.dimensions'|trans }}</label>
                     <p>{{ data.artwork.dimensions }}</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <label for="detailsDescription">{{ 'frontend.item.description'|trans }}</label>
                     <p>{{ data.artwork.description }}</p>
                 </div>
@@ -75,6 +102,21 @@
                 <div class="col-md-4">
                     <label for="detailsGeo">{{ 'frontend.item.artist_gender'|trans }}</label>
                     <p>{{ data.artwork.artistGender }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="carouselImageModal">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn close" data-dismiss="modal" aria-label="{{ 'action.close'|trans }}">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img class="img-fluid" id="carouselImageFull" src="" alt="{{ 'frontend.image_large'|trans }}">
                 </div>
             </div>
         </div>
