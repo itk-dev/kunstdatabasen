@@ -128,3 +128,4 @@ item.images: Billeder
 frontend.item.comment: Kommentarer
 frontend.item.artist_gender: Kunstners køn
 frontend.image_large: Stort billede
+no_results: Ingen resultater
