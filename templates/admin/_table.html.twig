@@ -1,47 +1,51 @@
 <div class="bg-white shadow rounded mb-5">
-    <div class="table-responsive">
-        <table class="table table-borderless">
-            {% if header %}
-                <thead class="bg-light">
-                <tr class="text-muted small">
-                    <th>{{ 'admin.table.thumpnail'|trans }}</th>
-                    <th class="pointer">{{ 'admin.table.title'|trans }}</th>
-                    <th class="d-none d-md-table-cell">{{ 'admin.table.art_serial'|trans }}</th>
-                    <th>{{ 'admin.table.building'|trans }}</th>
-                    <th class="d-none d-md-table-cell">{{ 'admin.table.artist'|trans }}</th>
-                    <th class="d-none d-md-table-cell">{{ 'admin.table.type'|trans }}</th>
-                    <th>{{ 'admin.table.status'|trans }}</th>
-                    <th class="text-right">{{ 'admin.table.function'|trans }}</th>
-                </tr>
-                </thead>
-            {% endif %}
-            <tbody>
-            {% for item in items %}
-                <tr>
-                    <td>{% if item.images|length > 0 %}<a href="javascript:void();" class="item-details-link" data-id="{{ item.id }}"><img src="{{ asset(item.images[0]) }}" alt="" height="30"/></a>{% endif %}</td>
-                    <td><a href="javascript:void();" class="item-details-link" data-id="{{ item.id }}"><strong>{{ item.title ?: 'item.no_title'|trans }}</strong></a></td>
-                    <td class="d-none d-md-table-cell">{{ item.artNo ?? '' }}</td>
-                    <td>{{ item.building ?? '' }}</td>
-                    <td class="d-none d-md-table-cell">{{ item.artist ?? '' }}</td>
-                    <td class="d-none d-md-table-cell">{{ item.type ?? '' }}</td>
-                    <td>
-                        {% if item.status == "Udlånt" %}
-                            <span class="badge badge-pill badge-dark">{{ item.status ?? '' }}</span>
-                        {% else %}
-                            <span class="badge badge-pill badge-success">{{ item.status ?? '' }}</span>
-                        {% endif %}
-                    </td>
-                    <td class="text-right"><a href="{{ item.linkEdit }}"><i class="fas fa-edit"></i></a></td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    {% if pagination is defined %}
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            {{ knp_pagination_render(pagination) }}
+    {% if items|length > 0 %}
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                {% if header %}
+                    <thead class="bg-light">
+                    <tr class="text-muted small">
+                        <th>{{ 'admin.table.thumpnail'|trans }}</th>
+                        <th class="pointer">{{ 'admin.table.title'|trans }}</th>
+                        <th class="d-none d-md-table-cell">{{ 'admin.table.art_serial'|trans }}</th>
+                        <th>{{ 'admin.table.building'|trans }}</th>
+                        <th class="d-none d-md-table-cell">{{ 'admin.table.artist'|trans }}</th>
+                        <th class="d-none d-md-table-cell">{{ 'admin.table.type'|trans }}</th>
+                        <th>{{ 'admin.table.status'|trans }}</th>
+                        <th class="text-right">{{ 'admin.table.function'|trans }}</th>
+                    </tr>
+                    </thead>
+                {% endif %}
+                <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{% if item.images|length > 0 %}<a href="javascript:void();" class="item-details-link" data-id="{{ item.id }}"><img src="{{ asset(item.images[0]) }}" alt="" height="30"/></a>{% endif %}</td>
+                        <td><a href="javascript:void();" class="item-details-link" data-id="{{ item.id }}"><strong>{{ item.title ?: 'item.no_title'|trans }}</strong></a></td>
+                        <td class="d-none d-md-table-cell">{{ item.artNo ?? '' }}</td>
+                        <td>{{ item.building ?? '' }}</td>
+                        <td class="d-none d-md-table-cell">{{ item.artist ?? '' }}</td>
+                        <td class="d-none d-md-table-cell">{{ item.type ?? '' }}</td>
+                        <td>
+                            {% if item.status == "Udlånt" %}
+                                <span class="badge badge-pill badge-dark">{{ item.status ?? '' }}</span>
+                            {% else %}
+                                <span class="badge badge-pill badge-success">{{ item.status ?? '' }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-right"><a href="{{ item.linkEdit }}"><i class="fas fa-edit"></i></a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
-    </div>
+        {% if pagination is defined %}
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="text-center p-3">{{ 'no_results'|trans }}</div>
     {% endif %}
 </div>
