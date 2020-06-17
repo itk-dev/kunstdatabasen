@@ -47,7 +47,7 @@ class ArtworkRepository extends ServiceEntityRepository
      *
      * @return \Doctrine\ORM\Query
      */
-    public function getQuery(string $search = null, string $type = null, string $category = null, string $building = null, int $yearFrom = null, int $yearTo = null, int $minWidth = null, int $maxWidth = null, int $minHeight = null, int $maxHeight = null): Query
+    public function getQuery(string $search = null, string $type = null, string $category = null, string $building = null, int $yearFrom = null, int $yearTo = null, int $minWidth = null, int $maxWidth = null, int $minHeight = null, int $maxHeight = null, string $artistGender = null): Query
     {
         $qb = $this->createQueryBuilder('e');
 
@@ -69,6 +69,7 @@ class ArtworkRepository extends ServiceEntityRepository
         null !== $maxWidth && $qb->andWhere('e.width <= :maxWidth')->setParameter('maxWidth', $maxWidth);
         null !== $minHeight && $qb->andWhere('e.height >= :minHeight')->setParameter('minHeight', $minHeight);
         null !== $maxHeight && $qb->andWhere('e.height <= :maxHeight')->setParameter('maxHeight', $maxHeight);
+        null !== $artistGender && $qb->andWhere('e.artistGender = :artistGender')->setParameter('artistGender', $artistGender);
 
         return $qb->getQuery();
     }

@@ -8,6 +8,7 @@
 
 namespace App\EventSubscriber;
 
+use App\Entity\Artwork;
 use App\Entity\Item;
 use App\Service\TagService;
 use Doctrine\Common\EventSubscriber;
@@ -78,6 +79,11 @@ class TaggingSubscriber implements EventSubscriber
             $location = $entity->getLocation();
             $status = $entity->getStatus();
 
+            $artistGender = null;
+            if ($entity instanceof Artwork) {
+                $artistGender = $entity->getArtistGender();
+            }
+
             null !== $type && $this->tagService->addTag($entity, 'type', $type);
             null !== $organization && $this->tagService->addTag($entity, 'organization', $organization);
             null !== $building && $this->tagService->addTag($entity, 'building', $building);
@@ -86,6 +92,7 @@ class TaggingSubscriber implements EventSubscriber
             null !== $room && $this->tagService->addTag($entity, 'room', $room);
             null !== $status && $this->tagService->addTag($entity, 'status', $status);
             null !== $location && $this->tagService->addTag($entity, 'location', $location);
+            null !== $artistGender && $this->tagService->addTag($entity, 'artistGender', $artistGender);
         }
     }
 }
