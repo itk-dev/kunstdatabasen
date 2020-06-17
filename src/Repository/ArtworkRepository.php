@@ -38,15 +38,15 @@ class ArtworkRepository extends ServiceEntityRepository
      * @param string|null $type
      * @param string|null $category
      * @param string|null $building
-     * @param int|null $yearFrom
-     * @param int|null $yearTo
-     * @param int|null $minWidth
-     * @param int|null $maxWidth
-     * @param int|null $minHeight
-     * @param int|null $maxHeight
+     * @param int|null    $yearFrom
+     * @param int|null    $yearTo
+     * @param int|null    $minWidth
+     * @param int|null    $maxWidth
+     * @param int|null    $minHeight
+     * @param int|null    $maxHeight
      * @param string|null $artistGender
-     * @param int|null $priceFrom
-     * @param int|null $priceTo
+     * @param int|null    $priceFrom
+     * @param int|null    $priceTo
      *
      * @return \Doctrine\ORM\Query
      */
