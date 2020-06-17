@@ -12,6 +12,7 @@ use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 /**
@@ -29,6 +30,15 @@ class ImageType extends AbstractType
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Vælg billede',
+                ],
+                'constraints' => [
+                    new File([
+                        'maxSize' => '20M',
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                    ]),
                 ],
             ])
             ->add('primaryImage', null, [
