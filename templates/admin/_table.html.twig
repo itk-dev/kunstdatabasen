@@ -19,7 +19,7 @@
                 <tbody>
                 {% for item in items %}
                     <tr>
-                        <td>{% if item.images|length > 0 %}<a href="#" class="item-details-link" data-id="{{ item.id }}"><img src="{{ asset(item.images[0]) | imagine_filter('thumbnail_admin') }}" alt="" height="30"/></a>{% endif %}</td>
+                        <td>{% if item.images|length > 0 %}<a href="#" class="item-details-link" data-id="{{ item.id }}"><img src="{{ asset(item.images[0])|imagine_filter('thumbnail_admin') }}" alt="" height="30"/></a>{% endif %}</td>
                         <td><a href="#" class="item-details-link" data-id="{{ item.id }}"><strong>{{ item.title ?: 'item.no_title'|trans }}</strong></a></td>
                         <td class="d-none d-md-table-cell">{{ item.artNo ?? '' }}</td>
                         <td>{{ item.building ?? '' }}</td>
