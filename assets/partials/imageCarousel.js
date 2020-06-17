@@ -8,7 +8,7 @@ $(function () {
             $('#carouselImageActiveIndex').text(to + 1);
         });
 
-        $('.js-image-full').on('click', () => {
+        $('.js-image-full').on('click', function () {
             $('#carouselImageFull').attr('src', $(this).data('src'));
             $('#carouselImageModal').modal();
         });
@@ -16,7 +16,7 @@ $(function () {
 
     $(document).ready(register);
 
-    window.addEventListener('registerImageCarousel', function (elem) {
+    window.addEventListener('registerImageCarousel', () => {
         register();
     }, false);
 });
