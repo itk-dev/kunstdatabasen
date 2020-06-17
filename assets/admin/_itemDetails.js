@@ -1,4 +1,4 @@
-/* global CustomEvent */
+/* global Event */
 
 $(function () {
     $(document).ready(function () {
@@ -29,7 +29,7 @@ $(function () {
                     modalBody.html(modalResponse.modalBody);
                     modalEditLink.prop('href', modalResponse.editLink);
 
-                    const event = new CustomEvent('registerImageCarousel');
+                    const event = new Event('registerImageCarousel');
                     window.dispatchEvent(event);
                 }
             });
