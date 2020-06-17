@@ -18,7 +18,7 @@
                         <tbody>
                         {% for art in artworks %}
                             <tr>
-                                <td>{% if art.images|length > 0 %}<a href="{{ art.link }}"><img src="{{ asset(art.images[0]) }}" alt="" height="60"/></a>{% endif %}</td>
+                                <td>{% if art.images|length > 0 %}<a href="{{ art.link }}"><img src="{{ asset(art.images[0]) | imagine_filter('thumbnail_frontend') }}" alt="" height="60"/></a>{% endif %}</td>
                                 <td><a href="{{ art.link }}"><strong>{{ art.title ?? 'frontend.no_title'|trans }}</strong></a></td>
                                 <td>{{ art.artNo }}</td>
                                 <td>{{ art.artist }}</td>
