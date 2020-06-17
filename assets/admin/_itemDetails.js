@@ -1,3 +1,5 @@
+/* global Event */
+
 $(function () {
     $(document).ready(function () {
         const modalTitle = $('#item-details-modal-title');
@@ -26,6 +28,9 @@ $(function () {
                     modalTitle.html(modalResponse.title);
                     modalBody.html(modalResponse.modalBody);
                     modalEditLink.prop('href', modalResponse.editLink);
+
+                    const event = new Event('registerImageCarousel');
+                    window.dispatchEvent(event);
                 }
             });
         });

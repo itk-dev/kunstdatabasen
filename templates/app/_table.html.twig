@@ -17,7 +17,7 @@
                     <tbody>
                     {% for art in artworks %}
                         <tr>
-                            <td><a href="{{ art.link }}"><img src="{{ asset(art.img) }}" alt="" height="60"/></a></td>
+                            <td>{% if art.images|length > 0 %}<a href="{{ art.link }}"><img src="{{ asset(art.images[0]) }}" alt="" height="60"/></a>{% endif %}</td>
                             <td><a href="{{ art.link }}"><strong>{{ art.title ?? 'frontend.no_title'|trans }}</strong></a></td>
                             <td>{{ art.artNo }}</td>
                             <td>{{ art.artist }}</td>
@@ -31,9 +31,11 @@
             </div>
         </div>
     </div>
+    {% if pagination is defined %}
     <div class="row justify-content-center">
         <div class="col-auto">
             {{ knp_pagination_render(pagination) }}
         </div>
     </div>
+    {% endif %}
 </div>
