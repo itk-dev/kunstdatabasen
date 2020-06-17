@@ -68,6 +68,11 @@ class Artwork extends Item
     private $weight;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $artistGender;
+
+    /**
      * @return string|null
      */
     public function getArtist(): ?string
@@ -271,6 +276,26 @@ class Artwork extends Item
     public function setWeight(?float $weight): self
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getArtistGender(): ?string
+    {
+        return $this->artistGender;
+    }
+
+    /**
+     * @param string|null $artistGender
+     *
+     * @return $this
+     */
+    public function setArtistGender(?string $artistGender): self
+    {
+        $this->artistGender = $artistGender;
 
         return $this;
     }

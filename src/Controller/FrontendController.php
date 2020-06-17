@@ -75,10 +75,11 @@ class FrontendController extends AbstractController
                 $width->min ?? null,
                 $width->max ?? null,
                 $height->min ?? null,
-                $height->max ?? null
+                $height->max ?? null,
+                $data['artistGender'] ?? null
             );
 
-            if (null !== $data['width'] || null !== $data['height'] || null !== $data['yearFrom'] || null !== $data['yearTo']) {
+            if (null !== $data['width'] || null !== $data['height'] || null !== $data['yearFrom'] || null !== $data['yearTo'] || null !== $data['artistGender']) {
                 $parameters['display_advanced_filters'] = true;
             }
         } else {
@@ -152,6 +153,7 @@ class FrontendController extends AbstractController
             'title' => $artwork->getName(),
             'artNo' => $artwork->getArtSerial(),
             'artist' => $artwork->getArtist(),
+            'artistGender' => $artwork->getArtistGender(),
             'type' => $artwork->getType(),
             'dimensions' => $this->getDimensions($artwork),
             'building' => $artwork->getBuilding(),
@@ -195,6 +197,7 @@ class FrontendController extends AbstractController
     {
         $typeChoices = $this->tagService->getChoices(Artwork::class, 'type');
         $buildingChoices = $this->tagService->getChoices(Artwork::class, 'building');
+        $artistGenderChoices = $this->tagService->getChoices(Artwork::class, 'artistGender');
 
         $formBuilder = $this->createFormBuilder();
         $formBuilder
@@ -284,6 +287,16 @@ class FrontendController extends AbstractController
                         'placeholder' => 'filter.year_to_placeholder',
                     ],
                     'required' => false,
+                ]
+            )
+            ->add(
+                'artistGender',
+                ChoiceType::class,
+                [
+                    'label' => 'filter.artist_gender',
+                    'required' => false,
+                    'placeholder' => 'filter.artist_gender_placeholder',
+                    'choices' => $artistGenderChoices,
                 ]
             );
 

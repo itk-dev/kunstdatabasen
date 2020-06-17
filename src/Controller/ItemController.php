@@ -149,7 +149,8 @@ class ItemController extends BaseController
                         $width->min ?? null,
                         $width->max ?? null,
                         $height->min ?? null,
-                        $height->max ?? null
+                        $height->max ?? null,
+                        $data['artistGender'] ?? null
                     );
                     break;
                 case 'furniture':
@@ -342,6 +343,7 @@ class ItemController extends BaseController
     {
         $typeChoices = $this->tagService->getChoices($classname, 'type');
         $buildingChoices = $this->tagService->getChoices($classname, 'building');
+        $artistGenderChoices = $this->tagService->getChoices($classname, 'artistGender');
 
         $formBuilder = $this->createFormBuilder();
         $formBuilder
@@ -444,6 +446,16 @@ class ItemController extends BaseController
                         'placeholder' => 'filter.year_to_placeholder',
                     ],
                     'required' => false,
+                ]
+            )
+            ->add(
+                'artistGender',
+                ChoiceType::class,
+                [
+                    'label' => 'filter.artist_gender',
+                    'required' => false,
+                    'placeholder' => 'filter.artist_gender_placeholder',
+                    'choices' => $artistGenderChoices,
                 ]
             );
 

@@ -70,6 +70,7 @@ class ItemService
         if ($item instanceof Artwork) {
             $renderObject->artNo = $item->getArtSerial();
             $renderObject->artist = $item->getArtist();
+            $renderObject->artistGender = $item->getArtistGender();
             $renderObject->dimensions = $this->getDimensions($item);
             $renderObject->price = $item->getPurchasePrice();
             $renderObject->productionYear = $item->getProductionYear();

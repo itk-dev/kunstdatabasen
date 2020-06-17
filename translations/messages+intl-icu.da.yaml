@@ -17,6 +17,8 @@ filter.height: 'Højde (cm)'
 filter.height_placeholder: 'Alle højder'
 filter.year_from_placeholder: 'Fra år'
 filter.year_to_placeholder: 'Til år'
+filter.artist_gender: 'Kunstnerens køn'
+filter.artist_gender_placeholder: 'Alle køn'
 frontend.back_to_list: 'Tilbage til liste'
 frontend.item.title: Titel
 frontend.item.artist: Kunstner
@@ -93,6 +95,7 @@ Kunstdatabasen: Kunstdatabasen
 item.comment: Kommentarer
 item.name: Titel
 item.artist: Kunstner
+item.artist_gender: Kunstners køn
 item.type: Type
 item.width: Bredde
 item.height: Højde
@@ -123,4 +126,5 @@ image.file_placeholder: Vælg fil
 image.primary_image: Primært billede
 item.images: Billeder
 frontend.item.comment: Kommentarer
+frontend.item.artist_gender: Kunstners køn
 frontend.image_large: Stort billede
