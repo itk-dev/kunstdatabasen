@@ -7,7 +7,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ['7.3']
+                php: ['7.3', '7.4']
         steps:
             -   uses: actions/checkout@master
             -   name: Setup PHP, with composer and extensions
@@ -33,7 +33,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ['7.3']
+                php: ['7.3', '7.4']
         steps:
             - uses: actions/checkout@master
             - name: Setup PHP, with composer and extensions
@@ -65,7 +65,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ['7.3']
+                php: ['7.3', '7.4']
         steps:
             - uses: actions/checkout@master
             - name: Setup PHP, with composer and extensions
@@ -93,7 +93,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ['7.3']
+                php: ['7.3', '7.4']
         steps:
             - uses: actions/checkout@master
             - name: Setup PHP, with composer and extensions
@@ -116,30 +116,10 @@ jobs:
               run: composer actions/twigcs
 
     js-coding-standards:
-        name: JS coding standards (PHP ${{ matrix.php }})
+        name: JS coding standards
         runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                php: ['7.3']
         steps:
             - uses: actions/checkout@master
-            - name: Setup PHP, with composer and extensions
-              uses: shivammathur/setup-php@master
-              with:
-                  php-version: ${{ matrix.php }}
-                  extension-csv: ctype, dom, iconv, json
-                  coverage: none
-            -   name: Get composer cache directory
-                id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-            -   uses: actions/cache@v1
-                with:
-                    path: ${{ steps.composer-cache.outputs.dir }}
-                    key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
-                    restore-keys: ${{ matrix.php }}-composer-
-            - name: Install Dependencies
-              run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
             - uses: actions/setup-node@v1
               with:
                   node-version: '10.x'
