@@ -166,6 +166,7 @@ class FrontendController extends AbstractController
             'type' => $artwork->getType(),
             'dimensions' => $this->getDimensions($artwork),
             'description' => $artwork->getDescription(),
+            'committeeDescription' => $artwork->getCommitteeDescription(),
             'price' => $artwork->getPurchasePrice(),
             'productionYear' => $artwork->getProductionYear(),
             'estimatedValue' => $artwork->getAssessmentPrice(),

@@ -4,6 +4,7 @@ App\Entity\Artwork:
         artist: '<da_DK:name()>'
         artSerial: 'G<randomElement([a,b,c,d])> <numberBetween(1000, 9999)>'
         description: '<text()>'
+        committeeDescription: '<text()>'
         purchasePrice: '<numberBetween(1000, 1000000)>'
         productionYear: '<numberBetween(1600, 2020)>'
         assessmentDate: '<date_create()>'
