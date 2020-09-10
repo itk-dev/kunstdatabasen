@@ -66,12 +66,12 @@ class FrontendController extends AbstractController
             $height = null !== $data['height'] ? json_decode($data['height']) : null;
 
             $query = $artworkRepository->getQuery(
-                $data['search'],
-                $data['type'],
+                $data['search'] ?? null,
+                $data['type'] ?? null,
                 null,
-                $data['building'],
-                $data['yearFrom'],
-                $data['yearTo'],
+                $data['building'] ?? null,
+                $data['yearFrom'] ?? null,
+                $data['yearTo'] ?? null,
                 $width->min ?? null,
                 $width->max ?? null,
                 $height->min ?? null,
@@ -85,7 +85,7 @@ class FrontendController extends AbstractController
                 null !== $data['height'] ||
                 null !== $data['yearFrom'] ||
                 null !== $data['yearTo'] ||
-                null !== $data['artistGender'] ||
+                (isset($data['artistGender']) && null !== $data['artistGender']) ||
                 null !== $data['priceFrom'] ||
                 null !== $data['priceTo']) {
                 $parameters['display_advanced_filters'] = true;
@@ -112,7 +112,7 @@ class FrontendController extends AbstractController
 
         return $this->render(
             'app/index.html.twig',
-            $parameters,
+            $parameters
         );
     }
 

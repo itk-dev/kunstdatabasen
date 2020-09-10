@@ -1,7 +1,7 @@
 footer.text: 'Aarhus kommunes kunstdatabase'
 frontend.search.submit: Søg
 filters.year: År
-filters.price: Vurderingspris
+filters.price: Indkøbspris
 filters.show_advanced: 'Vis avancerede søgemuligheder'
 filters.hide_advanced: 'Skjul avancerede søgemuligheder'
 filter.search: 'Søg titel, art. nr. eller kunstner'

@@ -73,8 +73,8 @@ class ArtworkRepository extends ServiceEntityRepository
         null !== $minHeight && $qb->andWhere('e.height >= :minHeight')->setParameter('minHeight', $minHeight);
         null !== $maxHeight && $qb->andWhere('e.height <= :maxHeight')->setParameter('maxHeight', $maxHeight);
         null !== $artistGender && $qb->andWhere('e.artistGender = :artistGender')->setParameter('artistGender', $artistGender);
-        null !== $priceFrom && $qb->andWhere('e.assessmentPrice >= :priceFrom')->setParameter('priceFrom', $priceFrom);
-        null !== $priceTo && $qb->andWhere('e.assessmentPrice <= :priceTo')->setParameter('priceTo', $priceTo);
+        null !== $priceFrom && $qb->andWhere('e.purchasePrice >= :priceFrom')->setParameter('priceFrom', $priceFrom);
+        null !== $priceTo && $qb->andWhere('e.purchasePrice <= :priceTo')->setParameter('priceTo', $priceTo);
 
         return $qb->getQuery();
     }
