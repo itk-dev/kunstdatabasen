@@ -142,10 +142,11 @@ class ItemController extends BaseController
                     $query = $artworkRepository->getQuery(
                         $data['search'],
                         $data['type'],
+                        $data['status'] ?? null,
                         null,
-                        $data['building'],
-                        $data['yearFrom'],
-                        $data['yearTo'],
+                        $data['building'] ?? null,
+                        $data['yearFrom'] ?? null,
+                        $data['yearTo'] ?? null,
                         $width->min ?? null,
                         $width->max ?? null,
                         $height->min ?? null,
@@ -168,6 +169,7 @@ class ItemController extends BaseController
 
             if (null !== $data['width'] ||
                 null !== $data['height'] ||
+                null !== $data['status'] ||
                 null !== $data['yearFrom'] ||
                 null !== $data['yearTo'] ||
                 null !== $data['artistGender'] ||
@@ -350,6 +352,7 @@ class ItemController extends BaseController
     private function getSearchForm($classname = Artwork::class)
     {
         $typeChoices = $this->tagService->getChoices($classname, 'type');
+        $statusChoices = $this->tagService->getChoices($classname, 'status');
         $buildingChoices = $this->tagService->getChoices($classname, 'building');
         $artistGenderChoices = $this->tagService->getChoices($classname, 'artistGender');
 
@@ -367,6 +370,16 @@ class ItemController extends BaseController
                         'artwork' => 'item.artwork',
                         'furniture' => 'item.furniture',
                     ],
+                ]
+            )
+            ->add(
+                'status',
+                ChoiceType::class,
+                [
+                    'label' => 'filter.status',
+                    'placeholder' => 'filter.status_placeholder',
+                    'required' => false,
+                    'choices' => $statusChoices,
                 ]
             )
             ->add(

@@ -68,6 +68,7 @@ class FrontendController extends AbstractController
             $query = $artworkRepository->getQuery(
                 $data['search'] ?? null,
                 $data['type'] ?? null,
+                $data['status'] ?? null,
                 null,
                 $data['building'] ?? null,
                 $data['yearFrom'] ?? null,
@@ -157,6 +158,7 @@ class FrontendController extends AbstractController
                     'id' => $artwork->getId(),
                 ]
             ),
+            'status' => $artwork->getStatus(),
             'images' => $imagePaths,
             'title' => $artwork->getName(),
             'artNo' => $artwork->getArtSerial(),
@@ -199,6 +201,7 @@ class FrontendController extends AbstractController
     private function getSearchForm()
     {
         $typeChoices = $this->tagService->getChoices(Artwork::class, 'type');
+        $statusChoices = $this->tagService->getChoices(Artwork::class, 'status');
 
         $formBuilder = $this->createFormBuilder();
         $formBuilder
@@ -225,6 +228,16 @@ class FrontendController extends AbstractController
                     'attr' => [
                         'class' => 'tag-select',
                     ],
+                ]
+            )
+            ->add(
+                'status',
+                ChoiceType::class,
+                [
+                    'label' => 'filter.status',
+                    'placeholder' => 'filter.status_placeholder',
+                    'required' => false,
+                    'choices' => $statusChoices,
                 ]
             )
             ->add(

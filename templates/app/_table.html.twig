@@ -12,6 +12,7 @@
                             <th>{{ 'frontend.item.artist'|trans }}</th>
                             <th>{{ 'frontend.item.type'|trans }}</th>
                             <th>{{ 'frontend.item.dimensions'|trans }}</th>
+                            <th>{{ 'frontend.item.status'|trans }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -23,6 +24,13 @@
                                 <td>{{ art.artist }}</td>
                                 <td>{{ art.type }}</td>
                                 <td>{{ art.dimensions }}</td>
+                                <td>
+                                    {% if art.status == "Udlånt" %}
+                                        <span class="badge badge-pill badge-dark">{{ art.status ?? '' }}</span>
+                                    {% else %}
+                                        <span class="badge badge-pill badge-success">{{ art.status ?? '' }}</span>
+                                    {% endif %}
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
