@@ -161,14 +161,9 @@ class FrontendController extends AbstractController
             'title' => $artwork->getName(),
             'artNo' => $artwork->getArtSerial(),
             'artist' => $artwork->getArtist(),
-            'artistGender' => $artwork->getArtistGender(),
             'type' => $artwork->getType(),
             'dimensions' => $this->getDimensions($artwork),
-            'building' => $artwork->getBuilding(),
-            'geo' => $artwork->getGeo(),
             'description' => $artwork->getDescription(),
-            'organization' => $artwork->getOrganization(),
-            'department' => $artwork->getDepartment(),
             'price' => $artwork->getPurchasePrice(),
             'productionYear' => $artwork->getProductionYear(),
             'estimatedValue' => $artwork->getAssessmentPrice(),
@@ -204,8 +199,6 @@ class FrontendController extends AbstractController
     private function getSearchForm()
     {
         $typeChoices = $this->tagService->getChoices(Artwork::class, 'type');
-        $buildingChoices = $this->tagService->getChoices(Artwork::class, 'building');
-        $artistGenderChoices = $this->tagService->getChoices(Artwork::class, 'artistGender');
 
         $formBuilder = $this->createFormBuilder();
         $formBuilder
@@ -229,19 +222,6 @@ class FrontendController extends AbstractController
                     'placeholder' => 'filter.type_placeholder',
                     'required' => false,
                     'choices' => $typeChoices,
-                    'attr' => [
-                        'class' => 'tag-select',
-                    ],
-                ]
-            )
-            ->add(
-                'building',
-                ChoiceType::class,
-                [
-                    'label' => 'filter.building',
-                    'placeholder' => 'filter.building_placeholder',
-                    'required' => false,
-                    'choices' => $buildingChoices,
                     'attr' => [
                         'class' => 'tag-select',
                     ],
@@ -295,16 +275,6 @@ class FrontendController extends AbstractController
                         'placeholder' => 'filter.year_to_placeholder',
                     ],
                     'required' => false,
-                ]
-            )
-            ->add(
-                'artistGender',
-                ChoiceType::class,
-                [
-                    'label' => 'filter.artist_gender',
-                    'required' => false,
-                    'placeholder' => 'filter.artist_gender_placeholder',
-                    'choices' => $artistGenderChoices,
                 ]
             )
             ->add(
