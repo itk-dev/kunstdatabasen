@@ -187,6 +187,7 @@ class ArkworkType extends AbstractType
             ])
             ->add('committeeDescription', TextareaType::class, [
                 'label' => 'item.committee_description',
+                'required' => false,
             ])
             ->add('weight', null, [
                 'label' => 'item.weight',

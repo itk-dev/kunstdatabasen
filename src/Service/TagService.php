@@ -59,39 +59,57 @@ class TagService
      * Add tag if it does not already exist.
      *
      * @param \App\Entity\Item $item
-     * @param $field
-     * @param $value
+     *                                    The item that has added the tag
+     * @param string           $field
+     *                                    The field of the tag
+     * @param mixed            $value
+     *                                    The field value
+     * @param array            $changeSet
+     *                                    The change set for the field, if it exists
      */
-    public function addTag(Item $item, $field, $value)
+    public function addTag(Item $item, string $field, $value, array $changeSet)
     {
         $classname = \get_class($item);
-        $tags = $this->tagRepository->findBy([
+        $tag = $this->tagRepository->findOneBy([
             'class' => $classname,
             'field' => $field,
             'value' => $value,
         ]);
 
-        if (0 === \count($tags)) {
+        // If the tag does not exist, add it.
+        if (null === $tag) {
             $tag = new Tag();
             $tag->setClass($classname);
             $tag->setField($field);
             $tag->setValue($value);
 
             $this->entityManager->persist($tag);
-            $this->entityManager->flush();
         }
 
-        $this->cleanupTags($classname, $field);
-    }
+        // Remove old tag if it is not in use anymore.
+        if (!empty($changeSet)) {
+            $oldValue = $changeSet[0];
 
-    /**
-     * Remove tags that are not related to an entity.
-     *
-     * @param string $classname
-     * @param string $field
-     */
-    private function cleanupTags(string $classname, string $field)
-    {
-        // @TODO: Implement this!
+            $repository = $this->entityManager->getRepository($classname);
+            $itemsWithTag = $repository->findBy([
+                $field => $oldValue,
+            ]);
+
+            // Remove tag if the only item that has the tag set, is the current that is changing
+            // to not using the tag anymore.
+            if (0 === \count($itemsWithTag)) {
+                $oldTag = $this->tagRepository->findOneBy([
+                    'class' => $classname,
+                    'field' => $field,
+                    'value' => $oldValue,
+                ]);
+
+                if (null !== $oldTag) {
+                    $this->entityManager->remove($oldTag);
+                }
+            }
+        }
+
+        $this->entityManager->flush();
     }
 }

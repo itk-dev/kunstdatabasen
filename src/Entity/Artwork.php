@@ -75,7 +75,7 @@ class Artwork extends Item
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $CommitteeDescription;
+    private $committeeDescription;
 
     /**
      * @return string|null
@@ -305,14 +305,22 @@ class Artwork extends Item
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getCommitteeDescription(): ?string
     {
-        return $this->CommitteeDescription;
+        return $this->committeeDescription;
     }
 
-    public function setCommitteeDescription(?string $CommitteeDescription): self
+    /**
+     * @param string|null $committeeDescription
+     *
+     * @return $this
+     */
+    public function setCommitteeDescription(?string $committeeDescription): self
     {
-        $this->CommitteeDescription = $CommitteeDescription;
+        $this->committeeDescription = $committeeDescription;
 
         return $this;
     }
