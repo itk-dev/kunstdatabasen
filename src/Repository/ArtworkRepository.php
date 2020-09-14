@@ -36,6 +36,7 @@ class ArtworkRepository extends ServiceEntityRepository
      *
      * @param string|null $search
      * @param string|null $type
+     * @param string|null $status
      * @param string|null $category
      * @param string|null $building
      * @param int|null    $yearFrom
@@ -50,7 +51,7 @@ class ArtworkRepository extends ServiceEntityRepository
      *
      * @return \Doctrine\ORM\Query
      */
-    public function getQuery(string $search = null, string $type = null, string $category = null, string $building = null, int $yearFrom = null, int $yearTo = null, int $minWidth = null, int $maxWidth = null, int $minHeight = null, int $maxHeight = null, string $artistGender = null, int $priceFrom = null, int $priceTo = null): Query
+    public function getQuery(string $search = null, string $type = null, string $status = null, string $category = null, string $building = null, int $yearFrom = null, int $yearTo = null, int $minWidth = null, int $maxWidth = null, int $minHeight = null, int $maxHeight = null, string $artistGender = null, int $priceFrom = null, int $priceTo = null): Query
     {
         $qb = $this->createQueryBuilder('e');
 
@@ -64,6 +65,7 @@ class ArtworkRepository extends ServiceEntityRepository
         }
 
         null !== $type && $qb->andWhere('e.type = :type')->setParameter('type', $type);
+        null !== $status && $qb->andWhere('e.status = :status')->setParameter('status', $status);
         null !== $category && $qb->andWhere('e.category = :category')->setParameter('category', $category);
         null !== $building && $qb->andWhere('e.building = :building')->setParameter('building', $building);
         null !== $yearFrom && $qb->andWhere('e.productionYear >= :yearFrom')->setParameter('yearFrom', $yearFrom);
@@ -73,8 +75,8 @@ class ArtworkRepository extends ServiceEntityRepository
         null !== $minHeight && $qb->andWhere('e.height >= :minHeight')->setParameter('minHeight', $minHeight);
         null !== $maxHeight && $qb->andWhere('e.height <= :maxHeight')->setParameter('maxHeight', $maxHeight);
         null !== $artistGender && $qb->andWhere('e.artistGender = :artistGender')->setParameter('artistGender', $artistGender);
-        null !== $priceFrom && $qb->andWhere('e.assessmentPrice >= :priceFrom')->setParameter('priceFrom', $priceFrom);
-        null !== $priceTo && $qb->andWhere('e.assessmentPrice <= :priceTo')->setParameter('priceTo', $priceTo);
+        null !== $priceFrom && $qb->andWhere('e.purchasePrice >= :priceFrom')->setParameter('priceFrom', $priceFrom);
+        null !== $priceTo && $qb->andWhere('e.purchasePrice <= :priceTo')->setParameter('priceTo', $priceTo);
 
         return $qb->getQuery();
     }

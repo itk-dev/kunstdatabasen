@@ -1,7 +1,7 @@
 footer.text: 'Aarhus kommunes kunstdatabase'
 frontend.search.submit: Søg
 filters.year: År
-filters.price: Vurderingspris
+filters.price: Indkøbspris
 filters.show_advanced: 'Vis avancerede søgemuligheder'
 filters.hide_advanced: 'Skjul avancerede søgemuligheder'
 filter.search: 'Søg titel, art. nr. eller kunstner'
@@ -132,3 +132,8 @@ frontend.item.comment: Kommentarer
 frontend.item.artist_gender: Kunstners køn
 frontend.image_large: Stort billede
 no_results: Ingen resultater
+filter.status: Status
+filter.status_placeholder: Alle statusser
+frontend.item.status: Status
+frontend.item.committee_description: Kunstudvalgets beskrivelse
+item.committee_description: Kunstudvalgets beskrivelse

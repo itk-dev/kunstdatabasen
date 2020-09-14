@@ -47,6 +47,20 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
+                    <label for="detailsComment">{{ 'frontend.item.description'|trans }}</label>
+                    <p>{{ item.description ? item.description|nl2br : '' }}</p>
+                </div>
+            </div>
+            {% if item.committeeDescription is defined %}
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="detailsComment">{{ 'frontend.item.committee_description'|trans }}</label>
+                    <p>{{ item.committeeDescription ? item.committeeDescription|nl2br : '' }}</p>
+                </div>
+            </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-md-12">
                     <label for="detailsComment">{{ 'frontend.item.comment'|trans }}</label>
                     <p>{{ item.comment ? item.comment|nl2br : '' }}</p>
                 </div>

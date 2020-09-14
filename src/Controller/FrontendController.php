@@ -66,12 +66,13 @@ class FrontendController extends AbstractController
             $height = null !== $data['height'] ? json_decode($data['height']) : null;
 
             $query = $artworkRepository->getQuery(
-                $data['search'],
-                $data['type'],
+                $data['search'] ?? null,
+                $data['type'] ?? null,
+                $data['status'] ?? null,
                 null,
-                $data['building'],
-                $data['yearFrom'],
-                $data['yearTo'],
+                $data['building'] ?? null,
+                $data['yearFrom'] ?? null,
+                $data['yearTo'] ?? null,
                 $width->min ?? null,
                 $width->max ?? null,
                 $height->min ?? null,
@@ -85,7 +86,7 @@ class FrontendController extends AbstractController
                 null !== $data['height'] ||
                 null !== $data['yearFrom'] ||
                 null !== $data['yearTo'] ||
-                null !== $data['artistGender'] ||
+                (isset($data['artistGender']) && null !== $data['artistGender']) ||
                 null !== $data['priceFrom'] ||
                 null !== $data['priceTo']) {
                 $parameters['display_advanced_filters'] = true;
@@ -112,7 +113,7 @@ class FrontendController extends AbstractController
 
         return $this->render(
             'app/index.html.twig',
-            $parameters,
+            $parameters
         );
     }
 
@@ -157,18 +158,15 @@ class FrontendController extends AbstractController
                     'id' => $artwork->getId(),
                 ]
             ),
+            'status' => $artwork->getStatus(),
             'images' => $imagePaths,
             'title' => $artwork->getName(),
             'artNo' => $artwork->getArtSerial(),
             'artist' => $artwork->getArtist(),
-            'artistGender' => $artwork->getArtistGender(),
             'type' => $artwork->getType(),
             'dimensions' => $this->getDimensions($artwork),
-            'building' => $artwork->getBuilding(),
-            'geo' => $artwork->getGeo(),
             'description' => $artwork->getDescription(),
-            'organization' => $artwork->getOrganization(),
-            'department' => $artwork->getDepartment(),
+            'committeeDescription' => $artwork->getCommitteeDescription(),
             'price' => $artwork->getPurchasePrice(),
             'productionYear' => $artwork->getProductionYear(),
             'estimatedValue' => $artwork->getAssessmentPrice(),
@@ -204,8 +202,7 @@ class FrontendController extends AbstractController
     private function getSearchForm()
     {
         $typeChoices = $this->tagService->getChoices(Artwork::class, 'type');
-        $buildingChoices = $this->tagService->getChoices(Artwork::class, 'building');
-        $artistGenderChoices = $this->tagService->getChoices(Artwork::class, 'artistGender');
+        $statusChoices = $this->tagService->getChoices(Artwork::class, 'status');
 
         $formBuilder = $this->createFormBuilder();
         $formBuilder
@@ -235,16 +232,13 @@ class FrontendController extends AbstractController
                 ]
             )
             ->add(
-                'building',
+                'status',
                 ChoiceType::class,
                 [
-                    'label' => 'filter.building',
-                    'placeholder' => 'filter.building_placeholder',
+                    'label' => 'filter.status',
+                    'placeholder' => 'filter.status_placeholder',
                     'required' => false,
-                    'choices' => $buildingChoices,
-                    'attr' => [
-                        'class' => 'tag-select',
-                    ],
+                    'choices' => $statusChoices,
                 ]
             )
             ->add(
@@ -295,16 +289,6 @@ class FrontendController extends AbstractController
                         'placeholder' => 'filter.year_to_placeholder',
                     ],
                     'required' => false,
-                ]
-            )
-            ->add(
-                'artistGender',
-                ChoiceType::class,
-                [
-                    'label' => 'filter.artist_gender',
-                    'required' => false,
-                    'placeholder' => 'filter.artist_gender_placeholder',
-                    'choices' => $artistGenderChoices,
                 ]
             )
             ->add(

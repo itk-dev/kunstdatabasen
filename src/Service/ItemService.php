@@ -73,6 +73,7 @@ class ItemService
             $renderObject->artistGender = $item->getArtistGender();
             $renderObject->dimensions = $this->getDimensions($item);
             $renderObject->price = $item->getPurchasePrice();
+            $renderObject->committeeDescription = $item->getCommitteeDescription();
             $renderObject->productionYear = $item->getProductionYear();
             $renderObject->estimatedValue = $item->getAssessmentPrice();
             $renderObject->estimatedValueDate = $item->getAssessmentDate() ? $item->getAssessmentDate()->format('d/m Y') : null;

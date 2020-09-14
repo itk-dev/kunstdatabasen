@@ -55,24 +55,11 @@
                 </div>
                 <div class="col-md-12">
                     <label for="detailsDescription">{{ 'frontend.item.description'|trans }}</label>
-                    <p>{{ data.artwork.description }}</p>
+                    <p>{{ data.artwork.description ? data.artwork.description|nl2br : '' }}</p>
                 </div>
-            </div>
-            <div class="row mt-3">
-                <div class="col-12">
-                    <h2 class="h4 border-bottom pb-2">{{ 'frontend.item.location'|trans }}</h2>
-                </div>
-                <div class="col-md-4">
-                    <label for="detailsDepartment">{{ 'frontend.item.department'|trans }}</label>
-                    <p>{{ data.artwork.department }}</p>
-                </div>
-                <div class="col-md-4">
-                    <label for="detailsBuilding">{{ 'frontend.item.building'|trans }}</label>
-                    <p>{{ data.artwork.building }}</p>
-                </div>
-                <div class="col-md-4">
-                    <label for="detailsGeo">{{ 'frontend.item.geo'|trans }}</label>
-                    <p>{{ data.artwork.geo }}</p>
+                <div class="col-md-12">
+                    <label for="detailsCommitteeDescription">{{ 'frontend.item.committee_description'|trans }}</label>
+                    <p>{{ data.artwork.committeeDescription ? data.artwork.committeeDescription|nl2br : '' }}</p>
                 </div>
             </div>
             <div class="row mt-3">
@@ -100,8 +87,14 @@
                     <p>{{ data.artwork.estimatedValueDate }}</p>
                 </div>
                 <div class="col-md-4">
-                    <label for="detailsArtistGender">{{ 'frontend.item.artist_gender'|trans }}</label>
-                    <p>{{ data.artwork.artistGender }}</p>
+                    <label for="detailsStatus">{{ 'frontend.item.status'|trans }}</label>
+                    <p>
+                        {% if data.artwork.status == "Udlånt" %}
+                            <span class="badge badge-pill badge-dark">{{ data.artwork.status ?? '' }}</span>
+                        {% else %}
+                            <span class="badge badge-pill badge-success">{{ data.artwork.status ?? '' }}</span>
+                        {% endif %}
+                    </p>
                 </div>
             </div>
         </div>

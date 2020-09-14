@@ -73,6 +73,11 @@ class Artwork extends Item
     private $artistGender;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $committeeDescription;
+
+    /**
      * @return string|null
      */
     public function getArtist(): ?string
@@ -296,6 +301,26 @@ class Artwork extends Item
     public function setArtistGender(?string $artistGender): self
     {
         $this->artistGender = $artistGender;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCommitteeDescription(): ?string
+    {
+        return $this->committeeDescription;
+    }
+
+    /**
+     * @param string|null $committeeDescription
+     *
+     * @return $this
+     */
+    public function setCommitteeDescription(?string $committeeDescription): self
+    {
+        $this->committeeDescription = $committeeDescription;
 
         return $this;
     }

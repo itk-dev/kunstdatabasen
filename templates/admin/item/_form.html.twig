@@ -18,6 +18,9 @@
         <div class="col-md-12">
             {{ form_row(form.description) }}
         </div>
+        <div class="col-md-12">
+            {{ form_row(form.comment) }}
+        </div>
     </div>
     {% if itemType == 'artwork' %}
     <div class="row mt-5">
@@ -42,6 +45,12 @@
         <div class="col-4 col-md-4">
             {{ form_row(form.assessmentPrice) }}
         </div>
+        <div class="col-md-12">
+            {{ form_row(form.committeeDescription) }}
+        </div>
+        <div class="col-md-12">
+            {{ form_row(form.artistGender) }}
+        </div>
     </div>
     {% endif %}
     <div class="row mt-5">
@@ -65,6 +74,9 @@
         </div>
         <div class="col-8 col-md-4">
             {{ form_row(form.city) }}
+        </div>
+        <div class="col-md-12">
+            {{ form_row(form.geo) }}
         </div>
         <div class="col-md-12">
             {{ form_row(form.publiclyAccessible) }}
@@ -105,15 +117,6 @@
         </div>
     </div>
     <div class="row mt-5">
-        <div class="col-md-12 mb-3">
-            <h2 class="h5">{{ 'item.form.extra'|trans }}</h2>
-        </div>
-        <div class="col-md-12">
-            {{ form_row(form.geo) }}
-        </div>
-        <div class="col-md-12">
-            {{ form_row(form.comment) }}
-        </div>
         <div class="col-md-12">
             {{ form_rest(form) }}
         </div>
