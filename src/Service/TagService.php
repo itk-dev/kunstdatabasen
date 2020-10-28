@@ -29,6 +29,7 @@ class TagService
      *
      * @param \App\Repository\TagRepository        $tagRepository
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
+     * @param ItemRepository                       $itemRepository
      */
     public function __construct(TagRepository $tagRepository, EntityManagerInterface $entityManager, ItemRepository $itemRepository)
     {
@@ -62,10 +63,11 @@ class TagService
     /**
      * Refresh tags.
      */
-    public function refreshTags() {
+    public function refreshTags()
+    {
         $items = $this->itemRepository->findAll();
 
-        echo count($items) . " items.\n";
+        echo \count($items)." items.\n";
 
         foreach ($items as $item) {
             echo '.';
@@ -96,32 +98,6 @@ class TagService
         }
 
         $this->entityManager->flush();
-    }
-
-    /**
-     * Add tag without removing old tags.
-     *
-     * @param Item $item
-     * @param string $field
-     * @param $value
-     */
-    private function addTagWithoutCleanup(Item $item, string $field, $value) {
-        $classname = \get_class($item);
-        $tag = $this->tagRepository->findOneBy([
-            'class' => $classname,
-            'field' => $field,
-            'value' => $value,
-        ]);
-
-        // If the tag does not exist, add it.
-        if (null === $tag) {
-            $tag = new Tag();
-            $tag->setClass($classname);
-            $tag->setField($field);
-            $tag->setValue($value);
-
-            $this->entityManager->persist($tag);
-        }
     }
 
     /**
@@ -180,5 +156,32 @@ class TagService
         }
 
         $this->entityManager->flush();
+    }
+
+    /**
+     * Add tag without removing old tags.
+     *
+     * @param Item   $item
+     * @param string $field
+     * @param $value
+     */
+    private function addTagWithoutCleanup(Item $item, string $field, $value)
+    {
+        $classname = \get_class($item);
+        $tag = $this->tagRepository->findOneBy([
+            'class' => $classname,
+            'field' => $field,
+            'value' => $value,
+        ]);
+
+        // If the tag does not exist, add it.
+        if (null === $tag) {
+            $tag = new Tag();
+            $tag->setClass($classname);
+            $tag->setField($field);
+            $tag->setValue($value);
+
+            $this->entityManager->persist($tag);
+        }
     }
 }

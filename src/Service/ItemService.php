@@ -18,7 +18,6 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
@@ -36,9 +35,11 @@ class ItemService
     /**
      * ItemService constructor.
      *
-     * @param UploaderHelper $uploaderHelper
-     * @param UrlGeneratorInterface $router
+     * @param UploaderHelper         $uploaderHelper
+     * @param UrlGeneratorInterface  $router
      * @param EntityManagerInterface $entityManager
+     * @param ItemRepository         $itemRepository
+     * @param TagService             $tagService
      */
     public function __construct(UploaderHelper $uploaderHelper, UrlGeneratorInterface $router, EntityManagerInterface $entityManager, ItemRepository $itemRepository, TagService $tagService)
     {
@@ -216,7 +217,7 @@ class ItemService
      * The images should be named [inventoryId].jpg
      *
      * @param string $folder
-     *   The folder to import from
+     *                       The folder to import from
      */
     public function importFromImages(string $folder)
     {
@@ -230,7 +231,7 @@ class ItemService
             /** @var Item $item */
             $item = $this->itemRepository->findOneBy(['inventoryId' => $filename]);
 
-            if ($item !== null) {
+            if (null !== $item) {
                 try {
                     $image = new Image();
                     $image->setImageFile(new File($file->getRealPath()));
@@ -240,14 +241,12 @@ class ItemService
                     $item->addImage($image);
                     $this->entityManager->persist($image);
 
-                    echo $filename . " found. Added image.\n";
+                    echo $filename." found. Added image.\n";
+                } catch (\Exception $exception) {
+                    echo $filename." produced an error. Ignoring file.\n";
                 }
-                catch (\Exception $exception) {
-                    echo $filename . " produced an error. Ignoring file.\n";
-                }
-            }
-            else {
-                echo $filename . " not found. Ignoring file.\n";
+            } else {
+                echo $filename." not found. Ignoring file.\n";
             }
         }
 

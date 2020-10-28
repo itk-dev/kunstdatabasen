@@ -1,16 +1,22 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\Command;
 
-use App\Service\ItemService;
 use App\Service\TagService;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+/**
+ * Class RefreshTagsCommand.
+ */
 class RefreshTagsCommand extends Command
 {
     protected static $defaultName = 'app:refresh-tags';
@@ -20,7 +26,7 @@ class RefreshTagsCommand extends Command
      * ImportSpreadsheetCommand constructor.
      *
      * @param TagService $tagService
-     *   The tag service
+     *                               The tag service
      */
     public function __construct(TagService $tagService)
     {
@@ -29,6 +35,9 @@ class RefreshTagsCommand extends Command
         parent::__construct();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function configure()
     {
         $this
@@ -36,6 +45,9 @@ class RefreshTagsCommand extends Command
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
