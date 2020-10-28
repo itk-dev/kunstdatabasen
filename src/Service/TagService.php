@@ -8,8 +8,10 @@
 
 namespace App\Service;
 
+use App\Entity\Artwork;
 use App\Entity\Item;
 use App\Entity\Tag;
+use App\Repository\ItemRepository;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -20,17 +22,20 @@ class TagService
 {
     private $tagRepository;
     private $entityManager;
+    private $itemRepository;
 
     /**
      * TagService constructor.
      *
      * @param \App\Repository\TagRepository        $tagRepository
      * @param \Doctrine\ORM\EntityManagerInterface $entityManager
+     * @param ItemRepository                       $itemRepository
      */
-    public function __construct(TagRepository $tagRepository, EntityManagerInterface $entityManager)
+    public function __construct(TagRepository $tagRepository, EntityManagerInterface $entityManager, ItemRepository $itemRepository)
     {
         $this->tagRepository = $tagRepository;
         $this->entityManager = $entityManager;
+        $this->itemRepository = $itemRepository;
     }
 
     /**
@@ -53,6 +58,46 @@ class TagService
         }
 
         return $choices;
+    }
+
+    /**
+     * Refresh tags.
+     */
+    public function refreshTags()
+    {
+        $items = $this->itemRepository->findAll();
+
+        echo \count($items)." items.\n";
+
+        foreach ($items as $item) {
+            echo '.';
+
+            $organization = $item->getOrganization();
+            $building = $item->getBuilding();
+            $type = $item->getType();
+            $address = $item->getAddress();
+            $city = $item->getCity();
+            $room = $item->getRoom();
+            $location = $item->getLocation();
+            $status = $item->getStatus();
+
+            $artistGender = null;
+            if ($item instanceof Artwork) {
+                $artistGender = $item->getArtistGender();
+            }
+
+            null !== $type && $this->addTagWithoutCleanup($item, 'type', $type);
+            null !== $organization && $this->addTagWithoutCleanup($item, 'organization', $organization);
+            null !== $building && $this->addTagWithoutCleanup($item, 'building', $building);
+            null !== $address && $this->addTagWithoutCleanup($item, 'address', $address);
+            null !== $city && $this->addTagWithoutCleanup($item, 'city', $city);
+            null !== $room && $this->addTagWithoutCleanup($item, 'room', $room);
+            null !== $status && $this->addTagWithoutCleanup($item, 'status', $status);
+            null !== $location && $this->addTagWithoutCleanup($item, 'location', $location);
+            null !== $artistGender && $this->addTagWithoutCleanup($item, 'artistGender', $artistGender);
+        }
+
+        $this->entityManager->flush();
     }
 
     /**
@@ -111,5 +156,32 @@ class TagService
         }
 
         $this->entityManager->flush();
+    }
+
+    /**
+     * Add tag without removing old tags.
+     *
+     * @param Item   $item
+     * @param string $field
+     * @param $value
+     */
+    private function addTagWithoutCleanup(Item $item, string $field, $value)
+    {
+        $classname = \get_class($item);
+        $tag = $this->tagRepository->findOneBy([
+            'class' => $classname,
+            'field' => $field,
+            'value' => $value,
+        ]);
+
+        // If the tag does not exist, add it.
+        if (null === $tag) {
+            $tag = new Tag();
+            $tag->setClass($classname);
+            $tag->setField($field);
+            $tag->setValue($value);
+
+            $this->entityManager->persist($tag);
+        }
     }
 }

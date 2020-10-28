@@ -10,9 +10,14 @@ namespace App\Service;
 
 use App\Entity\Artwork;
 use App\Entity\Furniture;
+use App\Entity\Image;
 use App\Entity\Item;
+use App\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
 
@@ -24,25 +29,31 @@ class ItemService
     protected $uploaderHelper;
     protected $router;
     protected $entityManager;
+    protected $itemRepository;
+    protected $tagService;
 
     /**
      * ItemService constructor.
      *
-     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper      $uploaderHelper
-     * @param \Symfony\Component\Routing\Generator\UrlGeneratorInterface $router
-     * @param \Doctrine\ORM\EntityManagerInterface                       $entityManager
+     * @param UploaderHelper         $uploaderHelper
+     * @param UrlGeneratorInterface  $router
+     * @param EntityManagerInterface $entityManager
+     * @param ItemRepository         $itemRepository
+     * @param TagService             $tagService
      */
-    public function __construct(UploaderHelper $uploaderHelper, UrlGeneratorInterface $router, EntityManagerInterface $entityManager)
+    public function __construct(UploaderHelper $uploaderHelper, UrlGeneratorInterface $router, EntityManagerInterface $entityManager, ItemRepository $itemRepository, TagService $tagService)
     {
         $this->uploaderHelper = $uploaderHelper;
         $this->router = $router;
         $this->entityManager = $entityManager;
+        $this->itemRepository = $itemRepository;
+        $this->tagService = $tagService;
     }
 
     /**
      * Create render object for item.
      *
-     * @param \App\Entity\Item $item
+     * @param Item $item
      *
      * @return object
      */
@@ -123,6 +134,8 @@ class ItemService
         $content = $spreadsheet->getActiveSheet()->toArray();
 
         foreach ($content as $entry) {
+            echo '.';
+
             $item = null;
 
             $unMappable = [];
@@ -192,6 +205,48 @@ class ItemService
                 $this->entityManager->persist($item);
                 $this->entityManager->flush();
                 $this->entityManager->clear();
+            }
+        }
+
+        $this->entityManager->flush();
+    }
+
+    /**
+     * Import images from folder.
+     *
+     * The images should be named [inventoryId].jpg
+     *
+     * @param string $folder
+     *                       The folder to import from
+     */
+    public function importFromImages(string $folder)
+    {
+        $finder = new Finder();
+        $files = $finder->in($folder)->files()->name('*.jpg');
+
+        /** @var SplFileInfo $file */
+        foreach ($files as $file) {
+            $filename = $file->getFilenameWithoutExtension();
+
+            /** @var Item $item */
+            $item = $this->itemRepository->findOneBy(['inventoryId' => $filename]);
+
+            if (null !== $item) {
+                try {
+                    $image = new Image();
+                    $image->setImageFile(new File($file->getRealPath()));
+                    $image->setImageSize($file->getSize());
+                    $image->setImageName('../migration_images/'.$file->getFilename());
+                    $image->setPrimaryImage(true);
+                    $item->addImage($image);
+                    $this->entityManager->persist($image);
+
+                    echo $filename." found. Added image.\n";
+                } catch (\Exception $exception) {
+                    echo $filename." produced an error. Ignoring file.\n";
+                }
+            } else {
+                echo $filename." not found. Ignoring file.\n";
             }
         }
 
