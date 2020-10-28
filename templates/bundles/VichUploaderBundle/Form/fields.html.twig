@@ -1,0 +1,23 @@
+{%- block vich_image_row -%}
+    {%- set force_error = true -%}
+    {# twigcs use-var force_error #}
+    {{- block('form_row') -}}
+{%- endblock -%}
+
+{%- block vich_image_widget -%}
+    <div class="row vich-image">
+        <div class="col-4 js-image-preview">
+            {%- if image_uri -%}
+                <a href="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" target="_blank">
+                    <img class="img-fluid" src="{{ asset_helper is same as(true) ? asset(image_uri) : image_uri }}" alt="" />
+                </a>
+            {%- endif -%}
+        </div>
+        <div class="col">
+            {{- form_widget(form.file) -}}
+
+            <div class="image-form-details mt-2 mb-2">
+            </div>
+        </div>
+    </div>
+{%- endblock -%}

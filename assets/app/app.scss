@@ -1,0 +1,33 @@
+@import '../custom-variables';
+@import '../base';
+
+@import '~bootstrap/scss/buttons';
+@import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/custom-forms';
+@import '~bootstrap/scss/tables';
+@import '~bootstrap/scss/pagination';
+@import '~bootstrap/scss/transitions';
+@import '~bootstrap/scss/images';
+@import '~bootstrap/scss/badge';
+@import '~bootstrap/scss/navbar';
+@import '~bootstrap/scss/carousel';
+@import '~bootstrap/scss/modal';
+
+@import '../partials/toggle-button';
+
+// Table styling
+
+.table {
+  // Style table header
+  th {
+    font-weight: normal;
+  }
+}
+
+// Art details styling
+
+.art-details {
+  label {
+    font-size: $sizer * 0.75;
+  }
+}

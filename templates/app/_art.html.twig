@@ -1,0 +1,117 @@
+<div class="container">
+    <div class="row my-3">
+        <div class="col">
+            <a href="{{ indexLink ?: '' }}"><span class="text-secondary" aria-hidden="true">&laquo;</span> {{ 'frontend.back_to_list'|trans }}</a>
+        </div>
+    </div>
+    <div class="row art-details">
+        <div class="col-md-12 mb-3">
+            <label for="detailsTitle">{{ 'frontend.item.title'|trans }}</label>
+            <h1 id="detailsTitle">{{ data.artwork.title }}</h1>
+        </div>
+        <div class="col-md-3">
+            <div id="carouselImageIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+                <div class="carousel-inner">
+                    {% for image in data.artwork.images %}
+                        <div class="carousel-item{% if loop.first %} active{% endif %}" class="position-relative">
+                            <a href="#" class="js-image-full" data-src="{{ image }}">
+                                <img class="d-block w-100" src="{{ asset(image)|imagine_filter('preview') }}" alt="Billede">
+                                <span class="position-absolute bg-dark text-light rounded-circle py-1 px-2" style="right: 1em; bottom: 0.5em;" >
+                                    <span class="sr-only">
+                                        {{ 'image-carousel.expand'|trans }}
+                                    </span>
+                                    <i class="fas fa-expand"></i>
+                                </span>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% if data.artwork.images|length > 1 %}
+            <div class="d-flex justify-content-between mt-1">
+                <a href="#carouselImageIndicators" role="button" data-slide="prev" class="text-dark ml-5">
+                    <span class="sr-only">{{ 'image-carousel.previous'|trans }}</span> <i class="fas fa-arrow-alt-circle-left" aria-hidden="true"></i>
+                </a>
+                <span><span id="carouselImageActiveIndex">1</span> / {{ data.artwork.images|length }}</span>
+                <a href="#carouselImageIndicators" role="button" data-slide="next" class="text-dark mr-5">
+                    <span class="sr-only">{{ 'image-carousel.next'|trans }}</span> <i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="detailsArtist">{{ 'frontend.item.artist'|trans }}</label>
+                    <p>{{ data.artwork.artist }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsType">{{ 'frontend.item.type'|trans }}</label>
+                    <p>{{ data.artwork.type }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsDimensions">{{ 'frontend.item.dimensions'|trans }}</label>
+                    <p>{{ data.artwork.dimensions }}</p>
+                </div>
+                <div class="col-md-12">
+                    <label for="detailsDescription">{{ 'frontend.item.description'|trans }}</label>
+                    <p>{{ data.artwork.description ? data.artwork.description|nl2br : '' }}</p>
+                </div>
+                <div class="col-md-12">
+                    <label for="detailsCommitteeDescription">{{ 'frontend.item.committee_description'|trans }}</label>
+                    <p>{{ data.artwork.committeeDescription ? data.artwork.committeeDescription|nl2br : '' }}</p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h2 class="h4 border-bottom pb-2">{{ 'frontend.item.further_information'|trans }}</h2>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsArtNo">{{ 'frontend.item.art_serial'|trans }}</label>
+                    <p>{{ data.artwork.artNo }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsPrice">{{ 'frontend.item.purchase_price'|trans }}</label>
+                    <p>{{ data.artwork.price }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsProductionYear">{{ 'frontend.item.production_year'|trans }}</label>
+                    <p>{{ data.artwork.productionYear }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsEstimatedValue">{{ 'frontend.item.assessment_price'|trans }}</label>
+                    <p>{{ data.artwork.estimatedValue }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsEstimatedValue">{{ 'frontend.item.assessment_date'|trans }}</label>
+                    <p>{{ data.artwork.estimatedValueDate }}</p>
+                </div>
+                <div class="col-md-4">
+                    <label for="detailsStatus">{{ 'frontend.item.status'|trans }}</label>
+                    <p>
+                        {% if data.artwork.status == "Udlånt" %}
+                            <span class="badge badge-pill badge-dark">{{ data.artwork.status ?? '' }}</span>
+                        {% else %}
+                            <span class="badge badge-pill badge-success">{{ data.artwork.status ?? '' }}</span>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" id="carouselImageModal">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn close" data-dismiss="modal" aria-label="{{ 'action.close'|trans }}">
+                        <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img class="img-fluid" id="carouselImageFull" src="" alt="{{ 'frontend.image_large'|trans }}">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

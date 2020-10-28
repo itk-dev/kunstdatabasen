@@ -1,0 +1,22 @@
+/* stylelint-disable */
+// Toggle button texts with collapse
+button[aria-expanded='false'] {
+  > .true {
+    display: none;
+  }
+
+  > :not(.true) {
+    display: inline;
+  }
+}
+
+button[aria-expanded='true'] {
+  > .true {
+    display: inline;
+  }
+
+  > :not(.true) {
+    display: none;
+  }
+}
+/* stylelint-enable */

@@ -1,0 +1,23 @@
+/* Overwrite bootstrap variables */
+
+/* Replace body font color*/
+$body-color: #333;
+
+/* Set primary color */
+$blue: #3661d8;
+$primary: $blue;
+
+/* Set secondary color */
+$pink: #ee0043;
+$secondary: $pink;
+
+/* Set primary font */
+$font-family-sans-serif: Arial, Helvetica, sans-serif;
+
+/* Set sizeing variable */
+$sizer: 1rem;
+
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/variables';
+
