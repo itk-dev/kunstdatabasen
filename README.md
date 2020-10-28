@@ -19,7 +19,7 @@ itkdev-docker-compose bin/console app:create-user
 
 ## Production
 
-@TODO
+@TODO: Describe production setup and deployment.
 
 ## Migration in production
 
