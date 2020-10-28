@@ -17,14 +17,19 @@ itkdev-docker-compose bin/console hautelook:fixtures:load
 itkdev-docker-compose bin/console app:create-user
 ```
 
+## Production
+
+@TODO
+
 ## Migration in production
 
 Run the migration command:
 ```
 bin/console app:import-spreadsheet var/migration.xls
+bin/console app:refresh-tags
 ```
 
-Add image files in a folder (`public/images/migration_images`) each named after the inventory_id they match, eg.`1000.jpg`.
+Add image files in a folder (`public/images/migration_images`) each named after the inventoryId they match, eg.`1000.jpg`.
 
 Attach images to Items
 ```
