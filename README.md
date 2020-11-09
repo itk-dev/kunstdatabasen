@@ -15,6 +15,12 @@ itkdev-docker-compose bin/console hautelook:fixtures:load
 # Create an admin user
 # Choose ROLE_ADMIN for roles
 itkdev-docker-compose bin/console app:create-user
+
+# Install yarn
+docker-compose run yarn install
+
+# Run or build yarn
+docker-compose run yarn watch # or docker-compose run yarn build for production build
 ```
 
 ## Production
