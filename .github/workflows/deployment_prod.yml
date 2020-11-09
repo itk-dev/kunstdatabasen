@@ -31,7 +31,7 @@ jobs:
         uses: itk-dev/actions-rsync@master
         with:
           src: public/build
-          dest: ${{ secrets.APP_PATH_PROD }}/public/build
+          dest: ${{ secrets.APP_PATH_PROD }}/public/
           host: ${{ secrets.HOST_PROD }}
           key: ${{ secrets.PRIVATE_KEY }}
           cert: ${{ secrets.PUBLIC_KEY_CERT }}
