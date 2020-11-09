@@ -16,6 +16,15 @@ itkdev-docker-compose bin/console hautelook:fixtures:load
 # Choose ROLE_ADMIN for roles
 itkdev-docker-compose bin/console app:create-user
 ```
+### Install dev dependencies
+
+run `yarn install` and `yarn build`
+
+You can watch for changes in development and build new assets with by running `yarn watch`
+
+### Browsersync
+
+For testing and to autoreload browser you kan run browsersync with `browser-sync start --config bs-config.js`
 
 ## Production
 
