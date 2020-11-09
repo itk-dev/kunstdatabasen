@@ -52,6 +52,7 @@ class ArkworkType extends AbstractType
             ])
             ->add('description', null, [
                 'label' => 'item.description',
+                'help' => 'item.description.helpText',
             ])
             ->add('purchasePrice', null, [
                 'label' => 'item.purchase_price',
