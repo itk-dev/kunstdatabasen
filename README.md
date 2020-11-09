@@ -6,6 +6,9 @@
 # Start docker
 itkdev-docker-compose up -d
 
+# Install
+itkdev-docker-compose composer install
+
 # Run migrations
 itkdev-docker-compose bin/console doctrine:migrations:migrate
 
@@ -16,6 +19,8 @@ itkdev-docker-compose bin/console hautelook:fixtures:load
 # Choose ROLE_ADMIN for roles
 itkdev-docker-compose bin/console app:create-user
 ```
+
+
 
 ## Production
 
