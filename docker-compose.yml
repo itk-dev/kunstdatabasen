@@ -53,3 +53,9 @@ services:
       - "traefik.enable=true"
       - "traefik.docker.network=frontend"
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${COMPOSE_DOMAIN}`)"
+  yarn:
+    image: itkdev/yarn:latest
+    networks:
+      - app
+    volumes:
+      - .:/app:delegated
