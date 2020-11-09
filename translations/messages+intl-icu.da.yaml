@@ -101,7 +101,9 @@ item.artist: Kunstner
 item.artist_gender: Kunstners køn
 item.type: Type
 item.width: Bredde
+item.width.helpText: Bredde i cm 
 item.height: Højde
+item.height.helpText: Højde i cm 
 item.description: Beskrivelse
 item.location: Placering
 item.department: Afdeling
@@ -123,8 +125,11 @@ item.city: By
 item.barcode: Stregkode
 admin.item.delete: Slet
 item.depth: Dybde
+item.depth.helpText: Dybde i cm 
 item.diameter: Diameter
+item.diameter.helpText: Diameter i cm 
 item.weight: Vægt
+item.weight.helpText: Vægt i kg 
 image.file_placeholder: Vælg fil
 image.primary_image: Primært billede
 item.images: Billeder

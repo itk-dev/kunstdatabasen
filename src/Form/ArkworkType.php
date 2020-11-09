@@ -175,15 +175,19 @@ class ArkworkType extends AbstractType
             ])
             ->add('width', null, [
                 'label' => 'item.width',
+                'help' => 'item.width.helpText',
             ])
             ->add('height', null, [
                 'label' => 'item.height',
+                'help' => 'item.height.helpText',
             ])
             ->add('depth', null, [
                 'label' => 'item.depth',
+                'help' => 'item.depth.helpText',
             ])
             ->add('diameter', null, [
                 'label' => 'item.diameter',
+                'help' => 'item.diameter.helpText',
             ])
             ->add('committeeDescription', TextareaType::class, [
                 'label' => 'item.committee_description',
@@ -191,6 +195,7 @@ class ArkworkType extends AbstractType
             ])
             ->add('weight', null, [
                 'label' => 'item.weight',
+                'help' => 'item.weight.helpText',
             ]);
 
         // Allow for new options from the user.
