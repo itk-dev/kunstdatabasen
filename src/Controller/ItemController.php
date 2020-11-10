@@ -85,9 +85,9 @@ class ItemController extends BaseController
                 'items' => $items,
                 'title' => 'Kunstdatabasen',
                 'headline' => 'item.list.item',
-                'brand' => 'Aarhus kommunes kunstdatabase',
+                'brand' => 'Aarhus Kommunes kunstsamling og udsmykninger',
                 'brandShort' => 'Kunstdatabasen',
-                'welcome' => 'Velkommen til Aarhus Kommunes kunstdatabase',
+                'welcome' => 'Velkommen til Aarhus Kommunes kunstsamling og udsmykninger',
                 'user' => [
                     'username' => 'Admin user',
                     'email' => 'admin@email.com',

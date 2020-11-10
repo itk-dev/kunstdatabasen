@@ -1,4 +1,5 @@
-footer.text: 'Aarhus kommunes kunstdatabase'
+Aarhus Kommunes kunstdatabase: Aarhus Kommunes kunstsamling og udsmykninger
+footer.text: 'Aarhus Kommunes kunstsamling og udsmykninger'
 frontend.search.submit: Søg
 filters.year: År
 filters.price: Indkøbspris
@@ -45,7 +46,7 @@ image-carousel.next: Næste
 pager.navigation: Paginering
 pager.previous: Forrige
 pager.next: Næste
-admin.welcome: 'Velkommen til Aarhus Kommunes kunstdatabase'
+admin.welcome: 'Velkommen til Aarhus Kommunes kunstsamling og udsmykninger'
 admin.table.thumpnail: Billede
 admin.table.title: Titel
 admin.table.art_serial: Art.No.
@@ -80,7 +81,7 @@ item.form.placement: Placering
 item.form.attributes: Attributter
 item.form.images: Billeder
 item.form.extra: Ekstra
-title: Aarhus Kommunes kunstdatabase
+title: Aarhus Kommunes kunstsamling og udsmykninger
 admin.index: Forside
 admin.item.edit: Redigér
 admin.item.new: Opret nyt
@@ -88,7 +89,7 @@ admin.index.help: Hjælp og vejledning
 admin.index.help.github: Github kildekode
 item.form.list: Liste
 frontend.no_title: '-- Uden titel --'
-'Aarhus Kommunes kunstdatabase': 'Aarhus Kommunes kunstdatabase'
+'Aarhus Kommunes kunstsamling og udsmykninger': 'Aarhus Kommunes kunstsamling og udsmykninger'
 'Aarhus Kommunes Byvåben': 'Aarhus Kommunes Byvåben'
 'Side navigation': 'Side navigation'
 Forrige: Forrige
@@ -101,8 +102,11 @@ item.artist: Kunstner
 item.artist_gender: Kunstners køn
 item.type: Type
 item.width: Bredde
+item.width.helpText: Bredde i cm 
 item.height: Højde
+item.height.helpText: Højde i cm 
 item.description: Beskrivelse
+item.description.helpText: Hvilke tanker/overvejelser ligger der bag værk/værkerne? Hvordan kan værket/værkerne ses i forhold til dit øvrige arbejde? Hvilke materialer og/eller teknikker har du brugt?
 item.location: Placering
 item.department: Afdeling
 item.building: Bygning
@@ -123,8 +127,11 @@ item.city: By
 item.barcode: Stregkode
 admin.item.delete: Slet
 item.depth: Dybde
+item.depth.helpText: Dybde i cm 
 item.diameter: Diameter
+item.diameter.helpText: Diameter i cm 
 item.weight: Vægt
+item.weight.helpText: Vægt i kg 
 image.file_placeholder: Vælg fil
 image.primary_image: Primært billede
 item.images: Billeder
