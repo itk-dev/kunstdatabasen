@@ -11,12 +11,11 @@ The default `.env` file that comes with the projekt is configured out-of-the-box
 
 ```sh
 docker-compose up -d
-```
 
-### Run migrations
-To setup the database we use doctrin migrations, so execute them first.
+# Install
+itkdev-docker-compose composer install
 
-```sh
+# Run migrations
 itkdev-docker-compose bin/console doctrine:migrations:migrate
 ```
 
@@ -32,6 +31,17 @@ itkdev-docker-compose bin/console hautelook:fixtures:load
 ```sh
 itkdev-docker-compose bin/console app:create-user
 ```
+### Install dev dependencies
+
+run `yarn install` and `yarn build`
+
+You can watch for changes in development and build new assets with by running `yarn watch`
+
+### Browsersync
+
+For testing and to autoreload browser you kan run browsersync with `browser-sync start --config bs-config.js`
+
+
 
 ## Build the front end
 The frontend is using web-pack and yarn to handle packages. First install the packages.
