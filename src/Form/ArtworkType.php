@@ -10,6 +10,7 @@ namespace App\Form;
 
 use App\Entity\Artwork;
 use App\Service\TagService;
+use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -21,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class ArtworkType.
  */
-class ArkworkType extends AbstractType
+class ArtworkType extends AbstractType
 {
     /* @var TagService $tagService */
     private $tagService;
@@ -56,6 +57,20 @@ class ArkworkType extends AbstractType
             ])
             ->add('purchasePrice', null, [
                 'label' => 'item.purchase_price',
+            ])
+            ->add('purchaseDate', null, [
+                'label' => 'item.purchase_date',
+                'html5' => true,
+                'widget' => 'single_text',
+                'required' => false,
+                'help' => 'item.purchase_date.helpText',
+            ])
+            ->add('locationDate', null, [
+                'label' => 'item.location_date',
+                'html5' => true,
+                'widget' => 'single_text',
+                'required' => false,
+                'help' => 'item.location_date.helpText',
             ])
             ->add('status', ChoiceType::class, [
                 'attr' => [

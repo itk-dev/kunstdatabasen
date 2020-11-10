@@ -145,6 +145,11 @@ class Item
     private $barcode;
 
     /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $locationDate;
+
+    /**
      * Artwork constructor.
      */
     public function __construct()
@@ -617,6 +622,18 @@ class Item
     public function setBarcode(?string $barcode): self
     {
         $this->barcode = $barcode;
+
+        return $this;
+    }
+
+    public function getLocationDate(): ?\DateTimeInterface
+    {
+        return $this->locationDate;
+    }
+
+    public function setLocationDate(?\DateTimeInterface $locationDate): self
+    {
+        $this->locationDate = $locationDate;
 
         return $this;
     }
