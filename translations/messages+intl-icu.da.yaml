@@ -150,3 +150,4 @@ item.purchase_date.helpText: mm-dd-åååå
 item.location_date: Placeringsdato
 item.location_date.helpText: mm-dd-åååå
 frontend.item.purchase_date: Indkøbsdato
+frontend.item.image: Billede
