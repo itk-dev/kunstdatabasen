@@ -18,7 +18,7 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20201110103237 extends AbstractMigration
 {
-     /**
+    /**
      * @return string
      */
     public function getDescription(): string
@@ -38,7 +38,7 @@ final class Version20201110103237 extends AbstractMigration
 
         $this->addSql('ALTER TABLE item ADD location_date DATE DEFAULT NULL');
     }
-    
+
     /**
      * @param \Doctrine\DBAL\Schema\Schema $schema
      *
