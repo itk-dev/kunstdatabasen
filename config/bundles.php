@@ -18,4 +18,5 @@ return [
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
     Knp\Bundle\PaginatorBundle\KnpPaginatorBundle::class => ['all' => true],
     Liip\ImagineBundle\LiipImagineBundle::class => ['all' => true],
+    ItkDev\WebAccessibilityStatementBundle\ItkDevWebAccessibilityStatementBundle::class => ['all' => true],
 ];

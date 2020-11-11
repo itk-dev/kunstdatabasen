@@ -134,6 +134,9 @@
     "itk-dev/mock-up-bundle": {
         "version": "dev-master"
     },
+    "itk-dev/web-accessibility-statement-bundle": {
+        "version": "1.0.2"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
