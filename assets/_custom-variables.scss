@@ -17,6 +17,9 @@ $font-family-sans-serif: Arial, Helvetica, sans-serif;
 /* Set sizeing variable */
 $sizer: 1rem;
 
+/*Replace text-muted color*/
+$text-muted: #6B747B;
+
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/variables';
