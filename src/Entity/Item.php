@@ -626,11 +626,19 @@ class Item
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLocationDate(): ?\DateTimeInterface
     {
         return $this->locationDate;
     }
 
+    /**
+     * @param string|null $locationDate
+     *
+     * @return $this
+     */
     public function setLocationDate(?\DateTimeInterface $locationDate): self
     {
         $this->locationDate = $locationDate;
