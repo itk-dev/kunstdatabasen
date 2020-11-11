@@ -10,7 +10,6 @@ namespace App\Form;
 
 use App\Entity\Artwork;
 use App\Service\TagService;
-use DateTime;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
