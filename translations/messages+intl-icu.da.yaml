@@ -144,3 +144,10 @@ filter.status_placeholder: Alle statusser
 frontend.item.status: Status
 frontend.item.committee_description: Kunstudvalgets beskrivelse
 item.committee_description: Kunstudvalgets beskrivelse
+item.purchase_date: Indkøbsdato
+item.purchase_date.helpText: mm-dd-åååå
+item.location_date: Placeringsdato
+item.location_date.helpText: mm-dd-åååå
+frontend.item.purchase_date: Indkøbsdato
+frontend.item.image: Billede
+frontend.image.alt: Værk af
