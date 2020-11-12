@@ -149,3 +149,9 @@ filter.priceFrom: Indkøbspris fra
 filter.yearTo: Til år
 filter.yearFrom: Fra år
 frontend.image.alt: Værk af
+item.purchase_date: Indkøbsdato
+item.purchase_date.helpText: mm-dd-åååå
+item.location_date: Placeringsdato
+item.location_date.helpText: mm-dd-åååå
+frontend.item.purchase_date: Indkøbsdato
+frontend.item.image: Billede
