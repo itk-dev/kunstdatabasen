@@ -144,3 +144,8 @@ filter.status_placeholder: Alle statusser
 frontend.item.status: Status
 frontend.item.committee_description: Kunstudvalgets beskrivelse
 item.committee_description: Kunstudvalgets beskrivelse
+filter.priceTo: Indkøbpris til
+filter.priceFrom: Indkøbspris fra
+filter.yearTo: Til år
+filter.yearFrom: Fra år
+frontend.image.alt: Værk af

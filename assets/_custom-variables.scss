@@ -17,6 +17,9 @@ $font-family-sans-serif: Arial, Helvetica, sans-serif;
 /* Set sizeing variable */
 $sizer: 1rem;
 
+/* Replace success color */
+$success: #218739;
+
 @import '~bootstrap/scss/functions';
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/variables';
