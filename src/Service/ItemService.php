@@ -88,6 +88,8 @@ class ItemService
             $renderObject->productionYear = $item->getProductionYear();
             $renderObject->estimatedValue = $item->getAssessmentPrice();
             $renderObject->estimatedValueDate = $item->getAssessmentDate() ? $item->getAssessmentDate()->format('d/m Y') : null;
+            $renderObject->locationDate = $item->getLocationDate() ? $item->getLocationDate()->format('d/m Y') : null;
+            $renderObject->purchaseDate = $item->getPurchaseDate() ? $item->getPurchaseDate()->format('d/m Y') : null;
         }
 
         return $renderObject;

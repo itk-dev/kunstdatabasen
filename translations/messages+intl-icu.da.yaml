@@ -40,6 +40,7 @@ frontend.item.purchase_price: Indkøbspris
 frontend.item.production_year: Produktionsår
 frontend.item.assessment_price: Vurderingspris
 frontend.item.assessment_date: Vurderingsdato
+frontend.item.locationDate : Placeringsdato
 image-carousel.expand: Vis stort billede
 image-carousel.previous: Forrige
 image-carousel.next: Næste

@@ -171,6 +171,8 @@ class FrontendController extends AbstractController
             'productionYear' => $artwork->getProductionYear(),
             'estimatedValue' => $artwork->getAssessmentPrice(),
             'estimatedValueDate' => $artwork->getAssessmentDate() ? $artwork->getAssessmentDate()->format('d/m Y') : null,
+            'locationDate' => $artwork->getLocationDate(),
+            'purchaseDate' => $artwork->getPurchaseDate(),
         ];
     }
 
