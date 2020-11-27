@@ -10,6 +10,7 @@
         "ext-json": "*",
         "doctrine/annotations": "^1.10",
         "itk-dev/mock-up-bundle": "^1.0",
+        "itk-dev/web-accessibility-statement-bundle": "^1.0",
         "knplabs/knp-paginator-bundle": "^5.2",
         "liip/imagine-bundle": "^2.3",
         "phpoffice/phpspreadsheet": "^1.12",
