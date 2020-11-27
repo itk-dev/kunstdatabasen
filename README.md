@@ -31,11 +31,6 @@ itkdev-docker-compose bin/console hautelook:fixtures:load
 ```sh
 itkdev-docker-compose bin/console app:create-user
 ```
-### Install dev dependencies
-
-run `yarn install` and `yarn build`
-
-You can watch for changes in development and build new assets with by running `yarn watch`
 
 ### Browsersync
 
