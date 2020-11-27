@@ -3,3 +3,4 @@
 #    controller: App\Controller\DefaultController::index
 was_bundle:
     resource: '@ItkDevWebAccessibilityStatementBundle/Resources/config/routing.php'
+    
