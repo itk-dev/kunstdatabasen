@@ -171,6 +171,8 @@ class FrontendController extends AbstractController
             'productionYear' => $artwork->getProductionYear(),
             'estimatedValue' => $artwork->getAssessmentPrice(),
             'estimatedValueDate' => $artwork->getAssessmentDate() ? $artwork->getAssessmentDate()->format('d/m Y') : null,
+            'locationDate' => $artwork->getLocationDate(),
+            'purchaseDate' => $artwork->getPurchaseDate(),
         ];
     }
 
@@ -273,7 +275,7 @@ class FrontendController extends AbstractController
                 'yearFrom',
                 NumberType::class,
                 [
-                    'label' => false,
+                    'label' => 'filter.yearFrom',
                     'attr' => [
                         'placeholder' => 'filter.year_from_placeholder',
                     ],
@@ -284,7 +286,7 @@ class FrontendController extends AbstractController
                 'yearTo',
                 NumberType::class,
                 [
-                    'label' => false,
+                    'label' => 'filter.yearTo',
                     'attr' => [
                         'placeholder' => 'filter.year_to_placeholder',
                     ],
@@ -295,7 +297,7 @@ class FrontendController extends AbstractController
                 'priceFrom',
                 NumberType::class,
                 [
-                    'label' => false,
+                    'label' => 'filter.priceFrom',
                     'attr' => [
                         'placeholder' => 'filter.price_from_placeholder',
                     ],
@@ -306,7 +308,7 @@ class FrontendController extends AbstractController
                 'priceTo',
                 NumberType::class,
                 [
-                    'label' => false,
+                    'label' => 'filter.priceTo',
                     'attr' => [
                         'placeholder' => 'filter.price_to_placeholder',
                     ],
