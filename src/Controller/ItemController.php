@@ -11,7 +11,7 @@ namespace App\Controller;
 use App\Entity\Artwork;
 use App\Entity\Furniture;
 use App\Entity\Item;
-use App\Form\ArkworkType;
+use App\Form\ArtworkType;
 use App\Form\FurnitureType;
 use App\Repository\ArtworkRepository;
 use App\Repository\ItemRepository;
@@ -85,9 +85,9 @@ class ItemController extends BaseController
                 'items' => $items,
                 'title' => 'Kunstdatabasen',
                 'headline' => 'item.list.item',
-                'brand' => 'Aarhus kommunes kunstdatabase',
+                'brand' => 'Aarhus Kommunes kunstsamling og udsmykninger',
                 'brandShort' => 'Kunstdatabasen',
-                'welcome' => 'Velkommen til Aarhus Kommunes kunstdatabase',
+                'welcome' => 'Velkommen til Aarhus Kommunes kunstsamling og udsmykninger',
                 'user' => [
                     'username' => 'Admin user',
                     'email' => 'admin@email.com',
@@ -228,7 +228,7 @@ class ItemController extends BaseController
         switch ($itemType) {
             case 'artwork':
                 $item = new Artwork();
-                $form = $this->createForm(ArkworkType::class, $item);
+                $form = $this->createForm(ArtworkType::class, $item);
                 break;
             case 'furniture':
                 $item = new Furniture();
@@ -273,7 +273,7 @@ class ItemController extends BaseController
     {
         if ($item instanceof Artwork) {
             $itemType = 'artwork';
-            $form = $this->createForm(ArkworkType::class, $item);
+            $form = $this->createForm(ArtworkType::class, $item);
         } elseif ($item instanceof Furniture) {
             $itemType = 'furniture';
             $form = $this->createForm(FurnitureType::class, $item);

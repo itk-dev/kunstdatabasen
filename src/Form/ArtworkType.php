@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * Class ArtworkType.
  */
-class ArkworkType extends AbstractType
+class ArtworkType extends AbstractType
 {
     /* @var TagService $tagService */
     private $tagService;
@@ -52,9 +52,24 @@ class ArkworkType extends AbstractType
             ])
             ->add('description', null, [
                 'label' => 'item.description',
+                'help' => 'item.description.helpText',
             ])
             ->add('purchasePrice', null, [
                 'label' => 'item.purchase_price',
+            ])
+            ->add('purchaseDate', null, [
+                'label' => 'item.purchase_date',
+                'html5' => true,
+                'widget' => 'single_text',
+                'required' => false,
+                'help' => 'item.purchase_date.helpText',
+            ])
+            ->add('locationDate', null, [
+                'label' => 'item.location_date',
+                'html5' => true,
+                'widget' => 'single_text',
+                'required' => false,
+                'help' => 'item.location_date.helpText',
             ])
             ->add('status', ChoiceType::class, [
                 'attr' => [
@@ -175,15 +190,19 @@ class ArkworkType extends AbstractType
             ])
             ->add('width', null, [
                 'label' => 'item.width',
+                'help' => 'item.width.helpText',
             ])
             ->add('height', null, [
                 'label' => 'item.height',
+                'help' => 'item.height.helpText',
             ])
             ->add('depth', null, [
                 'label' => 'item.depth',
+                'help' => 'item.depth.helpText',
             ])
             ->add('diameter', null, [
                 'label' => 'item.diameter',
+                'help' => 'item.diameter.helpText',
             ])
             ->add('committeeDescription', TextareaType::class, [
                 'label' => 'item.committee_description',
@@ -191,6 +210,7 @@ class ArkworkType extends AbstractType
             ])
             ->add('weight', null, [
                 'label' => 'item.weight',
+                'help' => 'item.weight.helpText',
             ]);
 
         // Allow for new options from the user.
