@@ -2,9 +2,9 @@
 on:
   push:
     branches:
-      - master
+      - develop
 
-name: Deployment (prod)
+name: Deployment (dev)
 
 jobs:
   build:
@@ -31,8 +31,8 @@ jobs:
         uses: itk-dev/actions-rsync@master
         with:
           src: public/build
-          dest: ${{ secrets.APP_PATH_PROD }}/public/
-          host: ${{ secrets.HOST_PROD }}
+          dest: ${{ secrets.APP_PATH_DEV }}/public/
+          host: ${{ secrets.HOST_DEV }}
           key: ${{ secrets.PRIVATE_KEY }}
           cert: ${{ secrets.PUBLIC_KEY_CERT }}
 
@@ -44,13 +44,13 @@ jobs:
         uses: itk-dev/actions-remote-ssh@master
         with:
           command: |
-            cd ${{ secrets.APP_PATH_PROD }}
+            cd ${{ secrets.APP_PATH_DEV }}
             git clean -d --force
             git checkout master
             git fetch
             git reset origin/master --hard
             composer install --no-dev -o
             bin/console cache:clear --no-debug
-          host: ${{ secrets.HOST_PROD }}
+          host: ${{ secrets.HOST_DEV }}
           key: ${{ secrets.PRIVATE_KEY }}
           cert: ${{ secrets.PUBLIC_KEY_CERT }}

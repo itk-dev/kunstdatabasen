@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d117f883ef19314ea61818855959323e",
+    "content-hash": "104843b4504375d0ce3d2493d843e18c",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1415,6 +1415,7 @@
                 "reflection",
                 "static"
             ],
+            "abandoned": "roave/better-reflection",
             "time": "2020-03-27T11:06:43+00:00"
         },
         {
@@ -1662,6 +1663,42 @@
             ],
             "description": "A mock-up bundle for Symfony",
             "time": "2020-04-30T08:11:55+00:00"
+        },
+        {
+            "name": "itk-dev/web-accessibility-statement-bundle",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/itk-dev/web-accessibility-statement-bundle.git",
+                "reference": "f0444c751466820d8cc9536238396198bea4bc36"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/itk-dev/web-accessibility-statement-bundle/zipball/f0444c751466820d8cc9536238396198bea4bc36",
+                "reference": "f0444c751466820d8cc9536238396198bea4bc36",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/framework-bundle": "^3.2 || ^4.0 || ^5.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "ItkDev\\WebAccessibilityStatementBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mikkel Ricky",
+                    "email": "rimi@aarhus.dk"
+                }
+            ],
+            "description": "Web accessibility statement bundle",
+            "time": "2020-09-23T09:01:29+00:00"
         },
         {
             "name": "jms/metadata",
