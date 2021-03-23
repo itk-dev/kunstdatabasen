@@ -52,7 +52,7 @@ docker-compose run yarn watch
 
 ## Production
 
-@TODO: Describe production setup and deployment.
+Automatic deployment to `stg` and `prod` are set up as [Github Actions](https://github.com/aakb/kunstdatabasen/actions).
 
 ## Migration in production
 

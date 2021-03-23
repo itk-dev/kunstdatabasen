@@ -8,6 +8,7 @@ name: Deployment (dev)
 
 jobs:
   build:
+    name: Build and deploy assets (dev)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -36,7 +37,8 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           cert: ${{ secrets.PUBLIC_KEY_CERT }}
 
-  remote:
+  deploy:
+    name: Deploy Application (dev)
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -46,10 +48,12 @@ jobs:
           command: |
             cd ${{ secrets.APP_PATH_DEV }}
             git clean -d --force
-            git checkout master
+            git checkout develop
             git fetch
-            git reset origin/master --hard
-            composer install --no-dev -o
+            git reset origin/develop --hard
+            composer install -o
+            bin/console doctrine:migrations:migrate --no-interaction
+            bin/console doctrine:schema:validate
             bin/console cache:clear --no-debug
           host: ${{ secrets.HOST_DEV }}
           key: ${{ secrets.PRIVATE_KEY }}
