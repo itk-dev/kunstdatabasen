@@ -8,6 +8,7 @@ name: Deployment (prod)
 
 jobs:
   build:
+    name: Build and deploy assets (prod)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -38,6 +39,7 @@ jobs:
 
   remote:
     needs: build
+    name: Deploy Application (prod)
     runs-on: ubuntu-latest
     steps:
       - name: Run remote commands
@@ -49,8 +51,11 @@ jobs:
             git checkout master
             git fetch
             git reset origin/master --hard
-            composer install --no-dev -o
-            bin/console cache:clear --no-debug
+            composer dump-env prod
+            composer install --no-dev --optimize-autoloader
+            bin/console doctrine:migrations:migrate --no-interaction
+            bin/console doctrine:schema:validate
+            APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear
           host: ${{ secrets.HOST_PROD }}
           key: ${{ secrets.PRIVATE_KEY }}
           cert: ${{ secrets.PUBLIC_KEY_CERT }}
