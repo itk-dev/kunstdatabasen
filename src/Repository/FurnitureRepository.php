@@ -38,6 +38,7 @@ class FurnitureRepository extends ServiceEntityRepository
      * @param string|null $type
      * @param string|null $category
      * @param string|null $building
+     *
      * @return \Doctrine\ORM\Query
      */
     public function getQuery(string $search = null, string $type = null, string $category = null, string $building = null): Query
