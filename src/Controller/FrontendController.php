@@ -292,28 +292,6 @@ class FrontendController extends AbstractController
                     ],
                     'required' => false,
                 ]
-            )
-            ->add(
-                'priceFrom',
-                NumberType::class,
-                [
-                    'label' => 'filter.priceFrom',
-                    'attr' => [
-                        'placeholder' => 'filter.price_from_placeholder',
-                    ],
-                    'required' => false,
-                ]
-            )
-            ->add(
-                'priceTo',
-                NumberType::class,
-                [
-                    'label' => 'filter.priceTo',
-                    'attr' => [
-                        'placeholder' => 'filter.price_to_placeholder',
-                    ],
-                    'required' => false,
-                ]
             );
 
         return $formBuilder->getForm();
