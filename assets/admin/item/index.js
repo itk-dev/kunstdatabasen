@@ -11,7 +11,23 @@ import '../../partials/initSelect2';
 
 // Add font awesome icons
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faEdit, faPalette, faSearch, faMountain, faBars, faPlusCircle, faChair, faTimes, faTimesCircle, faArrowLeft, faArrowRight, faExpand, faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
+import {
+    faEdit,
+    faPalette,
+    faSearch,
+    faMountain,
+    faBars,
+    faPlusCircle,
+    faChair,
+    faTimes,
+    faTimesCircle,
+    faArrowLeft,
+    faArrowRight,
+    faExpand,
+    faArrowAltCircleLeft,
+    faArrowAltCircleRight,
+    faFileExport
+} from '@fortawesome/free-solid-svg-icons';
 
 library.add(
     faEdit,
@@ -27,6 +43,7 @@ library.add(
     faArrowRight,
     faExpand,
     faArrowAltCircleLeft,
-    faArrowAltCircleRight
+    faArrowAltCircleRight,
+    faFileExport
 );
 dom.watch();
