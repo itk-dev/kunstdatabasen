@@ -2,6 +2,9 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
+    "box/spout": {
+        "version": "v3.2.0"
+    },
     "composer/semver": {
         "version": "1.5.1"
     },
@@ -192,6 +195,9 @@
     },
     "nikic/php-parser": {
         "version": "v4.4.0"
+    },
+    "ocramius/doctrine-batch-utils": {
+        "version": "2.1.0"
     },
     "ocramius/package-versions": {
         "version": "1.5.1"
@@ -473,6 +479,9 @@
     },
     "symfony/security-http": {
         "version": "v4.4.8"
+    },
+    "symfony/serializer": {
+        "version": "v4.4.20"
     },
     "symfony/service-contracts": {
         "version": "v2.0.1"

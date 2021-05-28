@@ -60,6 +60,7 @@ admin.index.latest_viewed: 'Senest åbne'
 admin.index.latest_added: 'Senest tilføjede'
 admin.index.new: 'Opret nyt værk'
 admin.index.show_all: 'Vis alle værker'
+admin.index.export: Eksportér
 admin.artwork.index: Værker
 search.submit: Søg
 item.no_title: 'Uden titel'
@@ -95,7 +96,7 @@ frontend.no_title: '-- Uden titel --'
 'Side navigation': 'Side navigation'
 Forrige: Forrige
 Næste: Næste
-Kunstdatabasen: Kunstdatabasen
+Kunstdatabasen: Kunstsamling
 'Sign in': Log ind
 item.comment: Kommentarer
 item.name: Titel
@@ -103,9 +104,9 @@ item.artist: Kunstner
 item.artist_gender: Kunstners køn
 item.type: Type
 item.width: Bredde
-item.width.helpText: Bredde i cm 
+item.width.helpText: Bredde i cm
 item.height: Højde
-item.height.helpText: Højde i cm 
+item.height.helpText: Højde i cm
 item.description: Beskrivelse
 item.description.helpText: Hvilke tanker/overvejelser ligger der bag værk/værkerne? Hvordan kan værket/værkerne ses i forhold til dit øvrige arbejde? Hvilke materialer og/eller teknikker har du brugt?
 item.location: Placering
@@ -128,11 +129,11 @@ item.city: By
 item.barcode: Stregkode
 admin.item.delete: Slet
 item.depth: Dybde
-item.depth.helpText: Dybde i cm 
+item.depth.helpText: Dybde i cm
 item.diameter: Diameter
-item.diameter.helpText: Diameter i cm 
+item.diameter.helpText: Diameter i cm
 item.weight: Vægt
-item.weight.helpText: Vægt i kg 
+item.weight.helpText: Vægt i kg
 image.file_placeholder: Vælg fil
 image.primary_image: Primært billede
 item.images: Billeder

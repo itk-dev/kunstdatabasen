@@ -15,6 +15,9 @@ use App\Form\ArtworkType;
 use App\Form\FurnitureType;
 use App\Repository\ArtworkRepository;
 use App\Repository\ItemRepository;
+use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use DoctrineBatchUtils\BatchProcessing\SimpleBatchIteratorAggregate;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -22,7 +25,11 @@ use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 /**
  * @Route("/admin/item")
@@ -36,7 +43,7 @@ class ItemController extends BaseController
      * @param \App\Repository\ItemRepository            $itemRepository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function index(Request $request, ItemRepository $itemRepository, PaginatorInterface $paginator): Response
     {
@@ -106,7 +113,7 @@ class ItemController extends BaseController
      * @param \App\Repository\ArtworkRepository         $artworkRepository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @throws \Exception
      */
@@ -214,12 +221,147 @@ class ItemController extends BaseController
     }
 
     /**
+     * @Route("/{itemType}/export", name="item_export", methods={"GET"})
+     *
+     * @param string $itemType
+     *                         The item type
+     *
+     * @return Response
+     */
+    public function export(string $itemType): Response
+    {
+        // Avoid php timeout errors.
+        set_time_limit(0);
+        $response = new StreamedResponse();
+
+        $response->setCallback(function () use ($itemType) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $repository = null;
+
+            switch ($itemType) {
+                case 'artwork':
+                    $repository = $entityManager->getRepository(Artwork::class);
+                    break;
+                case 'furniture':
+                    $repository = $entityManager->getRepository(Furniture::class);
+                    break;
+                default:
+                    $repository = $entityManager->getRepository(Item::class);
+            }
+
+            $query = $repository
+                ->createQueryBuilder('e')
+                ->getQuery();
+
+            $iterableItems = SimpleBatchIteratorAggregate::fromQuery(
+                $query,
+                100
+            );
+
+            $writer = WriterEntityFactory::createXLSXWriter();
+            $writer->openToFile('php://output');
+
+            $boldStyle = (new StyleBuilder())
+                ->setFontBold()
+                ->build();
+
+            $serializer = new Serializer([new ObjectNormalizer()]);
+
+            $dateCallback = function ($innerObject) {
+                return $innerObject instanceof \DateTime ? $innerObject->format(\DateTime::ISO8601) : '';
+            };
+
+            $defaultContext = [
+                AbstractNormalizer::CALLBACKS => [
+                    'createdAt' => $dateCallback,
+                    'updatedAt' => $dateCallback,
+                    'purchaseDate' => $dateCallback,
+                ],
+                AbstractNormalizer::ATTRIBUTES => [
+                    'id',
+                    'name',
+                    'description',
+                    'createdBy',
+                    'updatedBy',
+                    'createdAt',
+                    'updatedAt',
+                    'artist',
+                    'artSerial',
+                    'purchasePrice',
+                    'productionYear',
+                    'assessmentDate',
+                    'assessmentPrice',
+                    'location',
+                    'building',
+                    'room',
+                    'address',
+                    'postalCode',
+                    'city',
+                    'width',
+                    'height',
+                    'depth',
+                    'diameter',
+                    'weight',
+                    'publiclyAccessible',
+                    'status',
+                    'type',
+                    'organization',
+                    'geo',
+                    'comment',
+                    'department',
+                    'inventoryId',
+                    'purchasePlace',
+                    'barcode',
+                    'purchaseDate',
+                    'purchasedBy',
+                    'artistGender',
+                    'committeeDescription',
+                    'locationDate',
+                ],
+            ];
+
+            $itemsAdded = 0;
+
+            foreach ($iterableItems as $item) {
+                $itemArray = $serializer->normalize($item, null, $defaultContext);
+
+                // Add headlines for first row.
+                if (0 === $itemsAdded) {
+                    $row = WriterEntityFactory::createRowFromArray(array_keys($itemArray), $boldStyle);
+                    $writer->addRow($row);
+                }
+
+                // Replace null entries with empty string
+                foreach ($itemArray as $key => $value) {
+                    if (null === $value) {
+                        $itemArray[$key] = '';
+                    }
+                }
+
+                $row = WriterEntityFactory::createRowFromArray($itemArray);
+                $writer->addRow($row);
+
+                ++$itemsAdded;
+            }
+
+            $writer->close();
+        });
+
+        $filename = $itemType.'-eksport-'.date('d-m-Y');
+        $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        $response->headers->set('Content-Disposition', 'attachment; filename="'.$filename.'.xlsx"');
+        $response->setStatusCode(Response::HTTP_OK);
+
+        return $response;
+    }
+
+    /**
      * @Route("/{itemType}/new", name="item_new", methods={"GET","POST"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string                                    $itemType
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @throws \Exception
      */
@@ -265,7 +407,7 @@ class ItemController extends BaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \App\Entity\Item                          $item
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      *
      * @throws \Exception
      */
@@ -306,7 +448,7 @@ class ItemController extends BaseController
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \App\Entity\Item                          $item
      *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function delete(Request $request, Item $item): Response
     {
