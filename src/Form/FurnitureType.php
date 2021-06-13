@@ -102,6 +102,13 @@ class FurnitureType extends AbstractType
                 'required' => false,
                 'label' => 'item.location',
             ])
+            ->add('locationDate', null, [
+                'label' => 'item.location_date',
+                'html5' => true,
+                'widget' => 'single_text',
+                'required' => false,
+                'help' => 'item.location_date.helpText',
+            ])
             ->add('room', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
