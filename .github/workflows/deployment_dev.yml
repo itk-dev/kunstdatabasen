@@ -9,7 +9,7 @@ name: Deployment (dev)
 jobs:
   build:
     name: Build and deploy assets (dev)
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@master
 
@@ -40,7 +40,7 @@ jobs:
   deploy:
     name: Deploy Application (dev)
     needs: build
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Run remote commands
         uses: itk-dev/actions-remote-ssh@master

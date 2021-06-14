@@ -3,7 +3,7 @@ name: Review
 jobs:
     test-composer-files:
         name: Validate composer (PHP ${{ matrix.php }})
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
@@ -29,7 +29,7 @@ jobs:
 
     runner-phpcs:
         name: runner-phpcs (PHP ${{ matrix.php }})
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
@@ -61,7 +61,7 @@ jobs:
 
     phpcsfixer:
         name: PHP-CS-FIXER (PHP ${{ matrix.php }})
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
@@ -89,7 +89,7 @@ jobs:
 
     twigcs:
         name: TwigCS (PHP ${{ matrix.php }})
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
@@ -117,7 +117,7 @@ jobs:
 
     js-coding-standards:
         name: JS coding standards
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@master
             - uses: actions/setup-node@v1
@@ -130,7 +130,7 @@ jobs:
 
     test-yarn-build:
         name: Test yarn build assets
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@master
 
