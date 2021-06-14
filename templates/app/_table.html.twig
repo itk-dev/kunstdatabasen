@@ -7,12 +7,12 @@
                         <thead>
                         <tr class="text-muted small">
                             <th>{{ 'frontend.item.image'|trans }}</th>
-                            <th>{{ 'frontend.item.title'|trans }}</th>
-                            <th>{{ 'frontend.item.art_serial'|trans }}</th>
-                            <th>{{ 'frontend.item.artist'|trans }}</th>
-                            <th>{{ 'frontend.item.type'|trans }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'frontend.item.title'|trans , 'e.name')|raw }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'frontend.item.art_serial'|trans , 'e.artSerial')|raw }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'frontend.item.artist'|trans , 'e.artist')|raw }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'frontend.item.type'|trans , 'e.type')|raw }}</th>
                             <th>{{ 'frontend.item.dimensions'|trans }}</th>
-                            <th>{{ 'frontend.item.status'|trans }}</th>
+                            <th>{{ knp_pagination_sortable(pagination, 'frontend.item.status'|trans , 'e.status')|raw }}</th>
                         </tr>
                         </thead>
                         <tbody>
