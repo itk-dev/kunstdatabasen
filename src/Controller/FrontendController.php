@@ -87,8 +87,8 @@ class FrontendController extends AbstractController
                 null !== $data['yearFrom'] ||
                 null !== $data['yearTo'] ||
                 (isset($data['artistGender']) && null !== $data['artistGender']) ||
-                null !== $data['priceFrom'] ||
-                null !== $data['priceTo']) {
+                (isset($data['priceFrom']) && null !== $data['priceFrom']) ||
+                (isset($data['priceTo']) && null !== $data['priceTo'])) {
                 $parameters['display_advanced_filters'] = true;
             }
         } else {
