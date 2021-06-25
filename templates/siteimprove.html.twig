@@ -2,7 +2,6 @@
     var siteImproveKey = '{{ siteimprove_key }}';
 
     if (siteImproveKey) {
-        console.log('siteImproveKey: ' + siteImproveKey);
         window.addEventListener('CookieInformationConsentGiven', function (event) {
             // eslint-disable-next-line no-undef
             if (CookieInformation.getConsentGivenFor('cookie_cat_statistic')) {
