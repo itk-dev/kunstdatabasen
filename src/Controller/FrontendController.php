@@ -87,8 +87,8 @@ class FrontendController extends AbstractController
                 null !== $data['yearFrom'] ||
                 null !== $data['yearTo'] ||
                 (isset($data['artistGender']) && null !== $data['artistGender']) ||
-                null !== $data['priceFrom'] ||
-                null !== $data['priceTo']) {
+                (isset($data['priceFrom']) && null !== $data['priceFrom']) ||
+                (isset($data['priceTo']) && null !== $data['priceTo'])) {
                 $parameters['display_advanced_filters'] = true;
             }
         } else {
@@ -126,14 +126,16 @@ class FrontendController extends AbstractController
      */
     public function show(Artwork $artwork): Response
     {
+        $parameters = [
+            'indexLink' => $this->generateUrl('frontend_index'),
+            'data' => [
+                'artwork' => $this->artworkToRenderArray($artwork),
+            ],
+        ];
+
         return $this->render(
             'app/details.html.twig',
-            [
-                'indexLink' => $this->generateUrl('frontend_index'),
-                'data' => [
-                    'artwork' => $this->artworkToRenderArray($artwork),
-                ],
-            ]
+            $parameters
         );
     }
 

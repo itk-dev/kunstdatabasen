@@ -55,7 +55,7 @@ services:
       - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${COMPOSE_DOMAIN}`)"
 
   yarn:
-    image: itkdev/yarn:latest
+    image: itkdev/yarn:14
     networks:
       - app
     volumes:
