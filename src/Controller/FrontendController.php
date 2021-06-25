@@ -111,6 +111,12 @@ class FrontendController extends AbstractController
         $parameters['pagination'] = $pagination;
         $parameters['searchForm'] = $form->createView();
 
+        // Set siteimprove key from environment.
+        $siteImproveKey = $this->getParameter('app.siteimprove_key') ?? null;
+        if ($siteImproveKey) {
+            $parameters['siteImproveKey'] = $siteImproveKey;
+        }
+
         return $this->render(
             'app/index.html.twig',
             $parameters
@@ -126,14 +132,22 @@ class FrontendController extends AbstractController
      */
     public function show(Artwork $artwork): Response
     {
+        $parameters = [
+            'indexLink' => $this->generateUrl('frontend_index'),
+            'data' => [
+                'artwork' => $this->artworkToRenderArray($artwork),
+            ],
+        ];
+
+        // Set siteimprove key from environment.
+        $siteImproveKey = $this->getParameter('app.siteimprove_key') ?? null;
+        if ($siteImproveKey) {
+            $parameters['siteImproveKey'] = $siteImproveKey;
+        }
+
         return $this->render(
             'app/details.html.twig',
-            [
-                'indexLink' => $this->generateUrl('frontend_index'),
-                'data' => [
-                    'artwork' => $this->artworkToRenderArray($artwork),
-                ],
-            ]
+            $parameters
         );
     }
 
