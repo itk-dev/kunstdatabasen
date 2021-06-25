@@ -1,22 +1,22 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-  {{ 'title'|trans }}
+    {{ 'title'|trans }}
 {% endblock %}
 
 {% block body %}
-  {% include "app/_header.html.twig" %}
-  {% include "app/_filters.html.twig" with { form: searchForm } %}
-  {% include "app/_table.html.twig" %}
-  {% include "app/_footer.html.twig" %}
+    {% include "app/_header.html.twig" %}
+    {% include "app/_filters.html.twig" with { form: searchForm } %}
+    {% include "app/_table.html.twig" %}
+    {% include "app/_footer.html.twig" %}
 {% endblock %}
 
 {% block stylesheets %}
-	{{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('app') }}
 {% endblock %}
 
 {% block javascripts %}
-	{{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('app') }}
 
     {% if siteImproveKey is defined %}
         <script type="text/javascript">
