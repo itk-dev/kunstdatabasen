@@ -1,0 +1,20 @@
+<script type="text/javascript">
+    var siteImproveKey = '{{ siteimprove_key }}';
+
+    if (siteImproveKey) {
+        console.log('siteImproveKey: ' + siteImproveKey);
+        window.addEventListener('CookieInformationConsentGiven', function (event) {
+            // eslint-disable-next-line no-undef
+            if (CookieInformation.getConsentGivenFor('cookie_cat_statistic')) {
+                (function () {
+                    const sz = document.createElement('script');
+                    sz.type = 'text/javascript';
+                    sz.async = true;
+                    sz.src = '//ssl.siteimprove.com/js/siteanalyze_' + siteImproveKey + '.js';
+                    const s = document.getElementsByTagName('script')[0];
+                    s.parentNode.insertBefore(sz, s);
+                })();
+            }
+        }, false);
+    }
+</script>

@@ -126,14 +126,16 @@ class FrontendController extends AbstractController
      */
     public function show(Artwork $artwork): Response
     {
+        $parameters = [
+            'indexLink' => $this->generateUrl('frontend_index'),
+            'data' => [
+                'artwork' => $this->artworkToRenderArray($artwork),
+            ],
+        ];
+
         return $this->render(
             'app/details.html.twig',
-            [
-                'indexLink' => $this->generateUrl('frontend_index'),
-                'data' => [
-                    'artwork' => $this->artworkToRenderArray($artwork),
-                ],
-            ]
+            $parameters
         );
     }
 
