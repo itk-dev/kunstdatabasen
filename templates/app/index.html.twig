@@ -18,14 +18,10 @@
 {% block javascripts %}
 	{{ encore_entry_script_tags('app') }}
 
-    <script type="text/javascript">
-        var siteImproveKey = null;
+    {% if siteImproveKey is defined %}
+        <script type="text/javascript">
+            var siteImproveKey = '{{ siteImproveKey }}';
 
-        {% if siteImproveKey is defined %}
-            siteImproveKey = '{{ siteImproveKey }}';
-        {% endif %}
-
-        if (siteImproveKey) {
             window.addEventListener('CookieInformationConsentGiven', function (event) {
                 // eslint-disable-next-line no-undef
                 if (CookieInformation.getConsentGivenFor('cookie_cat_statistic')) {
@@ -39,6 +35,6 @@
                     })();
                 }
             }, false);
-        }
-    </script>
+        </script>
+    {% endif %}
 {% endblock %}

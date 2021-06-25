@@ -111,7 +111,7 @@ class FrontendController extends AbstractController
         $parameters['pagination'] = $pagination;
         $parameters['searchForm'] = $form->createView();
 
-        // Set siteimprove key from environment.
+        // Set site improve key from environment.
         $siteImproveKey = $this->getParameter('app.siteimprove_key') ?? null;
         if ($siteImproveKey) {
             $parameters['siteImproveKey'] = $siteImproveKey;
@@ -139,7 +139,7 @@ class FrontendController extends AbstractController
             ],
         ];
 
-        // Set siteimprove key from environment.
+        // Set site improve key from environment.
         $siteImproveKey = $this->getParameter('app.siteimprove_key') ?? null;
         if ($siteImproveKey) {
             $parameters['siteImproveKey'] = $siteImproveKey;
