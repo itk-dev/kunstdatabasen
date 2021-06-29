@@ -22,10 +22,10 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
  */
 class Item
 {
-    public $itemType = 'item';
-
     use BlameableEntity;
     use TimestampableEntity;
+
+    public $itemType = 'item';
 
     /**
      * @ORM\Id()

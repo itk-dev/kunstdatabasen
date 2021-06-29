@@ -142,7 +142,7 @@ class ItemService
 
             $unMappable = [];
 
-            $barcode = !empty($entry[20]) ? str_pad($entry[20], 5, '0', STR_PAD_LEFT) : null;
+            $barcode = !empty($entry[20]) ? str_pad($entry[20], 5, '0', \STR_PAD_LEFT) : null;
 
             if ('Kunst' === $entry[0]) {
                 $item = new Artwork();
