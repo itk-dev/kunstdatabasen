@@ -8,7 +8,7 @@
                         <tr class="text-muted small">
                             <th>{{ 'frontend.item.image'|trans }}</th>
                             <th>{{ 'frontend.item.title'|trans }}</th>
-                            <th>{{ 'frontend.item.art_serial'|trans }}</th>
+                            <th>{{ 'frontend.item.building'|trans }}</th>
                             <th>{{ 'frontend.item.artist'|trans }}</th>
                             <th>{{ 'frontend.item.type'|trans }}</th>
                             <th>{{ 'frontend.item.dimensions'|trans }}</th>
@@ -20,7 +20,7 @@
                             <tr>
                                 <td>{% if art.images|length > 0 %}<a href="{{ art.link }}"><img src="{{ asset(art.images[0])|imagine_filter('thumbnail_frontend') }}" alt="{{ 'frontend.image.alt'|trans }} {{ art.artist }}" height="60"/></a>{% endif %}</td>
                                 <td><a href="{{ art.link }}"><strong>{{ art.title ?? 'frontend.no_title'|trans }}</strong></a></td>
-                                <td>{{ art.artNo }}</td>
+                                <td>{{ art.building }}</td>
                                 <td>{{ art.artist }}</td>
                                 <td>{{ art.type }}</td>
                                 <td>{{ art.dimensions }}</td>
