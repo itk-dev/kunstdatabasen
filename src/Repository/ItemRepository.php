@@ -9,7 +9,9 @@
 namespace App\Repository;
 
 use App\Entity\Item;
+use App\Repository\Traits\OrderByTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,6 +23,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ItemRepository extends ServiceEntityRepository
 {
+    use OrderByTrait;
+
     /**
      * ItemRepository constructor.
      *
@@ -39,10 +43,11 @@ class ItemRepository extends ServiceEntityRepository
      * @param string|null $type
      * @param string|null $category
      * @param string|null $building
+     * @param array       $orderBy
      *
      * @return \Doctrine\ORM\Query
      */
-    public function getQuery(string $itemType = null, string $search = null, string $type = null, string $category = null, string $building = null): Query
+    public function getQuery(string $itemType = null, string $search = null, string $type = null, string $category = null, string $building = null, array $orderBy = [['purchaseDate', Criteria::DESC]]): Query
     {
         $qb = $this->createQueryBuilder('e');
         null !== $itemType && $qb->andWhere('e INSTANCE OF :itemType')->setParameter('itemType', $this->getEntityManager()->getClassMetadata($itemType));
@@ -50,6 +55,8 @@ class ItemRepository extends ServiceEntityRepository
         null !== $type && $qb->andWhere('e.type = :type')->setParameter('type', $type);
         null !== $category && $qb->andWhere('e.category = :category')->setParameter('category', $category);
         null !== $building && $qb->andWhere('e.building = :building')->setParameter('building', $building);
+
+        $this->addOrderBy($qb, $orderBy);
 
         return $qb->getQuery();
     }
