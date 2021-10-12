@@ -32,10 +32,9 @@ yarn-error.log
 /.php_cs.cache
 ###< friendsofphp/php-cs-fixer ###
 
-/public/images/artwork/
-
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
 
-/public/images/migration_images/
+public/images/artwork/*
+!public/images/artwork/fixtures/
