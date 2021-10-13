@@ -3,7 +3,7 @@ name: Review
 jobs:
     test-composer-files:
         name: Validate composer (PHP ${{ matrix.php }})
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
@@ -29,7 +29,7 @@ jobs:
 
     runner-phpcs:
         name: runner-phpcs (PHP ${{ matrix.php }})
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
@@ -61,7 +61,7 @@ jobs:
 
     phpcsfixer:
         name: PHP-CS-FIXER (PHP ${{ matrix.php }})
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
@@ -89,7 +89,7 @@ jobs:
 
     twigcs:
         name: TwigCS (PHP ${{ matrix.php }})
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
@@ -117,7 +117,7 @@ jobs:
 
     js-coding-standards:
         name: JS coding standards
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@master
             - uses: actions/setup-node@v1
@@ -127,3 +127,24 @@ jobs:
               run: yarn install
             - name: JS coding standards
               run: yarn check-coding-standards
+
+    test-yarn-build:
+        name: Test yarn build assets
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@master
+
+            - name: Get yarn cache directory
+              id: yarn-cache
+              run: echo "::set-output name=dir::$(yarn cache dir)"
+            - uses: actions/cache@v1
+              with:
+                  path: ${{ steps.yarn-cache.outputs.dir }}
+                  key: yarn-${{ hashFiles('**/yarn.lock') }}
+                  restore-keys: yarn-
+
+            - name: Install yarn packages
+              run: docker run -v $PWD:/app:rw -v ${{ steps.yarn-cache.outputs.dir }}:/usr/local/share/.cache/yarn/v6:rw itkdev/yarn:14 install
+
+            - name: Build assets
+              run: docker run -v $PWD:/app:rw -v ${{ steps.yarn-cache.outputs.dir }}:/usr/local/share/.cache/yarn/v6:rw itkdev/yarn:14 build

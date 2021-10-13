@@ -126,14 +126,16 @@ class FrontendController extends AbstractController
      */
     public function show(Artwork $artwork): Response
     {
+        $parameters = [
+            'indexLink' => $this->generateUrl('frontend_index'),
+            'data' => [
+                'artwork' => $this->artworkToRenderArray($artwork),
+            ],
+        ];
+
         return $this->render(
             'app/details.html.twig',
-            [
-                'indexLink' => $this->generateUrl('frontend_index'),
-                'data' => [
-                    'artwork' => $this->artworkToRenderArray($artwork),
-                ],
-            ]
+            $parameters
         );
     }
 
@@ -172,7 +174,8 @@ class FrontendController extends AbstractController
             'estimatedValue' => $artwork->getAssessmentPrice(),
             'estimatedValueDate' => $artwork->getAssessmentDate() ? $artwork->getAssessmentDate()->format('d/m Y') : null,
             'locationDate' => $artwork->getLocationDate(),
-            'purchaseDate' => $artwork->getPurchaseDate(),
+            'purchaseDate' => $artwork->getPurchaseDate() ? $artwork->getPurchaseDate()->format('d/m Y') : null,
+            'building' => $artwork->getBuilding(),
         ];
     }
 
