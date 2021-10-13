@@ -9,7 +9,9 @@
 namespace App\Repository;
 
 use App\Entity\Artwork;
+use App\Repository\Traits\OrderByTrait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,6 +23,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArtworkRepository extends ServiceEntityRepository
 {
+    use OrderByTrait;
+
     /**
      * ArtworkRepository constructor.
      *
@@ -48,10 +52,11 @@ class ArtworkRepository extends ServiceEntityRepository
      * @param string|null $artistGender
      * @param int|null    $priceFrom
      * @param int|null    $priceTo
+     * @param array       $orderBy
      *
      * @return \Doctrine\ORM\Query
      */
-    public function getQuery(string $search = null, string $type = null, string $status = null, string $category = null, string $building = null, int $yearFrom = null, int $yearTo = null, int $minWidth = null, int $maxWidth = null, int $minHeight = null, int $maxHeight = null, string $artistGender = null, int $priceFrom = null, int $priceTo = null): Query
+    public function getQuery(string $search = null, string $type = null, string $status = null, string $category = null, string $building = null, int $yearFrom = null, int $yearTo = null, int $minWidth = null, int $maxWidth = null, int $minHeight = null, int $maxHeight = null, string $artistGender = null, int $priceFrom = null, int $priceTo = null, array $orderBy = [['purchaseDate', Criteria::DESC]]): Query
     {
         $qb = $this->createQueryBuilder('e');
 
@@ -77,6 +82,8 @@ class ArtworkRepository extends ServiceEntityRepository
         null !== $artistGender && $qb->andWhere('e.artistGender = :artistGender')->setParameter('artistGender', $artistGender);
         null !== $priceFrom && $qb->andWhere('e.purchasePrice >= :priceFrom')->setParameter('priceFrom', $priceFrom);
         null !== $priceTo && $qb->andWhere('e.purchasePrice <= :priceTo')->setParameter('priceTo', $priceTo);
+
+        $this->addOrderBy($qb, $orderBy);
 
         return $qb->getQuery();
     }

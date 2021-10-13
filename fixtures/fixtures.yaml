@@ -6,8 +6,9 @@ App\Entity\Artwork:
         description: '<text()>'
         committeeDescription: '<text()>'
         purchasePrice: '<numberBetween(1000, 1000000)>'
+        purchaseDate: '<dateTimeBetween("-1000 days", "now")>'
         productionYear: '<numberBetween(1600, 2020)>'
-        assessmentDate: '<date_create()>'
+        assessmentDate: '<dateTimeBetween("-1000 days", "now")>'
         assessmentPrice: '<numberBetween(1000, 1000000)>'
         geo: '<randomFloat()>, <randomFloat()>'
         comment: '<text()>'
@@ -28,8 +29,8 @@ App\Entity\Artwork:
         organization: '<randomElement(["MKB","MBU","MBA","MSO","MSB","MTM"])>'
 
 App\Entity\Image:
-    image_{1..10}:
-        image_name: '../fixtures/image<current()>.jpg'
+    image_{1..200}:
+        image_name: 'fixtures/image<numberBetween(1, 10)>.jpg'
         image_size: 1234
         updatedAt: '<date_create()>'
         primaryImage: true
