@@ -74,6 +74,7 @@ class TagService
 
             $organization = $item->getOrganization();
             $building = $item->getBuilding();
+            $department = $item->getDepartment();
             $type = $item->getType();
             $address = $item->getAddress();
             $city = $item->getCity();
@@ -89,6 +90,7 @@ class TagService
             null !== $type && $this->addTagWithoutCleanup($item, 'type', $type);
             null !== $organization && $this->addTagWithoutCleanup($item, 'organization', $organization);
             null !== $building && $this->addTagWithoutCleanup($item, 'building', $building);
+            null !== $department && $this->addTagWithoutCleanup($item, 'department', $department);
             null !== $address && $this->addTagWithoutCleanup($item, 'address', $address);
             null !== $city && $this->addTagWithoutCleanup($item, 'city', $city);
             null !== $room && $this->addTagWithoutCleanup($item, 'room', $room);

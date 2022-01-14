@@ -70,10 +70,11 @@ class ItemService
             'title' => $item->getName(),
             'type' => $item->getType(),
             'building' => $item->getBuilding(),
+            'department' => $item->getDepartment(),
             'geo' => $item->getGeo(),
             'description' => $item->getDescription(),
             'comment' => $item->getComment(),
-            'department' => $item->getOrganization(),
+            'organization' => $item->getOrganization(),
             'status' => $item->getStatus(),
             'linkEdit' => $this->router->generate('item_edit', ['id' => $item->getId()]),
         ];
@@ -106,32 +107,32 @@ class ItemService
         $spreadsheet = IOFactory::load($file);
 
         /* Expected columns in spreadsheet:
-            0 => 'CAT_NAME',
-            1 => 'INVENTORY_ID',
-            2 => 'BILLEDE',
-            3 => 'ART_TITLE',
-            4 => 'ARTIST',
-            5 => 'ART_YEAR',
-            6 => 'ART_DIMENSION',
-            7 => 'TYPE',
-            8 => 'ART_EST_VALUE',
-            9 => 'ART_SERIAL',
-            10 => 'CUSTOM_1',
-            11 => 'CUSTOM_2',
-            12 => 'CUSTOM_4',
-            13 => 'DEPARTMENT',
-            14 => 'GEO_ROOM',
-            15 => 'BUILDING',
-            16 => 'REMARKS',
-            17 => 'STAT_NAME',
-            18 => 'STATUS_DATE',
-            19 => 'INV_TYPE',
-            20 => 'BARCODE',
-            21 => 'PRICE',
-            22 => 'INV_USER',
-            23 => 'CREATION_DATE',
-            24 => 'MODIFICATION_DATE',
-            25 => 'SCAN_DATE',
+            A  0 => 'CAT_NAME',
+            B  1 => 'INVENTORY_ID',
+            C  2 => 'BILLEDE',
+            D  3 => 'ART_TITLE',
+            E  4 => 'ARTIST',
+            F  5 => 'ART_YEAR',
+            G  6 => 'ART_DIMENSION',
+            H  7 => 'TYPE',
+            I  8 => 'ART_EST_VALUE',
+            J  9 => 'ART_SERIAL',
+            K 10 => 'CUSTOM_1',
+            L 11 => 'CUSTOM_2',
+            M 12 => 'CUSTOM_4',
+            N 13 => 'DEPARTMENT',
+            O 14 => 'GEO_ROOM',
+            P 15 => 'BUILDING',
+            Q 16 => 'REMARKS',
+            R 17 => 'STAT_NAME',
+            S 18 => 'STATUS_DATE',
+            T 19 => 'INV_TYPE',
+            U 20 => 'BARCODE',
+            V 21 => 'PRICE',
+            W 22 => 'INV_USER',
+            X 23 => 'CREATION_DATE',
+            Y 24 => 'MODIFICATION_DATE',
+            Z 25 => 'SCAN_DATE',
          */
         $content = $spreadsheet->getActiveSheet()->toArray();
 
@@ -155,7 +156,7 @@ class ItemService
                 $item->setArtSerial($entry[9]);
 
                 // Parse ART_DIMENSION.
-                $entryDimensions = strtolower($entry[6]);
+                $entryDimensions = mb_strtolower($entry[6]);
                 $split = explode('x', $entryDimensions);
 
                 if (\count($split) > 1) {
