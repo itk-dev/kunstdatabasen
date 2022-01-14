@@ -87,6 +87,14 @@ class ArtworkType extends AbstractType
                 'required' => false,
                 'label' => 'item.building',
             ])
+            ->add('department', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'tag-select-edit',
+                ],
+                'choices' => $this->tagService->getChoices($classname, 'department'),
+                'required' => false,
+                'label' => 'item.department',
+            ])
             ->add('organization', ChoiceType::class, [
                 'attr' => [
                     'class' => 'tag-select-edit',
@@ -215,6 +223,7 @@ class ArtworkType extends AbstractType
 
         // Allow for new options from the user.
         $builder->get('building')->resetViewTransformers();
+        $builder->get('department')->resetViewTransformers();
         $builder->get('organization')->resetViewTransformers();
         $builder->get('type')->resetViewTransformers();
         $builder->get('address')->resetViewTransformers();
