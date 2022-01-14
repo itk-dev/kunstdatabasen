@@ -93,6 +93,7 @@ class TaggingSubscriber implements EventSubscriber
         if ($entity instanceof Item) {
             $organization = $entity->getOrganization();
             $building = $entity->getBuilding();
+            $department = $entity->getDepartment();
             $type = $entity->getType();
             $address = $entity->getAddress();
             $city = $entity->getCity();
@@ -114,6 +115,7 @@ class TaggingSubscriber implements EventSubscriber
             null !== $type && $this->tagService->addTag($entity, 'type', $type, $changeSet['type'] ?? []);
             null !== $organization && $this->tagService->addTag($entity, 'organization', $organization, $changeSet['organization'] ?? []);
             null !== $building && $this->tagService->addTag($entity, 'building', $building, $changeSet['building'] ?? []);
+            null !== $department && $this->tagService->addTag($entity, 'department', $department, $changeSet['department'] ?? []);
             null !== $address && $this->tagService->addTag($entity, 'address', $address, $changeSet['address'] ?? []);
             null !== $city && $this->tagService->addTag($entity, 'city', $city, $changeSet['city'] ?? []);
             null !== $room && $this->tagService->addTag($entity, 'room', $room, $changeSet['room'] ?? []);
