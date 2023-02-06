@@ -23,10 +23,10 @@ jobs:
           restore-keys: yarn-
 
       - name: Install yarn packages
-        run: docker run -v $PWD:/app:rw -v ${{ steps.yarn-cache.outputs.dir }}:/usr/local/share/.cache/yarn/v6:rw itkdev/yarn:14 install
+        run: docker run -v $PWD:/app:rw -v ${{ steps.yarn-cache.outputs.dir }}:/usr/local/share/.cache/yarn/v6:rw --workdir /app node:14 yarn install
 
       - name: Build assets
-        run: docker run -v $PWD:/app:rw -v ${{ steps.yarn-cache.outputs.dir }}:/usr/local/share/.cache/yarn/v6:rw itkdev/yarn:14 build
+        run: docker run -v $PWD:/app:rw -v ${{ steps.yarn-cache.outputs.dir }}:/usr/local/share/.cache/yarn/v6:rw --workdir /app node:14 yarn build
 
       - name: Sync assets to remote server
         uses: itk-dev/actions-rsync@master
@@ -51,7 +51,7 @@ jobs:
             git checkout develop
             git fetch
             git reset origin/develop --hard
-            composer install -o
+            composer install --no-dev --optimize-autoloader
             bin/console doctrine:migrations:migrate --no-interaction
             bin/console doctrine:schema:validate
             bin/console cache:clear --no-debug
