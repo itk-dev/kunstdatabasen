@@ -42,12 +42,12 @@ For testing and to autoreload browser you kan run browsersync with `browser-sync
 The frontend is using web-pack and yarn to handle packages. First install the packages.
 
 ```sh
-docker-compose run yarn install
+docker-compose run node yarn install
 ```
 
 In development use.
 ```sh
-docker-compose run yarn watch
+docker-compose run node yarn watch
 ```
 
 ## Production
@@ -71,5 +71,5 @@ bin/console app:import-images public/images/migration_images
 
 Build the front end.
 ```sh
-docker-compose run yarn build
+docker-compose run node yarn build
 ```
