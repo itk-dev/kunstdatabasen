@@ -42,14 +42,13 @@ class FrontendController extends AbstractController
     }
 
     /**
-     * @Route("/", name="frontend_index")
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \App\Repository\ArtworkRepository         $artworkRepository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
+    #[Route(path: '/', name: 'frontend_index')]
     public function index(Request $request, ArtworkRepository $artworkRepository, PaginatorInterface $paginator)
     {
         $parameters = [];
@@ -118,12 +117,11 @@ class FrontendController extends AbstractController
     }
 
     /**
-     * @Route("/display/{id}", name="frontend_artwork_show", methods={"GET"})
      *
      * @param \App\Entity\Artwork $artwork
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
+    #[Route(path: '/display/{id}', name: 'frontend_artwork_show', methods: ['GET'])]
     public function show(Artwork $artwork): Response
     {
         $parameters = [

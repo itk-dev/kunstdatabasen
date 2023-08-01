@@ -11,7 +11,9 @@ namespace App\EventSubscriber;
 use App\Entity\Artwork;
 use App\Entity\Item;
 use App\Service\TagService;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
@@ -22,38 +24,21 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 /**
  * Class TaggingSubscriber.
  */
-class TaggingSubscriber implements EventSubscriber
+#[AsDoctrineListener(event: Events::prePersist)]
+#[AsDoctrineListener(event: Events::preUpdate)]
+class TaggingSubscriber
 {
-    private $tagService;
-    private $dispatcher;
-
     /**
      * TaggingSubscriber constructor.
-     *
-     * @param \App\Service\TagService                                     $tagService
-     * @param \Symfony\Contracts\EventDispatcher\EventDispatcherInterface $dispatcher
      */
-    public function __construct(TagService $tagService, EventDispatcherInterface $dispatcher)
+    public function __construct(
+        readonly private TagService $tagService,
+        readonly private EventDispatcherInterface $dispatcher
+    )
     {
-        $this->tagService = $tagService;
-        $this->dispatcher = $dispatcher;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSubscribedEvents()
-    {
-        return [
-            Events::prePersist,
-            Events::preUpdate,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prePersist(LifecycleEventArgs $args)
+    public function prePersist(PrePersistEventArgs $args)
     {
         if ($args->getObject() instanceof Item) {
             $this->dispatcher->addListener(
@@ -68,7 +53,7 @@ class TaggingSubscriber implements EventSubscriber
     /**
      * {@inheritdoc}
      */
-    public function preUpdate(LifecycleEventArgs $args)
+    public function preUpdate(PreUpdateEventArgs $args)
     {
         if ($args->getObject() instanceof Item) {
             $this->dispatcher->addListener(

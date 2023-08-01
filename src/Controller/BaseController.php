@@ -24,30 +24,17 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
  */
 class BaseController extends AbstractController
 {
-    protected $requestStack;
-    protected $session;
-    protected $itemService;
-    protected $tagService;
-    protected $uploaderHelper;
     protected $supportMail;
 
     /**
      * BaseController constructor.
-     *
-     * @param string                                                     $bindSupportMail
-     * @param RequestStack                                               $requestStack
-     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @param \App\Service\ItemService                                   $itemService
-     * @param \App\Service\TagService                                    $tagService
-     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper      $uploaderHelper
      */
-    public function __construct(string $bindSupportMail, RequestStack $requestStack, SessionInterface $session, ItemService $itemService, TagService $tagService, UploaderHelper $uploaderHelper)
-    {
-        $this->requestStack = $requestStack;
-        $this->session = $session;
-        $this->itemService = $itemService;
-        $this->tagService = $tagService;
-        $this->uploaderHelper = $uploaderHelper;
+    public function __construct(
+        string $bindSupportMail,
+        readonly protected RequestStack $requestStack,
+        readonly protected ItemService $itemService,
+        readonly protected TagService $tagService
+    ) {
         $this->supportMail = $bindSupportMail;
     }
 
@@ -115,8 +102,9 @@ class BaseController extends AbstractController
             }
             $id = $matches[2];
 
-            $this->session->start();
-            $visited = $this->session->get('latestVisitedItems', []);
+            $session = $this->requestStack->getSession();
+            $session->start();
+            $visited = $session->get('latestVisitedItems', []);
 
             $key = array_search($id, array_column($visited, 'id'));
 
@@ -134,7 +122,7 @@ class BaseController extends AbstractController
                 array_shift($visited);
             }
 
-            $this->session->set('latestVisitedItems', $visited);
+            $session->set('latestVisitedItems', $visited);
         }
     }
 }

@@ -16,6 +16,8 @@ use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * @extends ServiceEntityRepository<Item>
+ *
  * @method Item|null find($id, $lockMode = null, $lockVersion = null)
  * @method Item|null findOneBy(array $criteria, array $orderBy = null)
  * @method Item[]    findAll()

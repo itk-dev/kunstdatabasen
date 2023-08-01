@@ -5,7 +5,7 @@ services:
       - PHP_MEMORY_LIMIT=512M
 
   node:
-    image: node:14
+    image: node:18
     profiles:
       - dev
     networks:

@@ -31,20 +31,17 @@ use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-/**
- * @Route("/admin/item")
- */
+#[Route(path: '/admin/item')]
 class ItemController extends BaseController
 {
     /**
-     * @Route("/", name="item_index", methods={"GET"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \App\Repository\ItemRepository            $itemRepository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator
-     *
      * @return Response
      */
+    #[Route(path: '/', name: 'item_index', methods: ['GET'])]
     public function index(Request $request, ItemRepository $itemRepository, PaginatorInterface $paginator): Response
     {
         $form = $this->getSearchForm();
@@ -105,7 +102,6 @@ class ItemController extends BaseController
     }
 
     /**
-     * @Route("/list/{itemType}", name="item_list", methods={"GET"})
      *
      * @param string                                    $itemType
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -114,9 +110,9 @@ class ItemController extends BaseController
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return Response
-     *
      * @throws \Exception
      */
+    #[Route(path: '/list/{itemType}', name: 'item_list', methods: ['GET'])]
     public function list(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository, PaginatorInterface $paginator): Response
     {
         $parameters = [];
@@ -221,13 +217,12 @@ class ItemController extends BaseController
     }
 
     /**
-     * @Route("/{itemType}/export", name="item_export", methods={"GET"})
      *
      * @param string $itemType
      *                         The item type
-     *
      * @return Response
      */
+    #[Route(path: '/{itemType}/export', name: 'item_export', methods: ['GET'])]
     public function export(string $itemType): Response
     {
         // Avoid php timeout errors.
@@ -358,15 +353,14 @@ class ItemController extends BaseController
     }
 
     /**
-     * @Route("/{itemType}/new", name="item_new", methods={"GET","POST"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string                                    $itemType
      *
      * @return Response
-     *
      * @throws \Exception
      */
+    #[Route(path: '/{itemType}/new', name: 'item_new', methods: ['GET', 'POST'])]
     public function new(Request $request, string $itemType): Response
     {
         switch ($itemType) {
@@ -404,15 +398,14 @@ class ItemController extends BaseController
     }
 
     /**
-     * @Route("/{id}/edit", name="item_edit", methods={"GET","POST"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \App\Entity\Item                          $item
      *
      * @return Response
-     *
      * @throws \Exception
      */
+    #[Route(path: '/{id}/edit', name: 'item_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Item $item): Response
     {
         if ($item instanceof Artwork) {
@@ -445,13 +438,12 @@ class ItemController extends BaseController
     }
 
     /**
-     * @Route("/{id}", name="item_delete", methods={"DELETE"})
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \App\Entity\Item                          $item
-     *
      * @return Response
      */
+    #[Route(path: '/{id}', name: 'item_delete', methods: ['DELETE'])]
     public function delete(Request $request, Item $item): Response
     {
         if ($this->isCsrfTokenValid('delete'.$item->getId(), $request->request->get('_token'))) {
@@ -464,12 +456,11 @@ class ItemController extends BaseController
     }
 
     /**
-     * @Route("/{id}/modal", name="item_modal", methods={"GET"})
      *
      * @param \App\Entity\Item $item
-     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
+    #[Route(path: '/{id}/modal', name: 'item_modal', methods: ['GET'])]
     public function getModal(Item $item)
     {
         $itemObject = $this->itemService->itemToRenderObject($item);

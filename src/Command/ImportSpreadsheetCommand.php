@@ -9,6 +9,7 @@
 namespace App\Command;
 
 use App\Service\ItemService;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,9 +19,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Class ImportSpreadsheetCommand.
  */
+#[AsCommand(
+    name: 'app:import-spreadsheet',
+    description: 'Import spreadsheet',
+)]
 class ImportSpreadsheetCommand extends Command
 {
-    protected static $defaultName = 'app:import-spreadsheet';
     private $itemService;
 
     /**

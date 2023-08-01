@@ -9,7 +9,7 @@ This file is part of aakb/kunstdatabasen.
 This source file is subject to the MIT license.
 HEADER;
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules(
         [

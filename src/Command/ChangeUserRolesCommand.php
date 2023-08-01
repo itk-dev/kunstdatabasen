@@ -9,6 +9,7 @@
 namespace App\Command;
 
 use App\Repository\UserRepository;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,14 +19,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Class ChangeUserRolesCommand.
  */
+#[AsCommand(
+    name: 'app:change-user-roles',
+    description: 'Change user password',
+)]
 class ChangeUserRolesCommand extends Command
 {
     /* @var EntityManagerInterface $entityManager */
     private $entityManager;
     /* @var UserRepository $userRepository */
     private $userRepository;
-
-    protected static $defaultName = 'app:change-user-roles';
 
     /**
      * ChangeUserRolesCommand constructor.

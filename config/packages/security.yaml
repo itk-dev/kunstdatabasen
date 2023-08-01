@@ -1,24 +1,26 @@
 security:
-    encoders:
-        App\Entity\User:
-            algorithm: auto
+    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+    password_hashers:
+        Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
     providers:
         app_user_provider:
             entity:
                 class: App\Entity\User
                 property: email
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            pattern: ^/
-            anonymous: lazy
+            lazy: true
             provider: app_user_provider
-            guard:
-                authenticators:
-                    - App\Security\LoginFormAuthenticator
+            pattern: ^/
+            # TODO
+            # guard:
+            #     authenticators:
+            #         - App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
                 target: frontend_index

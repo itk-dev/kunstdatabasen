@@ -10,39 +10,32 @@ namespace App\Command;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class ChangeUserPasswordCommand.
  */
+#[AsCommand(
+    name: 'app:change-user-password',
+    description: 'Change user password',
+)]
 class ChangeUserPasswordCommand extends Command
 {
-    /* @var UserPasswordEncoderInterface $passwordEncoder */
-    private $passwordEncoder;
-    /* @var EntityManagerInterface $entityManager */
-    private $entityManager;
-    /* @var UserRepository $userRepository */
-    private $userRepository;
-
-    protected static $defaultName = 'app:change-user-password';
-
     /**
      * ChangeUserRolesCommand constructor.
-     *
-     * @param \Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface $passwordEncoder
-     * @param \Doctrine\ORM\EntityManagerInterface                                  $entityManager
-     * @param \App\Repository\UserRepository                                        $userRepository
      */
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $entityManager, UserRepository $userRepository)
+    public function __construct(
+        readonly private UserPasswordHasherInterface $passwordHasher,
+        readonly private EntityManagerInterface $entityManager,
+        readonly private UserRepository $userRepository
+)
     {
-        $this->passwordEncoder = $passwordEncoder;
-        $this->entityManager = $entityManager;
-        $this->userRepository = $userRepository;
-
         parent::__construct();
     }
 
@@ -81,7 +74,7 @@ class ChangeUserPasswordCommand extends Command
             return 1;
         }
 
-        $encodedPassword = $this->passwordEncoder->encodePassword($user, $password);
+        $encodedPassword = $this->passwordHasher->hashPassword($user, $password);
         $user->setPassword($encodedPassword);
         $this->entityManager->flush();
 

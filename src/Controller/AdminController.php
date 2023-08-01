@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Entity\Item;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,14 +19,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends BaseController
 {
     /**
-     * @Route("/admin", name="admin")
      *
      * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     *
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(SessionInterface $session)
+    #[Route(path: '/admin', name: 'admin')]
+    public function index(Request $request)
     {
+        $session = $request->getSession();
         $session->start();
         $visitedSession = $session->get('latestVisitedItems');
 
