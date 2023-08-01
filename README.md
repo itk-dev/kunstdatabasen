@@ -131,6 +131,10 @@ docker compose run --rm node yarn build
 ### Coding standards
 
 ```sh
+docker compose exec phpfpm composer check
+```
+
+```sh
 docker compose run --rm node yarn install
 docker compose run --rm node yarn check
 ```

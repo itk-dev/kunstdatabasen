@@ -83,26 +83,18 @@
         "coding-standards-check/php-cs-fixer": [
             "php-cs-fixer fix --dry-run --format=checkstyle"
         ],
-        "coding-standards-check/phpcs": [
-            "phpcs --standard=phpcs.xml.dist"
-        ],
         "coding-standards-check/twigcs": [
-            "twigcs lint templates"
+            "twigcs templates"
         ],
         "coding-standards-check": [
             "@coding-standards-check/php-cs-fixer",
-            "@coding-standards-check/phpcs",
             "@coding-standards-check/twigcs"
         ],
         "coding-standards-apply/php-cs-fixer": [
             "php-cs-fixer fix"
         ],
-        "coding-standards-apply/phpcs": [
-            "phpcbf --standard=phpcs.xml.dist"
-        ],
         "coding-standards-apply": [
-            "@coding-standards-apply/php-cs-fixer",
-            "@coding-standards-apply/phpcs"
+            "@coding-standards-apply/php-cs-fixer"
         ],
         "actions/phpcs": [
             "phpcs --standard=phpcs.xml.dist --report=checkstyle"
@@ -111,7 +103,7 @@
             "php-cs-fixer fix --dry-run --diff --diff-format=udiff"
         ],
         "actions/twigcs": [
-            "twigcs lint templates"
+            "twigcs templates"
         ]
     },
     "conflict": {

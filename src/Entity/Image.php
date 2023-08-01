@@ -72,7 +72,7 @@ class Image
      *
      * @throws \Exception
      */
-    public function setImageFile(?File $imageFile = null): void
+    public function setImageFile(File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
 

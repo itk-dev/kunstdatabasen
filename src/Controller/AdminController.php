@@ -10,7 +10,6 @@ namespace App\Controller;
 
 use App\Entity\Item;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -18,11 +17,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminController extends BaseController
 {
-    /**
-     *
-     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     #[Route(path: '/admin', name: 'admin')]
     public function index(Request $request)
     {

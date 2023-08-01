@@ -6,10 +6,10 @@
         </button>
         <div class="collapse navbar-collapse flex-column" id="primaryNavigation">
             <ul class="nav flex-column">
-                {% for menuItem in menuItems %}
-                    <li class="nav-item {{ menuItem.active ? ' active' : '' }}">
-                        <a class="nav-link" href="{{ menuItem.link }}">
-                            <i class="fas {{ menuItem.icon }} fa-fw mr-1"></i>{{ menuItem.title|trans }}
+                {% for menu_item in menuItems %}
+                    <li class="nav-item {{ menu_item.active ? ' active' : '' }}">
+                        <a class="nav-link" href="{{ menu_item.link }}">
+                            <i class="fas {{ menu_item.icon }} fa-fw mr-1"></i>{{ menu_item.title|trans }}
                         </a>
                     </li>
                 {% endfor %}

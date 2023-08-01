@@ -6,11 +6,11 @@
     <h1 class="h4 mt-3 mb-4">{{ 'admin.welcome'|trans }}</h1>
     <p class="text-muted">{{ 'admin.index.latest_viewed'|trans }}</p>
 
-    {% include "admin/_table.html.twig" with { header: false, items: latestVisited } %}
+    {% include "admin/_table.html.twig" with {header: false, items: latestVisited} %}
 
     <p class="text-muted">{{ 'admin.index.latest_added'|trans }}</p>
 
-    {% include "admin/_table.html.twig" with { header: false, items: latestAdded } %}
+    {% include "admin/_table.html.twig" with {header: false, items: latestAdded} %}
 
     <div class="row mt-5">
         <div class="col">

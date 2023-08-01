@@ -35,10 +35,10 @@ use Symfony\Component\Serializer\Serializer;
 class ItemController extends BaseController
 {
     /**
-     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \App\Repository\ItemRepository            $itemRepository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator
+     *
      * @return Response
      */
     #[Route(path: '/', name: 'item_index', methods: ['GET'])]
@@ -102,7 +102,6 @@ class ItemController extends BaseController
     }
 
     /**
-     *
      * @param string                                    $itemType
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \App\Repository\ItemRepository            $itemRepository
@@ -110,6 +109,7 @@ class ItemController extends BaseController
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return Response
+     *
      * @throws \Exception
      */
     #[Route(path: '/list/{itemType}', name: 'item_list', methods: ['GET'])]
@@ -170,14 +170,14 @@ class ItemController extends BaseController
                     );
             }
 
-            if (null !== $data['width'] ||
-                null !== $data['height'] ||
-                null !== $data['status'] ||
-                null !== $data['yearFrom'] ||
-                null !== $data['yearTo'] ||
-                null !== $data['artistGender'] ||
-                null !== $data['priceFrom'] ||
-                null !== $data['priceTo']) {
+            if (null !== $data['width']
+                || null !== $data['height']
+                || null !== $data['status']
+                || null !== $data['yearFrom']
+                || null !== $data['yearTo']
+                || null !== $data['artistGender']
+                || null !== $data['priceFrom']
+                || null !== $data['priceTo']) {
                 $parameters['display_advanced_filters'] = true;
             }
         } else {
@@ -217,9 +217,9 @@ class ItemController extends BaseController
     }
 
     /**
-     *
      * @param string $itemType
      *                         The item type
+     *
      * @return Response
      */
     #[Route(path: '/{itemType}/export', name: 'item_export', methods: ['GET'])]
@@ -353,11 +353,11 @@ class ItemController extends BaseController
     }
 
     /**
-     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param string                                    $itemType
      *
      * @return Response
+     *
      * @throws \Exception
      */
     #[Route(path: '/{itemType}/new', name: 'item_new', methods: ['GET', 'POST'])]
@@ -398,11 +398,11 @@ class ItemController extends BaseController
     }
 
     /**
-     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \App\Entity\Item                          $item
      *
      * @return Response
+     *
      * @throws \Exception
      */
     #[Route(path: '/{id}/edit', name: 'item_edit', methods: ['GET', 'POST'])]
@@ -438,9 +438,9 @@ class ItemController extends BaseController
     }
 
     /**
-     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \App\Entity\Item                          $item
+     *
      * @return Response
      */
     #[Route(path: '/{id}', name: 'item_delete', methods: ['DELETE'])]
@@ -456,8 +456,8 @@ class ItemController extends BaseController
     }
 
     /**
-     *
      * @param \App\Entity\Item $item
+     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     #[Route(path: '/{id}/modal', name: 'item_modal', methods: ['GET'])]

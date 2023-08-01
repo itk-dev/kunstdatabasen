@@ -12,7 +12,6 @@ use App\Entity\Artwork;
 use App\Entity\Item;
 use App\Service\TagService;
 use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
-use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
@@ -34,8 +33,7 @@ class TaggingSubscriber
     public function __construct(
         readonly private TagService $tagService,
         readonly private EventDispatcherInterface $dispatcher
-    )
-    {
+    ) {
     }
 
     public function prePersist(PrePersistEventArgs $args)
@@ -50,9 +48,6 @@ class TaggingSubscriber
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function preUpdate(PreUpdateEventArgs $args)
     {
         if ($args->getObject() instanceof Item) {

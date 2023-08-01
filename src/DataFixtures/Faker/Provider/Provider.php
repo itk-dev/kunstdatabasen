@@ -1,12 +1,15 @@
 <?php
 
+/*
+ * This file is part of aakb/kunstdatabasen.
+ * (c) 2020 ITK Development
+ * This source file is subject to the MIT license.
+ */
+
 namespace App\DataFixtures\Faker\Provider;
 
 use Faker\Generator;
 use Faker\Provider\Base;
-use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Mime\MimeTypeGuesserInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 

@@ -96,9 +96,6 @@
     "doctrine/sql-formatter": {
         "version": "1.1.1"
     },
-    "escapestudios/symfony2-coding-standard": {
-        "version": "3.11.0"
-    },
     "ezyang/htmlpurifier": {
         "version": "v4.13.0"
     },
@@ -269,18 +266,6 @@
         },
         "files": [
             "config/packages/sensio_framework_extra.yaml"
-        ]
-    },
-    "squizlabs/php_codesniffer": {
-        "version": "3.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "3.0",
-            "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
-        },
-        "files": [
-            "phpcs.xml.dist"
         ]
     },
     "stof/doctrine-extensions-bundle": {
