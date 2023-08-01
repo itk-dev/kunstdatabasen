@@ -5,6 +5,11 @@
 ## Upgrade from version 1.5.2
 
 ```sh
+# Upgrade migrations
+itkdev-docker-compose bin/console doctrine:migrations:list
+itkdev-docker-compose bin/console doctrine:migrations:sync-metadata-storage
+itkdev-docker-compose bin/console doctrine:migrations:version --add --all --no-interaction
+itkdev-docker-compose bin/console doctrine:migrations:list
 itkdev-docker-compose-server pull
 itkdev-docker-compose-server up --detach --remove-orphans
 itkdev-docker-compose-server exec phpfpm composer install --no-dev --no-scripts

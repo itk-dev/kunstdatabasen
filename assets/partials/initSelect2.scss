@@ -3,7 +3,8 @@
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/variables';
 @import '~select2/src/scss/core';
-@import '~@ttskch/select2-bootstrap4-theme/src/layout';
+// Replaced by select2-bootstrap-5-theme
+// @import '~@ttskch/select2-bootstrap4-theme/src/layout';
 
 // Modify BS-4 select 2 theme using different styleguide hence we disable our stylelint for
 /* stylelint-disable */
