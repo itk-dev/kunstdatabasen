@@ -17,6 +17,12 @@ security:
         main:
             lazy: true
             provider: app_user_provider
+
+            form_login:
+                # "app_login" is the name of the route created previously
+                login_path: app_login
+                check_path: app_login
+
             pattern: ^/
             # TODO
             # guard:
@@ -34,7 +40,7 @@ security:
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login$, roles: PUBLIC_ACCESS }
 
 when@test:
     security:
