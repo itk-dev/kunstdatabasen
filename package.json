@@ -31,15 +31,15 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress",
-        "check-coding-standards-stylelint": "stylelint --config=.stylelintrc.js 'assets/**/*.scss'",
-        "check-coding-standards-scss": "yarn run check-coding-standards-stylelint",
-        "check-coding-standards-eslint": "eslint --config .eslintrc.js 'assets/**/*.js'",
-        "check-coding-standards-js": "yarn run check-coding-standards-eslint",
-        "check-coding-standards": "yarn run check-coding-standards-scss; yarn run check-coding-standards-js",
-        "apply-coding-standards-stylelint": "stylelint --config=.stylelintrc.js 'assets/**/*.scss' --fix",
-        "apply-coding-standards-scss": "yarn run apply-coding-standards-stylelint",
-        "apply-coding-standards-eslint": "eslint --config .eslintrc.js 'assets/**/*.js' --fix",
-        "apply-coding-standards-js": "yarn run apply-coding-standards-eslint",
-        "apply-coding-standards": "yarn run apply-coding-standards-scss; yarn run apply-coding-standards-js"
+        "coding-standards-check/stylelint": "stylelint --config=.stylelintrc.js 'assets/**/*.scss'",
+        "coding-standards-check/scss": "yarn run coding-standards-check/stylelint",
+        "coding-standards-check/eslint": "eslint --config .eslintrc.js 'assets/**/*.js'",
+        "coding-standards-check/js": "yarn run coding-standards-check/eslint",
+        "coding-standards-check": "yarn run coding-standards-check/scss; yarn run coding-standards-check/js",
+        "coding-standards-apply/stylelint": "stylelint --config=.stylelintrc.js 'assets/**/*.scss' --fix",
+        "coding-standards-apply/scss": "yarn run coding-standards-apply/stylelint",
+        "coding-standards-apply/eslint": "eslint --config .eslintrc.js 'assets/**/*.js' --fix",
+        "coding-standards-apply/js": "yarn run coding-standards-apply/eslint",
+        "coding-standards-apply": "yarn run coding-standards-apply/scss; yarn run coding-standards-apply/js"
     }
 }

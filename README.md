@@ -41,7 +41,7 @@ docker compose exec phpfpm bin/console doctrine:migrations:migrate --no-interact
 To ease the development on local setup the project supplies fixtures:
 
 ```sh
-docker compose exec phpfpm composer fixtures-load
+docker compose exec phpfpm bin/console hautelook:fixtures:load --no-bundles
 ```
 
 ### Refresh tags
@@ -99,11 +99,6 @@ During development you can watch for changes:
 docker compose run --rm node yarn watch
 ```
 
-## Production
-
-Automatic deployment to `stg` and `prod` are set up as [Github
-Actions](https://github.com/aakb/kunstdatabasen/actions).
-
 ## Migration in production
 
 Run the migration command:
@@ -131,10 +126,10 @@ docker compose run --rm node yarn build
 ### Coding standards
 
 ```sh
-docker compose exec phpfpm composer check
+docker compose exec phpfpm composer coding-standards-check
 ```
 
 ```sh
 docker compose run --rm node yarn install
-docker compose run --rm node yarn check
+docker compose run --rm node yarn coding-standards-check
 ```

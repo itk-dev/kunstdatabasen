@@ -81,12 +81,6 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "fixtures-load": [
-            "bin/console hautelook:fixtures:load --no-bundles"
-        ],
-        "check": [
-            "@coding-standards-check"
-        ],
         "coding-standards-check/php-cs-fixer": [
             "php-cs-fixer fix --dry-run --format=checkstyle"
         ],
@@ -103,11 +97,8 @@
         "coding-standards-apply": [
             "@coding-standards-apply/php-cs-fixer"
         ],
-        "actions/phpcs": [
-            "phpcs --standard=phpcs.xml.dist --report=checkstyle"
-        ],
         "actions/phpcsfixer": [
-            "php-cs-fixer fix --dry-run --diff --diff-format=udiff"
+            "php-cs-fixer fix --dry-run --diff"
         ],
         "actions/twigcs": [
             "twigcs templates"
