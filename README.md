@@ -2,19 +2,38 @@
 
 ## Production
 
-```sh
-# Upgrade migrations
-itkdev-docker-compose bin/console doctrine:migrations:list
-itkdev-docker-compose bin/console doctrine:migrations:sync-metadata-storage
-itkdev-docker-compose bin/console doctrine:migrations:version --add --all --no-interaction
-itkdev-docker-compose bin/console doctrine:migrations:list
+## Upgrade from version 1.5.2
 
+```sh
+# Upgrade migrations (only once)
+itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:list
+itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:sync-metadata-storage
+itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:version --add --all --no-interaction
+# Remove our single new migration
+itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:version --delete 'DoctrineMigrations\Version20230801120357' --no-interaction
+itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:list
+```
+
+## Install/update
+
+```sh
 # Edit .env.local
 APP_SECRET=…
 
 SUPPORT_MAIL=…
 SITEIMPROVE_KEY=…
 WEB_ACCESSIBILITY_STATEMENT_URL=…
+
+# Install
+itkdev-docker-compose-server up --detach --remove-orphans
+itkdev-docker-compose-server exec phpfpm composer install --no-dev
+itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:migrate --no-interaction
+
+# Build assets using our development setup
+docker compose run --rm node yarn install
+docker compose run --rm node yarn build
+
+itkdev-docker-compose-server exec phpfpm bin/console cache:clear --no-interaction
 ```
 
 This site comes with an docker setup to do local developement.
