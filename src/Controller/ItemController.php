@@ -15,11 +15,12 @@ use App\Form\ArtworkType;
 use App\Form\FurnitureType;
 use App\Repository\ArtworkRepository;
 use App\Repository\ItemRepository;
-use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
-use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 use Doctrine\ORM\EntityManagerInterface;
 use DoctrineBatchUtils\BatchProcessing\SimpleBatchIteratorAggregate;
 use Knp\Component\Pager\PaginatorInterface;
+use OpenSpout\Common\Entity\Row;
+use OpenSpout\Common\Entity\Style\Style;
+use OpenSpout\Writer\XLSX;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
@@ -178,17 +179,16 @@ class ItemController extends BaseController
                 100
             );
 
-            $writer = WriterEntityFactory::createXLSXWriter();
+            $writer = new XLSX\Writer();
             $writer->openToFile('php://output');
 
-            $boldStyle = (new StyleBuilder())
-                ->setFontBold()
-                ->build();
+            $headerStyle = (new Style())
+                ->setFontBold();
 
             $serializer = new Serializer([new ObjectNormalizer()]);
 
             $dateCallback = function ($innerObject) {
-                return $innerObject instanceof \DateTime ? $innerObject->format(\DateTime::ISO8601) : '';
+                return $innerObject instanceof \DateTime ? $innerObject->format(\DateTime::ATOM) : '';
             };
 
             $defaultContext = [
@@ -247,9 +247,9 @@ class ItemController extends BaseController
                 // We have a bug!
                 $itemArray['assessmentDate'] = '';
 
-                // Add headlines for first row.
+                // Add header in first row.
                 if (0 === $itemsAdded) {
-                    $row = WriterEntityFactory::createRowFromArray(array_keys($itemArray), $boldStyle);
+                    $row = Row::fromValues(array_keys($itemArray), $headerStyle);
                     $writer->addRow($row);
                 }
 
@@ -260,7 +260,7 @@ class ItemController extends BaseController
                     }
                 }
 
-                $row = WriterEntityFactory::createRowFromArray($itemArray);
+                $row = Row::fromValues($itemArray);
                 $writer->addRow($row);
 
                 ++$itemsAdded;
@@ -269,7 +269,7 @@ class ItemController extends BaseController
             $writer->close();
         });
 
-        $filename = $itemType.'-eksport-'.date('d-m-Y');
+        $filename = sprintf('%s-eksport-%s', $itemType, (new \DateTimeImmutable())->format('d-m-Y'));
         $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         $response->headers->set('Content-Disposition', 'attachment; filename="'.$filename.'.xlsx"');
         $response->setStatusCode(Response::HTTP_OK);
