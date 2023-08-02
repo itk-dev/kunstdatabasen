@@ -28,6 +28,25 @@ App\Entity\Artwork:
         type: '<randomElement(["Maleri","Skulptur"])>'
         organization: '<randomElement(["MKB","MBU","MBA","MSO","MSB","MTM"])>'
 
+App\Entity\Furniture:
+    artwork_{1..17}:
+        name: '<da_DK:word()>'
+        description: '<text()>'
+        purchasePrice: '<numberBetween(1000, 1000000)>'
+        purchaseDate: '<dateTimeBetween("-1000 days", "now")>'
+        geo: '<randomFloat()>, <randomFloat()>'
+        comment: '<text()>'
+        location: '<text(15)>'
+        building: '<text(20)>'
+        room: 'M-<numberBetween(1, 10)>'
+        address: '<text(30)> <numberBetween(1, 100)>'
+        postal_code: '<numberBetween(8000, 8300)>'
+        city: '<randomElement(["Aarhus C","Aarhus V","Aarhus Ø","Aarhus N"])>'
+        publicly_accessible: '<boolean()>'
+        status: '<randomElement(["På lager","Udlånt"])>'
+        type: '<randomElement(["Maleri","Skulptur"])>'
+        organization: '<randomElement(["MKB","MBU","MBA","MSO","MSB","MTM"])>'
+
 App\Entity\Image:
     image_{1..200}:
         image_name: 'fixtures/image<numberBetween(1, 10)>.jpg'
