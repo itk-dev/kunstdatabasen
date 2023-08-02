@@ -1,0 +1,15 @@
+services:
+  phpfpm:
+    environment:
+      - PHP_MAX_EXECUTION_TIME=60
+      - PHP_MEMORY_LIMIT=512M
+
+  node:
+    image: node:14
+    profiles:
+      - dev
+    networks:
+      - app
+    volumes:
+      - .:/app:delegated
+    working_dir: /app

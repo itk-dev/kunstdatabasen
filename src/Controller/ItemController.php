@@ -324,6 +324,8 @@ class ItemController extends BaseController
 
             foreach ($iterableItems as $item) {
                 $itemArray = $serializer->normalize($item, null, $defaultContext);
+                // We have a bug!
+                $itemArray['assessmentDate'] = '';
 
                 // Add headlines for first row.
                 if (0 === $itemsAdded) {
