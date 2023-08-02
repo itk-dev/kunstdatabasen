@@ -20,22 +20,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * Class ImportSpreadsheetCommand.
  */
 #[AsCommand(
-    name: 'app:import-spreadsheet',
-    description: 'Import spreadsheet',
+    name: 'app:import-spreadsheet'
 )]
 class ImportSpreadsheetCommand extends Command
 {
-    private $itemService;
-
     /**
      * ImportSpreadsheetCommand constructor.
-     *
-     * @param \App\Service\ItemService $itemService
      */
-    public function __construct(ItemService $itemService)
-    {
-        $this->itemService = $itemService;
-
+    public function __construct(
+        readonly private ItemService $itemService
+    ) {
         parent::__construct();
     }
 
@@ -66,6 +60,6 @@ class ImportSpreadsheetCommand extends Command
 
         $io->success('Items successfully imported.');
 
-        return 0;
+        return self::SUCCESS;
     }
 }

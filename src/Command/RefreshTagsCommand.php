@@ -24,29 +24,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class RefreshTagsCommand extends Command
 {
-    private $tagService;
-
     /**
      * ImportSpreadsheetCommand constructor.
-     *
-     * @param TagService $tagService
-     *                               The tag service
      */
-    public function __construct(TagService $tagService)
-    {
-        $this->tagService = $tagService;
-
+    public function __construct(
+        readonly private TagService $tagService
+    ) {
         parent::__construct();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure()
-    {
-        $this
-            ->setDescription('Refreshes tags.')
-        ;
     }
 
     /**
@@ -60,6 +44,6 @@ class RefreshTagsCommand extends Command
 
         $io->success('Tags successfully imported.');
 
-        return 0;
+        return self::SUCCESS;
     }
 }

@@ -20,22 +20,16 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  * Class ImportImagesCommand.
  */
 #[AsCommand(
-    name: 'app:import-images',
-    description: 'Import images',
+    name: 'app:import-images'
 )]
 class ImportImagesCommand extends Command
 {
-    private $itemService;
-
     /**
      * ImportSpreadsheetCommand constructor.
-     *
-     * @param \App\Service\ItemService $itemService
      */
-    public function __construct(ItemService $itemService)
-    {
-        $this->itemService = $itemService;
-
+    public function __construct(
+        readonly private ItemService $itemService
+    ) {
         parent::__construct();
     }
 
@@ -66,6 +60,6 @@ class ImportImagesCommand extends Command
 
         $io->success('Images successfully imported.');
 
-        return 0;
+        return self::SUCCESS;
     }
 }
