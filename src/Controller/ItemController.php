@@ -286,25 +286,24 @@ class ItemController extends BaseController
      * @throws \Exception
      */
     #[Route(path: '/{itemType}/new', name: 'item_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, string $itemType): Response
+    public function new(Request $request, string $itemType, EntityManagerInterface $entityManager): Response
     {
         switch ($itemType) {
-            case 'artwork':
+            case Artwork::ITEM_TYPE:
                 $item = new Artwork();
                 $form = $this->createForm(ArtworkType::class, $item);
                 break;
-            case 'furniture':
+            case Furniture::ITEM_TYPE:
                 $item = new Furniture();
                 $form = $this->createForm(FurnitureType::class, $item);
                 break;
             default:
-                throw new \Exception('Type is not valid.');
+                throw new \RuntimeException('Type is not valid.');
         }
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($item);
             $entityManager->flush();
 
@@ -331,7 +330,7 @@ class ItemController extends BaseController
      * @throws \Exception
      */
     #[Route(path: '/{id}/edit', name: 'item_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Item $item): Response
+    public function edit(Request $request, Item $item, EntityManagerInterface $entityManager): Response
     {
         if ($item instanceof Artwork) {
             $itemType = 'artwork';
@@ -346,7 +345,7 @@ class ItemController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
 
             return $this->redirectToRoute('item_list', ['itemType' => $itemType]);
         }
