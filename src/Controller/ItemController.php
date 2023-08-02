@@ -17,6 +17,7 @@ use App\Repository\ArtworkRepository;
 use App\Repository\ItemRepository;
 use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Doctrine\ORM\EntityManagerInterface;
 use DoctrineBatchUtils\BatchProcessing\SimpleBatchIteratorAggregate;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -44,61 +45,7 @@ class ItemController extends BaseController
     #[Route(path: '/', name: 'item_index', methods: ['GET'])]
     public function index(Request $request, ItemRepository $itemRepository, PaginatorInterface $paginator): Response
     {
-        $form = $this->getSearchForm();
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            $width = null !== $data['width'] ? json_decode($data['width']) : null;
-            $height = null !== $data['height'] ? json_decode($data['height']) : null;
-
-            $query = $itemRepository->getQuery(
-                $data['itemType'],
-                $data['search'],
-                $data['type'],
-                null,
-                $data['building'],
-                $data['yearFrom'],
-                $data['yearTo'],
-                $width->min ?? null,
-                $width->max ?? null,
-                $height->min ?? null,
-                $height->max ?? null
-            );
-        } else {
-            $query = $itemRepository->getQuery();
-        }
-
-        $pagination = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            10
-        );
-
-        $items = [];
-        /* @var Item $item */
-        foreach ($pagination->getItems() as $item) {
-            $items[] = $this->itemService->itemToRenderObject($item);
-        }
-
-        return $this->render(
-            'admin/item/index.html.twig',
-            [
-                'items' => $items,
-                'title' => 'Kunstdatabasen',
-                'headline' => 'item.list.item',
-                'brand' => 'Aarhus Kommunes kunstsamling og udsmykninger',
-                'brandShort' => 'Kunstdatabasen',
-                'welcome' => 'Velkommen til Aarhus Kommunes kunstsamling og udsmykninger',
-                'user' => [
-                    'username' => 'Admin user',
-                    'email' => 'admin@email.com',
-                ],
-                'form' => $form->createView(),
-            ]
-        );
+        return $this->redirectToRoute('item_list');
     }
 
     /**
@@ -112,24 +59,13 @@ class ItemController extends BaseController
      *
      * @throws \Exception
      */
-    #[Route(path: '/list/{itemType}', name: 'item_list', methods: ['GET'])]
+    #[Route(path: '/list/{itemType}', name: 'item_list', methods: ['GET'], defaults: ['itemType' => Artwork::ITEM_TYPE])]
     public function list(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository, PaginatorInterface $paginator): Response
     {
         $parameters = [];
         $parameters['display_advanced_filters'] = false;
 
-        switch ($itemType) {
-            case 'artwork':
-                $itemTypeClass = Artwork::class;
-                break;
-            case 'furniture':
-                $itemTypeClass = Furniture::class;
-                break;
-            default:
-                $itemTypeClass = Item::class;
-                break;
-        }
-
+        $itemTypeClass = $this->getItemTypeClass($itemType);
         $form = $this->getSearchForm($itemTypeClass);
 
         $form->handleRequest($request);
@@ -223,28 +159,17 @@ class ItemController extends BaseController
      * @return Response
      */
     #[Route(path: '/{itemType}/export', name: 'item_export', methods: ['GET'])]
-    public function export(string $itemType): Response
+    public function export(string $itemType, EntityManagerInterface $entityManager): Response
     {
         // Avoid php timeout errors.
         set_time_limit(0);
         $response = new StreamedResponse();
 
-        $response->setCallback(function () use ($itemType) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $repository = null;
+        $itemTypeClass = $this->getItemTypeClass($itemType);
+        $itemRepository = $entityManager->getRepository($itemTypeClass);
 
-            switch ($itemType) {
-                case 'artwork':
-                    $repository = $entityManager->getRepository(Artwork::class);
-                    break;
-                case 'furniture':
-                    $repository = $entityManager->getRepository(Furniture::class);
-                    break;
-                default:
-                    $repository = $entityManager->getRepository(Item::class);
-            }
-
-            $query = $repository
+        $response->setCallback(function () use ($itemRepository) {
+            $query = $itemRepository
                 ->createQueryBuilder('e')
                 ->getQuery();
 
@@ -638,5 +563,14 @@ class ItemController extends BaseController
             );
 
         return $formBuilder->getForm();
+    }
+
+    private function getItemTypeClass(string $itemType): string
+    {
+        return match ($itemType) {
+            Artwork::ITEM_TYPE => Artwork::class,
+            Furniture::ITEM_TYPE => Furniture::class,
+            default => Item::class
+        };
     }
 }

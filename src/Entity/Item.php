@@ -23,7 +23,7 @@ class Item
     use BlameableEntity;
     use TimestampableEntity;
 
-    public $itemType = 'item';
+    public const ITEM_TYPE = 'item';
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -450,7 +450,7 @@ class Item
      */
     public function getItemType(): string
     {
-        return $this->itemType;
+        return static::ITEM_TYPE;
     }
 
     /**

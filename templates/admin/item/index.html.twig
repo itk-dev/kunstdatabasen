@@ -8,8 +8,10 @@
             <h1 class="h4">{{ headline|trans }}</h1>
         </div>
         <div class="col-auto">
-            <a class="btn btn-sm btn-outline-primary float-right" href="{{ path('item_new', {itemType: itemType}) }}" role="button"><i class="fas fa-plus-circle mr-1"></i>{{ 'admin.index.new'|trans }}</a>
-            <a class="btn btn-sm btn-outline-dark float-right mr-3" href="{{ path('item_export', {itemType: itemType}) }}" role="button"><i class="fas fa-file-export mr-1"></i>{{ 'admin.index.export'|trans }}</a>
+            {% if itemType %}
+                <a class="btn btn-sm btn-outline-primary float-right" href="{{ path('item_new', {itemType: itemType}) }}" role="button"><i class="fas fa-plus-circle mr-1"></i>{{ 'admin.index.new'|trans }}</a>
+                <a class="btn btn-sm btn-outline-dark float-right mr-3" href="{{ path('item_export', {itemType: itemType}) }}" role="button"><i class="fas fa-file-export mr-1"></i>{{ 'admin.index.export'|trans }}</a>
+            {% endif %}
         </div>
         <div class="col-12">
             {% include "admin/item/_filters.html.twig" %}

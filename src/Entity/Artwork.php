@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ArtworkRepository::class)]
 class Artwork extends Item
 {
-    public $itemType = 'artwork';
+    public const ITEM_TYPE = 'artwork';
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $artist;
