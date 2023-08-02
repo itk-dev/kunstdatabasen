@@ -28,6 +28,13 @@ App\Entity\Artwork:
         type: '<randomElement(["Maleri","Skulptur"])>'
         organization: '<randomElement(["MKB","MBU","MBA","MSO","MSB","MTM"])>'
 
+App\Entity\Image:
+    image_{1..200}:
+        imageFile: '<uploadFile("images/image{{random(1, 10)}}.jpg")>'
+        updatedAt: '<date_create()>'
+        primaryImage: true
+        item: '@artwork_<current()>'
+
 App\Entity\Furniture:
     artwork_{1..17}:
         name: '<da_DK:word()>'
@@ -46,14 +53,6 @@ App\Entity\Furniture:
         status: '<randomElement(["På lager","Udlånt"])>'
         type: '<randomElement(["Maleri","Skulptur"])>'
         organization: '<randomElement(["MKB","MBU","MBA","MSO","MSB","MTM"])>'
-
-App\Entity\Image:
-    image_{1..200}:
-        image_name: 'fixtures/image<numberBetween(1, 10)>.jpg'
-        image_size: 1234
-        updatedAt: '<date_create()>'
-        primaryImage: true
-        item: '@artwork_<current()>'
 
 App\Entity\User:
     user_1:

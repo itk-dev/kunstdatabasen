@@ -24,3 +24,18 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+# See https://symfony.com/doc/current/configuration.html#configuration-environments for details on “when@…”.
+when@dev: &services_dev
+    services:
+        # default configuration for services in *this* file
+        _defaults:
+            autowire: true      # Automatically injects dependencies in your services.
+            autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+        App\DataFixtures\Faker\Provider\Provider:
+            arguments:
+                $config:
+                    project_dir: '%kernel.project_dir%'
+
+when@test: *services_dev
