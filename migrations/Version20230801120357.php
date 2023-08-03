@@ -19,7 +19,12 @@ final class Version20230801120357 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        // The migration_versions table exists only if upgrading, i.e. not making a fresh install.
+        // The default migrations metadata storage table name has changed from
+        // `migration_versions` to `doctrine_migration_versions` (cf.
+        // https://github.com/doctrine/DoctrineMigrationsBundle/blob/3.2.x/UPGRADE.md#from-2x-to-300).
+        // Therefore the migration_versions table only exists if we're upgrading
+        // an existing database, i.e. not making a fresh install of the
+        // database schema.
         $this->addSql('DROP TABLE IF EXISTS migration_versions');
         $this->addSql('ALTER TABLE image ADD created_at DATETIME NOT NULL');
     }
