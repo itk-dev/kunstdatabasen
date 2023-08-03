@@ -5,6 +5,9 @@
 ## Upgrade from version 1.5.2
 
 ```sh
+itkdev-docker-compose-server pull
+itkdev-docker-compose-server up --detach --remove-orphans
+itkdev-docker-compose-server exec phpfpm composer install --no-dev --no-scripts
 # Upgrade migrations (only once)
 itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:list
 itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:sync-metadata-storage
@@ -25,6 +28,7 @@ SITEIMPROVE_KEY=…
 WEB_ACCESSIBILITY_STATEMENT_URL=…
 
 # Install
+itkdev-docker-compose-server pull
 itkdev-docker-compose-server up --detach --remove-orphans
 itkdev-docker-compose-server exec phpfpm composer install --no-dev
 itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:migrate --no-interaction
@@ -32,6 +36,8 @@ itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:migrate
 # Build assets using our development setup
 docker compose run --rm node yarn install
 docker compose run --rm node yarn build
+# Clean up
+rm -fr node_modules
 
 itkdev-docker-compose-server exec phpfpm bin/console cache:clear --no-interaction
 ```
