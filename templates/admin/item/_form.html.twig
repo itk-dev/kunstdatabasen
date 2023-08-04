@@ -81,7 +81,7 @@
         <div class="col-8 col-md-4">
             {{ form_row(form.city) }}
         </div>
-        {% if form.locationDate|default(false) %}
+        {% if form.locationDate is defined %}
             <div class="col-md-12">
                 {{ form_row(form.locationDate) }}
             </div>
