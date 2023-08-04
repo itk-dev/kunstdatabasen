@@ -1,6 +1,6 @@
 {{ form_start(form) }}
     <div class="row mt-5">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 border-bottom mb-3">
             <h2 class="h5">{{ 'item.form.common'|trans }}</h2>
         </div>
         <div class="col-md-4">
@@ -24,7 +24,7 @@
     </div>
     {% if itemType == 'artwork' %}
     <div class="row mt-5">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 border-bottom mb-3">
             <h2 class="h5">{{ 'item.form.art'|trans }}</h2>
         </div>
         <div class="col-md-4">
@@ -57,7 +57,7 @@
     </div>
     {% endif %}
     <div class="row mt-5">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 border-bottom mb-3">
             <h2 class="h5">{{ 'item.form.placement'|trans }}</h2>
         </div>
         <div class="col-md-3">
@@ -95,7 +95,7 @@
     </div>
     {% if itemType == 'artwork' %}
     <div class="row mt-5">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 border-bottom mb-3">
             <h2 class="h5">{{ 'item.form.attributes'|trans }}</h2>
         </div>
         <div class="col-md-2">
@@ -116,7 +116,7 @@
     </div>
     {% endif %}
     <div class="row mt-5">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12 border-bottom mb-3">
             <h2 class="h5">{{ form_label(form.images) }}</h2>
         </div>
         <div class="col-md-12">
@@ -128,13 +128,13 @@
         </div>
     </div>
     <div class="row mt-5">
-        <div class="col-md-12">
+        <div class="col-md-12 border-top pt-3">
             {{ form_rest(form) }}
         </div>
     </div>
-    <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-white shadow-sm">
-        <a class="text-small" href="{{ indexLink }}"><i class="fas fa-arrow-left mr-1"></i>{{ 'item.form.list'|trans }}</a>
-        <div class="ml-auto">
+    <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-white shadow-sm px-3">
+        <a class="text-small" href="{{ indexLink }}"><i class="fas fa-arrow-left me-1"></i>{{ 'item.form.list'|trans }}</a>
+        <div class="ms-auto">
             <button class="btn btn-primary px-5">{{ button_label|default('Save') }}</button>
         </div>
     </nav>
