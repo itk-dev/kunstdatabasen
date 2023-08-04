@@ -49,6 +49,5 @@
         "coding-standards-apply/eslint": "eslint --config .eslintrc.js 'assets/**/*.js' --fix",
         "coding-standards-apply/js": "yarn run coding-standards-apply/eslint",
         "coding-standards-apply": "yarn run coding-standards-apply/scss; yarn run coding-standards-apply/js"
-    },
-    "dependencies": {}
+    }
 }
