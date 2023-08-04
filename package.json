@@ -8,6 +8,7 @@
         "@popperjs/core": "^2.11.8",
         "@symfony/webpack-encore": "^4.0.0",
         "bootstrap": "^5.3.1",
+        "browserslist": "^4.21.10",
         "core-js": "^3.23.0",
         "eslint": "^8.46.0",
         "eslint-config-standard": "^17.1.0",
@@ -17,6 +18,7 @@
         "eslint-plugin-standard": "^5.0.0",
         "jquery": "^3.7.0",
         "markdownlint-cli": "^0.35.0",
+        "postcss": "^8.4.27",
         "regenerator-runtime": "^0.13.9",
         "sass": "^1.64.2",
         "sass-loader": "^13.0.0",
@@ -47,5 +49,6 @@
         "coding-standards-apply/eslint": "eslint --config .eslintrc.js 'assets/**/*.js' --fix",
         "coding-standards-apply/js": "yarn run coding-standards-apply/eslint",
         "coding-standards-apply": "yarn run coding-standards-apply/scss; yarn run coding-standards-apply/js"
-    }
+    },
+    "dependencies": {}
 }
