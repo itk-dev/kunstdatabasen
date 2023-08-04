@@ -8,6 +8,9 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+[PR-69](https://github.com/itk-dev/kunstdatabasen/pull/69)
+Update assets
+
 ### Changed
 
 - Upgraded to Symfony 6.3.
