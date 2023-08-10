@@ -3,22 +3,7 @@
 @import '~bootstrap/scss/mixins';
 @import '~bootstrap/scss/variables';
 @import '~select2/src/scss/core';
-@import '~@ttskch/select2-bootstrap4-theme/src/layout';
 
-// Modify BS-4 select 2 theme using different styleguide hence we disable our stylelint for
-/* stylelint-disable */
-.select2-container--bootstrap4 {
-  // all clear button
-  .select2-selection__clear {
-    $bg: $gray-900;
-
-    background-color: $bg;
-    line-height: 1em;
-    padding-left: 0.15em;
-
-    &:hover {
-      background-color: darken($bg, 10%);
-    }
-  }
-}
-/* stylelint-enable */
+// Fix for issue with the border color https://github.com/apalfrey/select2-bootstrap-5-theme/issues/75
+$s2bs5-border-color: $border-color;
+@import '~select2-bootstrap-5-theme/src/include-all';

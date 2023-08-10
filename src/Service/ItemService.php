@@ -156,7 +156,7 @@ class ItemService
                 $item->setArtSerial($entry[9]);
 
                 // Parse ART_DIMENSION.
-                $entryDimensions = mb_strtolower($entry[6]);
+                $entryDimensions = mb_strtolower($entry[6] ?? '');
                 $split = explode('x', $entryDimensions);
 
                 if (\count($split) > 1) {

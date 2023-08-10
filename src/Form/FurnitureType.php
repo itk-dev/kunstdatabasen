@@ -42,7 +42,7 @@ class FurnitureType extends AbstractType
         /* @var Furniture $furniture */
         $furniture = $options['data'];
 
-        $classname = \get_class($furniture);
+        $classname = $furniture::class;
 
         $builder
             ->add('name', null, [

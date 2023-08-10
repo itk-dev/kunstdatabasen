@@ -42,14 +42,13 @@ class FrontendController extends AbstractController
     }
 
     /**
-     * @Route("/", name="frontend_index")
-     *
      * @param \Symfony\Component\HttpFoundation\Request $request
      * @param \App\Repository\ArtworkRepository         $artworkRepository
      * @param \Knp\Component\Pager\PaginatorInterface   $paginator
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
+    #[Route(path: '/', name: 'frontend_index')]
     public function index(Request $request, ArtworkRepository $artworkRepository, PaginatorInterface $paginator)
     {
         $parameters = [];
@@ -82,13 +81,13 @@ class FrontendController extends AbstractController
                 $data['priceTo'] ?? null
             );
 
-            if (null !== $data['width'] ||
-                null !== $data['height'] ||
-                null !== $data['yearFrom'] ||
-                null !== $data['yearTo'] ||
-                (isset($data['artistGender']) && null !== $data['artistGender']) ||
-                (isset($data['priceFrom']) && null !== $data['priceFrom']) ||
-                (isset($data['priceTo']) && null !== $data['priceTo'])) {
+            if (null !== $data['width']
+                || null !== $data['height']
+                || null !== $data['yearFrom']
+                || null !== $data['yearTo']
+                || (isset($data['artistGender']) && null !== $data['artistGender'])
+                || (isset($data['priceFrom']) && null !== $data['priceFrom'])
+                || (isset($data['priceTo']) && null !== $data['priceTo'])) {
                 $parameters['display_advanced_filters'] = true;
             }
         } else {
@@ -118,12 +117,11 @@ class FrontendController extends AbstractController
     }
 
     /**
-     * @Route("/display/{id}", name="frontend_artwork_show", methods={"GET"})
-     *
      * @param \App\Entity\Artwork $artwork
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
+    #[Route(path: '/display/{id}', name: 'frontend_artwork_show', methods: ['GET'])]
     public function show(Artwork $artwork): Response
     {
         $parameters = [

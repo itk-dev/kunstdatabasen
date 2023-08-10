@@ -9,6 +9,7 @@
 namespace App\Command;
 
 use App\Service\TagService;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,32 +18,19 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Class RefreshTagsCommand.
  */
+#[AsCommand(
+    name: 'app:refresh-tags',
+    description: 'Refresh tags',
+)]
 class RefreshTagsCommand extends Command
 {
-    protected static $defaultName = 'app:refresh-tags';
-    private $tagService;
-
     /**
      * ImportSpreadsheetCommand constructor.
-     *
-     * @param TagService $tagService
-     *                               The tag service
      */
-    public function __construct(TagService $tagService)
-    {
-        $this->tagService = $tagService;
-
+    public function __construct(
+        readonly private TagService $tagService
+    ) {
         parent::__construct();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configure()
-    {
-        $this
-            ->setDescription('Refreshes tags.')
-        ;
     }
 
     /**
@@ -56,6 +44,6 @@ class RefreshTagsCommand extends Command
 
         $io->success('Tags successfully imported.');
 
-        return 0;
+        return self::SUCCESS;
     }
 }

@@ -16,6 +16,8 @@ use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
+ * @extends ServiceEntityRepository<Artwork>
+ *
  * @method Artwork|null find($id, $lockMode = null, $lockVersion = null)
  * @method Artwork|null findOneBy(array $criteria, array $orderBy = null)
  * @method Artwork[]    findAll()

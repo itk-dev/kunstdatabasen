@@ -22,7 +22,7 @@ $(function () {
                 url: '/admin/item/' + id + '/modal',
                 type: 'GET',
                 data: {
-                    id: id
+                    id
                 },
                 success: function (modalResponse) {
                     modalTitle.html(modalResponse.title);
