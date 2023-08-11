@@ -1,39 +1,30 @@
 on: pull_request
 name: Review
 jobs:
+    changelog:
+        runs-on: ubuntu-latest
+        name: Changelog should be updated
+        strategy:
+            fail-fast: false
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+              with:
+                  fetch-depth: 2
+
+            - name: Git fetch
+              run: git fetch
+
+            - name: Check that changelog has been updated.
+              run: git diff --exit-code origin/${{ github.base_ref }} -- CHANGELOG.md && exit 1 || exit 0
+
     test-composer-files:
         name: Validate composer (PHP ${{ matrix.php }})
         runs-on: ubuntu-20.04
         strategy:
             fail-fast: false
             matrix:
-                php: ['7.3', '7.4']
-        steps:
-            -   uses: actions/checkout@master
-            -   name: Setup PHP, with composer and extensions
-                uses: shivammathur/setup-php@master
-                with:
-                    php-version: ${{ matrix.php }}
-                    extension-csv: ctype, dom, iconv, json
-                    coverage: none
-            -   name: Get composer cache directory
-                id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-            -   uses: actions/cache@v1
-                with:
-                    path: ${{ steps.composer-cache.outputs.dir }}
-                    key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
-                    restore-keys: ${{ matrix.php }}-composer-
-            -   name: Validate composer files
-                run: composer validate composer.json
-
-    runner-phpcs:
-        name: runner-phpcs (PHP ${{ matrix.php }})
-        runs-on: ubuntu-20.04
-        strategy:
-            fail-fast: false
-            matrix:
-                php: ['7.3', '7.4']
+                php: ['8.1']
         steps:
             - uses: actions/checkout@master
             - name: Setup PHP, with composer and extensions
@@ -42,22 +33,16 @@ jobs:
                   php-version: ${{ matrix.php }}
                   extension-csv: ctype, dom, iconv, json
                   coverage: none
-            -   name: Get composer cache directory
-                id: composer-cache
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-            -   uses: actions/cache@v1
-                with:
-                    path: ${{ steps.composer-cache.outputs.dir }}
-                    key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
-                    restore-keys: ${{ matrix.php }}-composer-
-            - name: Install Reviewdog
-              run: wget -O - -q https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b $PWD/ v0.9.14
-            - name: Install Dependencies
-              run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-            - name: PHPCS
-              run: composer actions/phpcs | ./reviewdog -f=checkstyle -name=PHPCS -reporter=github-pr-check
-              env:
-                  REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            - name: Get composer cache directory
+              id: composer-cache
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+            - uses: actions/cache@v1
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: ${{ matrix.php }}-composer-
+            - name: Validate composer files
+              run: composer validate composer.json
 
     phpcsfixer:
         name: PHP-CS-FIXER (PHP ${{ matrix.php }})
@@ -65,7 +50,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ['7.3', '7.4']
+                php: ['8.1']
         steps:
             - uses: actions/checkout@master
             - name: Setup PHP, with composer and extensions
@@ -84,7 +69,7 @@ jobs:
                     restore-keys: ${{ matrix.php }}-composer-
             - name: Install Dependencies
               run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
-            - name: phpcsfixerr
+            - name: phpcsfixer
               run: composer actions/phpcsfixer
 
     twigcs:
@@ -93,7 +78,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                php: ['7.3', '7.4']
+                php: ['8.1']
         steps:
             - uses: actions/checkout@master
             - name: Setup PHP, with composer and extensions
@@ -122,11 +107,11 @@ jobs:
             - uses: actions/checkout@master
             - uses: actions/setup-node@v1
               with:
-                  node-version: '10.x'
+                  node-version: '18.x'
             - name: install
               run: yarn install
             - name: JS coding standards
-              run: yarn check-coding-standards
+              run: yarn coding-standards-check
 
     test-yarn-build:
         name: Test yarn build assets
@@ -144,7 +129,7 @@ jobs:
                   restore-keys: yarn-
 
             - name: Install yarn packages
-              run: docker run -v $PWD:/app:rw -v ${{ steps.yarn-cache.outputs.dir }}:/usr/local/share/.cache/yarn/v6:rw --workdir /app node:14 yarn install
+              run: docker run -v $PWD:/app:rw -v ${{ steps.yarn-cache.outputs.dir }}:/usr/local/share/.cache/yarn/v6:rw --workdir /app node:18 yarn install
 
             - name: Build assets
-              run: docker run -v $PWD:/app:rw -v ${{ steps.yarn-cache.outputs.dir }}:/usr/local/share/.cache/yarn/v6:rw --workdir /app node:14 yarn build
+              run: docker run -v $PWD:/app:rw -v ${{ steps.yarn-cache.outputs.dir }}:/usr/local/share/.cache/yarn/v6:rw --workdir /app node:18 yarn build

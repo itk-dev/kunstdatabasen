@@ -29,11 +29,11 @@
             </div>
             {% if data.artwork.images|length > 1 %}
             <div class="d-flex justify-content-between mt-1">
-                <a href="#carouselImageIndicators" role="button" data-slide="prev" class="text-dark ml-5">
+                <a href="#carouselImageIndicators" role="button" data-slide="prev" class="text-dark ms-5">
                     <span class="sr-only">{{ 'image-carousel.previous'|trans }}</span> <i class="fas fa-arrow-alt-circle-left" aria-hidden="true"></i>
                 </a>
                 <span><span id="carouselImageActiveIndex">1</span> / {{ data.artwork.images|length }}</span>
-                <a href="#carouselImageIndicators" role="button" data-slide="next" class="text-dark mr-5">
+                <a href="#carouselImageIndicators" role="button" data-slide="next" class="text-dark me-5">
                     <span class="sr-only">{{ 'image-carousel.next'|trans }}</span> <i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i>
                 </a>
             </div>
@@ -87,9 +87,9 @@
                     <label for="detailsStatus">{{ 'frontend.item.status'|trans }}</label>
                     <p>
                         {% if data.artwork.status == "Udlånt" %}
-                            <span class="badge badge-pill badge-dark">{{ data.artwork.status ?? '' }}</span>
+                            <span class="badge rounded-pill bg-dark">{{ data.artwork.status ?? '' }}</span>
                         {% else %}
-                            <span class="badge badge-pill badge-success">{{ data.artwork.status ?? '' }}</span>
+                            <span class="badge rounded-pill bg-success">{{ data.artwork.status ?? '' }}</span>
                         {% endif %}
                     </p>
                 </div>
@@ -101,7 +101,7 @@
         <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="btn close" data-dismiss="modal" aria-label="{{ 'action.close'|trans }}">
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="{{ 'action.close'|trans }}">
                         <span aria-hidden="true"><i class="fas fa-times"></i></span>
                     </button>
                 </div>

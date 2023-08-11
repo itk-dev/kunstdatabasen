@@ -9,6 +9,7 @@
 namespace App\Command;
 
 use App\Service\ItemService;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,20 +19,17 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 /**
  * Class ImportSpreadsheetCommand.
  */
+#[AsCommand(
+    name: 'app:import-spreadsheet'
+)]
 class ImportSpreadsheetCommand extends Command
 {
-    protected static $defaultName = 'app:import-spreadsheet';
-    private $itemService;
-
     /**
      * ImportSpreadsheetCommand constructor.
-     *
-     * @param \App\Service\ItemService $itemService
      */
-    public function __construct(ItemService $itemService)
-    {
-        $this->itemService = $itemService;
-
+    public function __construct(
+        readonly private ItemService $itemService
+    ) {
         parent::__construct();
     }
 
@@ -62,6 +60,6 @@ class ImportSpreadsheetCommand extends Command
 
         $io->success('Items successfully imported.');
 
-        return 0;
+        return self::SUCCESS;
     }
 }

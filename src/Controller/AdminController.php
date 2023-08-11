@@ -8,8 +8,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Item;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use App\Repository\ItemRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -17,15 +17,10 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminController extends BaseController
 {
-    /**
-     * @Route("/admin", name="admin")
-     *
-     * @param \Symfony\Component\HttpFoundation\Session\SessionInterface $session
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function index(SessionInterface $session)
+    #[Route(path: '/admin', name: 'admin')]
+    public function index(Request $request, ItemRepository $itemRepository)
     {
+        $session = $request->getSession();
         $session->start();
         $visitedSession = $session->get('latestVisitedItems');
 
@@ -34,16 +29,14 @@ class AdminController extends BaseController
         if (null !== $visitedSession) {
             /* @var \stdClass $sessionItem */
             foreach ($visitedSession as $sessionItem) {
-                /* @var Item $item */
-                $item = $this->getDoctrine()->getRepository($sessionItem['type'])->find($sessionItem['id']);
-
+                $item = $itemRepository->find($sessionItem['id']);
                 if (null !== $item) {
                     $latestVisitedRender[] = $this->itemService->itemToRenderObject($item);
                 }
             }
         }
 
-        $latestAdded = $this->getDoctrine()->getRepository(Item::class)->findBy([], ['createdAt' => 'desc'], 5);
+        $latestAdded = $itemRepository->findBy([], ['createdAt' => 'desc'], 5);
 
         $latestAddedRender = [];
         foreach ($latestAdded as $item) {

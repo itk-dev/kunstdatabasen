@@ -116,7 +116,7 @@ class TagService
      */
     public function addTag(Item $item, string $field, $value, array $changeSet)
     {
-        $classname = \get_class($item);
+        $classname = $item::class;
         $tag = $this->tagRepository->findOneBy([
             'class' => $classname,
             'field' => $field,
@@ -165,11 +165,11 @@ class TagService
      *
      * @param Item   $item
      * @param string $field
-     * @param $value
+     * @param        $value
      */
     private function addTagWithoutCleanup(Item $item, string $field, $value)
     {
-        $classname = \get_class($item);
+        $classname = $item::class;
         $tag = $this->tagRepository->findOneBy([
             'class' => $classname,
             'field' => $field,

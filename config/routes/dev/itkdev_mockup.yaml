@@ -1,3 +1,0 @@
-itkdev_mockup:
-    prefix: /mock-up
-    resource: "@ItkDevMockUpBundle/Resources/config/routes.xml"

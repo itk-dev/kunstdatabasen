@@ -1,5 +1,5 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
-was_bundle:
-    resource: '@ItkDevWebAccessibilityStatementBundle/Resources/config/routing.php'
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute

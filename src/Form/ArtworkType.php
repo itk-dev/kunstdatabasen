@@ -44,7 +44,7 @@ class ArtworkType extends AbstractType
         /* @var Artwork $artwork */
         $artwork = $options['data'];
 
-        $classname = \get_class($artwork);
+        $classname = $artwork::class;
 
         $builder
             ->add('name', null, [

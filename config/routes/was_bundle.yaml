@@ -1,0 +1,3 @@
+# https://github.com/itk-dev/web-accessibility-statement-bundle
+was_bundle:
+    resource: '@ItkDevWebAccessibilityStatementBundle/Resources/config/routing.php'
