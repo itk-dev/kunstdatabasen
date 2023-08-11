@@ -8,24 +8,33 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-[PR-69](https://github.com/itk-dev/kunstdatabasen/pull/69)
-Update assets
+## [1.6.0] - 2023-08-10
 
 ### Changed
 
-- Upgraded to Symfony 6.3.
+* [PR-68](https://github.com/itk-dev/kunstdatabasen/pull/68)
+  Upgraded to Symfony 6.3.
 
-[1.5.2] - yyyy-mm-dd
-[1.5.1] - yyyy-mm-dd
-[1.5.0] - yyyy-mm-dd
-[1.4.0] - yyyy-mm-dd
-[1.3.1] - yyyy-mm-dd
-[1.3.0] - yyyy-mm-dd
-[1.2.0] - yyyy-mm-dd
-[1.1.0] - yyyy-mm-dd
-[1.0.0] - yyyy-mm-dd
+## [1.5.2] - yyyy-mm-dd
 
-[Unreleased]: https://github.com/itk-dev/kunstdatabasen/compare/1.5.2...HEAD
+## [1.5.1] - yyyy-mm-dd
+
+## [1.5.0] - yyyy-mm-dd
+
+## [1.4.0] - yyyy-mm-dd
+
+## [1.3.1] - yyyy-mm-dd
+
+## [1.3.0] - yyyy-mm-dd
+
+## [1.2.0] - yyyy-mm-dd
+
+## [1.1.0] - yyyy-mm-dd
+
+## [1.0.0] - yyyy-mm-dd
+
+[Unreleased]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.0...HEAD
+[1.6.0]: https://github.com/itk-dev/kunstdatabasen/compare/1.5.2...1.6.0
 [1.5.2]: https://github.com/itk-dev/kunstdatabasen/compare/1.5.1...1.5.2
 [1.5.1]: https://github.com/itk-dev/kunstdatabasen/compare/1.5.0...1.5.1
 [1.5.0]: https://github.com/itk-dev/kunstdatabasen/compare/1.4.0...1.5.0
