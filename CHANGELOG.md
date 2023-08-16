@@ -10,6 +10,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 * [PR-69](https://github.com/itk-dev/kunstdatabasen/pull/69)
   Fixed image carousels.
+  Changed default ordering to by id descending.
 
 ## [1.6.0] - 2023-08-10
 

@@ -58,7 +58,7 @@ class ArtworkRepository extends ServiceEntityRepository
      *
      * @return \Doctrine\ORM\Query
      */
-    public function getQuery(string $search = null, string $type = null, string $status = null, string $category = null, string $building = null, int $yearFrom = null, int $yearTo = null, int $minWidth = null, int $maxWidth = null, int $minHeight = null, int $maxHeight = null, string $artistGender = null, int $priceFrom = null, int $priceTo = null, array $orderBy = [['purchaseDate', Criteria::DESC]]): Query
+    public function getQuery(string $search = null, string $type = null, string $status = null, string $category = null, string $building = null, int $yearFrom = null, int $yearTo = null, int $minWidth = null, int $maxWidth = null, int $minHeight = null, int $maxHeight = null, string $artistGender = null, int $priceFrom = null, int $priceTo = null, array $orderBy = [['id', Criteria::DESC]]): Query
     {
         $qb = $this->createQueryBuilder('e');
 
