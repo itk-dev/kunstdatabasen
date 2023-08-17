@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row art-details">
         <div class="col-md-4">
-            <div id="carouselImageIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+            <div id="carouselImageIndicators" class="carousel slide" data-bs-ride="false" data-bs-interval="false">
                 <div class="carousel-inner">
                     {% for image in item.images %}
                         <div class="carousel-item{% if loop.first %} active{% endif %} position-relative">
@@ -20,11 +20,11 @@
             </div>
             {% if item.images|length > 1 %}
             <div class="d-flex justify-content-between mt-1">
-                <a href="#carouselImageIndicators" role="button" data-slide="prev" style="color: black">
+                <a href="#carouselImageIndicators" role="button" data-bs-slide="prev" style="color: black">
                     <span class="sr-only">{{ 'image-carousel.previous'|trans }}</span> <i class="fas fa-arrow-alt-circle-left" aria-hidden="true"></i>
                 </a>
                 <span><span id="carouselImageActiveIndex">1</span> / {{ item.images|length }}</span>
-                <a href="#carouselImageIndicators" role="button" data-slide="next" style="color: black">
+                <a href="#carouselImageIndicators" role="button" data-bs-slide="next" style="color: black">
                     <span class="sr-only">{{ 'image-carousel.next'|trans }}</span> <i class="fas fa-arrow-alt-circle-right" aria-hidden="true"></i>
                 </a>
             </div>
