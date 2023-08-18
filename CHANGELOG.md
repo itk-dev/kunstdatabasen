@@ -8,6 +8,11 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+* [PR-72](https://github.com/itk-dev/kunstdatabasen/pull/72)
+  Applied patch to issue with timestampable.
+
 ## [1.6.1] - 2023-08-17
 
 ### Changed
