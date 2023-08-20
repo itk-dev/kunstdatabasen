@@ -8,17 +8,16 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## [1.6.1] - 2023-08-17
+* [PR-72](https://github.com/itk-dev/kunstdatabasen/pull/72)
+  Applied patch to issue with timestampable.
 
-### Changed
+## [1.6.1] - 2023-08-17
 
 * [PR-69](https://github.com/itk-dev/kunstdatabasen/pull/69)
   Fixed image carousels.
   Changed default ordering to by createdAt descending.
 
 ## [1.6.0] - 2023-08-10
-
-### Changed
 
 * [PR-68](https://github.com/itk-dev/kunstdatabasen/pull/68)
   Upgraded to Symfony 6.3.

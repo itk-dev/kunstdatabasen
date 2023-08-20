@@ -1,0 +1,13 @@
+diff --git a/src/Mapping/ExtensionMetadataFactory.php b/src/Mapping/ExtensionMetadataFactory.php
+index 95909809..6c9773cb 100644
+--- a/src/Mapping/ExtensionMetadataFactory.php
++++ b/src/Mapping/ExtensionMetadataFactory.php
+@@ -114,7 +114,7 @@ class ExtensionMetadataFactory
+         if (null !== $meta->reflClass) {
+             foreach (array_reverse(class_parents($meta->getName())) as $parentClass) {
+                 // read only inherited mapped classes
+-                if ($cmf->hasMetadataFor($parentClass)) {
++                if ($cmf->hasMetadataFor($parentClass) || !$cmf->isTransient($parentClass)) {
+                     assert(class_exists($parentClass));
+ 
+                     $class = $this->objectManager->getClassMetadata($parentClass);
