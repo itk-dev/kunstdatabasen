@@ -8,6 +8,11 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.6.3] - 2023-08-25
+
+* [PR-73](https://github.com/itk-dev/kunstdatabasen/pull/73)
+  Fixed closing X in admin popups.
+
 ## [1.6.2] - 2023-08-20
 
 * [PR-72](https://github.com/itk-dev/kunstdatabasen/pull/72)
