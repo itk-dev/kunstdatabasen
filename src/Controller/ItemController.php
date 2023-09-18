@@ -188,7 +188,7 @@ class ItemController extends BaseController
             $serializer = new Serializer([new ObjectNormalizer()]);
 
             $dateCallback = function ($innerObject) {
-                return $innerObject instanceof \DateTime ? $innerObject->format(\DateTime::ATOM) : '';
+                return $innerObject instanceof \DateTimeInterface ? $innerObject->format(\DateTime::ATOM) : '';
             };
 
             $defaultContext = [
@@ -196,6 +196,8 @@ class ItemController extends BaseController
                     'createdAt' => $dateCallback,
                     'updatedAt' => $dateCallback,
                     'purchaseDate' => $dateCallback,
+                    'locationDate' => $dateCallback,
+                    'assessmentDate' => $dateCallback,
                 ],
                 AbstractNormalizer::ATTRIBUTES => [
                     'id',
@@ -244,8 +246,6 @@ class ItemController extends BaseController
 
             foreach ($iterableItems as $item) {
                 $itemArray = $serializer->normalize($item, null, $defaultContext);
-                // We have a bug!
-                $itemArray['assessmentDate'] = '';
 
                 // Add header in first row.
                 if (0 === $itemsAdded) {
