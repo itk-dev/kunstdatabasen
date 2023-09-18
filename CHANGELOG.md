@@ -8,6 +8,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.6.4] - 2023-09-18
+
 * [PR-74](https://github.com/itk-dev/kunstdatabasen/pull/74)
   Fixed issue with serializing dates
 
@@ -50,7 +52,11 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.0.0] - yyyy-mm-dd
 
-[Unreleased]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.0...HEAD
+[Unreleased]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.4...HEAD
+[1.6.4]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.4...1.6.3
+[1.6.3]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.3...1.6.2
+[1.6.2]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.2...1.6.1
+[1.6.1]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.1...1.6.0
 [1.6.0]: https://github.com/itk-dev/kunstdatabasen/compare/1.5.2...1.6.0
 [1.5.2]: https://github.com/itk-dev/kunstdatabasen/compare/1.5.1...1.5.2
 [1.5.1]: https://github.com/itk-dev/kunstdatabasen/compare/1.5.0...1.5.1
