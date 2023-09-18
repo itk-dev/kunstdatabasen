@@ -8,6 +8,9 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+* [PR-74](https://github.com/itk-dev/kunstdatabasen/pull/74)
+  Fixed issue with serializing dates
+
 ## [1.6.3] - 2023-08-25
 
 * [PR-73](https://github.com/itk-dev/kunstdatabasen/pull/73)
