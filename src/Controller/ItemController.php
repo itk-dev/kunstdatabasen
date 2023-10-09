@@ -16,6 +16,7 @@ use App\Form\FurnitureType;
 use App\Repository\ArtworkRepository;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query;
 use DoctrineBatchUtils\BatchProcessing\SimpleBatchIteratorAggregate;
 use Knp\Component\Pager\PaginatorInterface;
 use OpenSpout\Common\Entity\Row;
@@ -63,70 +64,9 @@ class ItemController extends BaseController
     #[Route(path: '/list/{itemType}', name: 'item_list', methods: ['GET'], defaults: ['itemType' => Artwork::ITEM_TYPE])]
     public function list(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository, PaginatorInterface $paginator): Response
     {
-        $parameters = [];
         $parameters['display_advanced_filters'] = false;
 
-        $itemTypeClass = $this->getItemTypeClass($itemType);
-        $form = $this->getSearchForm($itemTypeClass);
-
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            $width = null !== $data['width'] ? json_decode($data['width']) : null;
-            $height = null !== $data['height'] ? json_decode($data['height']) : null;
-
-            switch ($itemType) {
-                case 'artwork':
-                    $query = $artworkRepository->getQuery(
-                        $data['search'],
-                        $data['type'],
-                        $data['status'] ?? null,
-                        null,
-                        $data['building'] ?? null,
-                        $data['yearFrom'] ?? null,
-                        $data['yearTo'] ?? null,
-                        $width->min ?? null,
-                        $width->max ?? null,
-                        $height->min ?? null,
-                        $height->max ?? null,
-                        $data['artistGender'] ?? null,
-                        $data['priceFrom'] ?? null,
-                        $data['priceTo'] ?? null
-                    );
-                    break;
-                case 'furniture':
-                default:
-                    $query = $itemRepository->getQuery(
-                        $itemTypeClass,
-                        $data['search'],
-                        $data['type'],
-                        null,
-                        $data['building']
-                    );
-            }
-
-            if (null !== $data['width']
-                || null !== $data['height']
-                || null !== $data['status']
-                || null !== $data['yearFrom']
-                || null !== $data['yearTo']
-                || null !== $data['artistGender']
-                || null !== $data['priceFrom']
-                || null !== $data['priceTo']) {
-                $parameters['display_advanced_filters'] = true;
-            }
-        } else {
-            switch ($itemType) {
-                case 'artwork':
-                    $query = $artworkRepository->getQuery();
-                    break;
-                case 'furniture':
-                default:
-                    $query = $itemRepository->getQuery($itemTypeClass);
-            }
-        }
+        [$query, $form] = $this->getFilteredQuery($itemType, $request, $itemRepository, $artworkRepository, $parameters);
 
         $pagination = $paginator->paginate(
             $query,
@@ -160,20 +100,15 @@ class ItemController extends BaseController
      * @return Response
      */
     #[Route(path: '/{itemType}/export', name: 'item_export', methods: ['GET'])]
-    public function export(string $itemType, EntityManagerInterface $entityManager): Response
+    public function export(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository): Response
     {
+        [$query] = $this->getFilteredQuery($itemType, $request, $itemRepository, $artworkRepository);
+
         // Avoid php timeout errors.
         set_time_limit(0);
         $response = new StreamedResponse();
 
-        $itemTypeClass = $this->getItemTypeClass($itemType);
-        $itemRepository = $entityManager->getRepository($itemTypeClass);
-
-        $response->setCallback(function () use ($itemRepository) {
-            $query = $itemRepository
-                ->createQueryBuilder('e')
-                ->getQuery();
-
+        $callback = function () use ($query) {
             $iterableItems = SimpleBatchIteratorAggregate::fromQuery(
                 $query,
                 100
@@ -267,7 +202,9 @@ class ItemController extends BaseController
             }
 
             $writer->close();
-        });
+        };
+
+        $response->setCallback($callback);
 
         $filename = sprintf('%s-eksport-%s', $itemType, (new \DateTimeImmutable())->format('d-m-Y'));
         $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -571,5 +508,80 @@ class ItemController extends BaseController
             Furniture::ITEM_TYPE => Furniture::class,
             default => Item::class
         };
+    }
+
+    /**
+     * @return array
+     *               [Query, Form]
+     */
+    private function getFilteredQuery(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository, array &$parameters = []): array
+    {
+        $itemTypeClass = $this->getItemTypeClass($itemType);
+        $form = $this->getSearchForm($itemTypeClass);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+
+            if (null !== $data['width']
+                || null !== $data['height']
+                || null !== $data['status']
+                || null !== $data['yearFrom']
+                || null !== $data['yearTo']
+                || null !== $data['artistGender']
+                || null !== $data['priceFrom']
+                || null !== $data['priceTo']) {
+                $parameters['display_advanced_filters'] = true;
+            }
+
+            $width = null !== $data['width'] ? json_decode($data['width']) : null;
+            $height = null !== $data['height'] ? json_decode($data['height']) : null;
+
+            switch ($itemType) {
+                case 'artwork':
+                    $query = $artworkRepository->getQuery(
+                        $data['search'],
+                        $data['type'],
+                        $data['status'] ?? null,
+                        null,
+                        $data['building'] ?? null,
+                        $data['yearFrom'] ?? null,
+                        $data['yearTo'] ?? null,
+                        $width->min ?? null,
+                        $width->max ?? null,
+                        $height->min ?? null,
+                        $height->max ?? null,
+                        $data['artistGender'] ?? null,
+                        $data['priceFrom'] ?? null,
+                        $data['priceTo'] ?? null
+                    );
+                    break;
+
+                case 'furniture':
+                default:
+                    $query = $itemRepository->getQuery(
+                        $itemTypeClass,
+                        $data['search'],
+                        $data['type'],
+                        null,
+                        $data['building']
+                    );
+                    break;
+            }
+        } else {
+            switch ($itemType) {
+                case 'artwork':
+                    $query = $artworkRepository->getQuery();
+                    break;
+
+                case 'furniture':
+                default:
+                    $query = $itemRepository->getQuery($itemTypeClass);
+                    break;
+            }
+        }
+
+        return [$query, $form];
     }
 }
