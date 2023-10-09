@@ -8,6 +8,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+* [PR-77](https://github.com/itk-dev/kunstdatabasen/pull/77)
+  Applied search filter on export
 * [PR-76](https://github.com/itk-dev/kunstdatabasen/pull/76)
   Updated composer packages
 
