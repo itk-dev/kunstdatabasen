@@ -7,19 +7,18 @@
         "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "cweagans/composer-patches": "^1.7",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.15",
         "itk-dev/web-accessibility-statement-bundle": "^1.1",
-        "knplabs/knp-paginator-bundle": "*",
-        "liip/imagine-bundle": "*",
+        "knplabs/knp-paginator-bundle": "^6.2",
+        "liip/imagine-bundle": "^2.12",
         "ocramius/doctrine-batch-utils": "^2.5",
         "openspout/openspout": "^4.15",
         "phpdocumentor/reflection-docblock": "^5.3",
         "phpoffice/phpspreadsheet": "^1.29",
         "phpstan/phpdoc-parser": "^1.23",
-        "stof/doctrine-extensions-bundle": "*",
+        "stof/doctrine-extensions-bundle": "^1.8",
         "symfony/console": "6.3.*",
         "symfony/dotenv": "6.3.*",
         "symfony/flex": "^2",
@@ -32,7 +31,7 @@
         "symfony/serializer": "6.3.*",
         "symfony/twig-bundle": "6.3.*",
         "symfony/validator": "6.3.*",
-        "symfony/webpack-encore-bundle": "*",
+        "symfony/webpack-encore-bundle": "^2.1",
         "symfony/yaml": "6.3.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
@@ -41,8 +40,8 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.22",
         "friendsoftwig/twigcs": "^6.2",
-        "hautelook/alice-bundle": "*",
-        "symfony/maker-bundle": "*",
+        "hautelook/alice-bundle": "^2.12",
+        "symfony/maker-bundle": "^1.51",
         "symfony/web-profiler-bundle": "6.3.*"
     },
     "config": {
@@ -114,11 +113,6 @@
         "symfony": {
             "allow-contrib": true,
             "require": "6.3.*"
-        },
-        "patches": {
-            "gedmo/doctrine-extensions": {
-                "https://github.com/doctrine-extensions/DoctrineExtensions/pull/2651": "patches/doctrine-extension1.patch"
-            }
         }
     }
 }
