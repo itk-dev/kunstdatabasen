@@ -105,9 +105,9 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             - uses: actions/checkout@master
-            - uses: actions/setup-node@v1
+            - uses: actions/setup-node@v3
               with:
-                  node-version: '18.x'
+                  node-version: 20
             - name: install
               run: yarn install
             - name: JS coding standards
