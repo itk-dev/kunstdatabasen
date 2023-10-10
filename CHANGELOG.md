@@ -8,6 +8,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.6.5] - 2023-10-10
+
 * [PR-77](https://github.com/itk-dev/kunstdatabasen/pull/77)
   Applied search filter on export
 * [PR-76](https://github.com/itk-dev/kunstdatabasen/pull/76)
@@ -57,7 +59,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.0.0] - yyyy-mm-dd
 
-[Unreleased]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.4...HEAD
+[Unreleased]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.5...HEAD
+[1.6.5]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.4...1.6.5
 [1.6.4]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.4...1.6.3
 [1.6.3]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.3...1.6.2
 [1.6.2]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.2...1.6.1
