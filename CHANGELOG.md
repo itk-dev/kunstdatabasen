@@ -8,6 +8,9 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+* [PR-79](https://github.com/itk-dev/kunstdatabasen/pull/79)
+  Security and recipe updates.
+
 ## [1.6.5] - 2023-10-10
 
 * [PR-77](https://github.com/itk-dev/kunstdatabasen/pull/77)
