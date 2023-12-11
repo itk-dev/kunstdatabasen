@@ -18,8 +18,7 @@ trait OrderByTrait
     /**
      * Add order by to query builder.
      *
-     * @param QueryBuilder $qb
-     * @param array        $orderBy list of field, direction pairs
+     * @param array $orderBy list of field, direction pairs
      */
     protected function addOrderBy(QueryBuilder $qb, array $orderBy)
     {

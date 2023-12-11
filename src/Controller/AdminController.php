@@ -10,6 +10,7 @@ namespace App\Controller;
 
 use App\Repository\ItemRepository;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -18,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends BaseController
 {
     #[Route(path: '/admin', name: 'admin')]
-    public function index(Request $request, ItemRepository $itemRepository)
+    public function index(Request $request, ItemRepository $itemRepository): Response
     {
         $session = $request->getSession();
         $session->start();

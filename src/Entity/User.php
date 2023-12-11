@@ -9,6 +9,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -18,20 +19,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private $email;
+    #[ORM\Column(type: Types::STRING, length: 180, unique: true)]
+    private ?string $email = null;
 
-    #[ORM\Column(type: 'json')]
-    private $roles = [];
+    #[ORM\Column(type: Types::JSON)]
+    private array $roles = [];
 
     /**
      * @var string The hashed password
      */
-    #[ORM\Column(type: 'string')]
-    private $password;
+    #[ORM\Column(type: Types::STRING)]
+    private ?string $password = null;
 
     /**
      * @return int|null
@@ -55,8 +56,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param string $email
-     *
      * @return $this
      */
     public function setEmail(string $email): self
@@ -93,8 +92,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param array $roles
-     *
      * @return $this
      */
     public function setRoles(array $roles): self
@@ -115,8 +112,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @param string $password
-     *
      * @return $this
      */
     public function setPassword(string $password): self

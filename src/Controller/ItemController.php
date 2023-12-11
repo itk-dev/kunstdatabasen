@@ -16,7 +16,6 @@ use App\Form\FurnitureType;
 use App\Repository\ArtworkRepository;
 use App\Repository\ItemRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query;
 use DoctrineBatchUtils\BatchProcessing\SimpleBatchIteratorAggregate;
 use Knp\Component\Pager\PaginatorInterface;
 use OpenSpout\Common\Entity\Row;
@@ -25,6 +24,7 @@ use OpenSpout\Writer\XLSX;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,28 +37,13 @@ use Symfony\Component\Serializer\Serializer;
 #[Route(path: '/admin/item')]
 class ItemController extends BaseController
 {
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ItemRepository            $itemRepository
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator
-     *
-     * @return Response
-     */
     #[Route(path: '/', name: 'item_index', methods: ['GET'])]
-    public function index(Request $request, ItemRepository $itemRepository, PaginatorInterface $paginator): Response
+    public function index(ItemRepository $itemRepository, PaginatorInterface $paginator): Response
     {
         return $this->redirectToRoute('item_list');
     }
 
     /**
-     * @param string                                    $itemType
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ItemRepository            $itemRepository
-     * @param \App\Repository\ArtworkRepository         $artworkRepository
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator
-     *
-     * @return Response
-     *
      * @throws \Exception
      */
     #[Route(path: '/list/{itemType}', name: 'item_list', methods: ['GET'], defaults: ['itemType' => Artwork::ITEM_TYPE])]
@@ -94,10 +79,7 @@ class ItemController extends BaseController
     }
 
     /**
-     * @param string $itemType
-     *                         The item type
-     *
-     * @return Response
+     * @param string $itemType The item type
      */
     #[Route(path: '/{itemType}/export', name: 'item_export', methods: ['GET'])]
     public function export(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository): Response
@@ -122,9 +104,7 @@ class ItemController extends BaseController
 
             $serializer = new Serializer([new ObjectNormalizer()]);
 
-            $dateCallback = function ($innerObject) {
-                return $innerObject instanceof \DateTimeInterface ? $innerObject->format(\DateTime::ATOM) : '';
-            };
+            $dateCallback = fn ($innerObject) => $innerObject instanceof \DateTimeInterface ? $innerObject->format(\DateTime::ATOM) : '';
 
             $defaultContext = [
                 AbstractNormalizer::CALLBACKS => [
@@ -215,11 +195,6 @@ class ItemController extends BaseController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param string                                    $itemType
-     *
-     * @return Response
-     *
      * @throws \Exception
      */
     #[Route(path: '/{itemType}/new', name: 'item_new', methods: ['GET', 'POST'])]
@@ -259,11 +234,6 @@ class ItemController extends BaseController
     }
 
     /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Entity\Item                          $item
-     *
-     * @return Response
-     *
      * @throws \Exception
      */
     #[Route(path: '/{id}/edit', name: 'item_edit', methods: ['GET', 'POST'])]
@@ -298,12 +268,6 @@ class ItemController extends BaseController
         );
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Entity\Item                          $item
-     *
-     * @return Response
-     */
     #[Route(path: '/{id}', name: 'item_delete', methods: ['DELETE'])]
     public function delete(Request $request, Item $item): Response
     {
@@ -316,13 +280,8 @@ class ItemController extends BaseController
         return $this->redirectToRoute('item_index');
     }
 
-    /**
-     * @param \App\Entity\Item $item
-     *
-     * @return \Symfony\Component\HttpFoundation\JsonResponse
-     */
     #[Route(path: '/{id}/modal', name: 'item_modal', methods: ['GET'])]
-    public function getModal(Item $item)
+    public function getModal(Item $item): JsonResponse
     {
         $itemObject = $this->itemService->itemToRenderObject($item);
 
@@ -342,10 +301,8 @@ class ItemController extends BaseController
      * Create search form.
      *
      * @param string $classname
-     *
-     * @return \Symfony\Component\Form\FormInterface
      */
-    private function getSearchForm($classname = Artwork::class)
+    private function getSearchForm($classname = Artwork::class): FormInterface
     {
         $typeChoices = $this->tagService->getChoices($classname, 'type');
         $statusChoices = $this->tagService->getChoices($classname, 'status');
@@ -354,7 +311,7 @@ class ItemController extends BaseController
 
         $formBuilder = $this->createFormBuilder();
         $formBuilder
-            ->setMethod('GET')
+            ->setMethod(Request::METHOD_GET)
             ->add(
                 'type',
                 ChoiceType::class,
@@ -511,8 +468,7 @@ class ItemController extends BaseController
     }
 
     /**
-     * @return array
-     *               [Query, Form]
+     * @return array [Query, Form]
      */
     private function getFilteredQuery(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository, array &$parameters = []): array
     {
@@ -535,51 +491,39 @@ class ItemController extends BaseController
                 $parameters['display_advanced_filters'] = true;
             }
 
-            $width = null !== $data['width'] ? json_decode($data['width']) : null;
-            $height = null !== $data['height'] ? json_decode($data['height']) : null;
+            $width = null !== $data['width'] ? json_decode((string) $data['width'], null, 512, \JSON_THROW_ON_ERROR) : null;
+            $height = null !== $data['height'] ? json_decode((string) $data['height'], null, 512, \JSON_THROW_ON_ERROR) : null;
 
-            switch ($itemType) {
-                case 'artwork':
-                    $query = $artworkRepository->getQuery(
-                        $data['search'],
-                        $data['type'],
-                        $data['status'] ?? null,
-                        null,
-                        $data['building'] ?? null,
-                        $data['yearFrom'] ?? null,
-                        $data['yearTo'] ?? null,
-                        $width->min ?? null,
-                        $width->max ?? null,
-                        $height->min ?? null,
-                        $height->max ?? null,
-                        $data['artistGender'] ?? null,
-                        $data['priceFrom'] ?? null,
-                        $data['priceTo'] ?? null
-                    );
-                    break;
-
-                case 'furniture':
-                default:
-                    $query = $itemRepository->getQuery(
-                        $itemTypeClass,
-                        $data['search'],
-                        $data['type'],
-                        null,
-                        $data['building']
-                    );
-                    break;
-            }
+            $query = match ($itemType) {
+                'artwork' => $artworkRepository->getQuery(
+                    $data['search'],
+                    $data['type'],
+                    $data['status'] ?? null,
+                    null,
+                    $data['building'] ?? null,
+                    $data['yearFrom'] ?? null,
+                    $data['yearTo'] ?? null,
+                    $width->min ?? null,
+                    $width->max ?? null,
+                    $height->min ?? null,
+                    $height->max ?? null,
+                    $data['artistGender'] ?? null,
+                    $data['priceFrom'] ?? null,
+                    $data['priceTo'] ?? null
+                ),
+                default => $itemRepository->getQuery(
+                    $itemTypeClass,
+                    $data['search'],
+                    $data['type'],
+                    null,
+                    $data['building']
+                ),
+            };
         } else {
-            switch ($itemType) {
-                case 'artwork':
-                    $query = $artworkRepository->getQuery();
-                    break;
-
-                case 'furniture':
-                default:
-                    $query = $itemRepository->getQuery($itemTypeClass);
-                    break;
-            }
+            $query = match ($itemType) {
+                'artwork' => $artworkRepository->getQuery(),
+                default => $itemRepository->getQuery($itemTypeClass),
+            };
         }
 
         return [$query, $form];

@@ -29,9 +29,9 @@ class BaseController extends AbstractController
      */
     public function __construct(
         string $bindSupportMail,
-        readonly protected RequestStack $requestStack,
-        readonly protected ItemService $itemService,
-        readonly protected TagService $tagService
+        protected readonly RequestStack $requestStack,
+        protected readonly ItemService $itemService,
+        protected readonly TagService $tagService
     ) {
         $this->supportMail = $bindSupportMail;
     }
@@ -42,8 +42,6 @@ class BaseController extends AbstractController
      * @param string        $view
      * @param array         $parameters
      * @param Response|null $response
-     *
-     * @return Response
      */
     public function render(string $view, array $parameters = [], Response $response = null): Response
     {
