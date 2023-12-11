@@ -13,7 +13,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\PersistentCollection;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 
@@ -42,7 +41,7 @@ class Item
      * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\Image>|\App\Entity\Image[]
      */
     #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'item', cascade: ['persist'])]
-    private ArrayCollection|PersistentCollection|iterable $images;
+    private Collection $images;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
     private ?string $status = null;
