@@ -23,17 +23,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class ArtworkType extends AbstractType
 {
-    /* @var TagService $tagService */
-    private $tagService;
-
     /**
      * ArtworkType constructor.
-     *
-     * @param \App\Service\TagService $tagService
      */
-    public function __construct(TagService $tagService)
-    {
-        $this->tagService = $tagService;
+    public function __construct(
+        private readonly TagService $tagService
+    ) {
     }
 
     /**

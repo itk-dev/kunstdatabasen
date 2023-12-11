@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,30 +27,17 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
  */
 class FrontendController extends AbstractController
 {
-    private $uploaderHelper;
-    private $tagService;
-
     /**
      * FrontendController constructor.
-     *
-     * @param \Vich\UploaderBundle\Templating\Helper\UploaderHelper $uploaderHelper
-     * @param \App\Service\TagService                               $tagService
      */
-    public function __construct(UploaderHelper $uploaderHelper, TagService $tagService)
-    {
-        $this->uploaderHelper = $uploaderHelper;
-        $this->tagService = $tagService;
+    public function __construct(
+        private readonly UploaderHelper $uploaderHelper,
+        private readonly TagService $tagService
+    ) {
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     * @param \App\Repository\ArtworkRepository         $artworkRepository
-     * @param \Knp\Component\Pager\PaginatorInterface   $paginator
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     #[Route(path: '/', name: 'frontend_index')]
-    public function index(Request $request, ArtworkRepository $artworkRepository, PaginatorInterface $paginator)
+    public function index(Request $request, ArtworkRepository $artworkRepository, PaginatorInterface $paginator): Response
     {
         $parameters = [];
         $parameters['display_advanced_filters'] = false;
@@ -61,8 +49,8 @@ class FrontendController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $width = null !== $data['width'] ? json_decode($data['width']) : null;
-            $height = null !== $data['height'] ? json_decode($data['height']) : null;
+            $width = null !== $data['width'] ? json_decode((string) $data['width'], null, 512, \JSON_THROW_ON_ERROR) : null;
+            $height = null !== $data['height'] ? json_decode((string) $data['height'], null, 512, \JSON_THROW_ON_ERROR) : null;
 
             $query = $artworkRepository->getQuery(
                 $data['search'] ?? null,
@@ -116,11 +104,6 @@ class FrontendController extends AbstractController
         );
     }
 
-    /**
-     * @param \App\Entity\Artwork $artwork
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
     #[Route(path: '/display/{id}', name: 'frontend_artwork_show', methods: ['GET'])]
     public function show(Artwork $artwork): Response
     {
@@ -140,11 +123,9 @@ class FrontendController extends AbstractController
     /**
      * Create render array for artwork.
      *
-     * @param \App\Entity\Artwork $artwork
-     *
      * @return object
      */
-    private function artworkToRenderArray(Artwork $artwork)
+    private function artworkToRenderArray(Artwork $artwork): object
     {
         $imagePaths = [];
         foreach ($artwork->getImages() as $image) {
@@ -177,14 +158,7 @@ class FrontendController extends AbstractController
         ];
     }
 
-    /**
-     * Get dimensions.
-     *
-     * @param \App\Entity\Artwork $artwork
-     *
-     * @return string
-     */
-    private function getDimensions(Artwork $artwork)
+    private function getDimensions(Artwork $artwork): ?string
     {
         $width = $artwork->getWidth();
         $height = $artwork->getHeight();
@@ -197,19 +171,14 @@ class FrontendController extends AbstractController
         return sprintf('%d x %d', $width, $height);
     }
 
-    /**
-     * Create search form.
-     *
-     * @return \Symfony\Component\Form\FormInterface
-     */
-    private function getSearchForm()
+    private function getSearchForm(): FormInterface
     {
         $typeChoices = $this->tagService->getChoices(Artwork::class, 'type');
         $statusChoices = $this->tagService->getChoices(Artwork::class, 'status');
 
         $formBuilder = $this->createFormBuilder();
         $formBuilder
-            ->setMethod('GET')
+            ->setMethod(\Symfony\Component\HttpFoundation\Request::METHOD_GET)
             ->add(
                 'search',
                 SearchType::class,

@@ -14,5 +14,5 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: FurnitureRepository::class)]
 class Furniture extends Item
 {
-    public const ITEM_TYPE = 'furniture';
+    final public const ITEM_TYPE = 'furniture';
 }

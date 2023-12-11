@@ -45,7 +45,6 @@ class ItemRepository extends ServiceEntityRepository
      * @param string|null $type
      * @param string|null $category
      * @param string|null $building
-     * @param array       $orderBy
      *
      * @return \Doctrine\ORM\Query
      */
