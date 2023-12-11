@@ -62,9 +62,6 @@ class TaggingSubscriber
 
     /**
      * Save the new tag.
-     *
-     * @param string             $action
-     * @param LifecycleEventArgs $args
      */
     private function changeTags(string $action, LifecycleEventArgs $args)
     {

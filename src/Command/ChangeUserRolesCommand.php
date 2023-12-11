@@ -25,22 +25,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 )]
 class ChangeUserRolesCommand extends Command
 {
-    /* @var EntityManagerInterface $entityManager */
-    private $entityManager;
-    /* @var UserRepository $userRepository */
-    private $userRepository;
-
     /**
      * ChangeUserRolesCommand constructor.
-     *
-     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
-     * @param \App\Repository\UserRepository       $userRepository
      */
-    public function __construct(EntityManagerInterface $entityManager, UserRepository $userRepository)
-    {
-        $this->entityManager = $entityManager;
-        $this->userRepository = $userRepository;
-
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly UserRepository $userRepository
+    ) {
         parent::__construct();
     }
 
@@ -79,7 +70,7 @@ class ChangeUserRolesCommand extends Command
             return 1;
         }
 
-        $rolesArray = explode(',', $roles);
+        $rolesArray = explode(',', (string) $roles);
 
         $user->setRoles($rolesArray);
         $this->entityManager->flush();

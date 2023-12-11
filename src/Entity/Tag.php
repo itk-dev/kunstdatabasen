@@ -9,6 +9,7 @@
 namespace App\Entity;
 
 use App\Repository\TagRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
@@ -16,17 +17,17 @@ class Tag
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
-    private $id;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $class;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $class = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $value;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $value = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $field;
+    #[ORM\Column(type: Types::STRING, length: 255)]
+    private ?string $field = null;
 
     /**
      * @return int|null
@@ -45,8 +46,6 @@ class Tag
     }
 
     /**
-     * @param string $class
-     *
      * @return $this
      */
     public function setClass(string $class): self
@@ -65,8 +64,6 @@ class Tag
     }
 
     /**
-     * @param string $value
-     *
      * @return $this
      */
     public function setValue(string $value): self
@@ -85,8 +82,6 @@ class Tag
     }
 
     /**
-     * @param string $field
-     *
      * @return $this
      */
     public function setField(string $field): self

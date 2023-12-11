@@ -9,6 +9,7 @@
 namespace App\Entity;
 
 use App\Repository\ImageRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\HttpFoundation\File\File;
@@ -16,7 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
 #[Vich\Uploadable()]
-class Image
+class Image implements \Stringable
 {
     use TimestampableEntity;
 
@@ -26,39 +27,31 @@ class Image
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Item::class, inversedBy: 'images')]
-    private $item;
+    private ?Item $item = null;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="artwork_image", fileNameProperty="imageName", size="imageSize")
-     *
-     * @var File|null
      */
     #[Vich\UploadableField(mapping: 'artwork_image', fileNameProperty: 'imageName', size: 'imageSize')]
-    private $imageFile;
+    private ?File $imageFile = null;
 
-    /**
-     * @var string|null
-     */
-    #[ORM\Column(type: 'string')]
-    private $imageName;
+    #[ORM\Column(type: Types::STRING)]
+    private ?string $imageName = null;
 
-    /**
-     * @var int|null
-     */
-    #[ORM\Column(type: 'integer')]
-    private $imageSize;
+    #[ORM\Column(type: Types::INTEGER)]
+    private ?int $imageSize = null;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
-    private $primaryImage;
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
+    private ?bool $primaryImage = null;
 
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getImageName();
+        return (string) $this->getImageName();
     }
 
     /**

@@ -20,29 +20,18 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class TagService
 {
-    private $tagRepository;
-    private $entityManager;
-    private $itemRepository;
-
     /**
      * TagService constructor.
-     *
-     * @param \App\Repository\TagRepository        $tagRepository
-     * @param \Doctrine\ORM\EntityManagerInterface $entityManager
-     * @param ItemRepository                       $itemRepository
      */
-    public function __construct(TagRepository $tagRepository, EntityManagerInterface $entityManager, ItemRepository $itemRepository)
-    {
-        $this->tagRepository = $tagRepository;
-        $this->entityManager = $entityManager;
-        $this->itemRepository = $itemRepository;
+    public function __construct(
+        private readonly TagRepository $tagRepository,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly ItemRepository $itemRepository
+    ) {
     }
 
     /**
      * Get choices for a given classname and field.
-     *
-     * @param string $classname
-     * @param string $field
      *
      * @return array
      */
@@ -114,7 +103,7 @@ class TagService
      * @param array            $changeSet
      *                                    The change set for the field, if it exists
      */
-    public function addTag(Item $item, string $field, $value, array $changeSet)
+    public function addTag(Item $item, string $field, mixed $value, array $changeSet)
     {
         $classname = $item::class;
         $tag = $this->tagRepository->findOneBy([
@@ -163,9 +152,7 @@ class TagService
     /**
      * Add tag without removing old tags.
      *
-     * @param Item   $item
-     * @param string $field
-     * @param        $value
+     * @param $value
      */
     private function addTagWithoutCleanup(Item $item, string $field, $value)
     {

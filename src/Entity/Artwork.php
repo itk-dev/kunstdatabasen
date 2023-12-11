@@ -9,48 +9,49 @@
 namespace App\Entity;
 
 use App\Repository\ArtworkRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArtworkRepository::class)]
-class Artwork extends Item
+class Artwork extends Item implements \Stringable
 {
-    public const ITEM_TYPE = 'artwork';
+    final public const ITEM_TYPE = 'artwork';
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $artist;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $artist = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $artSerial;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $artSerial = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $productionYear;
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    private ?int $productionYear = null;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private $assessmentDate;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $assessmentDate = null;
 
-    #[ORM\Column(type: 'float', nullable: true)]
-    private $assessmentPrice;
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    private ?float $assessmentPrice = null;
 
-    #[ORM\Column(type: 'float', nullable: true)]
-    private $width;
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    private ?float $width = null;
 
-    #[ORM\Column(type: 'float', nullable: true)]
-    private $height;
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    private ?float $height = null;
 
-    #[ORM\Column(type: 'float', nullable: true)]
-    private $depth;
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    private ?float $depth = null;
 
-    #[ORM\Column(type: 'float', nullable: true)]
-    private $diameter;
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    private ?float $diameter = null;
 
-    #[ORM\Column(type: 'float', nullable: true)]
-    private $weight;
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    private ?float $weight = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $artistGender;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $artistGender = null;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $committeeDescription;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $committeeDescription = null;
 
     /**
      * @return string|null
@@ -155,9 +156,9 @@ class Artwork extends Item
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getName();
+        return (string) $this->getName();
     }
 
     /**

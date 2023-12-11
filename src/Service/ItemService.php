@@ -26,34 +26,20 @@ use Vich\UploaderBundle\Templating\Helper\UploaderHelper;
  */
 class ItemService
 {
-    protected $uploaderHelper;
-    protected $router;
-    protected $entityManager;
-    protected $itemRepository;
-    protected $tagService;
-
     /**
      * ItemService constructor.
-     *
-     * @param UploaderHelper         $uploaderHelper
-     * @param UrlGeneratorInterface  $router
-     * @param EntityManagerInterface $entityManager
-     * @param ItemRepository         $itemRepository
-     * @param TagService             $tagService
      */
-    public function __construct(UploaderHelper $uploaderHelper, UrlGeneratorInterface $router, EntityManagerInterface $entityManager, ItemRepository $itemRepository, TagService $tagService)
-    {
-        $this->uploaderHelper = $uploaderHelper;
-        $this->router = $router;
-        $this->entityManager = $entityManager;
-        $this->itemRepository = $itemRepository;
-        $this->tagService = $tagService;
+    public function __construct(
+        protected readonly UploaderHelper $uploaderHelper,
+        protected readonly UrlGeneratorInterface $router,
+        protected readonly EntityManagerInterface $entityManager,
+        protected readonly ItemRepository $itemRepository,
+        protected readonly TagService $tagService
+    ) {
     }
 
     /**
      * Create render object for item.
-     *
-     * @param Item $item
      *
      * @return object
      */
@@ -143,7 +129,7 @@ class ItemService
 
             $unMappable = [];
 
-            $barcode = !empty($entry[20]) ? str_pad($entry[20], 5, '0', \STR_PAD_LEFT) : null;
+            $barcode = !empty($entry[20]) ? str_pad((string) $entry[20], 5, '0', \STR_PAD_LEFT) : null;
 
             if ('Kunst' === $entry[0]) {
                 $item = new Artwork();
@@ -245,7 +231,7 @@ class ItemService
                     $this->entityManager->persist($image);
 
                     echo $filename." found. Added image.\n";
-                } catch (\Exception $exception) {
+                } catch (\Exception) {
                     echo $filename." produced an error. Ignoring file.\n";
                 }
             } else {
@@ -258,8 +244,6 @@ class ItemService
 
     /**
      * Get dimensions.
-     *
-     * @param \App\Entity\Artwork $artwork
      *
      * @return string
      */

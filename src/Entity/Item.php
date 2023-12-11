@@ -11,6 +11,7 @@ namespace App\Entity;
 use App\Repository\ItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Blameable\Traits\BlameableEntity;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -30,74 +31,77 @@ class Item
     #[ORM\Column]
     protected ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $name;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $name = null;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $description;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\Image>|\App\Entity\Image[]
+     */
     #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'item', cascade: ['persist'])]
-    private $images;
+    private Collection $images;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $status;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $status = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $type;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $type = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $organization;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $organization = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $location;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $location = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $building;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $building = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $room;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $room = null;
 
-    #[ORM\Column(type: 'string', length: 500, nullable: true)]
-    private $address;
+    #[ORM\Column(type: Types::STRING, length: 500, nullable: true)]
+    private ?string $address = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $postalCode;
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    private ?int $postalCode = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $city;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $city = null;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
-    private $publiclyAccessible;
+    #[ORM\Column(type: Types::BOOLEAN, nullable: true)]
+    private ?bool $publiclyAccessible = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $geo;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $geo = null;
 
-    #[ORM\Column(type: 'text', nullable: true)]
-    private $comment;
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $comment = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $department;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $department = null;
 
-    #[ORM\Column(type: 'float', nullable: true)]
-    private $purchasePrice;
+    #[ORM\Column(type: Types::FLOAT, nullable: true)]
+    private ?float $purchasePrice = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
-    private $inventoryId;
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    private ?int $inventoryId = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $purchasePlace;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $purchasePlace = null;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
-    private $purchaseDate;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $purchaseDate = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $purchasedBy;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $purchasedBy = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $barcode;
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
+    private ?string $barcode = null;
 
-    #[ORM\Column(type: 'date', nullable: true)]
-    private $locationDate;
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $locationDate = null;
 
     /**
      * Artwork constructor.
@@ -136,10 +140,7 @@ class Item
         return $this->description;
     }
 
-    /**
-     * @param mixed $description
-     */
-    public function setDescription($description): void
+    public function setDescription(mixed $description): void
     {
         $this->description = $description;
     }
@@ -153,8 +154,6 @@ class Item
     }
 
     /**
-     * @param \App\Entity\Image $image
-     *
      * @return $this
      */
     public function addImage(Image $image): self
@@ -168,8 +167,6 @@ class Item
     }
 
     /**
-     * @param \App\Entity\Image $image
-     *
      * @return $this
      */
     public function removeImage(Image $image): self

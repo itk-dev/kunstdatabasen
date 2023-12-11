@@ -31,3 +31,7 @@ yarn-error.log
 
 public/images/artwork/*
 !public/images/artwork/fixtures/
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

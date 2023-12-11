@@ -75,7 +75,7 @@ class CreateUserCommand extends Command
             return 1;
         }
 
-        $rolesArray = explode(',', $roles);
+        $rolesArray = explode(',', (string) $roles);
 
         $user = new User();
         $user->setEmail($email);

@@ -54,7 +54,6 @@ class ArtworkRepository extends ServiceEntityRepository
      * @param string|null $artistGender
      * @param int|null    $priceFrom
      * @param int|null    $priceTo
-     * @param array       $orderBy
      *
      * @return \Doctrine\ORM\Query
      */

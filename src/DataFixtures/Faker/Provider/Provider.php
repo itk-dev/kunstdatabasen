@@ -22,11 +22,11 @@ class Provider extends Base
 {
     public function __construct(
         Generator $generator,
-        readonly private FileSystem $filesystem,
-        readonly private MimeTypeGuesserInterface $mimeTypeGuesser,
-        readonly private UserPasswordHasherInterface $passwordHasher,
-        readonly private Twig $twig,
-        readonly private array $config
+        private readonly FileSystem $filesystem,
+        private readonly MimeTypeGuesserInterface $mimeTypeGuesser,
+        private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly Twig $twig,
+        private readonly array $config
     ) {
         parent::__construct($generator);
     }
