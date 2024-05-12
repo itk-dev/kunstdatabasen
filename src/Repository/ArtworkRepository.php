@@ -30,7 +30,7 @@ class ArtworkRepository extends ServiceEntityRepository
     /**
      * ArtworkRepository constructor.
      *
-     * @param \Doctrine\Persistence\ManagerRegistry $registry
+     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -55,9 +55,9 @@ class ArtworkRepository extends ServiceEntityRepository
      * @param int|null    $priceFrom
      * @param int|null    $priceTo
      *
-     * @return \Doctrine\ORM\Query
+     * @return Query
      */
-    public function getQuery(string $search = null, string $type = null, string $status = null, string $category = null, string $building = null, int $yearFrom = null, int $yearTo = null, int $minWidth = null, int $maxWidth = null, int $minHeight = null, int $maxHeight = null, string $artistGender = null, int $priceFrom = null, int $priceTo = null, array $orderBy = [['createdAt', Criteria::DESC]]): Query
+    public function getQuery(?string $search = null, ?string $type = null, ?string $status = null, ?string $category = null, ?string $building = null, ?int $yearFrom = null, ?int $yearTo = null, ?int $minWidth = null, ?int $maxWidth = null, ?int $minHeight = null, ?int $maxHeight = null, ?string $artistGender = null, ?int $priceFrom = null, ?int $priceTo = null, array $orderBy = [['createdAt', Criteria::DESC]]): Query
     {
         $qb = $this->createQueryBuilder('e');
 

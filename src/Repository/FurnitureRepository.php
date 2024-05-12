@@ -30,7 +30,7 @@ class FurnitureRepository extends ServiceEntityRepository
     /**
      * FurnitureRepository constructor.
      *
-     * @param \Doctrine\Persistence\ManagerRegistry $registry
+     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -45,9 +45,9 @@ class FurnitureRepository extends ServiceEntityRepository
      * @param string|null $category
      * @param string|null $building
      *
-     * @return \Doctrine\ORM\Query
+     * @return Query
      */
-    public function getQuery(string $search = null, string $type = null, string $category = null, string $building = null, array $orderBy = [['purchaseDate', Criteria::DESC]]): Query
+    public function getQuery(?string $search = null, ?string $type = null, ?string $category = null, ?string $building = null, array $orderBy = [['purchaseDate', Criteria::DESC]]): Query
     {
         $qb = $this->createQueryBuilder('e');
         null !== $search && $qb->andWhere('e.name LIKE :search')->setParameter('search', '%'.$search.'%');
