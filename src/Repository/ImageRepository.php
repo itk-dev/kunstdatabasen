@@ -25,7 +25,7 @@ class ImageRepository extends ServiceEntityRepository
     /**
      * ImageRepository constructor.
      *
-     * @param \Doctrine\Persistence\ManagerRegistry $registry
+     * @param ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {

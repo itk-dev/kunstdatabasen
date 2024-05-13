@@ -65,7 +65,7 @@ class Image implements \Stringable
      *
      * @throws \Exception
      */
-    public function setImageFile(File $imageFile = null): void
+    public function setImageFile(?File $imageFile = null): void
     {
         $this->imageFile = $imageFile;
 
@@ -77,7 +77,7 @@ class Image implements \Stringable
     }
 
     /**
-     * @return \Symfony\Component\HttpFoundation\File\File|null
+     * @return File|null
      */
     public function getImageFile(): ?File
     {
@@ -125,7 +125,7 @@ class Image implements \Stringable
     }
 
     /**
-     * @return \App\Entity\Item|null
+     * @return Item|null
      */
     public function getItem(): ?Item
     {
@@ -133,7 +133,7 @@ class Image implements \Stringable
     }
 
     /**
-     * @param \App\Entity\Item|null $item
+     * @param Item|null $item
      *
      * @return $this
      */

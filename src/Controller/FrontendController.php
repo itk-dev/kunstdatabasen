@@ -178,7 +178,7 @@ class FrontendController extends AbstractController
 
         $formBuilder = $this->createFormBuilder();
         $formBuilder
-            ->setMethod(\Symfony\Component\HttpFoundation\Request::METHOD_GET)
+            ->setMethod(Request::METHOD_GET)
             ->add(
                 'search',
                 SearchType::class,
