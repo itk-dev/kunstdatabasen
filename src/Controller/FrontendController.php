@@ -32,7 +32,7 @@ class FrontendController extends AbstractController
      */
     public function __construct(
         private readonly UploaderHelper $uploaderHelper,
-        private readonly TagService $tagService
+        private readonly TagService $tagService,
     ) {
     }
 
@@ -168,7 +168,7 @@ class FrontendController extends AbstractController
             return null;
         }
 
-        return sprintf('%d x %d', $width, $height);
+        return \sprintf('%d x %d', $width, $height);
     }
 
     private function getSearchForm(): FormInterface

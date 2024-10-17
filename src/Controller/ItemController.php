@@ -186,7 +186,7 @@ class ItemController extends BaseController
 
         $response->setCallback($callback);
 
-        $filename = sprintf('%s-eksport-%s', $itemType, (new \DateTimeImmutable())->format('d-m-Y'));
+        $filename = \sprintf('%s-eksport-%s', $itemType, (new \DateTimeImmutable())->format('d-m-Y'));
         $response->headers->set('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         $response->headers->set('Content-Disposition', 'attachment; filename="'.$filename.'.xlsx"');
         $response->setStatusCode(Response::HTTP_OK);
@@ -463,7 +463,7 @@ class ItemController extends BaseController
         return match ($itemType) {
             Artwork::ITEM_TYPE => Artwork::class,
             Furniture::ITEM_TYPE => Furniture::class,
-            default => Item::class
+            default => Item::class,
         };
     }
 

@@ -28,7 +28,7 @@ class ImportSpreadsheetCommand extends Command
      * ImportSpreadsheetCommand constructor.
      */
     public function __construct(
-        readonly private ItemService $itemService
+        readonly private ItemService $itemService,
     ) {
         parent::__construct();
     }
@@ -53,7 +53,7 @@ class ImportSpreadsheetCommand extends Command
         $file = $input->getArgument('file');
 
         if ($file) {
-            $io->note(sprintf('Importing: %s', $file));
+            $io->note(\sprintf('Importing: %s', $file));
         }
 
         $this->itemService->importFromSpreadsheet($file);

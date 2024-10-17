@@ -26,7 +26,7 @@ class TagService
     public function __construct(
         private readonly TagRepository $tagRepository,
         private readonly EntityManagerInterface $entityManager,
-        private readonly ItemRepository $itemRepository
+        private readonly ItemRepository $itemRepository,
     ) {
     }
 

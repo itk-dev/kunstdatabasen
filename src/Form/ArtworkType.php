@@ -27,7 +27,7 @@ class ArtworkType extends AbstractType
      * ArtworkType constructor.
      */
     public function __construct(
-        private readonly TagService $tagService
+        private readonly TagService $tagService,
     ) {
     }
 

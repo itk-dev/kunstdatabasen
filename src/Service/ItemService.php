@@ -34,7 +34,7 @@ class ItemService
         protected readonly UrlGeneratorInterface $router,
         protected readonly EntityManagerInterface $entityManager,
         protected readonly ItemRepository $itemRepository,
-        protected readonly TagService $tagService
+        protected readonly TagService $tagService,
     ) {
     }
 
@@ -166,7 +166,7 @@ class ItemService
                         }
                     }
                 } else {
-                    !empty($entryDimensions) && $unMappable[] = sprintf('ART_DIMENSION: %s', $entryDimensions);
+                    !empty($entryDimensions) && $unMappable[] = \sprintf('ART_DIMENSION: %s', $entryDimensions);
                 }
             } elseif ('Inventar' === $entry[0]) {
                 $item = new Furniture();
@@ -175,7 +175,7 @@ class ItemService
                 // Set name to barcode.
                 $item->setName($barcode);
 
-                !empty($entry[21]) && $unMappable[] = sprintf('INV_USER: %s', $entry[21]);
+                !empty($entry[21]) && $unMappable[] = \sprintf('INV_USER: %s', $entry[21]);
             }
 
             if (null !== $item) {
@@ -257,6 +257,6 @@ class ItemService
         }
         // @TODO: Include depth, diameter and weight in string.
 
-        return sprintf('%d x %d', $width, $height);
+        return \sprintf('%d x %d', $width, $height);
     }
 }
