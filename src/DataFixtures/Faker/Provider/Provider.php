@@ -26,7 +26,7 @@ class Provider extends Base
         private readonly MimeTypeGuesserInterface $mimeTypeGuesser,
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly Twig $twig,
-        private readonly array $config
+        private readonly array $config,
     ) {
         parent::__construct($generator);
     }
@@ -63,7 +63,7 @@ class Provider extends Base
 
         $sourcePath = $this->config['project_dir'].'/fixtures/'.$path;
         if (!file_exists($sourcePath)) {
-            throw new \InvalidArgumentException(sprintf('File source path %s does not exist', $sourcePath));
+            throw new \InvalidArgumentException(\sprintf('File source path %s does not exist', $sourcePath));
         }
 
         // The uploaded file will be deleted, so we create a copy of the input file.

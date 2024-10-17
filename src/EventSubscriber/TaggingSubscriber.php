@@ -32,7 +32,7 @@ class TaggingSubscriber
      */
     public function __construct(
         readonly private TagService $tagService,
-        readonly private EventDispatcherInterface $dispatcher
+        readonly private EventDispatcherInterface $dispatcher,
     ) {
     }
 

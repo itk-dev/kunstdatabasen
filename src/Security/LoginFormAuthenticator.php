@@ -43,7 +43,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         private readonly EntityManagerInterface $entityManager,
         private readonly UrlGeneratorInterface $urlGenerator,
         private readonly CsrfTokenManagerInterface $csrfTokenManager,
-        UserPasswordEncoderInterface $passwordEncoder
+        UserPasswordEncoderInterface $passwordEncoder,
     ) {
         $this->passwordEncoder = $passwordEncoder;
     }

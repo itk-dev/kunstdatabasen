@@ -31,7 +31,7 @@ class BaseController extends AbstractController
         string $bindSupportMail,
         protected readonly RequestStack $requestStack,
         protected readonly ItemService $itemService,
-        protected readonly TagService $tagService
+        protected readonly TagService $tagService,
     ) {
         $this->supportMail = $bindSupportMail;
     }
