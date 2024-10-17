@@ -32,7 +32,7 @@ class ChangeUserPasswordCommand extends Command
     public function __construct(
         readonly private UserPasswordHasherInterface $passwordHasher,
         readonly private EntityManagerInterface $entityManager,
-        readonly private UserRepository $userRepository
+        readonly private UserRepository $userRepository,
     ) {
         parent::__construct();
     }

@@ -31,7 +31,7 @@ class BaseController extends AbstractController
         string $bindSupportMail,
         protected readonly RequestStack $requestStack,
         protected readonly ItemService $itemService,
-        protected readonly TagService $tagService
+        protected readonly TagService $tagService,
     ) {
         $this->supportMail = $bindSupportMail;
     }
@@ -43,7 +43,7 @@ class BaseController extends AbstractController
      * @param array         $parameters
      * @param Response|null $response
      */
-    public function render(string $view, array $parameters = [], Response $response = null): Response
+    public function render(string $view, array $parameters = [], ?Response $response = null): Response
     {
         !isset($parameters['title']) && $parameters['title'] = 'Kunstdatabasen';
         !isset($parameters['brand']) && $parameters['brand'] = 'Aarhus kommunes kunstdatabase';

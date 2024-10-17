@@ -26,7 +26,7 @@ class TagService
     public function __construct(
         private readonly TagRepository $tagRepository,
         private readonly EntityManagerInterface $entityManager,
-        private readonly ItemRepository $itemRepository
+        private readonly ItemRepository $itemRepository,
     ) {
     }
 
@@ -94,14 +94,14 @@ class TagService
     /**
      * Add tag if it does not already exist.
      *
-     * @param \App\Entity\Item $item
-     *                                    The item that has added the tag
-     * @param string           $field
-     *                                    The field of the tag
-     * @param mixed            $value
-     *                                    The field value
-     * @param array            $changeSet
-     *                                    The change set for the field, if it exists
+     * @param Item   $item
+     *                          The item that has added the tag
+     * @param string $field
+     *                          The field of the tag
+     * @param mixed  $value
+     *                          The field value
+     * @param array  $changeSet
+     *                          The change set for the field, if it exists
      */
     public function addTag(Item $item, string $field, mixed $value, array $changeSet)
     {

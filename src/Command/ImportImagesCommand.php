@@ -28,7 +28,7 @@ class ImportImagesCommand extends Command
      * ImportSpreadsheetCommand constructor.
      */
     public function __construct(
-        readonly private ItemService $itemService
+        readonly private ItemService $itemService,
     ) {
         parent::__construct();
     }
@@ -53,7 +53,7 @@ class ImportImagesCommand extends Command
         $folder = $input->getArgument('folder');
 
         if ($folder) {
-            $io->note(sprintf('Importing images from: %s', $folder));
+            $io->note(\sprintf('Importing images from: %s', $folder));
         }
 
         $this->itemService->importFromImages($folder);

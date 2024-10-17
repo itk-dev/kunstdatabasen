@@ -32,7 +32,7 @@ class FrontendController extends AbstractController
      */
     public function __construct(
         private readonly UploaderHelper $uploaderHelper,
-        private readonly TagService $tagService
+        private readonly TagService $tagService,
     ) {
     }
 
@@ -168,7 +168,7 @@ class FrontendController extends AbstractController
             return null;
         }
 
-        return sprintf('%d x %d', $width, $height);
+        return \sprintf('%d x %d', $width, $height);
     }
 
     private function getSearchForm(): FormInterface
@@ -178,7 +178,7 @@ class FrontendController extends AbstractController
 
         $formBuilder = $this->createFormBuilder();
         $formBuilder
-            ->setMethod(\Symfony\Component\HttpFoundation\Request::METHOD_GET)
+            ->setMethod(Request::METHOD_GET)
             ->add(
                 'search',
                 SearchType::class,

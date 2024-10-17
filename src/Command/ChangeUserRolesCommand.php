@@ -30,7 +30,7 @@ class ChangeUserRolesCommand extends Command
      */
     public function __construct(
         private readonly EntityManagerInterface $entityManager,
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $userRepository,
     ) {
         parent::__construct();
     }
