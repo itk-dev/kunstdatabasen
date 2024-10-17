@@ -8,10 +8,13 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-## [1.6.8] - 2024-05-13
+## [1.7.0] - 2024-10-17
 
 * [PR-83](https://github.com/itk-dev/kunstdatabasen/pull/83)
   Security updates.
+* Upgrade docker setup
+* Updated to php 8.3
+* Updated Symfony update to 6.4 LTS
 
 ## [1.6.7] - 2023-12-11
 
