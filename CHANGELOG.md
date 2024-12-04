@@ -78,7 +78,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.0.0] - yyyy-mm-dd
 
 [Unreleased]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.8...HEAD
-[1.6.8]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.7...1.6.8
+[1.7.0]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.8...1.7.0
 [1.6.7]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.6...1.6.7
 [1.6.6]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.5...1.6.6
 [1.6.5]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.4...1.6.5
