@@ -8,6 +8,10 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.7.1] - 2024-12-04
+
+* Automatisk deployment
+
 ## [1.7.0] - 2024-10-17
 
 * [PR-83](https://github.com/itk-dev/kunstdatabasen/pull/83)
@@ -78,6 +82,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.0.0] - yyyy-mm-dd
 
 [Unreleased]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.8...HEAD
+[1.7.1]: https://github.com/itk-dev/kunstdatabasen/compare/1.7.1...1.7.1
 [1.7.0]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.8...1.7.0
 [1.6.7]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.6...1.6.7
 [1.6.6]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.5...1.6.6
