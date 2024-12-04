@@ -7,8 +7,7 @@ jobs:
         strategy:
             fail-fast: false
         steps:
-            - name: Checkout
-              uses: actions/checkout@v2
+            - uses: actions/checkout@v4
               with:
                   fetch-depth: 2
 
@@ -26,21 +25,25 @@ jobs:
             matrix:
                 php: ['8.3']
         steps:
-            - uses: actions/checkout@master
+            - uses: actions/checkout@v4
+
             - name: Setup PHP, with composer and extensions
               uses: shivammathur/setup-php@master
               with:
                   php-version: ${{ matrix.php }}
                   extension-csv: ctype, dom, iconv, json
                   coverage: none
+
             - name: Get composer cache directory
               id: composer-cache
               run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
             - uses: actions/cache@v1
               with:
                   path: ${{ steps.composer-cache.outputs.dir }}
                   key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
                   restore-keys: ${{ matrix.php }}-composer-
+
             - name: Validate composer files
               run: composer validate composer.json
 
@@ -53,22 +56,27 @@ jobs:
                 php: ['8.3']
         steps:
             - uses: actions/checkout@master
+
             - name: Setup PHP, with composer and extensions
               uses: shivammathur/setup-php@master
               with:
                   php-version: ${{ matrix.php }}
                   extension-csv: ctype, dom, iconv, json
                   coverage: none
+
             -   name: Get composer cache directory
                 id: composer-cache
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
             -   uses: actions/cache@v1
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
                     restore-keys: ${{ matrix.php }}-composer-
+
             - name: Install Dependencies
               run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
             - name: phpcsfixer
               run: composer actions/phpcsfixer
 
@@ -81,22 +89,27 @@ jobs:
                 php: ['8.3']
         steps:
             - uses: actions/checkout@master
+
             - name: Setup PHP, with composer and extensions
               uses: shivammathur/setup-php@master
               with:
                   php-version: ${{ matrix.php }}
                   extension-csv: ctype, dom, iconv, json
                   coverage: none
+
             -   name: Get composer cache directory
                 id: composer-cache
                 run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
             -   uses: actions/cache@v1
                 with:
                     path: ${{ steps.composer-cache.outputs.dir }}
                     key: ${{ matrix.php }}-composer-${{ hashFiles('**/composer.lock') }}
                     restore-keys: ${{ matrix.php }}-composer-
+
             - name: Install Dependencies
               run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+
             - name: twigcs
               run: composer actions/twigcs
 
@@ -110,8 +123,23 @@ jobs:
                   node-version: 20
             - name: install
               run: yarn install
+
             - name: JS coding standards
               run: yarn coding-standards-check
+
+    markdown:
+        name: Markdown lint
+        runs-on: ubuntu-24.04
+        steps:
+            -   uses: actions/checkout@master
+            -   uses: actions/setup-node@v3
+                with:
+                    node-version: 20
+            -   name: install
+                run: yarn install
+
+            -   name: Run markdown lint
+                run: yarn run coding-standards-check/markdownlint
 
     test-yarn-build:
         name: Test yarn build assets
@@ -122,6 +150,7 @@ jobs:
             - name: Get yarn cache directory
               id: yarn-cache
               run: echo "::set-output name=dir::$(yarn cache dir)"
+
             - uses: actions/cache@v1
               with:
                   path: ${{ steps.yarn-cache.outputs.dir }}

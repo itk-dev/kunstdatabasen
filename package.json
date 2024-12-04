@@ -42,7 +42,7 @@
         "coding-standards-check/scss": "yarn run coding-standards-check/stylelint",
         "coding-standards-check/eslint": "eslint --config .eslintrc.js 'assets/**/*.js'",
         "coding-standards-check/js": "yarn run coding-standards-check/eslint",
-        "coding-standards-check": "yarn run coding-standards-check/scss; yarn run coding-standards-check/js; yarn run coding-standards-check/markdownlint",
+        "coding-standards-check": "yarn run coding-standards-check/scss; yarn run coding-standards-check/js",
         "coding-standards-apply/stylelint": "stylelint --config=.stylelintrc.js 'assets/**/*.scss' --fix",
         "coding-standards-apply/scss": "yarn run coding-standards-apply/stylelint",
         "coding-standards-apply/eslint": "eslint --config .eslintrc.js 'assets/**/*.js' --fix",
