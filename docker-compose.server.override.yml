@@ -3,3 +3,12 @@ services:
     environment:
       - PHP_MAX_EXECUTION_TIME=60
       - PHP_MEMORY_LIMIT=512M
+    volumes:
+      - ../../shared/images:/app/public/images
+      - ../../shared/media:/app/public/media
+      - ../../shared/.env.local:/app/.env.local
+
+  nginx:
+    volumes:
+      - ../../shared/images:/app/public/images
+      - ../../shared/media:/app/public/media
