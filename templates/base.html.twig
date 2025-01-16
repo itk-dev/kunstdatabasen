@@ -10,6 +10,7 @@
     </title>
     <script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js" data-culture="DA" type="text/javascript"></script>
     {% block stylesheets %}{% endblock %}
+            {{ encore_entry_link_tags('app') }}
 </head>
 
 <body class="{% block body_class app.request.get('_route') %}">
@@ -17,5 +18,6 @@
     {% block content %}{% endblock %}
 {% endblock %}
 {% block javascripts %}{% endblock %}
+            {{ encore_entry_script_tags('app') }}
 </body>
 </html>
