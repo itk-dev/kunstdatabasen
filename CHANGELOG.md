@@ -8,6 +8,14 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.7.2] - 2025-01-20
+
+* [PR-86](https://github.com/itk-dev/kunstdatabasen/pull/86)
+  Security updates.
+* Upgrade symfony to 7.2
+* ready for 7.4 (new LTS)
+
+
 ## [1.7.1] - 2024-12-04
 
 * Automatisk deployment
