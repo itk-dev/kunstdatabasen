@@ -36,7 +36,7 @@ class ImportImagesCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Import images from a folder. Each image should be named by inventoryId.[extension].')
