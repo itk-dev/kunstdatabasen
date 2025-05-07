@@ -1,1 +1,1 @@
-import './edit.js';
+import "./edit.js";
