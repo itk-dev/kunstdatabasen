@@ -8,6 +8,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+* [PR-88](https://github.com/itk-dev/kunstdatabasen/pull/88)
+  Updated Yarn packages
 * [PR-87](https://github.com/itk-dev/kunstdatabasen/pull/87)
   * Updated docker compose setup
   * Updated workflow templates
