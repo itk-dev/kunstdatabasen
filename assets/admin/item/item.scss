@@ -1,14 +1,14 @@
-@import '../../custom-variables';
-@import '../../base';
+@import "../../custom-variables";
+@import "../../base";
 
-@import '~bootstrap/scss/buttons';
-@import '~bootstrap/scss/forms';
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/forms";
 // Removed in Bootstrap 5
 // @import '~bootstrap/scss/custom-forms';
-@import '~bootstrap/scss/transitions';
-@import '~bootstrap/scss/images';
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/images";
 
-@import '../../partials/toggle-button';
+@import "../../partials/toggle-button";
 
 // Accomondate space for fixed nav
 body {
@@ -17,5 +17,5 @@ body {
 }
 
 .custom-file-label::after {
-  content: 'Vælg';
+  content: "Vælg";
 }
