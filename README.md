@@ -57,6 +57,7 @@ to match the docker setup.
 ```sh
 # Create the frontend network if it does not already exist.
 docker network inspect frontend 2>&1 > /dev/null || docker network create frontend
+docker compose pull
 docker compose up --detach
 
 # Install
