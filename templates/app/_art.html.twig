@@ -86,7 +86,7 @@
                 <div class="col-md-4">
                     <label for="detailsStatus">{{ 'frontend.item.status'|trans }}</label>
                     <p>
-                        {% if data.artwork.status == "Udlånt" %}
+                        {% if data.artwork.status == 'Udlånt' %}
                             <span class="badge rounded-pill bg-dark">{{ data.artwork.status ?? '' }}</span>
                         {% else %}
                             <span class="badge rounded-pill bg-success">{{ data.artwork.status ?? '' }}</span>

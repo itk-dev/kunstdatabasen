@@ -35,7 +35,7 @@ class TagRepository extends ServiceEntityRepository
     /**
      * Get tags by classname and field.
      *
-     * @return \App\Entity\Tag[]
+     * @return Tag[]
      */
     public function getByClassname(string $classname, string $field)
     {

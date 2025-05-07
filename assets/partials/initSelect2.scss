@@ -1,9 +1,9 @@
-@import '../custom-variables';
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/mixins';
-@import '~bootstrap/scss/variables';
-@import '~select2/src/scss/core';
+@import "../custom-variables";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/variables";
+@import "~select2/src/scss/core";
 
 // Fix for issue with the border color https://github.com/apalfrey/select2-bootstrap-5-theme/issues/75
 $s2bs5-border-color: $border-color;
-@import '~select2-bootstrap-5-theme/src/include-all';
+@import "~select2-bootstrap-5-theme/src/include-all";

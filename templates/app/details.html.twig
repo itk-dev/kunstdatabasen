@@ -1,21 +1,21 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block title %}
-	{{ ('title'|trans) ~ ' | ' ~ data.artwork.title }}
+    {{ ('title'|trans) ~ ' | ' ~ data.artwork.title }}
 {% endblock %}
 
 {% block body %}
-	{% include "app/_header.html.twig" %}
-	{% include "app/_art.html.twig" with {artwork: data.artwork} %}
-	{% include "app/_footer.html.twig" %}
+    {{ include('app/_header.html.twig') }}
+    {{ include('app/_art.html.twig', {artwork: data.artwork}) }}
+    {{ include('app/_footer.html.twig') }}
 {% endblock %}
 
 {% block stylesheets %}
-	{{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('app') }}
 {% endblock %}
 
 {% block javascripts %}
-	{{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('app') }}
 
-    {% include 'siteimprove.html.twig' %}
+    {{ include('siteimprove.html.twig') }}
 {% endblock %}

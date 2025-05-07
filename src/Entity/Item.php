@@ -38,7 +38,7 @@ class Item
     private ?string $description = null;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection<int, \App\Entity\Image>|\App\Entity\Image[]
+     * @var Collection<int, Image>|Image[]
      */
     #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'item', cascade: ['persist'])]
     private Collection $images;

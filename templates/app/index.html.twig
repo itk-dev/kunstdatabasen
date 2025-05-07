@@ -1,14 +1,14 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block title %}
     {{ 'title'|trans }}
 {% endblock %}
 
 {% block body %}
-    {% include "app/_header.html.twig" %}
-    {% include "app/_filters.html.twig" with {form: searchForm} %}
-    {% include "app/_table.html.twig" %}
-    {% include "app/_footer.html.twig" %}
+    {{ include('app/_header.html.twig') }}
+    {{ include('app/_filters.html.twig', {form: searchForm}) }}
+    {{ include('app/_table.html.twig') }}
+    {{ include('app/_footer.html.twig') }}
 {% endblock %}
 
 {% block stylesheets %}
@@ -18,5 +18,5 @@
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
 
-    {% include 'siteimprove.html.twig' %}
+    {{ include('siteimprove.html.twig') }}
 {% endblock %}
