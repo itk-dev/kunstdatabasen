@@ -26,7 +26,7 @@
                         <td class="d-none d-md-table-cell">{{ item.artist ?? '' }}</td>
                         <td class="d-none d-md-table-cell">{{ item.type ?? '' }}</td>
                         <td>
-                            {% if item.status == "Udlånt" %}
+                            {% if item.status == 'Udlånt' %}
                                 <span class="badge rounded-pill bg-dark">{{ item.status ?? '' }}</span>
                             {% else %}
                                 <span class="badge rounded-pill bg-success">{{ item.status ?? '' }}</span>
