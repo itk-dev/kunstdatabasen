@@ -161,6 +161,6 @@ docker compose exec phpfpm composer coding-standards-check
 ```
 
 ```sh
-docker compose run --rm node yarn install
-docker compose run --rm node yarn coding-standards-check
+docker compose run --rm prettier 'assets/' --write
+docker compose run --rm prettier 'assets/' --check
 ```

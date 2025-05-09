@@ -1,5 +1,7 @@
 import "bootstrap/js/dist/carousel";
 
+import { Modal } from "bootstrap";
+
 $(function () {
     function register() {
         $("#carouselImageIndicators").on("slide.bs.carousel", (event) => {
@@ -10,7 +12,7 @@ $(function () {
 
         $(".js-image-full").on("click", function () {
             $("#carouselImageFull").attr("src", $(this).data("src"));
-            $("#carouselImageModal").modal();
+            new Modal("#carouselImageModal").show();
         });
     }
 
