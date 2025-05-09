@@ -21,8 +21,8 @@
 ###    Clean up and check code by running
 ###
 ###    ``` shell
-###    docker compose run --rm phpfpm vendor/bin/phpcbf
-###    docker compose run --rm phpfpm vendor/bin/phpcs
+###    docker compose run --rm phpfpm vendor/bin/php-cs-fixer fix
+###    docker compose run --rm phpfpm vendor/bin/php-cs-fixer fix --dry-run --diff
 ###    ```
 ###
 ### > [!NOTE] The template adds `.php-cs-fixer.dist.php` as [a configuration
