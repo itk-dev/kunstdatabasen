@@ -1,7 +1,7 @@
-import "./app.scss";
+import './app.scss';
 
 // Add font awesome icons
-import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import {
     faArrowLeft,
     faArrowRight,
@@ -9,17 +9,17 @@ import {
     faArrowAltCircleLeft,
     faArrowAltCircleRight,
     faCircle,
-    faTimes,
-} from "@fortawesome/free-solid-svg-icons";
+    faTimes
+} from '@fortawesome/free-solid-svg-icons';
 
-import "bootstrap/js/dist/collapse";
-import "bootstrap/js/dist/carousel";
-import "bootstrap/js/dist/modal";
+import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/carousel';
+import 'bootstrap/js/dist/modal';
 
-import "./../partials/initSelect2";
-import "./../partials/imageCarousel";
+import './../partials/initSelect2';
+import './../partials/imageCarousel';
 
-const $ = require("jquery");
+const $ = require('jquery');
 global.$ = global.jQuery = $;
 
 library.add(
@@ -29,6 +29,6 @@ library.add(
     faArrowAltCircleLeft,
     faArrowAltCircleRight,
     faCircle,
-    faTimes,
+    faTimes
 );
 dom.watch();

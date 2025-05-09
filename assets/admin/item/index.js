@@ -1,16 +1,16 @@
 // Add bootstrap components
-import "bootstrap/js/dist/modal";
-import "bootstrap/js/dist/collapse";
-import "bootstrap/js/dist/dropdown";
+import 'bootstrap/js/dist/modal';
+import 'bootstrap/js/dist/collapse';
+import 'bootstrap/js/dist/dropdown';
 
 // Add admin styles
-import "../admin.scss";
-import "../../partials/imageCarousel";
-import "../_itemDetails.js";
-import "../../partials/initSelect2";
+import '../admin.scss';
+import '../../partials/imageCarousel';
+import '../_itemDetails.js';
+import '../../partials/initSelect2';
 
 // Add font awesome icons
-import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import {
     faEdit,
     faPalette,
@@ -26,8 +26,8 @@ import {
     faExpand,
     faArrowAltCircleLeft,
     faArrowAltCircleRight,
-    faFileExport,
-} from "@fortawesome/free-solid-svg-icons";
+    faFileExport
+} from '@fortawesome/free-solid-svg-icons';
 
 library.add(
     faEdit,
@@ -44,6 +44,6 @@ library.add(
     faExpand,
     faArrowAltCircleLeft,
     faArrowAltCircleRight,
-    faFileExport,
+    faFileExport
 );
 dom.watch();
