@@ -1,49 +1,54 @@
 // Add admin styles
 import "./admin.scss";
-import "./_itemDetails.js";
-
-// Add font awesome icons
-import { library, dom } from "@fortawesome/fontawesome-svg-core";
-import {
-    faEdit,
-    faPalette,
-    faSearch,
-    faMountain,
-    faBars,
-    faTimes,
-    faChair,
-    faTimesCircle,
-    faArrowLeft,
-    faArrowRight,
-    faExpand,
-    faArrowAltCircleLeft,
-    faArrowAltCircleRight,
-    faFileExport,
-} from "@fortawesome/free-solid-svg-icons";
+import "./item.scss";
 
 // Add bootstrap components
-import "bootstrap/js/dist/modal";
-import "bootstrap/js/dist/collapse";
-import "bootstrap/js/dist/dropdown";
+import {Modal, Collapse, Dropdown} from 'bootstrap'
+
+import "./_itemDetails.js";
+import "./_imageUpload.js";
+import "./../partials/initSelect2";
+import "./../partials/imageCarousel";
 
 // Add jQuery
 const $ = require("jquery");
 global.$ = global.jQuery = $;
 
-library.add(
-    faEdit,
-    faPalette,
-    faSearch,
-    faMountain,
-    faBars,
-    faTimes,
-    faChair,
-    faTimesCircle,
-    faArrowLeft,
-    faArrowRight,
-    faExpand,
+// Add font awesome icons
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import {
     faArrowAltCircleLeft,
     faArrowAltCircleRight,
+    faArrowLeft,
+    faArrowRight,
+    faBars,
+    faChair,
+    faEdit,
+    faExpand,
     faFileExport,
+    faMountain,
+    faPalette,
+    faPlusCircle,
+    faSearch,
+    faTimes,
+    faTimesCircle,
+} from "@fortawesome/free-solid-svg-icons";
+
+library.add(
+    faArrowAltCircleLeft,
+    faArrowAltCircleRight,
+    faArrowLeft,
+    faArrowRight,
+    faBars,
+    faChair,
+    faEdit,
+    faExpand,
+    faFileExport,
+    faMountain,
+    faPalette,
+    faPlusCircle,
+    faSearch,
+    faTimes,
+    faTimesCircle,
 );
 dom.watch();
