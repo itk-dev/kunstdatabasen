@@ -11,7 +11,8 @@
     <script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js" data-culture="DA" type="text/javascript"></script>
     {% block stylesheets %}{% endblock %}
 </head>
-<body>
+
+<body class="{% block body_classes app.request.get('_route') %}">
 {% block body %}
     {% block content %}{% endblock %}
 {% endblock %}
