@@ -3,7 +3,7 @@ import "./admin.scss";
 import "./item.scss";
 
 // Add bootstrap components
-import {Modal, Collapse, Dropdown} from 'bootstrap'
+import { Modal, Collapse, Dropdown } from "bootstrap";
 
 import "./_itemDetails.js";
 import "./_imageUpload.js";
