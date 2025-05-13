@@ -8,6 +8,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.8.0] - 2025-05-13
+
 * [PR-90](https://github.com/itk-dev/kunstdatabasen/pull/90)
   Cleaned up modals
 * [PR-89](https://github.com/itk-dev/kunstdatabasen/pull/89)
@@ -93,7 +95,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.0.0] - yyyy-mm-dd
 
-[Unreleased]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.8...HEAD
+[Unreleased]: https://github.com/itk-dev/kunstdatabasen/compare/1.8.0...HEAD
+[1.8.0]: https://github.com/itk-dev/kunstdatabasen/compare/1.7.1...1.8.0
 [1.7.1]: https://github.com/itk-dev/kunstdatabasen/compare/1.7.1...1.7.1
 [1.7.0]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.8...1.7.0
 [1.6.7]: https://github.com/itk-dev/kunstdatabasen/compare/1.6.6...1.6.7
