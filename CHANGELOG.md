@@ -8,6 +8,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+* [PR-90](https://github.com/itk-dev/kunstdatabasen/pull/90)
+  Cleaned up modals
 * [PR-89](https://github.com/itk-dev/kunstdatabasen/pull/89)
   Cleaned up assets
 * [PR-88](https://github.com/itk-dev/kunstdatabasen/pull/88)
