@@ -57,6 +57,7 @@ to match the docker setup.
 ```sh
 # Create the frontend network if it does not already exist.
 docker network inspect frontend 2>&1 > /dev/null || docker network create frontend
+docker compose pull
 docker compose up --detach
 
 # Install
@@ -160,6 +161,6 @@ docker compose exec phpfpm composer coding-standards-check
 ```
 
 ```sh
-docker compose run --rm node yarn install
-docker compose run --rm node yarn coding-standards-check
+docker compose run --rm prettier 'assets/' --write
+docker compose run --rm prettier 'assets/' --check
 ```

@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block title %}
     {{ title }}
@@ -7,7 +7,7 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-            {% include "admin/_sidebar.html.twig" %}
+            {{ include('admin/_sidebar.html.twig') }}
             <div class="col bg-light border-start px-md-5" style="min-height: 100vh;">
                 {% block content %}
                 {% endblock %}

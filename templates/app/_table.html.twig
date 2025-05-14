@@ -25,7 +25,7 @@
                                 <td>{{ art.type }}</td>
                                 <td>{{ art.dimensions }}</td>
                                 <td>
-                                    {% if art.status == "Udlånt" %}
+                                    {% if art.status == 'Udlånt' %}
                                         <span class="badge rounded-pill bg-dark">{{ art.status ?? '' }}</span>
                                     {% else %}
                                         <span class="badge rounded-pill bg-success">{{ art.status ?? '' }}</span>
