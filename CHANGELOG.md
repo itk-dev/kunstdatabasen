@@ -8,6 +8,9 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+* [PR-92](https://github.com/itk-dev/kunstdatabasen/pull/92)
+  4719: Made it possible to delete items
+
 ## [1.8.0] - 2025-05-13
 
 * [PR-90](https://github.com/itk-dev/kunstdatabasen/pull/90)

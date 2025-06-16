@@ -269,10 +269,9 @@ class ItemController extends BaseController
     }
 
     #[Route(path: '/{id}', name: 'item_delete', methods: ['DELETE'])]
-    public function delete(Request $request, Item $item): Response
+    public function delete(Request $request, Item $item, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$item->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($item);
             $entityManager->flush();
         }
