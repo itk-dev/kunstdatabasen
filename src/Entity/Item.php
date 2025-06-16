@@ -40,7 +40,7 @@ class Item
     /**
      * @var Collection<int, Image>|Image[]
      */
-    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'item', cascade: ['persist'])]
+    #[ORM\OneToMany(targetEntity: Image::class, mappedBy: 'item', cascade: ['persist', 'remove'])]
     private Collection $images;
 
     #[ORM\Column(type: Types::STRING, length: 255, nullable: true)]
