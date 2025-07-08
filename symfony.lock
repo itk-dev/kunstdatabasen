@@ -21,14 +21,8 @@
         },
         "files": []
     },
-    "doctrine/cache": {
-        "version": "1.10.0"
-    },
     "doctrine/collections": {
         "version": "1.6.4"
-    },
-    "doctrine/common": {
-        "version": "2.12.0"
     },
     "doctrine/dbal": {
         "version": "2.10.2"
@@ -109,7 +103,7 @@
         "version": "v2.4.39"
     },
     "hautelook/alice-bundle": {
-        "version": "2.13",
+        "version": "2.15",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -184,9 +178,6 @@
     },
     "nikic/php-parser": {
         "version": "v4.4.0"
-    },
-    "ocramius/doctrine-batch-utils": {
-        "version": "2.1.0"
     },
     "ocramius/package-versions": {
         "version": "1.5.1"
@@ -581,7 +572,7 @@
         "version": "v4.4.8"
     },
     "theofidry/alice-data-fixtures": {
-        "version": "1.8",
+        "version": "1.9",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",

@@ -22,12 +22,9 @@ security:
                 # "app_login" is the name of the route created previously
                 login_path: app_login
                 check_path: app_login
+                enable_csrf: true
 
             pattern: ^/
-            # TODO
-            # guard:
-            #     authenticators:
-            #         - App\Security\LoginFormAuthenticator
             logout:
                 path: app_logout
                 target: frontend_index

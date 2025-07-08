@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
 /**
- * Note: The up and down steps are the same in this migration, but it makes something fall into place.
+ * Auto-generated Migration: Please modify to your needs!
  */
 final class Version20250117101700 extends AbstractMigration
 {
@@ -19,11 +19,13 @@ final class Version20250117101700 extends AbstractMigration
 
     public function up(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE user CHANGE roles roles JSON NOT NULL COMMENT \'(DC2Type:json)\'');
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE user CHANGE roles roles JSON NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
-        $this->addSql('ALTER TABLE user CHANGE roles roles JSON NOT NULL COMMENT \'(DC2Type:json)\'');
+        // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE user CHANGE roles roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\'');
     }
 }

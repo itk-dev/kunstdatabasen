@@ -9,7 +9,7 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 ## [Unreleased]
 
 * [PR-86](https://github.com/itk-dev/kunstdatabasen/pull/86)
-  * Upgraded to Symfony 7.3
+  * Upgraded to Symfony 7.3 and PHP 8.4
 
 ## [1.8.1] - 2025-06-16
 
