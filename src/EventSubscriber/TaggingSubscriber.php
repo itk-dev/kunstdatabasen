@@ -31,8 +31,8 @@ class TaggingSubscriber
      * TaggingSubscriber constructor.
      */
     public function __construct(
-        readonly private TagService $tagService,
-        readonly private EventDispatcherInterface $dispatcher,
+        private readonly TagService $tagService,
+        private readonly EventDispatcherInterface $dispatcher,
     ) {
     }
 
