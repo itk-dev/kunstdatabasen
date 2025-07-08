@@ -8,7 +8,7 @@ parameters:
 services:
     # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
+        autowire: true # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             $bindSupportMail: '%env(resolve:SUPPORT_MAIL)%'
@@ -30,7 +30,7 @@ when@dev: &services_dev
     services:
         # default configuration for services in *this* file
         _defaults:
-            autowire: true      # Automatically injects dependencies in your services.
+            autowire: true # Automatically injects dependencies in your services.
             autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
         App\DataFixtures\Faker\Provider\Provider:
