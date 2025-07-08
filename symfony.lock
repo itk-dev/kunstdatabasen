@@ -30,9 +30,6 @@
     "doctrine/common": {
         "version": "2.12.0"
     },
-    "doctrine/data-fixtures": {
-        "version": "1.4.2"
-    },
     "doctrine/dbal": {
         "version": "2.10.2"
     },
@@ -96,9 +93,6 @@
     "ezyang/htmlpurifier": {
         "version": "v4.13.0"
     },
-    "fakerphp/faker": {
-        "version": "v1.14.1"
-    },
     "friendsofphp/php-cs-fixer": {
         "version": "3.22",
         "recipe": {
@@ -115,7 +109,7 @@
         "version": "v2.4.39"
     },
     "hautelook/alice-bundle": {
-        "version": "2.12",
+        "version": "2.13",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -173,14 +167,11 @@
     "markbaker/matrix": {
         "version": "1.2.0"
     },
-    "myclabs/deep-copy": {
-        "version": "1.9.5"
-    },
     "myclabs/php-enum": {
         "version": "1.7.6"
     },
     "nelmio/alice": {
-        "version": "3.12",
+        "version": "3.14",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "main",
@@ -248,16 +239,7 @@
     "psr/simple-cache": {
         "version": "1.0.1"
     },
-    "sebastian/comparator": {
-        "version": "4.0.0"
-    },
     "sebastian/diff": {
-        "version": "4.0.0"
-    },
-    "sebastian/exporter": {
-        "version": "4.0.0"
-    },
-    "sebastian/recursion-context": {
         "version": "4.0.0"
     },
     "sensio/framework-extra-bundle": {
@@ -310,6 +292,18 @@
     },
     "symfony/debug": {
         "version": "v4.4.8"
+    },
+    "symfony/debug-bundle": {
+        "version": "7.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.3",
+            "ref": "5aa8aa48234c8eb6dbdd7b3cd5d791485d2cec4b"
+        },
+        "files": [
+            "config/packages/debug.yaml"
+        ]
     },
     "symfony/dependency-injection": {
         "version": "v4.4.8"
@@ -587,10 +581,10 @@
         "version": "v4.4.8"
     },
     "theofidry/alice-data-fixtures": {
-        "version": "1.0",
+        "version": "1.8",
         "recipe": {
             "repo": "github.com/symfony/recipes",
-            "branch": "master",
+            "branch": "main",
             "version": "1.0",
             "ref": "fe5a50faf580eb58f08ada2abe8afbd2d4941e05"
         }

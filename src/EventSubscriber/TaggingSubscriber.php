@@ -41,7 +41,7 @@ class TaggingSubscriber
         if ($args->getObject() instanceof Item) {
             $this->dispatcher->addListener(
                 KernelEvents::TERMINATE,
-                function (TerminateEvent $event) use ($args) {
+                function (TerminateEvent $event) use ($args): void {
                     $this->changeTags('persist', $args);
                 }
             );
@@ -53,7 +53,7 @@ class TaggingSubscriber
         if ($args->getObject() instanceof Item) {
             $this->dispatcher->addListener(
                 KernelEvents::TERMINATE,
-                function (TerminateEvent $event) use ($args) {
+                function (TerminateEvent $event) use ($args): void {
                     $this->changeTags('update', $args);
                 }
             );

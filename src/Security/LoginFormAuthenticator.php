@@ -33,7 +33,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 {
     use TargetPathTrait;
 
-    final public const LOGIN_ROUTE = 'app_login';
+    final public const string LOGIN_ROUTE = 'app_login';
     private $passwordEncoder;
 
     /**

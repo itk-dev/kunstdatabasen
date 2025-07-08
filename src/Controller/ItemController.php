@@ -29,15 +29,14 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
-#[Route(path: '/admin/item')]
 class ItemController extends BaseController
 {
-    #[Route(path: '/', name: 'item_index', methods: ['GET'])]
+    #[Route(path: '/admin/item/', name: 'item_index', methods: ['GET'])]
     public function index(ItemRepository $itemRepository, PaginatorInterface $paginator): Response
     {
         return $this->redirectToRoute('item_list');
@@ -46,7 +45,7 @@ class ItemController extends BaseController
     /**
      * @throws \Exception
      */
-    #[Route(path: '/list/{itemType}', name: 'item_list', methods: ['GET'], defaults: ['itemType' => Artwork::ITEM_TYPE])]
+    #[Route(path: '/admin/item/list/{itemType}', name: 'item_list', methods: ['GET'], defaults: ['itemType' => Artwork::ITEM_TYPE])]
     public function list(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository, PaginatorInterface $paginator): Response
     {
         $parameters['display_advanced_filters'] = false;
@@ -81,7 +80,7 @@ class ItemController extends BaseController
     /**
      * @param string $itemType The item type
      */
-    #[Route(path: '/{itemType}/export', name: 'item_export', methods: ['GET'])]
+    #[Route(path: '/admin/item/{itemType}/export', name: 'item_export', methods: ['GET'])]
     public function export(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository): Response
     {
         [$query] = $this->getFilteredQuery($itemType, $request, $itemRepository, $artworkRepository);
@@ -90,7 +89,7 @@ class ItemController extends BaseController
         set_time_limit(0);
         $response = new StreamedResponse();
 
-        $callback = function () use ($query) {
+        $callback = function () use ($query): void {
             $iterableItems = SimpleBatchIteratorAggregate::fromQuery(
                 $query,
                 100
@@ -197,7 +196,7 @@ class ItemController extends BaseController
     /**
      * @throws \Exception
      */
-    #[Route(path: '/{itemType}/new', name: 'item_new', methods: ['GET', 'POST'])]
+    #[Route(path: '/admin/item/{itemType}/new', name: 'item_new', methods: ['GET', 'POST'])]
     public function new(Request $request, string $itemType, EntityManagerInterface $entityManager): Response
     {
         switch ($itemType) {
@@ -236,7 +235,7 @@ class ItemController extends BaseController
     /**
      * @throws \Exception
      */
-    #[Route(path: '/{id}/edit', name: 'item_edit', methods: ['GET', 'POST'])]
+    #[Route(path: '/admin/item/{id}/edit', name: 'item_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Item $item, EntityManagerInterface $entityManager): Response
     {
         if ($item instanceof Artwork) {
@@ -268,7 +267,7 @@ class ItemController extends BaseController
         );
     }
 
-    #[Route(path: '/{id}', name: 'item_delete', methods: ['DELETE'])]
+    #[Route(path: '/admin/item/{id}', name: 'item_delete', methods: ['DELETE'])]
     public function delete(Request $request, Item $item, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$item->getId(), $request->request->get('_token'))) {
@@ -279,7 +278,7 @@ class ItemController extends BaseController
         return $this->redirectToRoute('item_index');
     }
 
-    #[Route(path: '/{id}/modal', name: 'item_modal', methods: ['GET'])]
+    #[Route(path: '/admin/item/{id}/modal', name: 'item_modal', methods: ['GET'])]
     public function getModal(Item $item): JsonResponse
     {
         $itemObject = $this->itemService->itemToRenderObject($item);

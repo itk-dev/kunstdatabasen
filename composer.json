@@ -4,7 +4,7 @@
     "license": "proprietary",
     "type": "project",
     "require": {
-        "php": ">=8.1",
+        "php": ">=8.3",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^2.10",
@@ -39,12 +39,17 @@
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.47",
-        "friendsofphp/php-cs-fixer": "^3.22",
+        "friendsofphp/php-cs-fixer": "^3.73",
         "hautelook/alice-bundle": "^2.12",
-        "rector/rector": "^0.18.12",
-        "symfony/maker-bundle": "^1.51",
-        "symfony/web-profiler-bundle": "~7.3.0",
-        "vincentlanglet/twig-cs-fixer": "^3.8"
+        "phpstan/extension-installer": "^1.4.3",
+        "phpstan/phpstan": "^2.1.11",
+        "phpstan/phpstan-doctrine": "^2.0.2",
+        "rector/rector": "^2.0.10",
+        "symfony/debug-bundle": "~7.2.0",
+        "symfony/maker-bundle": "^1.62.1",
+        "symfony/stopwatch": "~7.2.4",
+        "symfony/web-profiler-bundle": "~7.2.4",
+        "vincentlanglet/twig-cs-fixer": "^3.5.1"
     },
     "replace": {
         "symfony/polyfill-ctype": "*",
@@ -58,6 +63,8 @@
     "conflict": {
         "symfony/symfony": "*"
     },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "App\\": "src/"
@@ -73,6 +80,7 @@
             "cweagans/composer-patches": true,
             "ergebnis/composer-normalize": true,
             "php-http/discovery": true,
+            "phpstan/extension-installer": true,
             "symfony/flex": true,
             "symfony/runtime": true
         },
