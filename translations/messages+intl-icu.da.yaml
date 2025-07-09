@@ -1,29 +1,29 @@
 Aarhus Kommunes kunstdatabase: Aarhus Kommunes kunstsamling og udsmykninger
-footer.text: 'Aarhus Kommunes kunstsamling og udsmykninger'
+footer.text: "Aarhus Kommunes kunstsamling og udsmykninger"
 frontend.search.submit: Søg
 filters.year: År
 filters.price: Indkøbspris
-filters.show_advanced: 'Vis avancerede søgemuligheder'
-filters.hide_advanced: 'Skjul avancerede søgemuligheder'
-filter.search: 'Søg titel, art. nr. eller kunstner'
-filter.search_placeholder: 'Skriv søgeord'
+filters.show_advanced: "Vis avancerede søgemuligheder"
+filters.hide_advanced: "Skjul avancerede søgemuligheder"
+filter.search: "Søg titel, art. nr. eller kunstner"
+filter.search_placeholder: "Skriv søgeord"
 filter.type: Type
-filter.type_placeholder: 'Alle typer'
+filter.type_placeholder: "Alle typer"
 filter.category: Kategori
-filter.category_placeholder: 'Alle kategorier'
+filter.category_placeholder: "Alle kategorier"
 filter.building: Bygning
-filter.building_placeholder: 'Alle bygninger'
-filter.width: 'Bredde (cm)'
-filter.width_placeholder: 'Alle bredder'
-filter.height: 'Højde (cm)'
-filter.height_placeholder: 'Alle højder'
-filter.year_from_placeholder: 'Fra år'
-filter.year_to_placeholder: 'Til år'
-filter.price_from_placeholder: 'Fra pris'
-filter.price_to_placeholder: 'Til pris'
-filter.artist_gender: 'Kunstnerens køn'
-filter.artist_gender_placeholder: 'Alle køn'
-frontend.back_to_list: 'Tilbage til liste'
+filter.building_placeholder: "Alle bygninger"
+filter.width: "Bredde (cm)"
+filter.width_placeholder: "Alle bredder"
+filter.height: "Højde (cm)"
+filter.height_placeholder: "Alle højder"
+filter.year_from_placeholder: "Fra år"
+filter.year_to_placeholder: "Til år"
+filter.price_from_placeholder: "Fra pris"
+filter.price_to_placeholder: "Til pris"
+filter.artist_gender: "Kunstnerens køn"
+filter.artist_gender_placeholder: "Alle køn"
+frontend.back_to_list: "Tilbage til liste"
 frontend.item.title: Titel
 frontend.item.artist: Kunstner
 frontend.item.type: Type
@@ -33,21 +33,21 @@ frontend.item.location: Placering
 frontend.item.department: Afdeling
 frontend.item.building: Bygning
 frontend.item.geo: Geo
-frontend.item.further_information: 'Yderligere informationer'
+frontend.item.further_information: "Yderligere informationer"
 frontend.item.art_serial: Art.No.
 frontend.item.category: Kategori
 frontend.item.purchase_price: Indkøbspris
 frontend.item.production_year: Produktionsår
 frontend.item.assessment_price: Vurderingspris
 frontend.item.assessment_date: Vurderingsdato
-frontend.item.locationDate : Placeringsdato
+frontend.item.locationDate: Placeringsdato
 image-carousel.expand: Vis stort billede
 image-carousel.previous: Forrige
 image-carousel.next: Næste
 pager.navigation: Paginering
 pager.previous: Forrige
 pager.next: Næste
-admin.welcome: 'Velkommen til Aarhus Kommunes kunstsamling og udsmykninger'
+admin.welcome: "Velkommen til Aarhus Kommunes kunstsamling og udsmykninger"
 admin.table.thumpnail: Billede
 admin.table.title: Titel
 admin.table.art_serial: Art.No.
@@ -56,27 +56,27 @@ admin.table.artist: Kunstner
 admin.table.type: Type
 admin.table.status: Status
 admin.table.function: Funktion
-admin.index.latest_viewed: 'Senest åbne'
-admin.index.latest_added: 'Senest tilføjede'
-admin.index.new: 'Opret nyt værk'
-admin.index.show_all: 'Vis alle værker'
+admin.index.latest_viewed: "Senest åbne"
+admin.index.latest_added: "Senest tilføjede"
+admin.index.new: "Opret nyt værk"
+admin.index.show_all: "Vis alle værker"
 admin.index.export: Eksportér
 admin.artwork.index: Værker
 search.submit: Søg
-item.no_title: 'Uden titel'
+item.no_title: "Uden titel"
 menu.artworks: Kunstværker
 menu.furniture: Inventar
-admin.dashboard.new_artwork: 'Nyt kunstværk'
-admin.dashboard.new_furniture: 'Nyt inventar'
-item.list.item: 'Alle indgange'
-item.list.artwork: 'Alle kunstværker'
-item.list.furniture: 'Alt inventar'
+admin.dashboard.new_artwork: "Nyt kunstværk"
+admin.dashboard.new_furniture: "Nyt inventar"
+item.list.item: "Alle indgange"
+item.list.artwork: "Alle kunstværker"
+item.list.furniture: "Alt inventar"
 admin.index.new_artwork: Tilføj kunstværk
 admin.index.new_furniture: Tilføj inventar
 admin.item.delete_confirm: Er du sikker på at du vil slette dette?
 action.edit_item: Redigér
 action.close: Luk
-action.create_new_item: 'Opret nyt'
+action.create_new_item: "Opret nyt"
 action.edit: Rediger
 item.form.common: Generelt
 item.form.art: Kunst
@@ -91,14 +91,14 @@ admin.item.new: Opret nyt
 admin.index.help: Hjælp og vejledning
 admin.index.help.github: Github kildekode
 item.form.list: Liste
-frontend.no_title: '-- Uden titel --'
-'Aarhus Kommunes kunstsamling og udsmykninger': 'Aarhus Kommunes kunstsamling og udsmykninger'
-'Aarhus Kommunes Byvåben': 'Aarhus Kommunes Byvåben'
-'Side navigation': 'Side navigation'
+frontend.no_title: "-- Uden titel --"
+"Aarhus Kommunes kunstsamling og udsmykninger": "Aarhus Kommunes kunstsamling og udsmykninger"
+"Aarhus Kommunes Byvåben": "Aarhus Kommunes Byvåben"
+"Side navigation": "Side navigation"
 Forrige: Forrige
 Næste: Næste
 Kunstdatabasen: Kunstsamling
-'Sign in': Log ind
+"Sign in": Log ind
 item.comment: Kommentarer
 item.name: Titel
 item.artist: Kunstner

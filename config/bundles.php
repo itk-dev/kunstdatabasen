@@ -18,4 +18,5 @@ return [
     Liip\ImagineBundle\LiipImagineBundle::class => ['all' => true],
     Twig\Extra\TwigExtraBundle\TwigExtraBundle::class => ['all' => true],
     ItkDev\WebAccessibilityStatementBundle\ItkDevWebAccessibilityStatementBundle::class => ['all' => true],
+    Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true],
 ];

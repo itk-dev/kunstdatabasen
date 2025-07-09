@@ -43,6 +43,7 @@ class BaseController extends AbstractController
      * @param array         $parameters
      * @param Response|null $response
      */
+    #[\Override]
     public function render(string $view, array $parameters = [], ?Response $response = null): Response
     {
         !isset($parameters['title']) && $parameters['title'] = 'Kunstdatabasen';

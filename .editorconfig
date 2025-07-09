@@ -1,25 +1,19 @@
-; top-most EditorConfig file
+# EditorConfig is awesome: https://editorconfig.org
+
+# top-most EditorConfig file
 root = true
 
-; Unix-style newlines
+# Unix-style newlines with a newline ending every file
 [*]
-charset = utf-8
-end_of_line = LF
+end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
+charset = utf-8
 indent_style = space
-
-[*.{php,html,twig,js,css,scss,json,yaml}]
 indent_size = 4
 
-[*.{css,scss}]
+[*.{css,js,yaml,yml}]
 indent_size = 2
 
-[*.min.js,*.min.css]
-exclude = true
-
-[*.md]
-max_line_length = 80
-
-[COMMIT_EDITMSG]
-max_line_length = 0
+[config/**/*.{yaml,yml}]
+indent_size = 4
