@@ -1,8 +1,14 @@
 services:
   phpfpm:
+    image: itkdev/php8.4-fpm:latest
     environment:
       - PHP_MAX_EXECUTION_TIME=60
       - PHP_MEMORY_LIMIT=512M
+
+  nginx:
+    labels:
+      - "traefik.http.routers.${COMPOSE_PROJECT_NAME}.middlewares=redirect-to-https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
 
   node:
     image: node:20
@@ -13,21 +19,3 @@ services:
     volumes:
       - .:/app:delegated
     working_dir: /app
-
-  markdownlint:
-    image: itkdev/markdownlint
-    profiles:
-      - dev
-    volumes:
-      - ./:/md
-
-  prettier:
-    # Prettier does not (yet, fcf.
-    # https://github.com/prettier/prettier/issues/15206) have an official
-    # docker image.
-    # https://hub.docker.com/r/jauderho/prettier is good candidate (cf. https://hub.docker.com/search?q=prettier&sort=updated_at&order=desc)
-    image: jauderho/prettier
-    profiles:
-      - dev
-    volumes:
-      - ./:/work

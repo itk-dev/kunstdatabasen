@@ -30,9 +30,9 @@ class ChangeUserPasswordCommand extends Command
      * ChangeUserRolesCommand constructor.
      */
     public function __construct(
-        readonly private UserPasswordHasherInterface $passwordHasher,
-        readonly private EntityManagerInterface $entityManager,
-        readonly private UserRepository $userRepository,
+        private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly UserRepository $userRepository,
     ) {
         parent::__construct();
     }
@@ -40,7 +40,7 @@ class ChangeUserPasswordCommand extends Command
     /**
      * {@inheritdoc}
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Change a user\'s roles')

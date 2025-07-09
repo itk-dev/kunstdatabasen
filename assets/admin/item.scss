@@ -13,10 +13,10 @@
 // Accommodate space for fixed nav
 body.item_edit,
 body.item_new {
-  background-color: $gray-100;
-  padding-top: $spacer * 5;
+    background-color: $gray-100;
+    padding-top: $spacer * 5;
 }
 
 .custom-file-label::after {
-  content: "Vælg";
+    content: "Vælg";
 }

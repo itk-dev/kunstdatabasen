@@ -1,61 +1,61 @@
 App\Entity\Artwork:
-    artwork_{1..200}:
-        name: '<da_DK:word()>'
-        artist: '<da_DK:name()>'
-        artSerial: 'G<randomElement([a,b,c,d])> <numberBetween(1000, 9999)>'
-        description: '<text()>'
-        committeeDescription: '<text()>'
-        purchasePrice: '<numberBetween(1000, 1000000)>'
-        purchaseDate: '<dateTimeBetween("-1000 days", "now")>'
-        productionYear: '<numberBetween(1600, 2020)>'
-        assessmentDate: '<dateTimeBetween("-1000 days", "now")>'
-        assessmentPrice: '<numberBetween(1000, 1000000)>'
-        geo: '<randomFloat()>, <randomFloat()>'
-        comment: '<text()>'
-        location: '<text(15)>'
-        building: '<text(20)>'
-        room: 'M-<numberBetween(1, 10)>'
-        address: '<text(30)> <numberBetween(1, 100)>'
-        postal_code: '<numberBetween(8000, 8300)>'
-        city: '<randomElement(["Aarhus C","Aarhus V","Aarhus Ø","Aarhus N"])>'
-        width: '<numberBetween(1.0, 100.0)>'
-        height: '<numberBetween(1.0, 100.0)>'
-        depth: '<numberBetween(1.0, 100.0)>'
-        diameter: '<numberBetween(1.0, 200.0)>'
-        weight: '<numberBetween(0.1, 100.0)>'
-        publicly_accessible: '<boolean()>'
-        status: '<randomElement(["På lager","Udlånt"])>'
-        type: '<randomElement(["Maleri","Skulptur"])>'
-        organization: '<randomElement(["MKB","MBU","MBA","MSO","MSB","MTM"])>'
+  artwork_{1..200}:
+    name: "<da_DK:word()>"
+    artist: "<da_DK:name()>"
+    artSerial: "G<randomElement([a,b,c,d])> <numberBetween(1000, 9999)>"
+    description: "<text()>"
+    committeeDescription: "<text()>"
+    purchasePrice: "<numberBetween(1000, 1000000)>"
+    purchaseDate: '<dateTimeBetween("-1000 days", "now")>'
+    productionYear: "<numberBetween(1600, 2020)>"
+    assessmentDate: '<dateTimeBetween("-1000 days", "now")>'
+    assessmentPrice: "<numberBetween(1000, 1000000)>"
+    geo: "<randomFloat()>, <randomFloat()>"
+    comment: "<text()>"
+    location: "<text(15)>"
+    building: "<text(20)>"
+    room: "M-<numberBetween(1, 10)>"
+    address: "<text(30)> <numberBetween(1, 100)>"
+    postal_code: "<numberBetween(8000, 8300)>"
+    city: '<randomElement(["Aarhus C","Aarhus V","Aarhus Ø","Aarhus N"])>'
+    width: "<numberBetween(1.0, 100.0)>"
+    height: "<numberBetween(1.0, 100.0)>"
+    depth: "<numberBetween(1.0, 100.0)>"
+    diameter: "<numberBetween(1.0, 200.0)>"
+    weight: "<numberBetween(0.1, 100.0)>"
+    publicly_accessible: "<boolean()>"
+    status: '<randomElement(["På lager","Udlånt"])>'
+    type: '<randomElement(["Maleri","Skulptur"])>'
+    organization: '<randomElement(["MKB","MBU","MBA","MSO","MSB","MTM"])>'
 
 App\Entity\Image:
-    image_{1..200}:
-        imageFile: '<uploadFile("images/image{{random(1, 10)}}.jpg")>'
-        updatedAt: '<date_create()>'
-        primaryImage: true
-        item: '@artwork_<current()>'
+  image_{1..200}:
+    imageFile: '<uploadFile("images/image{{random(1, 10)}}.jpg")>'
+    updatedAt: "<date_create()>"
+    primaryImage: true
+    item: "@artwork_<current()>"
 
 App\Entity\Furniture:
-    artwork_{1..17}:
-        name: '<da_DK:word()>'
-        description: '<text()>'
-        purchasePrice: '<numberBetween(1000, 1000000)>'
-        purchaseDate: '<dateTimeBetween("-1000 days", "now")>'
-        geo: '<randomFloat()>, <randomFloat()>'
-        comment: '<text()>'
-        location: '<text(15)>'
-        building: '<text(20)>'
-        room: 'M-<numberBetween(1, 10)>'
-        address: '<text(30)> <numberBetween(1, 100)>'
-        postal_code: '<numberBetween(8000, 8300)>'
-        city: '<randomElement(["Aarhus C","Aarhus V","Aarhus Ø","Aarhus N"])>'
-        publicly_accessible: '<boolean()>'
-        status: '<randomElement(["På lager","Udlånt"])>'
-        type: '<randomElement(["Maleri","Skulptur"])>'
-        organization: '<randomElement(["MKB","MBU","MBA","MSO","MSB","MTM"])>'
+  artwork_{1..17}:
+    name: "<da_DK:word()>"
+    description: "<text()>"
+    purchasePrice: "<numberBetween(1000, 1000000)>"
+    purchaseDate: '<dateTimeBetween("-1000 days", "now")>'
+    geo: "<randomFloat()>, <randomFloat()>"
+    comment: "<text()>"
+    location: "<text(15)>"
+    building: "<text(20)>"
+    room: "M-<numberBetween(1, 10)>"
+    address: "<text(30)> <numberBetween(1, 100)>"
+    postal_code: "<numberBetween(8000, 8300)>"
+    city: '<randomElement(["Aarhus C","Aarhus V","Aarhus Ø","Aarhus N"])>'
+    publicly_accessible: "<boolean()>"
+    status: '<randomElement(["På lager","Udlånt"])>'
+    type: '<randomElement(["Maleri","Skulptur"])>'
+    organization: '<randomElement(["MKB","MBU","MBA","MSO","MSB","MTM"])>'
 
 App\Entity\User:
-    user_1:
-        email: 'admin@example.com'
-        roles: ['ROLE_ADMIN']
-        password: '<password(@self, "admin")>'
+  user_1:
+    email: "admin@example.com"
+    roles: ["ROLE_ADMIN"]
+    password: '<password(@self, "admin")>'

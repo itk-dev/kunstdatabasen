@@ -28,7 +28,7 @@ class RefreshTagsCommand extends Command
      * ImportSpreadsheetCommand constructor.
      */
     public function __construct(
-        readonly private TagService $tagService,
+        private readonly TagService $tagService,
     ) {
         parent::__construct();
     }
