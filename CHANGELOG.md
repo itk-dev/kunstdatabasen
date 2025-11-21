@@ -8,6 +8,10 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+* [PR-96](https://github.com/itk-dev/kunstdatabasen/pull/96)
+  * Composer update
+  * Cleaned up package.json
+
 ## [2.0.0] - 2025-07-09
 
 * [PR-86](https://github.com/itk-dev/kunstdatabasen/pull/86)
