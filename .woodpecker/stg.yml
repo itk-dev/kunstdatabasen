@@ -37,6 +37,5 @@ steps:
         - itkdev-docker-compose-server up --detach --force-recreate --remove-orphans
         # Install php dependencies
         - itkdev-docker-compose-server exec phpfpm composer install --no-dev --optimize-autoloader
-        - itkdev-docker-compose-server exec phpfpm composer clear-cache
         # Migrate database
         - itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:migrate --no-interaction
