@@ -10,6 +10,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [2.0.1] - 2025-12-09
 
+* [PR-98](https://github.com/itk-dev/kunstdatabasen/pull/98)
+  * Added woodpecker stg file
 * [PR-96](https://github.com/itk-dev/kunstdatabasen/pull/96)
   * Composer update
   * Cleaned up package.json

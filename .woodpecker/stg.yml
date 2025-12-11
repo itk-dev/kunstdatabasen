@@ -1,0 +1,41 @@
+when:
+  - branch: release/*
+    event: push
+
+skip_clone: true
+
+labels:
+  zone: CLOUD
+
+steps:
+  - name: Run stg site update
+    image: itkdev/ansible-plugin:1
+    pull: true
+    settings:
+      id:
+        from_secret: id
+      secret:
+        from_secret: secret
+      host:
+        from_secret: stg_host
+      path:
+        from_secret: stg_path
+      user:
+        from_secret: user
+      actions:
+        # Checkout branch
+        - git fetch origin ${CI_COMMIT_BRANCH}
+        - git checkout --force ${CI_COMMIT_BRANCH}
+        - git reset --hard origin/${CI_COMMIT_BRANCH}
+        # Pull images
+        - itkdev-docker-compose-server pull
+        # Build assets
+        - docker compose run --rm node npm install
+        - docker compose run --rm node npm run build
+        - docker compose run --rm node rm -rf node_modules
+        # Up containers
+        - itkdev-docker-compose-server up --detach --force-recreate --remove-orphans
+        # Install php dependencies
+        - itkdev-docker-compose-server exec phpfpm composer install --no-dev --optimize-autoloader
+        # Migrate database
+        - itkdev-docker-compose-server exec phpfpm bin/console doctrine:migrations:migrate --no-interaction
