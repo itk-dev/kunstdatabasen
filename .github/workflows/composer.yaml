@@ -26,7 +26,7 @@
 name: Composer
 
 env:
-  COMPOSE_USER: root
+  COMPOSE_USER: runner
 
 on:
   pull_request:
@@ -41,9 +41,13 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - uses: actions/checkout@v4
-      - run: |
+      - uses: actions/checkout@v5
+
+      - name: Create docker network
+        run: |
           docker network create frontend
+
+      - run: |
           docker compose run --rm phpfpm composer validate --strict
 
   composer-normalized:
@@ -51,9 +55,13 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - uses: actions/checkout@v4
-      - run: |
+      - uses: actions/checkout@v5
+
+      - name: Create docker network
+        run: |
           docker network create frontend
+
+      - run: |
           docker compose run --rm phpfpm composer install
           docker compose run --rm phpfpm composer normalize --dry-run
 
@@ -62,7 +70,11 @@ jobs:
     strategy:
       fail-fast: false
     steps:
-      - uses: actions/checkout@v4
-      - run: |
+      - uses: actions/checkout@v5
+
+      - name: Create docker network
+        run: |
           docker network create frontend
+
+      - run: |
           docker compose run --rm phpfpm composer audit
