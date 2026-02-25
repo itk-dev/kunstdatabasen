@@ -8,6 +8,11 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.2] - 2026-02-25
+
+* [PR-99](https://github.com/itk-dev/kunstdatabasen/pull/99)
+  * Fixed Image.updatedAt type issue.
+
 ## [2.0.1] - 2025-12-09
 
 * [PR-98](https://github.com/itk-dev/kunstdatabasen/pull/98)
@@ -24,16 +29,16 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 ## [1.8.1] - 2025-06-16
 
 * [PR-92](https://github.com/itk-dev/kunstdatabasen/pull/92)
-  4719: Made it possible to delete items
+  * 4719: Made it possible to delete items
 
 ## [1.8.0] - 2025-05-13
 
 * [PR-90](https://github.com/itk-dev/kunstdatabasen/pull/90)
-  Cleaned up modals
+  * Cleaned up modals
 * [PR-89](https://github.com/itk-dev/kunstdatabasen/pull/89)
-  Cleaned up assets
+  * Cleaned up assets
 * [PR-88](https://github.com/itk-dev/kunstdatabasen/pull/88)
-  Updated Yarn packages
+  * Updated Yarn packages
 * [PR-87](https://github.com/itk-dev/kunstdatabasen/pull/87)
   * Updated docker compose setup
   * Updated workflow templates
