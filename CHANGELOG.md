@@ -8,6 +8,8 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.2] - 2026-02-25
+
 * [PR-99](https://github.com/itk-dev/kunstdatabasen/pull/99)
   * Fixed Image.updatedAt type issue.
 
