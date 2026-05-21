@@ -26,9 +26,9 @@ class AdminController extends BaseController
      */
     public function __construct(
         string $bindSupportMail,
-        protected readonly RequestStack $requestStack,
-        protected readonly ItemService $itemService,
-        protected readonly TagService $tagService,
+        RequestStack $requestStack,
+        ItemService $itemService,
+        TagService $tagService,
         private readonly ItemRepository $itemRepository,
     ) {
         parent::__construct($bindSupportMail, $requestStack, $itemService, $tagService);
