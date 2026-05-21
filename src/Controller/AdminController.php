@@ -18,8 +18,16 @@ use Symfony\Component\Routing\Attribute\Route;
  */
 class AdminController extends BaseController
 {
+    /**
+     * BaseController constructor.
+     */
+    public function __construct(string $bindSupportMail, protected readonly \Symfony\Component\HttpFoundation\RequestStack $requestStack, protected readonly \App\Service\ItemService $itemService, protected readonly \App\Service\TagService $tagService, private readonly ItemRepository $itemRepository)
+    {
+        parent::__construct($bindSupportMail, $requestStack, $itemService, $tagService);
+    }
+
     #[Route(path: '/admin', name: 'admin')]
-    public function index(Request $request, ItemRepository $itemRepository): Response
+    public function index(Request $request): Response
     {
         $session = $request->getSession();
         $session->start();
@@ -30,14 +38,14 @@ class AdminController extends BaseController
         if (null !== $visitedSession) {
             /* @var \stdClass $sessionItem */
             foreach ($visitedSession as $sessionItem) {
-                $item = $itemRepository->find($sessionItem['id']);
+                $item = $this->itemRepository->find($sessionItem['id']);
                 if (null !== $item) {
                     $latestVisitedRender[] = $this->itemService->itemToRenderObject($item);
                 }
             }
         }
 
-        $latestAdded = $itemRepository->findBy([], ['createdAt' => 'desc'], 5);
+        $latestAdded = $this->itemRepository->findBy([], ['createdAt' => 'desc'], 5);
 
         $latestAddedRender = [];
         foreach ($latestAdded as $item) {
