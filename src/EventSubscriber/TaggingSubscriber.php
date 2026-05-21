@@ -36,7 +36,7 @@ class TaggingSubscriber
     ) {
     }
 
-    public function prePersist(PrePersistEventArgs $args)
+    public function prePersist(PrePersistEventArgs $args): void
     {
         if ($args->getObject() instanceof Item) {
             $this->dispatcher->addListener(
@@ -48,7 +48,7 @@ class TaggingSubscriber
         }
     }
 
-    public function preUpdate(PreUpdateEventArgs $args)
+    public function preUpdate(PreUpdateEventArgs $args): void
     {
         if ($args->getObject() instanceof Item) {
             $this->dispatcher->addListener(
@@ -63,7 +63,7 @@ class TaggingSubscriber
     /**
      * Save the new tag.
      */
-    private function changeTags(string $action, LifecycleEventArgs $args)
+    private function changeTags(string $action, LifecycleEventArgs $args): void
     {
         $entity = $args->getObject();
 

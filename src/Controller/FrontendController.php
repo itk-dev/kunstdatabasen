@@ -33,11 +33,13 @@ class FrontendController extends AbstractController
     public function __construct(
         private readonly UploaderHelper $uploaderHelper,
         private readonly TagService $tagService,
+        private readonly ArtworkRepository $artworkRepository,
+        private readonly PaginatorInterface $paginator,
     ) {
     }
 
     #[Route(path: '/', name: 'frontend_index')]
-    public function index(Request $request, ArtworkRepository $artworkRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request): Response
     {
         $parameters = [];
         $parameters['display_advanced_filters'] = false;
@@ -52,7 +54,7 @@ class FrontendController extends AbstractController
             $width = null !== $data['width'] ? json_decode((string) $data['width'], null, 512, \JSON_THROW_ON_ERROR) : null;
             $height = null !== $data['height'] ? json_decode((string) $data['height'], null, 512, \JSON_THROW_ON_ERROR) : null;
 
-            $query = $artworkRepository->getQuery(
+            $query = $this->artworkRepository->getQuery(
                 $data['search'] ?? null,
                 $data['type'] ?? null,
                 $data['status'] ?? null,
@@ -79,10 +81,10 @@ class FrontendController extends AbstractController
                 $parameters['display_advanced_filters'] = true;
             }
         } else {
-            $query = $artworkRepository->getQuery();
+            $query = $this->artworkRepository->getQuery();
         }
 
-        $pagination = $paginator->paginate(
+        $pagination = $this->paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
             10

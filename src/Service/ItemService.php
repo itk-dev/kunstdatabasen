@@ -88,7 +88,7 @@ class ItemService
      * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
      * @throws \PhpOffice\PhpSpreadsheet\Exception
      */
-    public function importFromSpreadsheet($file)
+    public function importFromSpreadsheet($file): void
     {
         $spreadsheet = IOFactory::load($file);
 
@@ -208,7 +208,7 @@ class ItemService
      * @param string $folder
      *                       The folder to import from
      */
-    public function importFromImages(string $folder)
+    public function importFromImages(string $folder): void
     {
         $finder = new Finder();
         $files = $finder->in($folder)->files()->name('*.jpg');

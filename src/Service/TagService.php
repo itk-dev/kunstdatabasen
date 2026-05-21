@@ -52,7 +52,7 @@ class TagService
     /**
      * Refresh tags.
      */
-    public function refreshTags()
+    public function refreshTags(): void
     {
         $items = $this->itemRepository->findAll();
 
@@ -103,7 +103,7 @@ class TagService
      * @param array  $changeSet
      *                          The change set for the field, if it exists
      */
-    public function addTag(Item $item, string $field, mixed $value, array $changeSet)
+    public function addTag(Item $item, string $field, mixed $value, array $changeSet): void
     {
         $classname = $item::class;
         $tag = $this->tagRepository->findOneBy([
@@ -154,7 +154,7 @@ class TagService
      *
      * @param $value
      */
-    private function addTagWithoutCleanup(Item $item, string $field, $value)
+    private function addTagWithoutCleanup(Item $item, string $field, $value): void
     {
         $classname = $item::class;
         $tag = $this->tagRepository->findOneBy([

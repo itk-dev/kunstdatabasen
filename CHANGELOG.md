@@ -8,6 +8,11 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.3] - 2026-05-21
+
+* [PR-101](https://github.com/itk-dev/kunstdatabasen/pull/100)
+  * Upgraded bundles.
+
 ## [2.0.2] - 2026-02-25
 
 * [PR-99](https://github.com/itk-dev/kunstdatabasen/pull/99)

@@ -15,6 +15,8 @@ use App\Form\ArtworkType;
 use App\Form\FurnitureType;
 use App\Repository\ArtworkRepository;
 use App\Repository\ItemRepository;
+use App\Service\ItemService;
+use App\Service\TagService;
 use Doctrine\ORM\EntityManagerInterface;
 use DoctrineBatchUtils\BatchProcessing\SimpleBatchIteratorAggregate;
 use Knp\Component\Pager\PaginatorInterface;
@@ -27,6 +29,7 @@ use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Routing\Attribute\Route;
@@ -36,8 +39,24 @@ use Symfony\Component\Serializer\Serializer;
 
 class ItemController extends BaseController
 {
+    /**
+     * BaseController constructor.
+     */
+    public function __construct(
+        string $bindSupportMail,
+        RequestStack $requestStack,
+        ItemService $itemService,
+        TagService $tagService,
+        private readonly ItemRepository $itemRepository,
+        private readonly PaginatorInterface $paginator,
+        private readonly ArtworkRepository $artworkRepository,
+        private readonly EntityManagerInterface $entityManager,
+    ) {
+        parent::__construct($bindSupportMail, $requestStack, $itemService, $tagService);
+    }
+
     #[Route(path: '/admin/item/', name: 'item_index', methods: ['GET'])]
-    public function index(ItemRepository $itemRepository, PaginatorInterface $paginator): Response
+    public function index(): Response
     {
         return $this->redirectToRoute('item_list');
     }
@@ -46,13 +65,13 @@ class ItemController extends BaseController
      * @throws \Exception
      */
     #[Route(path: '/admin/item/list/{itemType}', name: 'item_list', methods: ['GET'], defaults: ['itemType' => Artwork::ITEM_TYPE])]
-    public function list(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository, PaginatorInterface $paginator): Response
+    public function list(string $itemType, Request $request): Response
     {
         $parameters['display_advanced_filters'] = false;
 
-        [$query, $form] = $this->getFilteredQuery($itemType, $request, $itemRepository, $artworkRepository, $parameters);
+        [$query, $form] = $this->getFilteredQuery($itemType, $request, $this->itemRepository, $this->artworkRepository, $parameters);
 
-        $pagination = $paginator->paginate(
+        $pagination = $this->paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
             10
@@ -81,15 +100,15 @@ class ItemController extends BaseController
      * @param string $itemType The item type
      */
     #[Route(path: '/admin/item/{itemType}/export', name: 'item_export', methods: ['GET'])]
-    public function export(string $itemType, Request $request, ItemRepository $itemRepository, ArtworkRepository $artworkRepository): Response
+    public function export(string $itemType, Request $request): Response
     {
-        [$query] = $this->getFilteredQuery($itemType, $request, $itemRepository, $artworkRepository);
+        [$query] = $this->getFilteredQuery($itemType, $request, $this->itemRepository, $this->artworkRepository);
 
         // Avoid php timeout errors.
         set_time_limit(0);
         $response = new StreamedResponse();
 
-        $callback = function () use ($query): void {
+        $callback = static function () use ($query): void {
             $iterableItems = SimpleBatchIteratorAggregate::fromQuery(
                 $query,
                 100
@@ -103,7 +122,7 @@ class ItemController extends BaseController
 
             $serializer = new Serializer([new ObjectNormalizer()]);
 
-            $dateCallback = fn ($innerObject) => $innerObject instanceof \DateTimeInterface ? $innerObject->format(\DateTime::ATOM) : '';
+            $dateCallback = static fn ($innerObject) => $innerObject instanceof \DateTimeInterface ? $innerObject->format(\DateTime::ATOM) : '';
 
             $defaultContext = [
                 AbstractNormalizer::CALLBACKS => [
@@ -197,7 +216,7 @@ class ItemController extends BaseController
      * @throws \Exception
      */
     #[Route(path: '/admin/item/{itemType}/new', name: 'item_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, string $itemType, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, string $itemType): Response
     {
         switch ($itemType) {
             case Artwork::ITEM_TYPE:
@@ -215,8 +234,8 @@ class ItemController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($item);
-            $entityManager->flush();
+            $this->entityManager->persist($item);
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('item_list', ['itemType' => $itemType]);
         }
@@ -236,7 +255,7 @@ class ItemController extends BaseController
      * @throws \Exception
      */
     #[Route(path: '/admin/item/{id}/edit', name: 'item_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Item $item, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Item $item): Response
     {
         if ($item instanceof Artwork) {
             $itemType = 'artwork';
@@ -251,7 +270,7 @@ class ItemController extends BaseController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $this->entityManager->flush();
 
             return $this->redirectToRoute('item_list', ['itemType' => $itemType]);
         }
@@ -268,11 +287,11 @@ class ItemController extends BaseController
     }
 
     #[Route(path: '/admin/item/{id}', name: 'item_delete', methods: ['DELETE'])]
-    public function delete(Request $request, Item $item, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Item $item): Response
     {
         if ($this->isCsrfTokenValid('delete'.$item->getId(), $request->request->get('_token'))) {
-            $entityManager->remove($item);
-            $entityManager->flush();
+            $this->entityManager->remove($item);
+            $this->entityManager->flush();
         }
 
         return $this->redirectToRoute('item_index');

@@ -20,7 +20,7 @@ trait OrderByTrait
      *
      * @param array $orderBy list of field, direction pairs
      */
-    protected function addOrderBy(QueryBuilder $qb, array $orderBy)
+    protected function addOrderBy(QueryBuilder $qb, array $orderBy): void
     {
         foreach ($orderBy as $order) {
             $qb->orderBy($qb->getRootAliases()[0].'.'.$order[0], $order[1]);

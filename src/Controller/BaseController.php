@@ -79,7 +79,7 @@ class BaseController extends AbstractController
     /**
      * Save that the user visited the item to session.
      */
-    public function saveVisited()
+    public function saveVisited(): void
     {
         // Save latest visited items,artworks.
         $basePath = $this->requestStack->getCurrentRequest()->getPathInfo();
