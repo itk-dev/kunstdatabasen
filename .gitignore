@@ -33,6 +33,7 @@ public/images/artwork/*
 
 ###> phpstan/phpstan ###
 phpstan.neon
+config/reference.php
 ###< phpstan/phpstan ###
 
 ###> vincentlanglet/twig-cs-fixer ###
