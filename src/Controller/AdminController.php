@@ -9,7 +9,10 @@
 namespace App\Controller;
 
 use App\Repository\ItemRepository;
+use App\Service\ItemService;
+use App\Service\TagService;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -21,8 +24,13 @@ class AdminController extends BaseController
     /**
      * BaseController constructor.
      */
-    public function __construct(string $bindSupportMail, protected readonly \Symfony\Component\HttpFoundation\RequestStack $requestStack, protected readonly \App\Service\ItemService $itemService, protected readonly \App\Service\TagService $tagService, private readonly ItemRepository $itemRepository)
-    {
+    public function __construct(
+        string $bindSupportMail,
+        protected readonly RequestStack $requestStack,
+        protected readonly ItemService $itemService,
+        protected readonly TagService $tagService,
+        private readonly ItemRepository $itemRepository,
+    ) {
         parent::__construct($bindSupportMail, $requestStack, $itemService, $tagService);
     }
 
