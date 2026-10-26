@@ -8,6 +8,11 @@ Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [2.0.4] - 2026-10-26
+
+* [PR-103](https://github.com/itk-dev/kunstdatabasen/pull/103)
+  * Switched to maintained nginx/nginx-unprivileged image.
+
 ## [2.0.3] - 2026-05-21
 
 * [PR-101](https://github.com/itk-dev/kunstdatabasen/pull/100)
